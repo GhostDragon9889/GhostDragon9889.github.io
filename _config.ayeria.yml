@@ -7,6 +7,11 @@ menu:
   关于本站: /about
 
 
+cover:
+  enable: true
+  path: /images/cover.jpg    # 背景图路径（放在主题或站点的 source/images/ 下）
+  logo: false                # 封面 Logo 图片路径，不需要设为 false
+
 mathjax: false
 
 katex:
@@ -32,6 +37,8 @@ logo: /favicon.svg           # 侧边栏顶部 Logo
 progressBar: true
 
 search: true
+
+
 
 
 broadcast:
