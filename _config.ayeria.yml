@@ -1,0 +1,53 @@
+menu:
+  主页: /
+  全部文章: /archives
+  文章分类: /categories
+  全部标签: /tags
+  友情链接: /friends
+  关于本站: /about
+
+
+mathjax: false
+
+katex:
+  enable: false
+  allpost: true               # false: 仅 front-matter 中 math:true 的文章开启
+  copy_tex: false
+
+
+subtitle:
+  enable: true
+  text: 第一行文字
+  text2: 第二行文字          # 可留空
+  text3: 第三行文字          # 最多三行
+  startDelay: 1000
+  typeSpeed: 200
+  loop: true
+  backSpeed: 100
+  showCursor: true
+
+favicon: /favicon.svg        # 浏览器标签页图标
+logo: /favicon.svg           # 侧边栏顶部 Logo
+
+progressBar: true
+
+search: true
+
+
+broadcast:
+  enable: true
+  type: 2                    # 1: 自定义文字；2: 一言 API (hitokoto.cn)
+  text: 自定义告示内容        # type 为 1 时有效
+
+darkmode: true                # 侧边栏显示深色模式切换按钮
+
+
+busuanzi:
+  enable: true                # 不蒜子页面访问量统计
+
+cnzz:
+  enable: false
+  url:                        # 友盟 CNZZ 的 js 代码 src 链接
+
+google_analytics: ""          # Google Analytics 追踪 ID
+baidu_analytics: ""           # 百度统计追踪 ID
