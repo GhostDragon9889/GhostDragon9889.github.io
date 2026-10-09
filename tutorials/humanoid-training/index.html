@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">人形机器人：控制维度、对称性与课程恢复</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">人形机器人：控制维度、对称性与课程恢复</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%B8%89%E4%BB%BD%E5%90%8D%E7%A7%B0%E6%98%A0%E5%B0%84"><span class="article-toc-text">三份名称映射</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AF%B9%E7%A7%B0%E6%80%A7%E6%98%AF%E4%B8%80%E9%A1%B9%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="article-toc-text">对称性是一项模型假设</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E8%AF%BE%E7%A8%8B%E9%98%B6%E6%AE%B5%E4%B8%8E%E7%BB%88%E6%AD%A2%E8%BE%B9%E7%95%8C"><span class="article-toc-text">课程阶段与终止边界</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E8%B5%84%E6%96%99%E8%A1%A5%E5%85%85%E4%B8%8E%E9%AA%8C%E6%94%B6"><span class="article-toc-text">官方资料补充与验收</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="三份名称映射">三份名称映射</h2>
 <p>分别记录仿真关节坐标、硬件可主动控制关节及策略控制子集。自由基座的 quaternion 使位置维度和速度维度不同；actuator 数量也不必等于关节数量。手部版本、被动耦合和任务动作子集变化时，必须使用对应资产与映射。公开教程不继承某个私有模型快照的维度数字。</p>
@@ -114,7 +116,7 @@
 <p>MuJoCo 计算文档区分广义位置与速度；Isaac Lab actuator 文档说明隐式与显式驱动可能造成迁移差异；ProtoMotions 固定提交说明身体、运动数据与控制策略必须配套。先验收单关节和静态接触，再验证短时站立、动作符号及一个阶段切换。策略标准差重置是新实验干预，应独立报告，不能默认为“安全修复”。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">NVlabs/ProtoMotions · 引用提交 <code>7a8417a9f55b</code></span></li><li><a data-reference-id="mujoco-computation" href="https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/computation/index.rst" target="_blank" rel="noopener noreferrer">MuJoCo computation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">google-deepmind/mujoco · 引用提交 <code>9660a5c7ff74</code></span></li></ul></aside>
@@ -126,7 +128,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

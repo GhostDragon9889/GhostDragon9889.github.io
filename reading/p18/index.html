@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" aria-current="location">文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,11 +63,13 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">VLASH：通过未来状态感知的异步推理实现实时视觉—语言—动作控制</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">VLASH：通过未来状态感知的异步推理实现实时视觉—语言—动作控制</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 10 分钟</span></div></header>
 
-  <aside class="paper-reference" aria-label="文献信息"><h2>VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference</h2><p>文献编号: P18 · 实时执行与动态操作</p><p>所用版本: 2512.01031v1 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2512.01031v1" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</a></aside>
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%B8%AD%E6%96%87%E9%A2%98%E7%9B%AE%E4%B8%8E%E6%96%87%E7%8C%AE%E4%BF%A1%E6%81%AF"><span class="article-toc-text">中文题目与文献信息</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#1-%E9%97%AE%E9%A2%98%EF%BC%9A%E5%BC%82%E6%AD%A5%E4%B9%8B%E5%90%8E%E4%B8%BA%E4%BD%95%E4%BB%8D%E7%84%B6%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="article-toc-text">1. 问题：异步之后为何仍然不稳定</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#2-%E6%9C%AA%E6%9D%A5%E7%8A%B6%E6%80%81%E6%84%9F%E7%9F%A5%E5%88%B0%E5%BA%95%E9%A2%84%E6%B5%8B%E4%BA%86%E4%BB%80%E4%B9%88"><span class="article-toc-text">2. 未来状态感知到底预测了什么</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#2-1-%E4%BB%8E%E5%B7%B2%E7%9F%A5%E6%97%A7%E5%8A%A8%E4%BD%9C%E6%8E%A8%E7%AE%97%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%89%A7%E8%A1%8C%E8%B5%B7%E7%82%B9"><span class="article-toc-text">2.1 从已知旧动作推算机器人执行起点</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#2-2-%E6%9C%AA%E6%9D%A5%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%8A%B6%E6%80%81%E4%B8%8D%E7%AD%89%E4%BA%8E%E6%9C%AA%E6%9D%A5%E5%9C%BA%E6%99%AF"><span class="article-toc-text">2.2 未来机器人状态不等于未来场景</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#3-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%8A%B6%E6%80%81-%E5%8A%A8%E4%BD%9C%E5%81%8F%E7%A7%BB%E5%BE%AE%E8%B0%83"><span class="article-toc-text">3. 为什么需要状态—动作偏移微调</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#4-%E5%85%B1%E4%BA%AB%E8%A7%82%E6%B5%8B%E5%BE%AE%E8%B0%83%E4%B8%8E%E5%9B%BE4"><span class="article-toc-text">4. 共享观测微调与图4</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#5-%E5%8A%A8%E4%BD%9C%E9%87%8F%E5%8C%96%E4%B8%8E%E5%9B%BE5%EF%BC%9A%E5%8A%A0%E5%BF%AB%E7%89%A9%E7%90%86%E5%8A%A8%E4%BD%9C%E7%9A%84%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%9C%BA%E5%88%B6"><span class="article-toc-text">5. 动作量化与图5：加快物理动作的第二个机制</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#6-%E4%BB%BF%E7%9C%9F%E5%AE%9E%E9%AA%8C%E4%B8%8E%E6%95%B0%E5%80%BC%E7%BB%93%E6%9E%9C"><span class="article-toc-text">6. 仿真实验与数值结果</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#6-1-kinetix"><span class="article-toc-text">6.1 Kinetix</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#6-2-libero"><span class="article-toc-text">6.2 LIBERO</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#7-%E5%AE%9E%E6%9C%BA%E7%BB%93%E6%9E%9C%E4%B8%8E-17-4-%E7%9A%84%E8%AE%A1%E9%87%8F%E8%BE%B9%E7%95%8C"><span class="article-toc-text">7. 实机结果与“17.4×”的计量边界</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#8-%E5%B1%80%E9%99%90-%E5%A4%8D%E7%8E%B0%E4%B8%8E%E6%9C%AC%E9%A1%B9%E7%9B%AE%E6%84%8F%E4%B9%89"><span class="article-toc-text">8. 局限、复现与本项目意义</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="article-toc-text">参考来源</span></a></li></ol></details>
 
+
+  <aside class="paper-reference" aria-label="文献信息"><details><summary>文献信息 · P18</summary><div class="source-details"><h2>VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference</h2><p>文献编号: P18 · 实时执行与动态操作</p><p>所用版本: 2512.01031v1 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2512.01031v1" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></div></details></aside>
 
   <div class="post-content"><h2 id="中文题目与文献信息">中文题目与文献信息</h2>
 <p><strong>中文题目：VLASH：通过未来状态感知的异步推理实现实时视觉—语言—动作控制。</strong></p>
@@ -212,7 +216,7 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

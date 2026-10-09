@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">GPU 软件栈与 PyTorch / JAX 正确计时</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">GPU 软件栈与 PyTorch / JAX 正确计时</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%9B%9B%E5%B1%82%E6%A3%80%E6%9F%A5"><span class="article-toc-text">四层检查</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E8%A1%A5%E5%85%85%EF%BC%9A%E5%BC%82%E6%AD%A5%E8%BF%94%E5%9B%9E%E4%B8%8D%E7%AD%89%E4%BA%8E%E8%AE%A1%E7%AE%97%E5%AE%8C%E6%88%90"><span class="article-toc-text">官方文档补充：异步返回不等于计算完成</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#pytorch-gpu-%E6%B5%8B%E9%87%8F"><span class="article-toc-text">PyTorch GPU 测量</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%8A%A5%E5%91%8A%E6%9C%80%E5%B0%91%E5%AD%97%E6%AE%B5"><span class="article-toc-text">报告最少字段</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="四层检查">四层检查</h2>
 <p>驱动提供设备访问；CUDA Toolkit 包含 <code>nvcc</code> 等开发工具；框架发行包包含或依赖相应运行时；目标模型还需实际计算。<code>nvidia-smi</code>、<code>nvcc --version</code>、设备列表和模型成功分别证明不同层次。<code>nvidia-smi</code> 显示的 CUDA 上限不等于本地 Toolkit 的已安装版本。</p>
@@ -80,7 +82,7 @@
 <p>日志公开前删除设备序列号、私人主机名、进程账户、路径与网络端点。补充排错步骤见 <a href="../python-builds/">Python 构建</a> 和 <a href="../reproducible-debugging/">复现排错</a>。本次未运行 CUDA/JAX 目标模型性能测量。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="torch-amp" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/amp_examples.rst" target="_blank" rel="noopener noreferrer">Automatic mixed precision examples <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="torch-amp" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/amp_examples.rst" target="_blank" rel="noopener noreferrer">Automatic mixed precision examples <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">pytorch/pytorch · 引用提交 <code>449b17684101</code></span></li><li><a data-reference-id="jax-async" href="https://github.com/jax-ml/jax/blob/2dc7e6df4fd0eb14e75d70aac954bd0e784d8b44/docs/async_dispatch.rst" target="_blank" rel="noopener noreferrer">JAX asynchronous dispatch <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">jax-ml/jax · 引用提交 <code>2dc7e6df4fd0</code></span></li><li><a data-reference-id="jax-install" href="https://github.com/jax-ml/jax/blob/2dc7e6df4fd0eb14e75d70aac954bd0e784d8b44/docs/installation.md" target="_blank" rel="noopener noreferrer">JAX installation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">jax-ml/jax · 引用提交 <code>2dc7e6df4fd0</code></span></li></ul></aside>
@@ -92,7 +94,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

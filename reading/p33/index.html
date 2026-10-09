@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" aria-current="location">文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,12 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">Era of Experience：经验驱动学习观点</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">Era of Experience：经验驱动学习观点</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
-  <aside class="paper-reference" aria-label="文献信息"><h2>Era of Experience: Notes on Experience-Driven Learning</h2><p>文献编号: P33 · 综述与理论基础</p><p>所用版本: Perspective note; exact primary source not identified · 未确定</p><p>资料来源: Obsidian 阅读笔记</p><p>据上传笔记整理，具体版本按所给题录标注；本次未重新核验原论文 PDF 或复现其实验。</p></aside>
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%9D%A5%E6%BA%90%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%A7%82%E7%82%B9%E8%BE%B9%E7%95%8C"><span class="article-toc-text">来源身份与观点边界</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90%E7%9A%84%E5%8F%98%E5%8C%96"><span class="article-toc-text">数据来源的变化</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%9B%9B%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%B4%E5%BA%A6"><span class="article-toc-text">四个研究维度</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%B8%8E-world-model-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="article-toc-text">与 world model 的关系</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8F%AF%E4%BB%A5%E6%80%8E%E6%A0%B7%E5%BC%80%E5%B1%95%E7%A0%94%E7%A9%B6"><span class="article-toc-text">可以怎样开展研究</span></a></li></ol></details>
 
+
+  <aside class="paper-reference" aria-label="文献信息"><details><summary>文献信息 · P33</summary><div class="source-details"><h2>Era of Experience: Notes on Experience-Driven Learning</h2><p>文献编号: P33 · 综述与理论基础</p><p>所用版本: Perspective note; exact primary source not identified · 未确定</p><p>资料来源: Obsidian 阅读笔记</p><p>据上传笔记整理，具体版本按所给题录标注；本次未重新核验原论文 PDF 或复现其实验。</p></div></details></aside>
 
   <div class="post-content"><h2 id="来源身份与观点边界">来源身份与观点边界</h2>
 <p>这是一份关于“经验时代”的观点整理，讨论 David Silver、Richard Sutton 所代表的经验驱动学习方向，并引用播客、后续观点及 world model 讨论。上传文件没有提供可唯一定位的原始文献 URL，因此此条按观点笔记发布，不补造作者表、DOI、版本或正式引文。</p>
@@ -91,7 +95,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

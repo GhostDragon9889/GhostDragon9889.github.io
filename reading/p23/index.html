@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" aria-current="location">文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,11 +63,13 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">GRAIL：从三维资产与视频先验生成人形机器人移动操作数据</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">GRAIL：从三维资产与视频先验生成人形机器人移动操作数据</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 10 分钟</span></div></header>
 
-  <aside class="paper-reference" aria-label="文献信息"><h2>GRAIL: Generating Humanoid Loco-Manipulation from 3D Assets and Video Priors</h2><p>文献编号: P23 · 人体运动与交互合成</p><p>所用版本: 2606.05160v1 · 2026</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2606.05160v1" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</a></aside>
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#1-%E6%96%87%E7%8C%AE%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%BB%93%E8%AE%BA"><span class="article-toc-text">1. 文献信息与核心结论</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%88%E6%8C%87%E5%AE%9A%E4%B8%89%E7%BB%B4%E9%85%8D%E7%BD%AE%E5%86%8D%E7%94%9F%E6%88%90%E8%A7%86%E9%A2%91"><span class="article-toc-text">2. 为什么先指定三维配置再生成视频</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#3-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90"><span class="article-toc-text">3. 输入输出与视频生成</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#4-%E5%9B%9B%E7%BB%B4%E4%BA%BA-%E7%89%A9%E4%BA%A4%E4%BA%92%E6%81%A2%E5%A4%8D"><span class="article-toc-text">4. 四维人—物交互恢复</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4-1-%E5%88%9D%E5%A7%8B%E4%BA%BA%E4%BD%93%E5%8F%8A%E5%AF%B9%E8%B1%A1%E8%BD%A8%E8%BF%B9"><span class="article-toc-text">4.1 初始人体及对象轨迹</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4-2-%E4%BA%A4%E4%BA%92%E6%84%9F%E7%9F%A5%E8%81%94%E5%90%88%E4%BC%98%E5%8C%96"><span class="article-toc-text">4.2 交互感知联合优化</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#5-%E4%BB%8E%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%8F%82%E8%80%83%E5%88%B0%E7%89%A9%E7%90%86%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8A%A8%E4%BD%9C"><span class="article-toc-text">5. 从运动学参考到物理机器人动作</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#5-1-%E4%B8%A4%E7%B1%BB%E8%B7%9F%E8%B8%AA%E5%99%A8%E5%85%B7%E6%9C%89%E4%B8%8D%E5%90%8C%E5%8F%AF%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86"><span class="article-toc-text">5.1 两类跟踪器具有不同可训练部分</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#5-2-%E5%A5%96%E5%8A%B1%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="article-toc-text">5.2 奖励与训练</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#5-3-%E8%A7%86%E8%A7%89%E7%AD%96%E7%95%A5%E8%92%B8%E9%A6%8F%E5%92%8C%E7%9C%9F%E5%AE%9E%E9%83%A8%E7%BD%B2"><span class="article-toc-text">5.3 视觉策略蒸馏和真实部署</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%E5%8F%8A%E5%90%84%E4%B8%AA-%E6%88%90%E5%8A%9F%E7%8E%87-%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="article-toc-text">6. 实验结果及各个“成功率”的定义</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#6-1-hoi%E7%94%9F%E6%88%90%E7%9A%84%E7%89%A9%E7%90%86%E5%8F%AF%E8%B7%9F%E8%B8%AA%E6%80%A7"><span class="article-toc-text">6.1 HOI生成的物理可跟踪性</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#6-2-g1%E7%A7%BB%E5%8A%A8%E6%93%8D%E4%BD%9C%E8%B7%9F%E8%B8%AA"><span class="article-toc-text">6.2 G1移动操作跟踪</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#6-3-%E7%9C%9F%E5%AE%9E%E9%83%A8%E7%BD%B2"><span class="article-toc-text">6.3 真实部署</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#7-%E5%B1%80%E9%99%90-%E6%88%90%E6%9C%AC%E4%B8%8E%E6%9C%AC%E9%A1%B9%E7%9B%AE%E8%81%94%E7%B3%BB"><span class="article-toc-text">7. 局限、成本与本项目联系</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#8-%E6%9D%A5%E6%BA%90%E4%B8%8E%E9%98%85%E8%AF%BB%E5%AE%9A%E4%BD%8D"><span class="article-toc-text">8. 来源与阅读定位</span></a></li></ol></details>
 
+
+  <aside class="paper-reference" aria-label="文献信息"><details><summary>文献信息 · P23</summary><div class="source-details"><h2>GRAIL: Generating Humanoid Loco-Manipulation from 3D Assets and Video Priors</h2><p>文献编号: P23 · 人体运动与交互合成</p><p>所用版本: 2606.05160v1 · 2026</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2606.05160v1" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></div></details></aside>
 
   <div class="post-content"><h2 id="1-文献信息与核心结论">1. 文献信息与核心结论</h2>
 <ul>
@@ -235,7 +239,7 @@ c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg><
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">ROS 2 与仿真：时钟、TF、QoS 和过期动作</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">ROS 2 与仿真：时钟、TF、QoS 和过期动作</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E7%BB%9F%E4%B8%80%E6%97%B6%E9%97%B4%E4%B8%8E%E5%9D%90%E6%A0%87"><span class="article-toc-text">统一时间与坐标</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E8%A1%A5%E5%85%85%EF%BC%9Aqos-%E6%98%AF%E5%8C%B9%E9%85%8D%E6%9D%A1%E4%BB%B6"><span class="article-toc-text">官方文档补充：QoS 是匹配条件</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8A%A8%E4%BD%9C%E8%AE%BE%E7%BD%AE%E6%9C%89%E6%95%88%E6%9C%9F"><span class="article-toc-text">动作设置有效期</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%AA%8C%E6%94%B6"><span class="article-toc-text">接口验收</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="统一时间与坐标">统一时间与坐标</h2>
 <p>需要仿真时钟的节点使用一致的 <code>use_sim_time</code> 配置，并确认 <code>/clock</code> 实际发布。墙钟记录用于性能，仿真钟用于状态时间；暂停和 reset 后的时间回退需要清理缓存及旧控制请求。</p>
@@ -80,7 +82,7 @@
 <p>先只发布时钟，再检查 TF 和里程计，随后加入一类传感器，最后接入低速命令。用暂停、重复 reset、缺帧和 QoS 不匹配验证回退行为。多进程性能统计同时记录观测采样、发送、推理、接收和生效时间；video FPS 不能代替任何一个控制频率。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="ros-qos" href="https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst" target="_blank" rel="noopener noreferrer">ROS 2 QoS <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="ros-qos" href="https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst" target="_blank" rel="noopener noreferrer">ROS 2 QoS <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">ros2/ros2_documentation · 引用提交 <code>ddfbbf25bea5</code></span></li><li><a data-reference-id="ros-tf" href="https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.rst" target="_blank" rel="noopener noreferrer">Introduction to tf2 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">ros2/ros2_documentation · 引用提交 <code>ddfbbf25bea5</code></span></li><li><a data-reference-id="lab-articulation" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/01_assets/run_articulation.rst" target="_blank" rel="noopener noreferrer">Interacting with an articulation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li></ul></aside>
@@ -92,7 +94,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

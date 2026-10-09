@@ -98,7 +98,10 @@
     "tutorialRoutes": "建议实践路线",
     "tutorialRouteLearning": "学习：张量布局 → Autograd → RL 掩码与梯度 → 实验协议。",
     "tutorialRouteRobot": "机器人：资产 → 接触 → 仿真时序 → ROS 2 → 人群与导航评测。",
-    "tutorialRouteVla": "VLA：动作分块 → OpenPI / LIBERO → 配对评测 → GPU 计时与排错。"
+    "tutorialRouteVla": "VLA：动作分块 → OpenPI / LIBERO → 配对评测 → GPU 计时与排错。",
+    "onThisPage": "本页目录",
+    "readingTime": "约 {minutes} 分钟",
+    "archiveNav": "归档"
   },
   "en": {
     "siteTitle": "Research & Engineering",
@@ -199,6 +202,9 @@
     "tutorialRoutes": "Suggested practice routes",
     "tutorialRouteLearning": "Learning: tensor layout → autograd → RL masks and gradients → evaluation protocol.",
     "tutorialRouteRobot": "Robotics: assets → contact → simulation timing → ROS 2 → crowds and navigation evaluation.",
-    "tutorialRouteVla": "VLA: action chunks → OpenPI/LIBERO → paired evaluation → GPU timing and debugging."
+    "tutorialRouteVla": "VLA: action chunks → OpenPI/LIBERO → paired evaluation → GPU timing and debugging.",
+    "onThisPage": "On this page",
+    "readingTime": "{minutes} min read",
+    "archiveNav": "Archive"
   }
 }

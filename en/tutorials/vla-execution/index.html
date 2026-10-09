@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/en/#about" >About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" aria-current="location">Tutorials</a></li>
+        <li><a href="/en/#knowledge" >Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">VLA Execution: Action Chunks, Latency, and Feedback</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">VLA Execution: Action Chunks, Latency, and Feedback</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>2 min read</span></div></header>
 
+  <details class="post-toc"><summary>On this page</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#separate-model-and-execution-layers"><span class="article-toc-text">Separate model and execution layers</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#track-three-time-scales"><span class="article-toc-text">Track three time scales</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#official-source-supplement-chunks-do-not-define-the-control-loop"><span class="article-toc-text">Official-source supplement: chunks do not define the control loop</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#experimental-route"><span class="article-toc-text">Experimental route</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
 
   <div class="post-content"><h2 id="separate-model-and-execution-layers">Separate model and execution layers</h2>
 <p>A vision-language-action policy maps images, instructions, and supported state inputs to actions. Discrete action tokens, continuous vectors, diffusion, and flow trajectories have different training and decoding procedures. OpenVLA documents decoding and normalization interfaces; OpenPI documents policy serving and clients. Action dimensions, token counts, and robot joint counts remain separate.</p>
@@ -109,7 +111,7 @@
 <p>Compare the existing <a href="../../reading/?category=reading%3Areal-time">real-time execution readings</a> and continue with <a href="../openpi-libero/">OpenPI integration</a>. No new VLA performance or robot experiment is claimed.</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · Referenced commit <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-readme" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/README.md" target="_blank" rel="noopener noreferrer">OpenPI project overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · Referenced commit <code>215abfb217db</code></span></li><li><a data-reference-id="openvla" href="https://github.com/openvla/openvla/blob/c8f03f48af692657d3060c19588038c7220e9af9/README.md" target="_blank" rel="noopener noreferrer">OpenVLA overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">openvla/openvla · Referenced commit <code>c8f03f48af69</code></span></li></ul></aside>
@@ -121,7 +123,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="<%= site_locale() %>" data-theme="light">
 <%- partial('_partial/profile-head', {profile: profile}) %>
-<body class="profile-home">
+<body class="profile-home<%= site_is_home() || ['reading', 'knowledge', 'notebook', 'tutorials', 'archive'].includes(page.layout) || is_archive() ? ' journal-list' : '' %>" id="top">
 <%- partial('_partial/profile-header', {profile: profile}) %>
 <main id="main" class="site-shell">
 <%- body %>

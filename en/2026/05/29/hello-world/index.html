@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -34,11 +35,12 @@
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <ul>
-        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#about" class="is-active" aria-current="location">About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" >Tutorials</a></li>
+        <li><a href="/en/#knowledge" >Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,7 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#education">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Personal Record</p><h1 class="reading-title" id="post-title">Education</h1><time class="reading-date" datetime="2026-05-29">2026.05.29</time></header>
+  <header class="reading-header"><p class="section-label">Personal Record</p><h1 class="reading-title" id="post-title">Education</h1><div class="post-meta"><time class="reading-date" datetime="2026-05-29">2026.05.29</time><span>1 min read</span></div></header>
 
 
   <div class="post-content"><h2 id="education-record">Education record</h2>
@@ -79,7 +81,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

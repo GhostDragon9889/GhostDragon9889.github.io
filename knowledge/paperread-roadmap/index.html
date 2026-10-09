@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" aria-current="location">学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,9 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">学术研究</p><h1 class="reading-title" id="post-title">跨论文对照与研究路线</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">学术研究</p><h1 class="reading-title" id="post-title">跨论文对照与研究路线</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 11 分钟</span></div></header>
+
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#1-%E6%9C%AC%E9%A1%B9%E7%9B%AE%E6%9C%80%E6%B8%85%E6%A5%9A%E7%9A%84%E7%A0%94%E7%A9%B6%E4%B8%BB%E7%BA%BF"><span class="article-toc-text">1. 本项目最清楚的研究主线</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#2-%E5%85%88%E5%8C%BA%E5%88%86%E4%BA%94%E7%A7%8D%E6%97%B6%E9%97%B4-%E6%89%8D%E8%83%BD%E6%AF%94%E8%BE%83%E5%AE%9E%E6%97%B6%E6%80%A7"><span class="article-toc-text">2. 先区分五种时间，才能比较实时性</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%B8%83%E7%AF%87%E5%AE%9E%E6%97%B6%E4%B8%8E%E5%8A%A8%E6%80%81%E8%AE%BA%E6%96%87%E5%88%86%E5%88%AB%E6%94%B9%E5%8F%98%E4%BB%80%E4%B9%88"><span class="article-toc-text">七篇实时与动态论文分别改变什么</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#3-%E5%90%8C%E6%A0%B7%E5%8F%AB%E5%AD%A6%E4%B9%A0%E6%88%96%E9%80%82%E9%85%8D-%E6%9B%B4%E6%96%B0%E5%AF%B9%E8%B1%A1%E5%B9%B6%E4%B8%8D%E7%9B%B8%E5%90%8C"><span class="article-toc-text">3. 同样叫学习或适配，更新对象并不相同</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#4-%E5%8A%A8%E4%BD%9C%E7%94%9F%E6%88%90-%E4%BA%BA%E4%BD%93%E8%BF%90%E5%8A%A8%E4%B8%8E%E7%89%A9%E7%90%86%E6%89%A7%E8%A1%8C%E4%B9%8B%E9%97%B4%E8%BF%98%E6%9C%89%E4%B8%80%E5%B1%82"><span class="article-toc-text">4. 动作生成、人体运动与物理执行之间还有一层</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#5-%E8%A7%86%E8%A7%89%E9%80%BC%E7%9C%9F%E4%B8%8D%E8%83%BD%E6%9B%BF%E4%BB%A3%E5%9C%BA%E6%99%AF%E5%87%A0%E4%BD%95%E4%B8%8E%E4%BA%A4%E4%BA%92%E9%AA%8C%E8%AF%81"><span class="article-toc-text">5. 视觉逼真不能替代场景几何与交互验证</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#6-%E7%A4%BE%E4%BA%A4%E5%AF%BC%E8%88%AA%E9%9C%80%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8C%87%E6%A0%87%E5%88%86%E6%AF%8D%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%AE%9A%E4%B9%89"><span class="article-toc-text">6. 社交导航需要统一指标分母和事件定义</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#7-%E7%94%A8%E5%9B%9B%E6%9D%A1%E9%98%85%E8%AF%BB%E8%B7%AF%E7%BA%BF%E6%8A%8A%E8%AE%BA%E6%96%87%E8%BF%9E%E6%8E%A5%E8%B5%B7%E6%9D%A5"><span class="article-toc-text">7. 用四条阅读路线把论文连接起来</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#8-%E4%BB%8E%E6%96%87%E7%8C%AE%E7%A9%BA%E7%99%BD%E5%88%B0%E5%8F%AF%E9%AA%8C%E8%AF%81%E5%AE%9E%E9%AA%8C"><span class="article-toc-text">8. 从文献空白到可验证实验</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#9-%E7%89%88%E6%9C%AC%E4%B8%8E%E6%9D%A5%E6%BA%90%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99"><span class="article-toc-text">9. 版本与来源使用规则</span></a></li></ol></details>
 
 
   <div class="post-content"><p>核对日期：2026-10-09。本文是基于逐篇原文阅读的综合分析；事实对应原论文，系统组合与实验建议均为本次总结的独立分析。完整题目、版本、来源和各篇详细方法见《论文总索引》。</p>
@@ -333,7 +337,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

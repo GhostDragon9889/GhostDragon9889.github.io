@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/en/#about" >About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" aria-current="location">Tutorials</a></li>
+        <li><a href="/en/#knowledge" >Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Humanoid Robots: Control Dimensions, Symmetry, and Curriculum Recovery</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Humanoid Robots: Control Dimensions, Symmetry, and Curriculum Recovery</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>2 min read</span></div></header>
 
+  <details class="post-toc"><summary>On this page</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#maintain-three-name-mappings"><span class="article-toc-text">Maintain three name mappings</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#symmetry-is-a-modeling-assumption"><span class="article-toc-text">Symmetry is a modeling assumption</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#curriculum-and-termination-boundaries"><span class="article-toc-text">Curriculum and termination boundaries</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#official-source-supplement-and-acceptance"><span class="article-toc-text">Official-source supplement and acceptance</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
 
   <div class="post-content"><h2 id="maintain-three-name-mappings">Maintain three name mappings</h2>
 <p>Separate simulator joint coordinates, actively controllable hardware joints, and the policy’s action subset. A free base represented with a quaternion gives different position and velocity dimensions. Actuator counts need not equal joint counts. Hand variants, passive couplings, and action subsets require matching assets and mappings. This public guide does not inherit dimensions from a private model snapshot.</p>
@@ -114,7 +116,7 @@
 <p>MuJoCo distinguishes generalized position and velocity. Isaac Lab explains migration differences between implicit and explicit actuators. The pinned ProtoMotions overview requires compatible bodies, motion data, and policies. Validate a single joint and static contact before short standing, action-sign checks, and one stage transition. Resetting policy standard deviation is an experimental intervention and should be reported separately rather than assumed to be a generic repair.</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">NVlabs/ProtoMotions · Referenced commit <code>7a8417a9f55b</code></span></li><li><a data-reference-id="mujoco-computation" href="https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/computation/index.rst" target="_blank" rel="noopener noreferrer">MuJoCo computation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">google-deepmind/mujoco · Referenced commit <code>9660a5c7ff74</code></span></li></ul></aside>
@@ -126,7 +128,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

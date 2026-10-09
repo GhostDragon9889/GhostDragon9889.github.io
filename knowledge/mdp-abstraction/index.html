@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" aria-current="location">学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,9 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">理论与方法</p><h1 class="reading-title" id="post-title">MDP Homomorphism 与状态动作抽象</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">理论与方法</p><h1 class="reading-title" id="post-title">MDP Homomorphism 与状态动作抽象</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
+
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%BF%85%E9%A1%BB%E4%BF%9D%E6%8C%81%E5%93%AA%E4%BA%9B%E7%BB%93%E6%9E%84"><span class="article-toc-text">抽象必须保持哪些结构</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%BB%B7%E5%80%BC%E7%AD%89%E4%BB%B7%E4%B8%8E%E7%AD%96%E7%95%A5%E6%8F%90%E5%8D%87"><span class="article-toc-text">价值等价与策略提升</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%B8%8E%E7%9B%B8%E8%BF%91%E6%A6%82%E5%BF%B5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="article-toc-text">与相近概念的区别</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%9C%A8%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E6%A3%80%E6%9F%A5"><span class="article-toc-text">在表示学习中如何检查</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8E%9F%E7%AC%94%E8%AE%B0%E4%B8%AD%E7%9A%84%E9%80%89%E8%AF%BB%E9%93%BE%E6%8E%A5"><span class="article-toc-text">原笔记中的选读链接</span></a></li></ol></details>
 
 
   <div class="post-content"><h2 id="抽象必须保持哪些结构">抽象必须保持哪些结构</h2>
@@ -123,7 +127,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">OpenPI × LIBERO：服务、观测和动作契约</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">OpenPI × LIBERO：服务、观测和动作契约</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%92%8C%E4%BB%BF%E7%9C%9F%E7%AB%AF%E5%88%86%E7%8E%AF%E5%A2%83"><span class="article-toc-text">服务端和仿真端分环境</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%85%EF%BC%9Alibero-%E9%A2%84%E5%A4%84%E7%90%86%E4%B8%8D%E8%83%BD%E5%8F%AA%E7%9C%8B-shape"><span class="article-toc-text">官方代码补充：LIBERO 预处理不能只看 shape</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8A%A8%E4%BD%9C%E9%98%9F%E5%88%97%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="article-toc-text">动作队列与请求</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%88%86%E5%B1%82%E9%AA%8C%E8%AF%81"><span class="article-toc-text">分层验证</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="服务端和仿真端分环境">服务端和仿真端分环境</h2>
 <p>OpenPI 官方推荐远程推理将策略依赖与机器人/仿真依赖分开；LIBERO 示例包含 Docker 与独立环境流程。使用本页引用的固定提交核对入口和依赖，而不是混装所有项目的最新版本。</p>
@@ -116,7 +118,7 @@
 <p>先验证模型加载，再验证单请求字段和有限输出，然后用固定 initial state 检查动作单位与停止语义，最后运行完整套件。记录预热、推理、传输、动作执行和 episode 墙钟时间。一次连通、单任务成功或服务端测速不能变成全套 LIBERO 分数。比较外层 Agent 与直接策略时转到 <a href="../paired-evaluation/">配对评测</a>。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-libero" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/README.md" target="_blank" rel="noopener noreferrer">OpenPI LIBERO example <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-client" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/main.py" target="_blank" rel="noopener noreferrer">OpenPI LIBERO client source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="libero" href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/README.md" target="_blank" rel="noopener noreferrer">LIBERO benchmark <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -129,7 +131,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

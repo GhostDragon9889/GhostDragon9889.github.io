@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/en/#about" >About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" aria-current="location">Tutorials</a></li>
+        <li><a href="/en/#knowledge" >Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Simulation Timing, NavMesh Updates, and Profiling</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Simulation Timing, NavMesh Updates, and Profiling</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>2 min read</span></div></header>
 
+  <details class="post-toc"><summary>On this page</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#record-four-independent-schedules"><span class="article-toc-text">Record four independent schedules</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#official-code-supplement-command-and-cache-order"><span class="article-toc-text">Official-code supplement: command and cache order</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#separate-navigation-and-contact-representations"><span class="article-toc-text">Separate navigation and contact representations</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#use-a-profiling-matrix"><span class="article-toc-text">Use a profiling matrix</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
 
   <div class="post-content"><h2 id="record-four-independent-schedules">Record four independent schedules</h2>
 <p>Physics advances by <code>dt_p</code>. Updating control every <code>k</code> steps gives a control interval of <code>k·dt_p</code>; sensors and rendering can have separate schedules. Frame rate is not physics frequency. The real-time factor is elapsed simulation time divided by elapsed wall time. Record completed steps rather than only the requested frequency.</p>
@@ -80,7 +82,7 @@
 <p>A suddenly enormous bounding box calls for finding the first non-finite state, penetration, or constraint failure. A busy thread requires call-stack evidence. Callback signature errors, missing shaders, and synchronous resource calls belong to the <a href="../reproducible-debugging/">versioned debugging workflow</a>. They cannot all be attributed to the physics solver. Without running the target simulator, these remain diagnostic procedures.</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">PixarAnimationStudios/OpenUSD · Referenced commit <code>ee47c679abde</code></span></li><li><a data-reference-id="lab-articulation" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/01_assets/run_articulation.rst" target="_blank" rel="noopener noreferrer">Interacting with an articulation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="lab-scene" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/02_scene/create_scene.rst" target="_blank" rel="noopener noreferrer">Creating an interactive scene <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="lab-articulation-code" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/scripts/tutorials/01_assets/run_articulation.py" target="_blank" rel="noopener noreferrer">Articulation example source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -93,7 +95,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -34,11 +35,12 @@
     </a>
     <nav class="site-nav" id="site-nav" aria-label="主导航">
       <ul>
-        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#about" class="is-active" aria-current="location">简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,7 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#education">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">个人记录</p><h1 class="reading-title" id="post-title">学习经历</h1><time class="reading-date" datetime="2026-05-29">2026.05.29</time></header>
+  <header class="reading-header"><p class="section-label">个人记录</p><h1 class="reading-title" id="post-title">学习经历</h1><div class="post-meta"><time class="reading-date" datetime="2026-05-29">2026.05.29</time><span>约 1 分钟</span></div></header>
 
 
   <div class="post-content"><h2 id="学习的足迹">学习的足迹</h2>
@@ -79,7 +81,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

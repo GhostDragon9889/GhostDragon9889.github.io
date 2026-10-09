@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">仿真时序、NavMesh 更新与性能剖析</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">仿真时序、NavMesh 更新与性能剖析</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%9B%9B%E4%B8%AA%E5%91%A8%E6%9C%9F%E5%88%86%E5%88%AB%E8%AE%B0%E5%BD%95"><span class="article-toc-text">四个周期分别记录</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%85%EF%BC%9A%E5%91%BD%E4%BB%A4%E5%92%8C%E7%8A%B6%E6%80%81%E7%BC%93%E5%AD%98%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="article-toc-text">官方代码补充：命令和状态缓存的顺序</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#navmesh-%E4%B8%8E%E7%89%A9%E7%90%86%E7%A2%B0%E6%92%9E%E5%88%86%E5%B7%A5"><span class="article-toc-text">NavMesh 与物理碰撞分工</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%80%A7%E8%83%BD%E5%AE%9E%E9%AA%8C%E7%9F%A9%E9%98%B5"><span class="article-toc-text">性能实验矩阵</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="四个周期分别记录">四个周期分别记录</h2>
 <p>物理步长 <code>dt_p</code>，控制每 <code>k</code> 步更新，控制间隔为 <code>k·dt_p</code>；传感器和渲染可以采用其他周期。帧率不是物理频率，实时因子为观测窗口中的仿真时间增量除以墙钟时间增量。改变频率时记录实际完成的物理步数，不能只填写目标设置。</p>
@@ -80,7 +82,7 @@
 <p>包围盒突然变大时寻找第一个非有限状态、穿透或约束异常；单线程高占用则进一步定位调用栈。回调参数错误、缺失 shader 和同步资源调用分别进入 <a href="../reproducible-debugging/">版本与排错流程</a>，不能统一归因于物理求解器。未运行目标仿真时，只能给出定位路线。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">PixarAnimationStudios/OpenUSD · 引用提交 <code>ee47c679abde</code></span></li><li><a data-reference-id="lab-articulation" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/01_assets/run_articulation.rst" target="_blank" rel="noopener noreferrer">Interacting with an articulation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="lab-scene" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/02_scene/create_scene.rst" target="_blank" rel="noopener noreferrer">Creating an interactive scene <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="lab-articulation-code" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/scripts/tutorials/01_assets/run_articulation.py" target="_blank" rel="noopener noreferrer">Articulation example source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -93,7 +95,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

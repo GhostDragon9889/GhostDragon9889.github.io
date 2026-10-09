@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" aria-current="location">文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,11 +63,13 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">视觉—语言—动作模型综述：动作令牌化视角</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">视觉—语言—动作模型综述：动作令牌化视角</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 14 分钟</span></div></header>
 
-  <aside class="paper-reference" aria-label="文献信息"><h2>A Survey on Vision-Language-Action Models: An Action Tokenization Perspective</h2><p>文献编号: P02 · 综述与理论基础</p><p>所用版本: 2507.01925v1 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2507.01925v1" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</a></aside>
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#1-%E8%AE%BA%E6%96%87%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%A0%B8%E5%BF%83%E8%B4%A1%E7%8C%AE"><span class="article-toc-text">1. 论文身份与核心贡献</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#2-%E6%9C%80%E5%85%B3%E9%94%AE%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A%E8%BF%99%E9%87%8C%E7%9A%84-token-%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="article-toc-text">2. 最关键的定义：这里的 token 到底是什么</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#3-%E5%85%AB%E7%B1%BB%E5%8A%A8%E4%BD%9C%E8%A1%A8%E7%A4%BA%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AF%B9%E7%85%A7"><span class="article-toc-text">3. 八类动作表示的完整对照</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#4-%E8%AF%AD%E8%A8%80%E4%B8%8E%E4%BB%A3%E7%A0%81%EF%BC%9A%E9%AB%98%E5%B1%82%E7%BB%84%E5%90%88%E8%83%BD%E5%8A%9B%E6%9D%A5%E8%87%AA%E5%93%AA%E9%87%8C"><span class="article-toc-text">4. 语言与代码：高层组合能力来自哪里</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4-1-%E8%AF%AD%E8%A8%80%E8%AE%A1%E5%88%92%E4%B8%8E%E8%AF%AD%E8%A8%80%E8%BF%90%E5%8A%A8"><span class="article-toc-text">4.1 语言计划与语言运动</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4-2-%E4%BB%A3%E7%A0%81%E8%A1%A8%E7%A4%BA"><span class="article-toc-text">4.2 代码表示</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#5-%E5%8F%AF%E4%BE%9B%E6%80%A7%EF%BC%9A%E5%9C%A8%E4%BB%80%E4%B9%88%E5%9C%B0%E6%96%B9%E4%BB%A5%E4%BD%95%E7%A7%8D%E6%96%B9%E5%BC%8F%E4%BA%A4%E4%BA%92"><span class="article-toc-text">5. 可供性：在什么地方以何种方式交互</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#6-%E8%BD%A8%E8%BF%B9%EF%BC%9A%E6%98%BE%E5%BC%8F%E8%BF%90%E5%8A%A8%E8%A1%A8%E7%A4%BA%E7%9A%84%E6%94%B6%E7%9B%8A%E4%B8%8E%E7%BC%BA%E5%8F%A3"><span class="article-toc-text">6. 轨迹：显式运动表示的收益与缺口</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#7-%E7%9B%AE%E6%A0%87%E7%8A%B6%E6%80%81%EF%BC%9A%E7%94%A8%E6%9C%AA%E6%9D%A5%E8%A7%82%E6%B5%8B%E6%8C%87%E5%AF%BC%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%8A%A8%E4%BD%9C"><span class="article-toc-text">7. 目标状态：用未来观测指导现在的动作</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#8-%E6%BD%9C%E5%8A%A8%E4%BD%9C%EF%BC%9A%E4%B8%89%E9%98%B6%E6%AE%B5%E8%AE%AD%E7%BB%83%E4%BB%A5%E5%8F%8A%E6%9C%80%E5%AE%B9%E6%98%93%E6%B7%B7%E6%B7%86%E7%9A%84%E8%BE%B9%E7%95%8C"><span class="article-toc-text">8. 潜动作：三阶段训练以及最容易混淆的边界</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#8-1-%E5%9F%BA%E4%BA%8E%E8%A7%86%E8%A7%89%E5%8F%98%E5%8C%96"><span class="article-toc-text">8.1 基于视觉变化</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#8-2-%E5%9F%BA%E4%BA%8E%E7%9C%9F%E5%AE%9E%E5%8A%A8%E4%BD%9C"><span class="article-toc-text">8.2 基于真实动作</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#8-3-%E5%9F%BA%E4%BA%8E%E6%95%B4%E4%BD%93%E7%9B%AE%E6%A0%87"><span class="article-toc-text">8.3 基于整体目标</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#9-%E5%8E%9F%E5%A7%8B%E5%8A%A8%E4%BD%9C%EF%BC%9A%E7%AB%AF%E5%88%B0%E7%AB%AF%E5%AD%A6%E4%B9%A0%E4%BB%8D%E4%BE%9D%E8%B5%96%E7%B2%BE%E7%A1%AE%E6%8E%A5%E5%8F%A3"><span class="article-toc-text">9. 原始动作：端到端学习仍依赖精确接口</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#10-%E6%8E%A8%E7%90%86%E4%B8%AD%E9%97%B4%E8%A1%A8%E7%A4%BA%EF%BC%9A%E5%8F%AF%E6%A3%80%E6%9F%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E7%9C%9F%E5%AE%9E%E6%89%A7%E8%A1%8C%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="article-toc-text">10. 推理中间表示：可检查输出与真实执行的关系</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#11-%E6%95%B0%E6%8D%AE-%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A0%94%E7%A9%B6%E8%BE%B9%E7%95%8C"><span class="article-toc-text">11. 数据、证据与研究边界</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#12-%E5%AF%B9%E6%9C%AC%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A0%94%E7%A9%B6%E9%97%AE%E9%A2%98"><span class="article-toc-text">12. 对本项目的连接与可执行研究问题</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="article-toc-text">参考来源</span></a></li></ol></details>
 
+
+  <aside class="paper-reference" aria-label="文献信息"><details><summary>文献信息 · P02</summary><div class="source-details"><h2>A Survey on Vision-Language-Action Models: An Action Tokenization Perspective</h2><p>文献编号: P02 · 综述与理论基础</p><p>所用版本: 2507.01925v1 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2507.01925v1" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></div></details></aside>
 
   <div class="post-content"><h2 id="1-论文身份与核心贡献">1. 论文身份与核心贡献</h2>
 <ul>
@@ -246,7 +250,7 @@ A\sim p_a(\cdot\mid o,\ell,z_{1:K}).
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">Autograd、梯度累积与训练状态恢复</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">Autograd、梯度累积与训练状态恢复</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%89%8D%E5%90%91%E8%AE%B0%E5%BD%95%E5%85%B3%E7%B3%BB-%E5%8F%8D%E5%90%91%E8%AE%A1%E7%AE%97%E6%A2%AF%E5%BA%A6"><span class="article-toc-text">前向记录关系，反向计算梯度</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E8%A1%A5%E5%85%85%EF%BC%9Aeval-%E4%B8%8D%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E6%B1%82%E5%AF%BC"><span class="article-toc-text">官方文档补充：eval 不关闭自动求导</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF%E6%8C%89%E6%A0%B7%E6%9C%AC%E6%95%B0%E5%8A%A0%E6%9D%83"><span class="article-toc-text">梯度累积按样本数加权</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%81%A2%E5%A4%8D%E5%AE%8C%E6%95%B4%E8%AE%AD%E7%BB%83%E7%8A%B6%E6%80%81"><span class="article-toc-text">恢复完整训练状态</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="前向记录关系-反向计算梯度">前向记录关系，反向计算梯度</h2>
 <p>常规反向自动求导在前向执行时建立计算关系，保存反向规则所需的量；反向计算向量–Jacobian 乘积，并非为每个算子预先保存完整 Jacobian。叶张量且 <code>requires_grad=True</code> 的参数通常在 <code>.grad</code> 累积梯度。多次 <code>backward()</code> 会累加，不会替代优化器更新。</p>
@@ -79,7 +81,7 @@
 <p>检查点应包含模型、优化器、学习率调度器、AMP scaler、全局步数及归一化统计。严格续训还需要随机数状态、采样器位置及环境状态；epoch 边界恢复和任意时刻恢复是不同任务。只加载模型权重属于初始化或推理，不等同于完整续训。用同条件的短窗口对比恢复前后 loss、参数更新和数据顺序；本文不声称跨设备逐位一致。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="torch-autograd" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/autograd.rst" target="_blank" rel="noopener noreferrer">Autograd mechanics <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="torch-autograd" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/autograd.rst" target="_blank" rel="noopener noreferrer">Autograd mechanics <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">pytorch/pytorch · 引用提交 <code>449b17684101</code></span></li><li><a data-reference-id="torch-amp" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/amp_examples.rst" target="_blank" rel="noopener noreferrer">Automatic mixed precision examples <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">pytorch/pytorch · 引用提交 <code>449b17684101</code></span></li></ul></aside>
 
@@ -90,7 +92,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

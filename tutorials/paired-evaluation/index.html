@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">基准与实验方法</p><h1 class="reading-title" id="post-title">Direct / Agent 配对评测与进展核验</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">基准与实验方法</p><h1 class="reading-title" id="post-title">Direct / Agent 配对评测与进展核验</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%AF%94%E8%BE%83%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E8%B0%83%E5%BA%A6%E5%99%A8%E8%BF%98%E6%98%AF%E7%AD%96%E7%95%A5"><span class="article-toc-text">比较的对象是调度器还是策略</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%BB%BA%E7%AB%8B%E9%85%8D%E5%AF%B9-manifest"><span class="article-toc-text">建立配对 manifest</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%85%E4%B8%8E%E6%88%90%E5%8A%9F%E5%88%A4%E5%AE%9A"><span class="article-toc-text">官方代码补充与成功判定</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%BB%8E%E8%AF%8A%E6%96%AD%E5%88%B0%E6%9C%BA%E5%88%B6%E7%BB%93%E8%AE%BA"><span class="article-toc-text">从诊断到机制结论</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="比较的对象是调度器还是策略">比较的对象是调度器还是策略</h2>
 <p>外层 Agent 可以改变子目标、重试、调用时机和终止。比较 Direct 与 Agent 时固定 VLA checkpoint、观测权限、预处理、动作空间和任务清单。若 Agent 获得更多交互预算，应单独报告同预算性能和追加成本下的性能。</p>
@@ -80,7 +82,7 @@
 <p>本页没有公开个人诊断成绩、时间线或私人工具配置，提供的是可复用协议。实验方法延伸见 <a href="../../knowledge/statistics-tuning/">统计与调参</a> 和 <a href="../../knowledge/evaluation-protocol/">复现协议</a>。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="openpi-libero" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/README.md" target="_blank" rel="noopener noreferrer">OpenPI LIBERO example <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="openpi-libero" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/README.md" target="_blank" rel="noopener noreferrer">OpenPI LIBERO example <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-client" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/main.py" target="_blank" rel="noopener noreferrer">OpenPI LIBERO client source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="libero" href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/README.md" target="_blank" rel="noopener noreferrer">LIBERO benchmark <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">Lifelong-Robot-Learning/LIBERO · 引用提交 <code>8f1084e3132a</code></span></li></ul></aside>
@@ -92,7 +94,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

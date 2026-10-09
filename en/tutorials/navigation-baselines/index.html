@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/en/#about" >About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" aria-current="location">Tutorials</a></li>
+        <li><a href="/en/#knowledge" >Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Reproduction</p><h1 class="reading-title" id="post-title">Navigation Baselines and Migration: Auditing Papers, Code, and Assets</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">Reproduction</p><h1 class="reading-title" id="post-title">Navigation Baselines and Migration: Auditing Papers, Code, and Assets</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>2 min read</span></div></header>
 
+  <details class="post-toc"><summary>On this page</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#keep-four-evidence-layers"><span class="article-toc-text">Keep four evidence layers</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#trace-each-interface"><span class="article-toc-text">Trace each interface</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#official-repository-supplement-migrate-interfaces-explicitly"><span class="article-toc-text">Official-repository supplement: migrate interfaces explicitly</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#acceptance-sequence"><span class="article-toc-text">Acceptance sequence</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
 
   <div class="post-content"><h2 id="keep-four-evidence-layers">Keep four evidence layers</h2>
 <p>Separate the paper method, execution at a pinned commit, asset availability, and target-environment results. A README capability list does not establish reproduction by the default configuration. Utility tests do not establish sensor, GPU, or training integration. Disambiguate project names, including navigation FLUX versus image-generation FLUX.</p>
@@ -104,7 +106,7 @@
 <p>The upload supplies summaries and catalogs of some historical audits, not their complete referenced artifacts. Private audit filenames and repository relationships are omitted, and unreviewed code conclusions are not reconstructed. See <a href="../../reading/?category=reading%3Anavigation-worlds">navigation readings</a> and the <a href="../reproducible-debugging/">debugging workflow</a>.</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="lab-install" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/setup/installation/pip_installation.rst" target="_blank" rel="noopener noreferrer">Isaac Lab installation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p><ul><li><a data-reference-id="lab-install" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/setup/installation/pip_installation.rst" target="_blank" rel="noopener noreferrer">Isaac Lab installation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="git-submodule" href="https://github.com/git/git/blob/6de20f6092dcf9bdb1c8efe03db4b70c82b423dd/Documentation/git-submodule.adoc" target="_blank" rel="noopener noreferrer">Git submodule manual <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">git/git · Referenced commit <code>6de20f6092dc</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">NVlabs/ProtoMotions · Referenced commit <code>7a8417a9f55b</code></span></li></ul></aside>
@@ -116,7 +118,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

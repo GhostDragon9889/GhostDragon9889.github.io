@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" aria-current="location">文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,11 +63,13 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">Arena-Bench 2.0：面向协作环境中社交导航方法的综合基准</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">Arena-Bench 2.0：面向协作环境中社交导航方法的综合基准</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 11 分钟</span></div></header>
 
-  <aside class="paper-reference" aria-label="文献信息"><h2>Arena-Bench 2.0: A Comprehensive Benchmark of Social Navigation Approaches in Collaborative Environments</h2><p>文献编号: P27 · 导航、社交评测与三维环境</p><p>所用版本: 2025 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://doi.org/10.1109/IROS60139.2025.11246895" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</a></aside>
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E8%AE%BA%E6%96%87%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%89%88%E6%9C%AC"><span class="article-toc-text">论文信息与版本</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#1-%E8%AE%BA%E6%96%87%E4%B8%BB%E5%BC%A0%E4%B8%8E%E7%9C%9F%E6%AD%A3%E7%9A%84%E7%A0%94%E7%A9%B6%E5%AF%B9%E8%B1%A1"><span class="article-toc-text">1. 论文主张与真正的研究对象</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#2-nav2py%EF%BC%9Apython-%E6%96%B9%E6%B3%95%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5-nav2"><span class="article-toc-text">2. nav2py：Python 方法如何进入 Nav2</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#2-1-%E4%BE%9D%E8%B5%96%E9%9A%94%E7%A6%BB%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="article-toc-text">2.1 依赖隔离解决什么问题</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#2-2-%E5%8F%8C%E4%BE%A7%E6%8E%A5%E5%8F%A3%E4%B8%8E%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8"><span class="article-toc-text">2.2 双侧接口与事件驱动</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#3-%E5%9C%BA%E6%99%AF%E7%94%9F%E6%88%90%EF%BC%9A%E4%B8%96%E7%95%8C-%E7%89%A9%E4%BD%93%E4%B8%8E%E8%A1%8C%E4%BA%BA%E8%AF%AD%E4%B9%89"><span class="article-toc-text">3. 场景生成：世界、物体与行人语义</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#4-%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%8C%87%E6%A0%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%90%8C%E6%97%B6%E7%9C%8B%E5%87%A0%E7%B1%BB%E7%BB%93%E6%9E%9C"><span class="article-toc-text">4. 数据与指标：为什么需要同时看几类结果</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4-1-%E4%BB%8E%E5%8E%9F%E5%A7%8B%E6%97%A5%E5%BF%97%E5%88%B0%E5%8F%AF%E8%BF%BD%E6%BA%AF%E7%BB%9F%E8%AE%A1"><span class="article-toc-text">4.1 从原始日志到可追溯统计</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4-2-%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB%E4%B8%8E%E5%AE%9A%E4%B9%89%E9%A3%8E%E9%99%A9"><span class="article-toc-text">4.2 指标体系与定义风险</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#5-%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BD%9C%E8%80%85%E8%A7%82%E5%AF%9F"><span class="article-toc-text">5. 实验设计与作者观察</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#5-1-%E5%9C%BA%E6%99%AF%E7%9F%A9%E9%98%B5%E4%B8%8E%E9%87%8D%E5%A4%8D%E6%AC%A1%E6%95%B0"><span class="article-toc-text">5.1 场景矩阵与重复次数</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#5-2-%E6%8A%A5%E5%91%8A%E5%87%BA%E6%9D%A5%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BB%93%E8%AE%BA"><span class="article-toc-text">5.2 报告出来的主要结论</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#6-%E5%8E%9F%E8%A1%A8%E5%88%86%E7%B1%BB%E9%94%99%E8%AF%AF%EF%BC%9A%E4%B8%8D%E8%83%BD%E6%8A%8A-benchmark-%E7%9A%84%E6%8F%8F%E8%BF%B0%E5%BD%93%E4%BD%9C%E7%AE%97%E6%B3%95%E5%AE%9A%E4%B9%89"><span class="article-toc-text">6. 原表分类错误：不能把 benchmark 的描述当作算法定义</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#7-%E7%9B%B8%E5%AF%B9%E6%97%A2%E6%9C%89%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B0%E5%A2%9E%E4%BB%B7%E5%80%BC%E4%B8%8E%E5%B1%80%E9%99%90"><span class="article-toc-text">7. 相对既有平台的新增价值与局限</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#8-%E5%AF%B9-isaac-sim-ros-2-%E7%A4%BE%E4%BA%A4%E5%AF%BC%E8%88%AA-benchmark-%E7%9A%84%E5%85%B7%E4%BD%93%E5%90%AF%E7%A4%BA"><span class="article-toc-text">8. 对 Isaac Sim + ROS 2 社交导航 benchmark 的具体启示</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="article-toc-text">参考来源</span></a></li></ol></details>
 
+
+  <aside class="paper-reference" aria-label="文献信息"><details><summary>文献信息 · P27</summary><div class="source-details"><h2>Arena-Bench 2.0: A Comprehensive Benchmark of Social Navigation Approaches in Collaborative Environments</h2><p>文献编号: P27 · 导航、社交评测与三维环境</p><p>所用版本: 2025 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://doi.org/10.1109/IROS60139.2025.11246895" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></div></details></aside>
 
   <div class="post-content"><h2 id="论文信息与版本">论文信息与版本</h2>
 <ul>
@@ -193,7 +197,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

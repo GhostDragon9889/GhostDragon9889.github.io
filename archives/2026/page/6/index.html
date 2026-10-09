@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home journal-list" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" aria-current="location">归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -74,15 +76,15 @@
 
     <li><a class="archive-item" href="/reading/p02/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">视觉—语言—动作模型综述：动作令牌化视角</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
 
-    <li><a class="archive-item" href="/reading/p06/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">SimBa：利用简洁性偏置扩大深度强化学习网络的参数规模</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
+    <li><a class="archive-item" href="/reading/p03/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">面向具身操作的视觉-语言-动作模型综述</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
+
+    <li><a class="archive-item" href="/reading/p04/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">面向机器人操作的视觉—语言—动作模型强化学习综述</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
 
     <li><a class="archive-item" href="/reading/p05/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">RL²：通过慢速强化学习学会快速强化学习</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
 
-    <li><a class="archive-item" href="/reading/p08/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">扩散策略：通过动作扩散学习视觉运动策略</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
+    <li><a class="archive-item" href="/reading/p07/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">利用低成本硬件学习精细双臂操作</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
 
-    <li><a class="archive-item" href="/reading/p09/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">π₀：用于通用机器人控制的视觉—语言—动作流模型</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
-
-    <li><a class="archive-item" href="/reading/p11/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">π_RL：面向流式视觉—语言—动作模型的在线强化学习微调</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
+    <li><a class="archive-item" href="/reading/p06/"><time datetime="2026-10-09">2026.10.09</time><span class="archive-title">SimBa：利用简洁性偏置扩大深度强化学习网络的参数规模</span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
 
   </ul>
 
@@ -92,7 +94,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

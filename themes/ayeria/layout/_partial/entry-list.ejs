@@ -1,10 +1,9 @@
 <div class="entry-list">
 <% entries.each(function(post) { %>
   <article class="entry-row<%= filterable ? ' content-item' : '' %>"<% if (filterable) { %> data-group="<%= post.collection === 'reading' ? 'reading:' + post.paper.topic_id : post.collection %>"<% } %>>
-    <div class="entry-meta"><span><%= post.collection === 'reading' ? site_topic(post.paper) : site_group(post.collection) %></span><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time></div>
     <h3><a href="<%- url_for(post.path) %>"><% if (post.paper) { %><span class="paper-id"><%= post.paper.id %></span> <% } %><%= post.title %></a></h3>
     <p class="entry-description"><%= post.description || truncate(strip_html(post.excerpt || post.content), {length: 120}) %></p>
-    <div class="entry-links"><a href="<%- url_for(post.path) %>"><%= site_text('readMore') %> →</a><% if (post.paper && post.paper.url) { %><a href="<%= post.paper.url %>" target="_blank" rel="noopener noreferrer"><%= site_text('originalPaper') %> <%- partial('external-link-icon') %></a><% } %></div>
+    <div class="entry-meta"><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time><span><%= post.collection === 'reading' ? site_topic(post.paper) : site_group(post.collection) %></span><span><%= site_reading_time(post) %></span><% if (post.paper && post.paper.url) { %><a href="<%= post.paper.url %>" target="_blank" rel="noopener noreferrer"><%= site_text('originalPaper') %> <%- partial('external-link-icon') %></a><% } %></div>
   </article>
 <% }); %>
 </div>

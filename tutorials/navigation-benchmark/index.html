@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">基准与实验方法</p><h1 class="reading-title" id="post-title">社交导航 Benchmark：模块契约与指标</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">基准与实验方法</p><h1 class="reading-title" id="post-title">社交导航 Benchmark：模块契约与指标</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%8C%89%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89-%E7%A4%BE%E4%BA%A4"><span class="article-toc-text">按任务定义“社交”</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8D%81%E4%BA%8C%E6%A8%A1%E5%9D%97%E7%9A%84%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84"><span class="article-toc-text">十二模块的参考架构</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%8C%87%E6%A0%87%E5%BF%85%E9%A1%BB%E6%9C%89%E5%88%86%E6%AF%8D%E4%B8%8E%E5%AE%9A%E4%B9%89"><span class="article-toc-text">指标必须有分母与定义</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E8%B5%84%E6%96%99%E8%A1%A5%E5%85%85%E4%B8%8E%E9%AA%8C%E6%94%B6"><span class="article-toc-text">官方资料补充与验收</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="按任务定义-社交">按任务定义“社交”</h2>
 <p>存在行人不等于符合社交规范。静态导航关注可达性，动态避障关注随时间变化的障碍；社交导航还需操作性地定义让行、群体空间、通行秩序或不适。提前停住可以安全却长期冻结，穿过交谈群体可以无碰撞却违反任务规则。</p>
@@ -136,7 +138,7 @@
 <p>评估器可读取真值不代表策略可以读取真值。训练/测试按实际泛化目标拆分场景，保存全量 episode、失败原因与可重算指标。动画回放、规则避让和学习反应型人群是不同实验条件。后续见 <a href="../crowd-motion/">人群运动接口</a> 和 <a href="../paired-evaluation/">配对评测</a>。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="ros-qos" href="https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst" target="_blank" rel="noopener noreferrer">ROS 2 QoS <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="ros-qos" href="https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst" target="_blank" rel="noopener noreferrer">ROS 2 QoS <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">ros2/ros2_documentation · 引用提交 <code>ddfbbf25bea5</code></span></li><li><a data-reference-id="lab-scene" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/02_scene/create_scene.rst" target="_blank" rel="noopener noreferrer">Creating an interactive scene <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">NVlabs/ProtoMotions · 引用提交 <code>7a8417a9f55b</code></span></li></ul></aside>
@@ -148,7 +150,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

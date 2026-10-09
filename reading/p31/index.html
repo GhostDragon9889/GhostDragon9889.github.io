@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" aria-current="location">文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,11 +63,13 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">深度策略梯度的理论与实证差距</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">深度策略梯度的理论与实证差距</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
-  <aside class="paper-reference" aria-label="文献信息"><h2>A Closer Look at Deep Policy Gradients</h2><p>文献编号: P31 · 强化学习经典与教材</p><p>所用版本: arXiv:1811.02553; version unspecified · 2018 / ICLR 2020</p><p>资料来源: Obsidian 阅读笔记</p><p>据上传笔记整理，具体版本按所给题录标注；本次未重新核验原论文 PDF 或复现其实验。</p><a class="text-link" href="https://arxiv.org/abs/1811.02553" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</a></aside>
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%96%87%E7%8C%AE%E9%97%AE%E9%A2%98%E4%B8%8E%E9%98%85%E8%AF%BB%E5%AE%9A%E4%BD%8D"><span class="article-toc-text">文献问题与阅读定位</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%BC%B0%E8%AE%A1%EF%BC%9A%E6%A0%B7%E6%9C%AC%E5%A4%9A%E4%B8%8D%E7%AD%89%E4%BA%8E%E6%96%B9%E5%90%91%E5%8F%AF%E9%9D%A0"><span class="article-toc-text">梯度估计：样本多不等于方向可靠</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E4%BB%B7%E5%80%BC%E9%A2%84%E6%B5%8B%EF%BC%9A%E6%A0%87%E7%AD%BE%E6%8B%9F%E5%90%88%E4%B8%8E%E7%9C%9F%E5%AE%9E%E4%BB%B7%E5%80%BC"><span class="article-toc-text">价值预测：标签拟合与真实价值</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%9B%BF%E4%BB%A3%E7%9B%AE%E6%A0%87%E4%B8%8E%E7%9C%9F%E5%AE%9E%E6%99%AF%E8%A7%82"><span class="article-toc-text">替代目标与真实景观</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AF%B9%E5%A4%8D%E7%8E%B0%E7%9A%84%E5%90%AF%E5%8F%91"><span class="article-toc-text">对复现的启发</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8E%9F%E7%AC%94%E8%AE%B0%E4%B8%AD%E7%9A%84%E9%80%89%E8%AF%BB%E9%93%BE%E6%8E%A5"><span class="article-toc-text">原笔记中的选读链接</span></a></li></ol></details>
 
+
+  <aside class="paper-reference" aria-label="文献信息"><details><summary>文献信息 · P31</summary><div class="source-details"><h2>A Closer Look at Deep Policy Gradients</h2><p>文献编号: P31 · 强化学习经典与教材</p><p>所用版本: arXiv:1811.02553; version unspecified · 2018 / ICLR 2020</p><p>资料来源: Obsidian 阅读笔记</p><p>据上传笔记整理，具体版本按所给题录标注；本次未重新核验原论文 PDF 或复现其实验。</p><a class="text-link" href="https://arxiv.org/abs/1811.02553" target="_blank" rel="noopener noreferrer">原始文献 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></div></details></aside>
 
   <div class="post-content"><h2 id="文献问题与阅读定位">文献问题与阅读定位</h2>
 <p>Ilyas、Engstrom 等人的 <em>A Closer Look at Deep Policy Gradients</em> 以三个维度审查深度策略梯度：梯度估计、价值预测和优化景观。原笔记将主文、附录、策略梯度背景和若干解释混在一起，本整理把论文问题与补充分析分开。</p>
@@ -103,7 +107,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

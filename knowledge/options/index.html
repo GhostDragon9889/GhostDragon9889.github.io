@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" aria-current="location">学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,9 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">理论与方法</p><h1 class="reading-title" id="post-title">Options、SMDP 与 Intra-option Learning</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">理论与方法</p><h1 class="reading-title" id="post-title">Options、SMDP 与 Intra-option Learning</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
+
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#option-%E6%98%AF%E6%80%8E%E6%A0%B7%E5%AE%9A%E4%B9%89%E7%9A%84"><span class="article-toc-text">Option 是怎样定义的</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%97%B6%E9%97%B4%E6%8A%BD%E8%B1%A1%E4%B8%8E-smdp-%E5%9B%9E%E6%BA%AF"><span class="article-toc-text">时间抽象与 SMDP 回溯</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#intra-option-learning"><span class="article-toc-text">Intra-option learning</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="article-toc-text">机器人中的接口</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%8E%9F%E7%AC%94%E8%AE%B0%E4%B8%AD%E7%9A%84%E9%80%89%E8%AF%BB%E9%93%BE%E6%8E%A5"><span class="article-toc-text">原笔记中的选读链接</span></a></li></ol></details>
 
 
   <div class="post-content"><h2 id="option-是怎样定义的">Option 是怎样定义的</h2>
@@ -94,7 +98,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

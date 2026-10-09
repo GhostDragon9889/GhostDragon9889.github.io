@@ -9,7 +9,7 @@
     const dark = root.dataset.theme === 'dark';
     toggle.setAttribute('aria-pressed', String(dark));
     toggle.setAttribute('aria-label', dark ? toggle.dataset.lightLabel : toggle.dataset.darkLabel);
-    themeColor.setAttribute('content', dark ? '#131b26' : '#ffffff');
+    themeColor.setAttribute('content', getComputedStyle(document.body).getPropertyValue('--page-bg').trim());
   }
 
   toggle.addEventListener('click', () => {
@@ -76,11 +76,14 @@
   });
 
   const languageLink = document.querySelector('[data-language-switch]');
-  // Keep a filter and a same-article anchor when switching languages.
+  // Keep filters and shared anchors. Localized contents headings can have
+  // different IDs in the other edition, so return to its article title.
   function updateLanguageLink() {
     const target = new URL(languageLink.href);
     target.search = location.search;
-    target.hash = location.hash;
+    const contentsHeading = location.hash && [...document.querySelectorAll('.post-toc a')]
+      .some(link => link.hash === location.hash);
+    target.hash = contentsHeading ? '#post-title' : location.hash;
     languageLink.href = target.href;
   }
   languageLink.addEventListener('click', updateLanguageLink);
@@ -88,17 +91,18 @@
 
   if ('IntersectionObserver' in window) {
     const links = [...nav.querySelectorAll('a')];
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        links.forEach(link => {
-          const active = link.hash === '#' + entry.target.id;
-          link.classList.toggle('is-active', active);
-          if (active) link.setAttribute('aria-current', 'location');
-          else link.removeAttribute('aria-current');
-        });
+    const sections = [...document.querySelectorAll('#about, #scholar, #reading, #tutorials, #knowledge')];
+    const observer = new IntersectionObserver(() => {
+      const crossed = sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .3);
+      const section = crossed[crossed.length - 1] || sections[0];
+      if (!section) return;
+      links.forEach(link => {
+        const active = link.hash === '#' + section.id;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
       });
-    }, {rootMargin: '-10% 0px -55% 0px'});
-    document.querySelectorAll('#about, #scholar, #reading, #knowledge').forEach(section => observer.observe(section));
+    }, {rootMargin: '0px 0px -70% 0px'});
+    sections.forEach(section => observer.observe(section));
   }
 })();

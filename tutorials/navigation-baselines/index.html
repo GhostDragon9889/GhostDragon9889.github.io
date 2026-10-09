@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">实验复现</p><h1 class="reading-title" id="post-title">导航基线与框架迁移：论文、代码和资源审计</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">实验复现</p><h1 class="reading-title" id="post-title">导航基线与框架迁移：论文、代码和资源审计</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%9B%9B%E4%B8%AA%E8%AF%81%E6%8D%AE%E5%B1%82"><span class="article-toc-text">四个证据层</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E9%80%90%E9%A1%B9%E5%AE%A1%E8%AE%A1%E8%A1%A8"><span class="article-toc-text">逐项审计表</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E4%BB%93%E5%BA%93%E8%A1%A5%E5%85%85%EF%BC%9A%E4%B8%8D%E8%A6%81%E7%9B%B4%E6%8E%A5%E8%A6%86%E7%9B%96%E6%95%B4%E4%B8%AA%E4%BE%9D%E8%B5%96%E7%9B%AE%E5%BD%95"><span class="article-toc-text">官方仓库补充：不要直接覆盖整个依赖目录</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E8%BF%81%E7%A7%BB%E9%AA%8C%E6%94%B6%E9%A1%BA%E5%BA%8F"><span class="article-toc-text">迁移验收顺序</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="四个证据层">四个证据层</h2>
 <p>论文方法、固定提交的实际执行链、资源可用性和目标环境运行分别记录。README 的能力列表不等于默认配置已复现论文；工具单元测试不等于传感器、GPU 仿真或训练通过。对同名项目先确认全称，例如导航 FLUX 与图像生成 FLUX 属于不同项目。</p>
@@ -104,7 +106,7 @@
 <p>NavDP、FLUX 和 NavIsaacLab 的具体历史报告在上传材料中只提供摘要和目录，本次不公开私人审计文件名或提交关系，也不补写没有直接读取的代码结论。论文入口见 <a href="../../reading/?category=reading%3Anavigation-worlds">导航与环境文献</a>，通用复现步骤见 <a href="../reproducible-debugging/">工程排错</a>。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="lab-install" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/setup/installation/pip_installation.rst" target="_blank" rel="noopener noreferrer">Isaac Lab installation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="lab-install" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/setup/installation/pip_installation.rst" target="_blank" rel="noopener noreferrer">Isaac Lab installation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="git-submodule" href="https://github.com/git/git/blob/6de20f6092dcf9bdb1c8efe03db4b70c82b423dd/Documentation/git-submodule.adoc" target="_blank" rel="noopener noreferrer">Git submodule manual <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">git/git · 引用提交 <code>6de20f6092dc</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">NVlabs/ProtoMotions · 引用提交 <code>7a8417a9f55b</code></span></li></ul></aside>
@@ -116,7 +118,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

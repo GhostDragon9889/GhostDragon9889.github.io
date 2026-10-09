@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" >技术教程</a></li>
+        <li><a href="/#knowledge" aria-current="location">学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,9 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">Hexo 与 GitHub Pages：保留源码的构建和发布流程</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">Hexo 与 GitHub Pages：保留源码的构建和发布流程</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
+
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#1-%E4%BD%BF%E7%94%A8%E9%94%81%E5%AE%9A%E4%BE%9D%E8%B5%96-%E4%BF%9D%E7%95%99%E5%AE%8C%E6%95%B4%E6%80%A7%E6%A0%A1%E9%AA%8C"><span class="article-toc-text">1. 使用锁定依赖，保留完整性校验</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#2-%E5%8C%BA%E5%88%86%E6%BA%90%E6%96%87%E4%BB%B6-%E6%9E%84%E5%BB%BA%E8%BE%93%E5%87%BA%E4%B8%8E%E5%8F%91%E5%B8%83%E6%96%87%E4%BB%B6"><span class="article-toc-text">2. 区分源文件、构建输出与发布文件</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#3-%E4%BF%9D%E6%8C%81%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5%E7%A8%B3%E5%AE%9A"><span class="article-toc-text">3. 保持文章链接稳定</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#4-%E9%AA%8C%E8%AF%81%E5%AE%9E%E9%99%85%E9%A1%B5%E9%9D%A2%E5%92%8C%E4%BA%A4%E4%BA%92"><span class="article-toc-text">4. 验证实际页面和交互</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#5-%E5%8F%91%E5%B8%83%E5%89%8D%E6%A0%B8%E5%AF%B9"><span class="article-toc-text">5. 发布前核对</span></a></li></ol></details>
 
 
   <div class="post-content"><p>这篇记录整理了本主页维护过程中实际采用的构建、验证与发布方法。仓库同时保存 Hexo 源码和根目录的静态站点文件，发布流程需要保留这两部分。</p>
@@ -100,7 +104,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

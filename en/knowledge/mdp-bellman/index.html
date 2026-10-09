@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/en/#about" >About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" >Tutorials</a></li>
+        <li><a href="/en/#knowledge" aria-current="location">Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,9 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#knowledge">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Theory &amp; Methods</p><h1 class="reading-title" id="post-title">MDPs, Value Functions, and Bellman Errors</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">Theory &amp; Methods</p><h1 class="reading-title" id="post-title">MDPs, Value Functions, and Bellman Errors</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>2 min read</span></div></header>
+
+  <details class="post-toc"><summary>On this page</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#from-an-mdp-to-its-value-function"><span class="article-toc-text">From an MDP to its value function</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#three-different-errors"><span class="article-toc-text">Three different errors</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#semi-gradients-and-double-sampling"><span class="article-toc-text">Semi-gradients and double sampling</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#a-useful-diagnostic-experiment"><span class="article-toc-text">A useful diagnostic experiment</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#selected-references-from-the-source-notes"><span class="article-toc-text">Selected references from the source notes</span></a></li></ol></details>
 
 
   <div class="post-content"><h2 id="from-an-mdp-to-its-value-function">From an MDP to its value function</h2>
@@ -123,7 +127,7 @@ Q^\pi(s,a)=\mathbb E[r_0+\gamma V^\pi(s_1)\mid s_0=s,a_0=a].
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

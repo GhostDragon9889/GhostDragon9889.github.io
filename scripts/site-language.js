@@ -26,6 +26,17 @@ hexo.extend.helper.register('site_group', function (id) {
   const group = this.site.data.collections.groups.find(item => item.id === id);
   return group ? (this.page.lang === 'en' ? group.label_en : group.label) : this.site_text('personalRecord');
 });
+hexo.extend.helper.register('site_reading_time', function (record) {
+  const text = String(record.raw || record.content || '')
+    .replace(/^---[\s\S]*?\n---\s*/, '')
+    .replace(/```[\s\S]*?```|<pre\b[\s\S]*?<\/pre>/g, '')
+    .replace(/\$\$[\s\S]*?\$\$/g, '')
+    .replace(/<[^>]+>/g, '');
+  const characters = (text.match(/[\u4e00-\u9fff]/g) || []).length;
+  const words = (text.match(/[A-Za-z]+(?:['’\-][A-Za-z]+)*/g) || []).length;
+  const minutes = Math.max(1, Math.ceil(characters / 400 + words / 220));
+  return this.site_text('readingTime').replace('{minutes}', minutes);
+});
 hexo.extend.helper.register('site_topic', function (paper) {
   if (!paper) return this.site_text('other');
   const topic = this.site.data.paperread.topics.find(item => item.id === paper.topic_id);

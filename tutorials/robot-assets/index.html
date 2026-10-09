@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">机器人资产：CAD、USD、URDF 与惯量验收</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">机器人资产：CAD、USD、URDF 与惯量验收</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E8%B5%84%E4%BA%A7%E5%88%B6%E4%BD%9C%E5%88%86%E5%9B%9B%E6%AD%A5"><span class="article-toc-text">资产制作分四步</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E8%A1%A5%E5%85%85%EF%BC%9A%E7%BB%84%E5%90%88%E4%B8%8D%E7%AD%89%E4%BA%8E%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6"><span class="article-toc-text">官方文档补充：组合不等于文件复制</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E6%83%AF%E9%87%8F%E4%B8%8E%E5%85%B3%E8%8A%82%E5%B8%A7"><span class="article-toc-text">惯量与关节帧</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E9%AA%8C%E6%94%B6%E4%BA%A4%E4%BB%98%E7%89%A9"><span class="article-toc-text">验收交付物</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="资产制作分四步">资产制作分四步</h2>
 <p>CAD 装配 → 下游工具支持的网格 → 视觉与碰撞代理 → 关节和动力学属性。STEP 的导入能力依赖转换器与插件版本，不能默认 Blender 原生支持所有 CAD 文件。用已知长度校验尺度，检查法向、零件原点、层级和活动部件边界，再生成机器人资产。</p>
@@ -112,7 +114,7 @@
 <p>保存资产来源、单位、坐标约定、关节名称映射、资源清单与修改说明。先检查单关节，再加入重力、接触和控制；出现大位移时先检查初始穿透、重复约束和关节帧。面向人形机器人继续阅读 <a href="../humanoid-training/">控制维度与课程恢复</a>，接触问题见 <a href="../contact-mecanum/">碰撞与麦克纳姆轮</a>。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">PixarAnimationStudios/OpenUSD · 引用提交 <code>ee47c679abde</code></span></li><li><a data-reference-id="lab-articulation" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/01_assets/run_articulation.rst" target="_blank" rel="noopener noreferrer">Interacting with an articulation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="mujoco-model" href="https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/modeling.rst" target="_blank" rel="noopener noreferrer">MuJoCo modeling <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">google-deepmind/mujoco · 引用提交 <code>9660a5c7ff74</code></span></li></ul></aside>
@@ -124,7 +126,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

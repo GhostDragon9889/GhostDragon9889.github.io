@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 <link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header site-shell">
     <a class="brand" href="/en/" aria-label="LFM academic homepage">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/en/#about" >About</a></li>
         <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading">Reading</a></li>
-        <li><a href="/en/tutorials/">Tutorials</a></li>
-        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/tutorials/" >Tutorials</a></li>
+        <li><a href="/en/#knowledge" aria-current="location">Research &amp; Engineering</a></li>
+        <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,7 +63,9 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/en/#knowledge">← Back to homepage</a>
-  <header class="reading-header"><p class="section-label">Theory &amp; Methods</p><h1 class="reading-title" id="post-title">MDP Homomorphisms and State–Action Abstraction</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">Theory &amp; Methods</p><h1 class="reading-title" id="post-title">MDP Homomorphisms and State–Action Abstraction</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>2 min read</span></div></header>
+
+  <details class="post-toc"><summary>On this page</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#structure-that-an-abstraction-preserves"><span class="article-toc-text">Structure that an abstraction preserves</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#values-and-policy-lifting"><span class="article-toc-text">Values and policy lifting</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#checking-a-learned-representation"><span class="article-toc-text">Checking a learned representation</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#selected-references-from-the-source-notes"><span class="article-toc-text">Selected references from the source notes</span></a></li></ol></details>
 
 
   <div class="post-content"><h2 id="structure-that-an-abstraction-preserves">Structure that an abstraction preserves</h2>
@@ -122,7 +126,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
-    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>

@@ -23,7 +23,8 @@
   <script src="/js/profile.js" defer></script>
 </head>
 
-<body class="profile-home">
+<body class="profile-home" id="top">
+
   <a class="skip-link" href="#main">跳转到主要内容</a>
   <header class="site-header site-shell">
     <a class="brand" href="/" aria-label="LFM 的主页">
@@ -36,9 +37,10 @@
       <ul>
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading">文献阅读</a></li>
-        <li><a href="/tutorials/">技术教程</a></li>
-        <li><a href="/#knowledge">学术与工程</a></li>
+        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/tutorials/" aria-current="location">技术教程</a></li>
+        <li><a href="/#knowledge" >学术与工程</a></li>
+        <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -61,10 +63,10 @@
 
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">视频到仿真场景：几何、尺度、碰撞与导航</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">视频到仿真场景：几何、尺度、碰撞与导航</h1><div class="post-meta"><time class="reading-date" datetime="2026-10-09">2026.10.09</time><span>约 2 分钟</span></div></header>
 
+  <details class="post-toc"><summary>本页目录</summary><ol class="article-toc"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E8%BE%93%E5%87%BA%E5%88%86%E6%88%90%E5%9B%9B%E4%BB%BD"><span class="article-toc-text">输出分成四份</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E8%A1%A5%E5%85%85%EF%BC%9A%E5%85%88%E9%87%8D%E5%BB%BA-%E5%86%8D%E8%BD%AC%E6%8D%A2"><span class="article-toc-text">官方教程补充：先重建，再转换</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E5%A4%9A%E6%AE%B5%E8%A7%86%E9%A2%91%E5%90%88%E5%B9%B6"><span class="article-toc-text">多段视频合并</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#%E7%89%A9%E7%90%86%E4%B8%8E%E5%AF%BC%E8%88%AA%E9%AA%8C%E6%94%B6"><span class="article-toc-text">物理与导航验收</span></a></li></ol></details>
 
-  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
 
   <div class="post-content"><h2 id="输出分成四份">输出分成四份</h2>
 <p>视觉表示、度量几何、物理/语义资产和任务配置分别验收。3DGS 可以表现外观，碰撞代理用于物理交互，USD 描述对象与引用，episode 清单定义起终点和事件。PLY 或 USD 能打开不代表尺度正确、可接触或可通行。</p>
@@ -79,7 +81,7 @@
 <p>视频中的移动人物一般从静态背景重建中剥离，再用 <a href="../crowd-motion/">可控人群</a> 加入。公开示例素材还应取得适当授权，移除人脸、车牌、定位元数据与私人场所线索。ViPE、Depth Anything、Lyra、SAGE-3D 等保留为可选路线，不声称本次已打通其全部格式接口或物理导入。</p>
 </div>
 
-  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">PixarAnimationStudios/OpenUSD · 引用提交 <code>ee47c679abde</code></span></li><li><a data-reference-id="colmap" href="https://github.com/colmap/colmap/blob/b7d115e126827f9c0470baca2ad83daf82f1530e/doc/tutorial.rst" target="_blank" rel="noopener noreferrer">COLMAP reconstruction tutorial <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a><span class="tutorial-reference-version">colmap/colmap · 引用提交 <code>b7d115e12682</code></span></li></ul></aside>
 
@@ -90,7 +92,7 @@
 </main>
   <footer class="site-footer site-shell">
     <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
-    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
   </footer>
 
 </body>
