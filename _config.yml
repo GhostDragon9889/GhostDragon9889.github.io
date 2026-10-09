@@ -5,11 +5,11 @@
 # Site
 title: 哈基米南北绿豆
 subtitle: '喵喵喵'
-description: '喵喵喵'
+description: 'LFM 的个人主页，记录学习的足迹与新的想法。'
 keywords:
 author: LFM
-language: zh
-timezone: 'GMT+8'
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -90,6 +90,7 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
+  - .nojekyll
 exclude:
 ignore:
 

@@ -1,3 +1,5 @@
-<section class="outer">
-  <%- partial('_partial/article', {post: page, index: false}) %>
-</section>
+<article class="reading-page section-block" aria-labelledby="page-title">
+  <a class="breadcrumb text-link" href="<%- url_for() %>">← 返回主页</a>
+  <header class="reading-header"><h1 class="reading-title" id="page-title"><%= page.title %></h1></header>
+  <div class="post-content"><%- page.content %></div>
+</article>

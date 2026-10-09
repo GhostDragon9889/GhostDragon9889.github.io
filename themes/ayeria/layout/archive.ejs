@@ -1,1 +1,17 @@
-<%- partial('_partial/archive', {pagination: config.archive, index: true}) %>
+<section class="reading-page section-block" aria-labelledby="archive-title">
+  <a class="breadcrumb text-link" href="<%- url_for() %>#notes">← 返回主页</a>
+  <header class="reading-header">
+    <p class="section-label">02 / NOTES</p>
+    <h1 class="reading-title" id="archive-title">文字记录<span class="accent">。</span></h1>
+    <p class="reading-description">把走过的路、想过的事，慢慢记录下来。<% if (page.year) { %> · <%= page.year %><% if (page.month) { %>.<%= page.month %><% } %><% } %></p>
+  </header>
+  <ul class="archive-list">
+<% page.posts.each(function(post) { %>
+    <li><a class="archive-item" href="<%- url_for(post.path) %>"><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time><span class="archive-title"><%= post.title %></span><span class="archive-arrow" aria-hidden="true">↗</span></a></li>
+<% }); %>
+  </ul>
+<% if (!page.posts.length) { %><p class="archive-empty">新的记录正在酝酿中。</p><% } %>
+<% if (page.total > 1) { %>
+  <nav class="archive-pagination" aria-label="文章分页"><%- paginator({prev_text: '上一页', next_text: '下一页'}) %></nav>
+<% } %>
+</section>

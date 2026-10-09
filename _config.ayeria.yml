@@ -1,15 +1,15 @@
 menu:
   主页: /
   全部文章: /archives
-  文章分类: /categories
-  全部标签: /tags
-  友情链接: /friends
-  关于本站: /about
+  学习经历: /#education
+  GitHub:
+    url: https://github.com/GhostDragon9889
+    target: blank
 
 
 cover:
   enable: true
-  path: /images/cover.jpg    # 背景图路径（放在主题或站点的 source/images/ 下）
+  path: /images/cover1.jpg
   logo: false                # 封面 Logo 图片路径，不需要设为 false
 
 mathjax: false
@@ -21,10 +21,10 @@ katex:
 
 
 subtitle:
-  enable: true
-  text: 第一行文字
-  text2: 第二行文字          # 可留空
-  text3: 第三行文字          # 最多三行
+  enable: false
+  text: 保持好奇，让想法生长。
+  text2:
+  text3:
   startDelay: 1000
   typeSpeed: 200
   loop: true
@@ -34,15 +34,15 @@ subtitle:
 favicon: /favicon.svg        # 浏览器标签页图标
 logo: /favicon.svg           # 侧边栏顶部 Logo
 
-progressBar: true
+progressBar: false
 
-search: true
+search: false
 
 
 
 
 broadcast:
-  enable: true
+  enable: false
   type: 2                    # 1: 自定义文字；2: 一言 API (hitokoto.cn)
   text: 自定义告示内容        # type 为 1 时有效
 
@@ -50,7 +50,7 @@ darkmode: true                # 侧边栏显示深色模式切换按钮
 
 
 busuanzi:
-  enable: true                # 不蒜子页面访问量统计
+  enable: false
 
 cnzz:
   enable: false
