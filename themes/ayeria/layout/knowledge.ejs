@@ -1,16 +1,16 @@
-<% const entries = site.posts.filter(post => ['research', 'engineering', 'reproduction'].includes(post.collection)).sort('date', -1); %>
+<% const entries = site_records(['research', 'engineering', 'reproduction']); %>
 <section class="reading-page" aria-labelledby="knowledge-title">
-  <a class="breadcrumb text-link" href="<%- url_for() %>#knowledge">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">RESEARCH & ENGINEERING</p><h1 class="reading-title" id="knowledge-title">学术与工程</h1><p class="reading-description">分类整理研究讨论、工程经验与实验复现记录。</p></header>
-  <div class="content-filter" data-content-filter>
-    <div class="filter-controls" role="group" aria-label="按内容分类筛选">
-      <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">全部</button>
+  <a class="breadcrumb text-link" href="<%- site_home() %>#knowledge">← <%= site_text('backHome') %></a>
+  <header class="reading-header"><p class="section-label">RESEARCH & ENGINEERING</p><h1 class="reading-title" id="knowledge-title"><%= site_text('knowledge') %></h1><p class="reading-description"><%= site_text('knowledgePageIntro') %></p></header>
+  <div class="content-filter" data-content-filter data-count-label="<%= site_text('recordCount') %>">
+    <div class="filter-controls" role="group" aria-label="<%= site_text('filterKnowledge') %>">
+      <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true"><%= site_text('all') %></button>
 <% site.data.collections.groups.filter(group => group.id !== 'reading').forEach(function(group) { %>
-      <button class="filter-button" type="button" data-filter="<%= group.id %>" aria-pressed="false"><%= group.label %></button>
+      <button class="filter-button" type="button" data-filter="<%= group.id %>" aria-pressed="false"><%= site_group(group.id) %></button>
 <% }); %>
     </div>
     <p class="filter-status" aria-live="polite" aria-atomic="true"></p>
 <%- partial('_partial/entry-list', {entries: entries, filterable: true}) %>
-    <p class="filter-empty empty-state" hidden>该分类暂无已发布内容。</p>
+    <p class="filter-empty empty-state" hidden><%= site_text('knowledgeFilterEmpty') %></p>
   </div>
 </section>

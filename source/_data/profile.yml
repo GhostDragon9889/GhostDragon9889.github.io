@@ -3,18 +3,29 @@ alias: 哈基米南北绿豆
 github: https://github.com/GhostDragon9889
 scholar: https://scholar.google.com/citations?user=-lS94kMAAAAJ
 description: 记录学习经历，整理文献阅读、学术思考与工程实践。
+description_en: Notes on education, literature reading, research, and engineering practice.
 publications: []
 education:
   - period: 2017.09 — 2021.06
     degree: 本科 · B.S.
     school: 中南民族大学
     department: 计算机学院
+    degree_en: B.S.
+    school_en: South-Central Minzu University
+    department_en: School of Computer Science
   - period: 2021.09 — 2024.06
     degree: 硕士 · M.S.
     school: 哈尔滨工程大学
     department: 计算机学院
+    degree_en: M.S.
+    school_en: Harbin Engineering University
+    department_en: College of Computer Science and Technology
   - period: 2024.09 — 2025.09
     degree: 博士阶段学习
     school: 湖南大学
     department: 电气与信息工程学院 / 人工智能与机器人学院
     note: 已退出，未取得博士学位
+    degree_en: Doctoral study
+    school_en: Hunan University
+    department_en: College of Electrical and Information Engineering / School of Artificial Intelligence and Robotics
+    note_en: Withdrew; no doctoral degree awarded

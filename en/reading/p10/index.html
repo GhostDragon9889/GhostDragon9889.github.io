@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Demonstration context and deterministic meta co-training improve unified multitask VLA adaptation.">
+  <meta name="theme-color" content="#ffffff">
+  <title>MetaVLA: Unified Meta Co-training For Efficient Embodied Adaption · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/reading/p10/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p10/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p10/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/reading/p10/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#reading">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Literature Reading</p><h1 class="reading-title" id="post-title">MetaVLA: Unified Meta Co-training For Efficient Embodied Adaption</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="Paper information"><h2>MetaVLA: Unified Meta Co-training For Efficient Embodied Adaption</h2><p>Paper ID: P10 · Action Generation and Policy Adaptation</p><p>Source version: 2510.05580v3 · 2025</p><p>Source: Project paper attachment</p><p>This is a literature reading note. Reported experimental results refer to the identified paper version; independent analysis and proposed experiments are labeled separately.</p><a class="text-link" href="https://arxiv.org/abs/2510.05580v3" target="_blank" rel="noopener noreferrer">Original paper <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="identity-and-contribution">Identity and contribution</h2>
+<p>MetaVLA, by Chen Li, Zhantao Yang, Han Zhang, and colleagues, first appeared October 7, 2025. The notes use <strong>arXiv:2510.05580v3</strong>, January 28, 2026, a 25-page manuscript; the project page identifies ICLR 2026. The stored title spells <strong>Adaption</strong>, while the website uses <strong>Adaptation</strong>.</p>
+<p>The method improves multitask VLA post-training by reading demonstrations from a context bank through a <strong>Meta-Action-Reasoner (MAR)</strong>. Its main comparison is with OpenVLA and naive multitask SFT, not a claim of the highest absolute VLA performance: the table’s π₀.₅ average is 96.9%, above OpenVLA-based MetaVLA’s 79.3%.</p>
+<h2 id="target-supervision-versus-context">Target supervision versus context</h2>
+<p>Naively mixing heterogeneous tasks can hurt optimization. MetaVLA separates target data, which define the desired action loss, from context data, which supply related experience. Auxiliary GR00T actions enter context rather than being equally mixed into target supervision.</p>
+<p>Given target features <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">x_T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and context observation–action pairs <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><msub><mi>C</mi><mi>i</mi></msub></msub><mo separator="true">,</mo><msub><mi>y</mi><msub><mi>C</mi><mi>i</mi></msub></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x_{C_i},y_{C_i})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0001em;vertical-align:-0.2501em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.07153em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.07153em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>, self-attention encodes contextual pairs and cross-attention retrieves target-relevant information:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>T</mi></msub><mo>=</mo><mi mathvariant="normal">Attention</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>Q</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>T</mi></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>K</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>C</mi></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>V</mi><mo stretchy="false">(</mo><msub><mi>r</mi><mi>C</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">r_T=\operatorname{Attention}(Q(x_T),K(x_C),V(r_C)).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">A</span><span class="mord mathrm">t</span><span class="mord mathrm">t</span><span class="mord mathrm">e</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span><span class="mord mathrm">i</span><span class="mord mathrm">o</span><span class="mord mathrm">n</span></span><span class="mopen">(</span><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p>This is an explanatory interface expression. It is not text-only retrieval or uniform feature averaging. MAR representations are concatenated with OpenVLA/Llama2 hidden states before predicting action-token logits. Training uses LoRA and a small MAR with latent dimension 2,048, rather than retraining a VLA from scratch.</p>
+<h2 id="probabilistic-formulation-and-the-deterministic-default">Probabilistic formulation and the deterministic default</h2>
+<p>The paper presents an Attentive Neural Process formulation:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mi>T</mi></msub><mo>∣</mo><msub><mi>x</mi><mi>T</mi></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>C</mi></msub><mo separator="true">,</mo><msub><mi>y</mi><mi>C</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mo>∫</mo><mi>p</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mi>T</mi></msub><mo>∣</mo><msub><mi>x</mi><mi>T</mi></msub><mo separator="true">,</mo><msub><mi>r</mi><mi>T</mi></msub><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo>∣</mo><msub><mover accent="true"><mi>s</mi><mo>ˉ</mo></mover><mi>C</mi></msub><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>z</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">p(y_T\mid x_T,x_C,y_C)=
+\int p(y_T\mid x_T,r_T,z)q(z\mid\bar s_C)\,dz.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.22225em;vertical-align:-0.86225em;"></span><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011249999999999316em;">∫</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault">s</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">.</span></span></span></span></span></p>
+<p>A variational objective combines target likelihood with a KL term aligning a target-informed posterior and a context-only prior. Target action labels are available during training, not deployment; putting them into inference context would leak labels.</p>
+<p>However, the <strong>main experiments disable the stochastic path</strong>. Deterministic MAR gives 77.8% average and 55.3% Long success, versus 77.3% and 53.0% with the stochastic module. The principal results therefore must not be explained as gains from random latent variables or KL regularization.</p>
+<p>This is amortized context conditioning, not a MAML-style gradient inner loop. The experiments do not establish universal adaptation to entirely unseen skills from a few online demonstrations.</p>
+<h2 id="data-and-computation">Data and computation</h2>
+<p>Four LIBERO suites each contain ten tasks and 500 demonstrations, split into disjoint context and target sets. Auxiliary context includes five single-arm GR00T tasks plus bimanual Threading, introducing different views and 14-dimensional actions. The context is refreshed every <strong>200 training steps</strong>, sampling <strong>32 examples per context task</strong>, not 32 for the whole bank.</p>
+<p>Training uses <strong>75,000 steps, eight A100 80GB GPUs, total batch 128, LoRA rank 32, zero dropout, learning rate <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><annotation encoding="application/x-tex">5\times10^{-4}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span></strong>, and FlashAttention-2. Evaluation uses one 24GB RTX 4090. The paper reports approximately 24 hours compared with about 100 hours in its eight-GPU setting. That is not safely interpretable as only 24 aggregate single-GPU hours.</p>
+<h2 id="results-and-ablations">Results and ablations</h2>
+<table>
+<thead>
+<tr>
+<th>OpenVLA-based method</th>
+<th style="text-align:right">Total steps</th>
+<th style="text-align:right">Goal</th>
+<th style="text-align:right">Spatial</th>
+<th style="text-align:right">Object</th>
+<th style="text-align:right">Long</th>
+<th style="text-align:right">Mean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Four separate models</td>
+<td style="text-align:right">240K</td>
+<td style="text-align:right">76.2%</td>
+<td style="text-align:right">84.7%</td>
+<td style="text-align:right">87.0%</td>
+<td style="text-align:right">51.8%</td>
+<td style="text-align:right">74.9%</td>
+</tr>
+<tr>
+<td>Unified SFT</td>
+<td style="text-align:right">75K</td>
+<td style="text-align:right">77.8%</td>
+<td style="text-align:right">84.8%</td>
+<td style="text-align:right">87.4%</td>
+<td style="text-align:right">54.7%</td>
+<td style="text-align:right">76.2%</td>
+</tr>
+<tr>
+<td>MAR, no auxiliary tasks</td>
+<td style="text-align:right">75K</td>
+<td style="text-align:right">78.9%</td>
+<td style="text-align:right">88.5%</td>
+<td style="text-align:right">88.5%</td>
+<td style="text-align:right">55.3%</td>
+<td style="text-align:right">77.8%</td>
+</tr>
+<tr>
+<td>MAR, six auxiliary tasks</td>
+<td style="text-align:right">75K</td>
+<td style="text-align:right">78.7%</td>
+<td style="text-align:right">89.9%</td>
+<td style="text-align:right">88.9%</td>
+<td style="text-align:right">59.8%</td>
+<td style="text-align:right">79.3%</td>
+</tr>
+</tbody>
+</table>
+<p>The improvement over four separate models is <strong>4.4 percentage points</strong>, and eight points on Long. Reducing total steps from 240K to 75K is 68.75%; 240K is the sum across four models, not each model’s budget.</p>
+<p>Naive SFT with the same heterogeneous auxiliary tasks gives only 8.6% at 75K and 14.5% at 187.5K. This supports the importance of how data are used, but changes both structure and supervision organization. It does not isolate one attention layer or prove gradient conflict is the only cause.</p>
+<p>With the Qwen2.5-VL-based 3B NORA-Long backbone, separate models average 85.4%, unified SFT 87.3%, MAR 90.3%, and auxiliary-context MAR 91.8%. This provides two-backbone evidence, not validation of every possible VLA interface.</p>
+<p>Context sizes 4, 8, 16, and 32 give means 73.2%, 74.8%, 76.7%, and 77.8%. Using only Bridge/Fractal context yields 74.4%, supporting context relevance. Gains need not continue with unlimited context. Separately training each suite with MAR sacrifices unified-checkpoint efficiency.</p>
+<p>Token timing changes from <strong>181.8 tokens/s and 5.5 ms/token</strong> to <strong>172.4 tokens/s and 5.8 ms/token</strong>. The additional 0.3 ms/token is not an entire robot-action inference latency; image encoding, multiple tokens, and transfer remain.</p>
+<h2 id="limits-and-project-use">Limits and project use</h2>
+<p>Evidence is concentrated in LIBERO simulation, without real-robot validation. Context selection, refreshing, action encoding, memory scaling, and cache cost need further evaluation. Disjoint examples do not automatically mean disjoint skills.</p>
+<p><strong>Independent analysis:</strong> MAR offers a way to use heterogeneous demonstrations without directly mixing incompatible action targets. Combining it with RL would require stable context across rollout and updates, or consistent treatment of changing features in PPO ratios and replay. That integration is a proposal, not part of the reported algorithm.</p>
+<p>Reproduction should record suite splits, per-task context sampling, disabled stochastic defaults, the 200-step refresh rule, matched checkpoints, cumulative updates, device hours, token timing, and full action latency. The export records the official code link as “Coming soon” and claims no executed implementation.</p>
+<h2 id="source-references">Source references</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stellar-neuron.github.io/metavla/">Source 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2510.05580v3">Source 2</a></li>
+</ul>
+<p>The source versions and checks above are retained from the uploaded PaperRead notes. This English edition edits their presentation; it does not report new experiments.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/reading/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

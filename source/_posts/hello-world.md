@@ -1,4 +1,5 @@
 ---
+translation_path: en/2026/05/29/hello-world/
 title: 学习经历
 date: 2026-05-29 18:26:07
 description: 记录我的学习经历与一路走来的足迹。

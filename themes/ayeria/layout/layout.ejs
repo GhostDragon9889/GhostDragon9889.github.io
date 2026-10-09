@@ -1,6 +1,6 @@
 <% const profile = site.data.profile; %>
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="<%= site_locale() %>" data-theme="light">
 <%- partial('_partial/profile-head', {profile: profile}) %>
 <body class="profile-home">
 <%- partial('_partial/profile-header', {profile: profile}) %>

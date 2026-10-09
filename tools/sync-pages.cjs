@@ -10,7 +10,7 @@ const output = path.join(root, 'public');
 const checkOnly = process.argv.includes('--check');
 const files = [];
 const allowedFiles = new Set(['index.html', '404.html', 'favicon.svg', 'search.json', 'search.xml', '.nojekyll']);
-const allowedDirectories = new Set(['css', 'js', 'images', 'dist', 'data', 'archives', 'reading', 'knowledge', 'categories', 'tags']);
+const allowedDirectories = new Set(['css', 'js', 'images', 'dist', 'data', 'archives', 'reading', 'knowledge', 'categories', 'tags', 'en', 'downloads']);
 
 function collect(directory) {
   for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {

@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="以CUDA Graph、代数折叠和Triton融合缩短π0前向，并提出视觉/动作专家重叠的流式设计。 完整流式与progressive chunking仍为设计草图，接笔仅为一维夹爪任务，不能据此宣称通用高速操控。">
+  <meta name="theme-color" content="#ffffff">
+  <title>使视觉—语言—动作模型以实时速度运行 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/reading/p17/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p17/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p17/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/reading/p17/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">使视觉—语言—动作模型以实时速度运行</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="论文信息"><h2>Running VLAs at Real-time Speed</h2><p>论文编号: P17 · 实时执行与动态操作</p><p>所用版本: 2510.26742v1 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2510.26742v1" target="_blank" rel="noopener noreferrer">论文原文 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="中文题目与文献信息">中文题目与文献信息</h2>
+<p><strong>中文题目：使视觉—语言—动作模型以实时速度运行。</strong></p>
+<ul>
+<li>**作者：**Yunchao Ma、Yizhuang Zhou、Yunhuan Yang、Tiancai Wang、Haoqiang Fan；Dexmal、StepFun。</li>
+<li>**版本：**arXiv:2510.26742v1，2025-10-30，上传PDF共11页。</li>
+<li>**核心贡献：**围绕 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\pi_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的实际计算图，结合CUDA Graph、等价图变换、矩阵乘法调优和算子融合，将单张RTX4090的双视图推理做到27.3 ms，并用接住下落笔的实验验证端到端时序。</li>
+<li>**必须区分的两层成果：**30 FPS级完整视觉推理及10次接笔实验是已测结果；480 Hz动作专家调度有计算测量支持，但完整480 Hz力反馈控制、渐进动作块算法和三层闭环属于本文提出的设计框架，论文明确省略其完整实现。[1，§3—7；2]</li>
+</ul>
+<h2 id="1-研究问题：模型规模与实时性是否必然冲突">1. 研究问题：模型规模与实时性是否必然冲突</h2>
+<p>论文面对的不是“如何重新训练更小策略”，而是现有大模型推理中多少时间来自可消除的系统开销。对30 FPS相机，一个完整模型若稳定在约33.3 ms内完成，就有可能处理每个到达的视频帧；若超过帧间隔，系统必须丢帧或积累队列，从而增加事件反应延迟。作者以此为工程目标，优化 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\pi_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的视觉编码、语言主干和动作专家。[1，§1—2]</p>
+<p>这里“可能处理每一帧”依赖稳定调度和其他开销也受控。模型平均27.3 ms不等于每次从曝光到动作都只耗时27.3 ms：相机ISP、传输、预处理、排队、执行器运动同样影响闭环。论文的接笔实验特别测量了约两帧相机延迟和约60 ms夹爪动作时间，正是对这个区别的直接体现。[1，§7]</p>
+<h2 id="2-模型结构与计算图的阅读方法">2. 模型结构与计算图的阅读方法</h2>
+<p>基础模型以PaliGemma为视觉语言主体，包含SigLIP视觉编码器和Gemma语言模型；动作专家约300M参数，用流匹配从噪声生成动作块。视觉和语言先产生KV缓存，动作专家随后重复使用缓存完成多步去噪。本文主要计时条件为10步流匹配、63步动作块、空语言提示，动作/状态补齐到32维。[1，§2、图4、表1—2]</p>
+<p>**图4不是新的策略架构。**它把 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\pi_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 现有前向拆成视觉、语言和动作专家三列，展示张量形状、矩阵乘法、归一化、残差和激活。双视图224×224输入经编码得到512个视觉token；动作专家的63个动作token加上状态token形成64个位置。图中“27×”“18×”“10×”等表示网络层或去噪迭代的重复次数，不是机器人执行时间步。[1，图4]</p>
+<p>利用这张图，可以区分三类计算：视觉/语言前缀每次完整推理计算一次；动作专家的层计算随去噪步骤重复；只与固定权重、固定形状或固定去噪时刻相关的量可以预先处理。论文把重复单元归纳为24类GEMM及相关标量操作，而不是说整个模型总共只调用24个算子。[1，§4、表2]</p>
+<h2 id="3-第一层优化：消除python与调度开销">3. 第一层优化：消除Python与调度开销</h2>
+<p>普通PyTorch前向由Python逐次启动CUDA kernel，整个模型包含大量小操作和上千次矩阵/相关计算，CPU提交开销占比显著。CUDA Graph将固定的GPU操作序列与缓冲区记录下来，之后重放，减少每轮Python解释和单独调度开销。它要求图结构和关键内存地址稳定；任意改变输入形状、动态分支或重新分配缓冲区，可能破坏这一假设。[1，§3.1]</p>
+<p>图2中，单视图朴素PyTorch约105.0 ms，加入CUDA Graph后约43.5 ms；双视图106.5 ms降至45.8 ms；三视图113.9 ms降至53.9 ms。这说明相当一部分慢来自实现方式，而不是模型数学计算本身。但这一比较的起点是作者的朴素实现，不能直接将这部分收益泛化为任意已优化框架的可获得收益。[1，图2]</p>
+<h2 id="4-第二层优化：等价变换计算图">4. 第二层优化：等价变换计算图</h2>
+<h3 id="4-1-折叠rmsnorm中的可学习缩放">4.1 折叠RMSNorm中的可学习缩放</h3>
+<p>RMSNorm含输入相关的归一化和可学习逐维缩放。可将后者吸收到下一线性层权重，例如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>x</mi><mo stretchy="true">^</mo></mover><mo>⊙</mo><mi>g</mi><mo stretchy="false">)</mo><mi>W</mi><mo>=</mo><mover accent="true"><mi>x</mi><mo stretchy="true">^</mo></mover><mo stretchy="false">[</mo><mi mathvariant="normal">diag</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mi>W</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">(\widehat x\odot g)W=\widehat x[\operatorname{diag}(g)W]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.67056em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault">x</span></span><span class="svg-align" style="width:calc(100% - 0.05556em);margin-left:0.05556em;top:-3.43056em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg width='100%' height='0.24em' viewBox='0 0 1062 239' preserveAspectRatio='none'><path d='M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊙</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.67056em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault">x</span></span><span class="svg-align" style="width:calc(100% - 0.05556em);margin-left:0.05556em;top:-3.43056em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg width='100%' height='0.24em' viewBox='0 0 1062 239' preserveAspectRatio='none'><path d='M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg></span></span></span></span></span></span><span class="mopen">[</span><span class="mop"><span class="mord mathrm">d</span><span class="mord mathrm">i</span><span class="mord mathrm">a</span><span class="mord mathrm" style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mclose">]</span></span></span></span>，减少逐元素乘法与中间存储。**RMS归一化本身仍然依赖输入，不能整体称为线性操作而删除。**这里可折叠的是固定仿射参数。[1，§3.2、图3]</p>
+<h3 id="4-2-折叠动作与时间嵌入">4.2 折叠动作与时间嵌入</h3>
+<p>动作先经线性投影，再与时间编码拼接后进入另一个线性层；在中间没有非线性的支路上，可预先相乘权重，合并线性变换。固定10个去噪时刻的时间支路输出还可预计算成表，并折叠到SiLU之前的偏置项。这样既减少kernel启动，也减少乘加量，但换去噪时刻表时必须同步更新预计算量。[1，§3.2、图3]</p>
+<h3 id="4-3-合并qkv及相关操作">4.3 合并QKV及相关操作</h3>
+<p>将Q、K、V三次投影合成一次大矩阵乘法，再按列拆出结果；固定位置编码相关量可预计算，RoPE操作可与矩阵计算结合。另一个结构性节省来自VLM最后一层：如果下游仅使用该层KV，而不使用最终隐藏输出，就不必执行对后续无贡献的末层注意力和前馈分支。作者报告这部分额外节省约0.7 ms。[1，§3.2、§4.1]</p>
+<p>这些改写在实数运算层面可等价，但BF16浮点数的结合顺序会影响舍入误差。复现时仍应以相同输入和初始噪声比较动作差异，并检查闭环任务表现，不能只以“公式等价”代替数值验证。</p>
+<h2 id="5-第三层优化：矩阵乘法-访存和算子融合">5. 第三层优化：矩阵乘法、访存和算子融合</h2>
+<p>GEMM性能取决于矩阵形状、分块大小、寄存器、共享内存及SM利用率，库默认配置未必对所有VLA矩阵最优。作者用Triton手工调节tile，保留某些已经足够快的PyTorch注意力实现，并非把所有操作一律重写。单纯GEMM调优约节省1.5 ms。[1，§4.1、表2]</p>
+<p>门控FFN可将两路上投影共同加载输入，再融合激活、逐元素门控和写回，减少中间结果读写。偏置、残差、激活也可合并到矩阵乘法末端；RMS统计量预先保存，随后融合使用。作者还讨论了特殊矩阵形状下的partial split-k：用不同划分改善尾部block的SM分配。不过相关单项收益不到0.1 ms，其价值在于展示具体矩阵与硬件共同决定优化策略。[1，§4.2—4.4]</p>
+<p>双视图完整结果中，视觉编码约4.059 ms、语言部分12.503 ms、动作专家11.001 ms，合计27.299 ms。各部分瓶颈不同，因此不能从“Transformer都一样”推断一套kernel配置适合所有阶段。[1，表2]</p>
+<h2 id="6-速度结果及-理论下界-的准确含义">6. 速度结果及“理论下界”的准确含义</h2>
+<h3 id="6-1-完整前向的实测比较">6.1 完整前向的实测比较</h3>
+<p>以下结果均来自原论文表1，单张RTX4090，空提示、63步动作块。[1，表1]</p>
+<table>
+<thead>
+<tr>
+<th>实现</th>
+<th style="text-align:right">1视图</th>
+<th style="text-align:right">2视图</th>
+<th style="text-align:right">3视图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>朴素Torch</td>
+<td style="text-align:right">105.0 ms</td>
+<td style="text-align:right">106.5 ms</td>
+<td style="text-align:right">113.9 ms</td>
+</tr>
+<tr>
+<td>OpenPI/JAX</td>
+<td style="text-align:right">43.8 ms</td>
+<td style="text-align:right">53.7 ms</td>
+<td style="text-align:right">67.6 ms</td>
+</tr>
+<tr>
+<td>本文优化</td>
+<td style="text-align:right">20.0 ms</td>
+<td style="text-align:right">27.3 ms</td>
+<td style="text-align:right">36.8 ms</td>
+</tr>
+</tbody>
+</table>
+<p>双视图相对JAX约1.97倍，相对朴素Torch约3.90倍；三视图36.8 ms未达到30 FPS的33.3 ms间隔。因此“多视图30 Hz”应结合实际视图数量、提示长度、动作块形状和硬件说明。官方仓库还公布了非空提示等条件的后续计时，不能把它们与本论文表格混作同一设置。[1][2]</p>
+<h3 id="6-2-roofline分析">6.2 Roofline分析</h3>
+<p>对矩阵乘法 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>×</mo><mi>K</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>K</mi><mo>×</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(N\times K)(K\times M)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mclose">)</span></span></span></span>，论文采用</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">e</mi></mrow></msub><mo>=</mo><mi>max</mi><mo>⁡</mo><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mfrac><mrow><mn>2</mn><mi>K</mi><mi>M</mi></mrow><msub><mi>B</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">y</mi></mrow></msub></mfrac><mo separator="true">,</mo><mfrac><mrow><mi>N</mi><mi>K</mi><mi>M</mi></mrow><msub><mi>P</mi><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">A</mi><mi mathvariant="normal">C</mi></mrow></msub></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">t_{\rm roofline}=\max\!\left(
+\frac{2KM}{B_{\rm memory}},
+\frac{NKM}{P_{\rm MAC}}
+\right).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">r</span><span class="mord mathrm mtight">o</span><span class="mord mathrm mtight">o</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight">e</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.4221079999999997em;vertical-align:-0.972108em;"></span><span class="mop">max</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:-0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">m</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">m</span><span class="mord mathrm mtight">o</span><span class="mord mathrm mtight">r</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">y</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.972108em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">M</span><span class="mord mathrm mtight">A</span><span class="mord mathrm mtight">C</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span></span></span></span></span></p>
+<p>第一项只计BF16权重读入，假设激活及输出主要可驻留L2；第二项按乘加能力估计。注意 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">A</mi><mi mathvariant="normal">C</mi></mrow></msub></mrow><annotation encoding="application/x-tex">P_{\rm MAC}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">M</span><span class="mord mathrm mtight">A</span><span class="mord mathrm mtight">C</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 是每秒乘加数，与常把一次乘加记作两次浮点运算的FLOPS口径不同，不能把单位直接互换。[1，§5.1]</p>
+<p>作者根据GPU实际提升频率估计算力，并把多算子成本加总，加上同步开销后得出1/2/3视图13.7/20.6/27.6 ms的下界估计。它建立在缓存、并行性和阶段瓶颈假设上，是实现空间的性能模型，不是对所有可能编译器和算法变换的无条件数学下界。作者自己也讨论了连续算子可能重叠、直接加总需谨慎。[1，§5]</p>
+<p>软件barrier微基准虽降低同步开销，但实际融合因寄存器、共享内存和代码规模代价而产生负收益，因此未作为主实现加速手段。这一点说明微基准更快不自动意味着完整模型更快。[1，§5.2]</p>
+<h2 id="7-full-streaming-inference与-渐进式动作块">7. Full Streaming Inference与“渐进式动作块”</h2>
+<h3 id="7-1-从10步串行去噪到并发调度">7.1 从10步串行去噪到并发调度</h3>
+<p>视觉/语言主要计算受限，动作专家较受访存限制。作者用两个CUDA stream，允许VLM计算新视觉缓存时，动作专家复用旧缓存继续工作。双视图计时为：顺序VLM＋10次AE为27.3 ms；并发VLM＋10次AE为26.3 ms；并发VLM＋16次AE为32.7 ms。因此，在约30个视觉周期/秒内，计算上可以容纳约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>30</mn><mo>×</mo><mn>16</mn><mo>=</mo><mn>480</mn></mrow><annotation encoding="application/x-tex">30\times16=480</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">8</span><span class="mord">0</span></span></span></span> 次AE更新。[1，§6.1]</p>
+<p>这里一次AE更新通常只是一次去噪网络调用，不是标准10步去噪生成完一个独立动作块。**480次AE调用/秒、480个轨迹采样点/秒、480 Hz闭环控制是三个不同概念。**插值可以增加轨迹点密度，但不能让传感器产生更快的新信息；真正高频闭环还要求新信号进入策略并在有限延迟内改变实际输出。[1，§6.2]</p>
+<h3 id="7-2-渐进动作块的含义与未完成部分">7.2 渐进动作块的含义与未完成部分</h3>
+<p>标准flow matching在整个动作块去噪完成后一次输出。作者设想改为逐渐生成可提交的局部动作，每次AE更新既接收新高频信号，也调整尚未提交的未来动作；带时间戳的轨迹缓冲区持续向控制器输出，已经被取走的动作不再修改。[1，§6.2]</p>
+<p>可以把它理解为：较近动作较早达到可执行条件，较远动作继续被后续计算修正；新传感器输入不必等待整个视觉主干重新计算。可是本文<strong>没有给出完整的逐位置噪声日程、训练目标、动作提交判据或轨迹融合规则</strong>，并明确说融合细节与完整实现留待后续工作。因此不能把这个概念图写成已经实证的“每步去噪天然输出一个正确新动作”，也不能用自拟公式冒充论文算法。[1，§6.2、§6.4]</p>
+<h3 id="7-3-图5中的三类反馈">7.3 图5中的三类反馈</h3>
+<p>图5是系统设计图：视觉编码与VLM约30 Hz更新KV缓存；AE利用最新可用缓存及力/触觉等高频信号更新轨迹；文本流以较低频率承担任务交互或推理。作者设想将文本token计算附带在重复的VLM权重读取上，形成约30 token/s的文本生成，再以更低任务频率使用文本结果。[1，§6.2—6.4、图5]</p>
+<p>高频力环的“约2 ms”、视觉环的“约1/30 s”均是框架中最有利条件下的反馈设想，不包含所有传感器、队列与执行器延迟；本文没有给出真实480 Hz力反馈操控成功率。与图4相比，图4是已优化模型的实际计算结构，图5是作者据此提出的流式控制扩展。</p>
+<h2 id="8-接住下落笔：实验说明了什么">8. 接住下落笔：实验说明了什么</h2>
+<p>上下两个夹爪竖直对齐，上夹爪释放笔，下夹爪需要在合适时刻闭合。相机看见下夹爪和笔，但看不到上夹爪，避免直接读取释放动作。笔约下落30 cm，夹爪闭合约60 ms；30 FPS、720P USB相机约有两帧延迟。通过改变夹持位置和轻微调整相机姿态增加变化。[1，§7.1]</p>
+<p>作者采集600个episode：示范中下夹爪在上夹爪释放后200 ms闭合，再把记录转成每个时间位置的1维夹爪状态轨迹。网络输入“当前帧＋上一帧”，利用时间差提供速度线索，语言提示为空。训练沿用OpenPI，仅描述训练少量epochs，没有提供充分的多任务泛化评估。[1，§7.1—7.2]</p>
+<p>推理系统分为相机、推理、输出线程：相机帧进入带时间戳的环形缓冲区，推理读取最新帧并写入未来状态缓冲区，输出线程按时间取相应动作。作者预热GPU后进行10次连续测试，10次均抓住笔，即报告的100%成功率。[1，§7.2—7.3]</p>
+<p>这10次试验支持“这样的大模型系统可以满足该装置的反应时间”，但不是高统计置信度的开放环境可靠性证据。作者也承认任务在学习上很简单，小型网络甚至传统方法可能同样完成。它不是6DoF机械臂动态追踪、碰撞后再抓取或跨对象语义泛化的证明。所谓与人相当的反应速度也来自有限演示，不应当作严格的人类对照实验。[1，§7.3]</p>
+<h2 id="9-对本项目的意义与复现要求">9. 对本项目的意义与复现要求</h2>
+<p>本文说明，在讨论剪枝、压缩或异步前，首先应测量纯模型计算、Python调度、图像处理、网络和执行器延迟。若开销主要来自软件实现，大量性能可能通过保持原策略能力的图优化获得；若传感器本身延迟超过100 ms，仅把模型从50 ms加速到30 ms仍无法实现20 ms视觉反应。</p>
+<p>官方仓库提供 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\pi_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 权重转换、Triton推理与benchmark，后续还加入 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mn>0.5</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{0.5}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span><span class="mord mtight">.</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 及其他模型支持。仓库在2026年已有进一步更新，复现上传论文时应固定提交和原始计时条件；本总结不把这些后续更新混入2025年结果。[2]</p>
+<p>具体应核查形状、提示长度、去噪步数、BF16精度、显卡实际频率、预热、GPU同步计时、相同随机噪声下的输出差异，以及完整事件时间戳。CUDA Graph与高度固定形状的kernel在更换相机数量、动作块长度或模型版本时需要重新适配。本文没有执行仓库代码或本地性能测试。</p>
+<p>相对RTC，本文首先缩短前向计算时间；相对FLASH，它仍运行完整模型，只是更高效；相对DynamicVLA，它没有以大规模动态数据和专门模型设计解决动态理解。对项目中的动态VLA系统，可把它作为底层推理优化基础，再分别研究观测时序、动作块衔接和动态任务训练。</p>
+<h2 id="参考来源">参考来源</h2>
+<p>[1] 上传原文：<code>Ma et al. - 2025 - Running VLAs at Real-time Speed.pdf</code>，arXiv:2510.26742v1；PDF第2—6页工程优化，第6—8页Full Streaming Inference，第8—9页接笔实验；重点为图2—5、表1—3、§6.4的实现范围声明。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2510.26742v1">官方链接</a> 。</p>
+<p>[2] 作者官方仓库，核对日期2026-10-09：<a target="_blank" rel="noopener" href="https://github.com/dexmal/realtime-vla">官方链接</a> 。其README包含后续支持模型和性能更新，本文主要实验数值均按上传论文版本。</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/reading/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

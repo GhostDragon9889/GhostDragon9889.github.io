@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learning-based social planners are reviewed and benchmarked, with implementation and budget caveats.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Social robot navigation: a review and benchmarking of learning-based methods · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/reading/p28/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p28/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p28/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/reading/p28/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#reading">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Literature Reading</p><h1 class="reading-title" id="post-title">Social robot navigation: a review and benchmarking of learning-based methods</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="Paper information"><h2>Social robot navigation: a review and benchmarking of learning-based methods</h2><p>Paper ID: P28 · Navigation, Social Evaluation, and 3D Worlds</p><p>Source version: 2025 · 2025</p><p>Source: Project paper attachment</p><p>This is a literature reading note. Reported experimental results refer to the identified paper version; independent analysis and proposed experiments are labeled separately.</p><a class="text-link" href="https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2025.1658643/full" target="_blank" rel="noopener noreferrer">Original paper <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="identity-and-reading-scope">Identity and reading scope</h2>
+<p>Rashid Alyassi, Cesar Cadena, Robert Riener, and Diego Paez-Granados publish this 34-page review in <strong>Frontiers in Robotics and AI 12, 1658643</strong>, December 11, 2025, DOI <strong>10.3389/frobt.2025.1658643</strong>. No arXiv identifier is invented.</p>
+<p>It maps learning architectures, rewards, perception, crowd models, and training, then compares planners in six scenario families. Its strongest design message is that open-space avoidance of circular people does not adequately test coordination at doors, intersections, and narrow passages.</p>
+<h2 id="task-and-architecture-boundaries">Task and architecture boundaries</h2>
+<p>The principal focus is independent human-aware local navigation; following/guiding and cooperative tasks have different requirements. A local policy does not automatically provide global localization, mapping, or task reasoning.</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Added information</th>
+<th>Main dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>End-to-end</td>
+<td>Raw sensors and history</td>
+<td>Occlusion, training coverage, temporal modeling</td>
+</tr>
+<tr>
+<td>Pedestrian-state</td>
+<td>Detected positions/velocities</td>
+<td>Reliable tracking and wall handling</td>
+</tr>
+<tr>
+<td>Interaction/attention</td>
+<td>Relations between agents</td>
+<td>Learned weighting is not verified social understanding</td>
+</tr>
+<tr>
+<td>Prediction</td>
+<td>Future paths/distributions</td>
+<td>Calibration, planning horizon, interactive response</td>
+</tr>
+<tr>
+<td>Safety-aware</td>
+<td>Filters, switching, constraints, reachable sets</td>
+<td>Assumptions, feasibility, conservatism/freezing</td>
+</tr>
+</tbody>
+</table>
+<p>Families overlap. CADRL uses sampled actions and a learned value with approximate transitions; SARL pools relations; DS-RNN combines motion histories; graph/temporal attention and multimodal fusion add structure. VO/RVO/ORCA are geometric concepts, not inherently neural policies. RVO2’s newer implementation uses ORCA; the names should not be treated as exact synonyms.</p>
+<p>Predictions help only if downstream decisions use the relevant horizon. The review cites settings where multiple predicted modes perform similarly to few modes or constant velocity. These are bounded observations, not evidence that prediction never helps. Reachable-set thresholds and hard personal-space constraints can become so conservative that all routes disappear.</p>
+<h2 id="training-crowds-and-perception">Training, crowds, and perception</h2>
+<p>Rewards combine goal progress, collisions, timing, smoothness, social rules, preferences, prediction uncertainty, and exploration. A printed progress sign would penalize approaching the goal under a positive maximized reward; implementation requires checking. More weighted terms do not automatically improve behavior.</p>
+<p>Crowd libraries include RVO2, UMANS, PySocialForce, DeepSocialForce, CROMOSIM, CrowdDynamics, JuPedSim, Mesa, Agents.jl, and Vadere. These mainly decide where people move. Isaac/Habitat/Unity/Gazebo additionally provide scene rendering, sensors, and body/control models. Either layer can look plausible while the other is wrong.</p>
+<p>Trajectory datasets differ from robot-perspective sensing. SCAND, MuSoHu, CrowdBot, HuRoN, JRDB, and SiT have different duration, viewpoint, and labels. Detection, depth/geometric projection, identity tracking, prediction, and scene semantics should be tested separately. Truth-state inputs are different from noisy estimated states.</p>
+<p>Pretraining, imitation, curricula, auxiliary tasks, privileged teachers, and domain randomization improve different bottlenecks. Appearance randomization alone does not cover how people react to different robot behavior.</p>
+<h2 id="what-the-benchmark-actually-compares">What the benchmark actually compares</h2>
+<p>The platform uses GPU kinematics and Habitat-based sensing. Its approximately <strong>600 FPS for forty rendered bodies</strong> is not full closed-loop throughput; some crowd behavior runs on CPU.</p>
+<p>Six scenarios are static obstacles, doors, corridors, intersections, open random crowds, and open data-driven crowds. Nine plotted implementations include SFM, ORCA, DWA, BC, and end-to-end/state/interaction/prediction/hybrid learning variants.</p>
+<p>Several methods are <strong>author-modified</strong>: GRU is added to the end-to-end policy, static-obstacle LiDAR encoding to state methods, actor–critic/LiDAR changes to SARL, and prediction components to a different decision stack. BC learns from <strong>35,000 successful simulated expert episodes</strong>, not real human demonstrations. Classical baselines receive privileged maps and pedestrian states.</p>
+<p>Approximate readings of the success plot are <strong>SFM 60%, ORCA 62%, DWA 74%, BC 73%, end-to-end 82%, pedestrian-state 90%, interaction 92%, hybrid 93%, prediction 95%</strong>. These are <strong>manual rounded plot estimates</strong>, not original precise statistics. Error-bar meanings, seeds, and complete per-scenario tables are insufficiently specified in the checked text.</p>
+<p>Doors/intersections expose stronger learned coordination; open-space classical methods can be faster but collide more. Higher success and shorter time are distinct. Differing sensors, recurrent features, curricula, and budgets prevent assigning every gain solely to one architecture family.</p>
+<h2 id="metrics-availability-and-project-route">Metrics, availability, and project route</h2>
+<p>Report goal success, timeout, freezing, contact, path length, time, speed/jerk, distances, personal-space invasion, pedestrian detours, legibility, and predictability. Standard SPL should not exceed SR for the same episodes. Distances need center/surface definitions; time needs successful/all-episode denominators. Laboratory and public-space studies supply different evidence from demos.</p>
+<p>The export’s official <strong>SocialNav repository check found a “Coming Soon” README</strong>, not confirmed executable benchmark/configurations. The awesome-list is a bibliography, not that implementation. This availability boundary limits reproduction claims.</p>
+<p><strong>Project proposal:</strong> preserve the six scene types, compare truth-state, estimated-state, and raw-sensor inputs, and vary crowd models independently. Establish matched geometry, control, sensors, budgets, seeds, and event definitions before adding attention/prediction. NavDP/FLUX provide policy layers, NavIsaacLab body/behavior layers, and SAGE/Lyra scene layers; this is a project-level synthesis, not a direct comparison performed by the review. The source notes report no rerun training or evaluation.</p>
+<h2 id="source-references">Source references</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2025.1658643/full">Source 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://socialnavigation.github.io/">Source 2</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ralyassi/SocialNav">Source 3</a></li>
+<li><a target="_blank" rel="noopener" href="https://gamma.cs.unc.edu/RVO/icra2008.pdf">Source 4</a></li>
+<li><a target="_blank" rel="noopener" href="https://gamma-web.iacs.umd.edu/RVO2/downloads/">Source 5</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ralyassi/awesome-social-navigation">Source 6</a></li>
+</ul>
+<p>The source versions and checks above are retained from the uploaded PaperRead notes. This English edition edits their presentation; it does not report new experiments.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/reading/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

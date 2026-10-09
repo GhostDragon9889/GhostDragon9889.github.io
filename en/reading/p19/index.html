@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A compact multiframe policy, dynamic data, and stale-prefix removal target moving-object manipulation.">
+  <meta name="theme-color" content="#ffffff">
+  <title>DynamicVLA: A Vision-Language-Action Model for Dynamic Object Manipulation · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/reading/p19/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p19/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p19/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/reading/p19/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#reading">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Literature Reading</p><h1 class="reading-title" id="post-title">DynamicVLA: A Vision-Language-Action Model for Dynamic Object Manipulation</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="Paper information"><h2>DynamicVLA: A Vision-Language-Action Model for Dynamic Object Manipulation</h2><p>Paper ID: P19 · Real-Time Execution and Dynamic Manipulation</p><p>Source version: 2601.22153v1 · 2026</p><p>Source: Project paper attachment</p><p>This is a literature reading note. Reported experimental results refer to the identified paper version; independent analysis and proposed experiments are labeled separately.</p><a class="text-link" href="https://arxiv.org/abs/2601.22153v1" target="_blank" rel="noopener noreferrer">Original paper <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="identity-and-contribution">Identity and contribution</h2>
+<p>Haozhe Xie, Beichen Wen, and colleagues propose DynamicVLA. The notes use the <strong>fourteen-page arXiv:2601.22153v1</strong>, January 29, 2026, with separately labeled clarifications from v2, October 1. The later record corrects an author spelling and clarifies execution timing; v1 experiments remain the basis of the table.</p>
+<p>The system combines a compact multiframe VLA, <strong>Continuous Inference (CI)</strong>, stale-prefix removal through <strong>LAAS</strong>, and the <strong>Dynamic Object Manipulation (DOM)</strong> dataset. DOM is distinct from DOMINO.</p>
+<h2 id="architecture-and-generation">Architecture and generation</h2>
+<p>The approximately <strong>430M-parameter</strong> model uses FastViT spatial compression, sixteen layers from SmolLM2-360M, and a sixteen-layer action expert. Default twenty-step outputs pad state/actions to 32 dimensions. Input uses frames <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">t-2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> from scene/wrist views: four images total, compressed into a short visual representation.</p>
+<p>Multiple frames provide motion cues without exposing simulator object truth to deployment. Object pose and velocities instead support demonstration collection and evaluation. FastViT includes both mixer and attention components; its efficiency does not mean all attention is removed.</p>
+<p>The original notes flag a v1 flow-notation inconsistency. For</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi>τ</mi></msup><mo>=</mo><mi>τ</mi><mi>A</mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>τ</mi><mo stretchy="false">)</mo><mi>ϵ</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">A^\tau=\tau A+(1-\tau)\epsilon,
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7143919999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mord mathdefault">ϵ</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>an increasing noise-to-data clock implies velocity <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>−</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">A-\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ϵ</span></span></span></span> and covariance <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>τ</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mi>I</mi></mrow><annotation encoding="application/x-tex">(1-\tau)^2I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span></span></span>. The printed opposite sign/unsquared covariance needs a consistent interpretation with code and integration direction. This is a PDF formula check, not an allegation that the implementation uses the same mistake.</p>
+<h2 id="continuous-inference-and-valid-suffixes">Continuous inference and valid suffixes</h2>
+<p>CI immediately starts another inference after completion, rather than waiting for the current chunk to finish. It does not insert new images into a forward pass already running.</p>
+<p>LAAS aligns each chunk to its observation start time, discards positions whose intended execution time has passed, and uses newer completed predictions for overlapping future times. It corrects action indexing; the surviving suffix can still depend on stale environmental information.</p>
+<p>v1 calls LAAS “Latent-aware”; the v2 body uses <strong>Latency-aware Action Streaming</strong>, although some metadata retain older wording. The later clarification gives <strong>0.226 s per chunk, 25 Hz action indexing, and twenty predicted steps</strong>. The v1 “88 Hz” approximately equals <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mi mathvariant="normal">/</mi><mn>0.226</mn></mrow><annotation encoding="application/x-tex">20/0.226</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">/</span><span class="mord">0</span><span class="mord">.</span><span class="mord">2</span><span class="mord">2</span><span class="mord">6</span></span></span></span>, which is action-generation throughput, not eighty-eight fresh visual decisions per second.</p>
+<p>With latency of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> steps and horizon <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>, returning leaves <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n-m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> valid steps. Continuous coverage approximately requires <strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>2</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">n\ge2m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span></span></span></span></strong> under constant latency. At roughly six-step latency, twenty-step predictions leave useful margin; an eight-step horizon would not cover the next call. Actual queues and delay variation still need checks.</p>
+<h2 id="dynamic-data-and-training">Dynamic data and training</h2>
+<p>DOM has approximately <strong>200K simulated episodes, 2,824 scenes, 206 object types, and 2K real episodes</strong>. Its nine dimensions cover reaction, adaptation, sequencing, appearance, spatial reasoning, motion perception, visual/motion generalization, and disturbance robustness.</p>
+<p>The source has differing speed-range descriptions, 0–0.75 versus 0–1 m/s; actual sampling configuration should decide. Simulator demonstrations use object truth in a closed-loop state machine, predict about 0.23 seconds ahead, and can retry after drops. Real collection uses masks, multiple cameras, triangulation, and fitted motion. Mask centers alone do not establish full arbitrary rigid-body 6D pose, so orientation estimation assumptions need verification.</p>
+<p>Training uses 150M COYO image–text pairs, simulated actions, then robot-specific real data. The stated budget is <strong>32 A100s for approximately two weeks</strong>, not implied by the modest approximately 1.8GB deployment memory.</p>
+<h2 id="results-and-ablations">Results and ablations</h2>
+<p>The v1 simulation evaluation uses <strong>1,800 trials per method</strong> across nine dimensions.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align:right">Mean success</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Diffusion Policy</td>
+<td style="text-align:right">0.38%</td>
+</tr>
+<tr>
+<td>OpenVLA-OFT</td>
+<td style="text-align:right">1.33%</td>
+</tr>
+<tr>
+<td>π₀</td>
+<td style="text-align:right">8.11%</td>
+</tr>
+<tr>
+<td>π₀.₅</td>
+<td style="text-align:right">11.06%</td>
+</tr>
+<tr>
+<td>SmolVLA</td>
+<td style="text-align:right">12.67%</td>
+</tr>
+<tr>
+<td>GR00T-N1.5</td>
+<td style="text-align:right">13.05%</td>
+</tr>
+<tr>
+<td>VLA-Adapter-Pro</td>
+<td style="text-align:right">13.61%</td>
+</tr>
+<tr>
+<td>VLASH</td>
+<td style="text-align:right">12.33%</td>
+</tr>
+<tr>
+<td>DynamicVLA</td>
+<td style="text-align:right">47.06%</td>
+</tr>
+</tbody>
+</table>
+<p>The gain over the strongest listed mean is <strong>33.45 percentage points</strong>. Motion perception remains at 33.5% and disturbance robustness at 26.5%. Longer traveled paths can reflect more completed work; short failed trajectories are not automatically efficient. Termination times include failure/timeout cases.</p>
+<p>Without CI/LAAS success is 30.27%; LAAS alone gives 36.11%; CI alone 39.72%; both give 47.06%. Changing language/vision architectures also changes latency, so larger-model declines do not establish a universal scaling law.</p>
+<p>Single-frame success is 38.22%, adjacent-frame 43.39%, and the two-step-spaced pair 47.06%. Sixteen language layers give 47.06% at 0.226 seconds; twenty-four give a slightly higher 48.44% at 0.317 seconds. Sixteen is a cost compromise, not the best on every metric. CI/LAAS improve SmolVLA and π₀.₅ but do not match the full DynamicVLA system.</p>
+<p>Real Franka/PiPER evaluation covers sixteen tasks with controlled launches. Disturbance robustness is not reported because of reproducibility difficulties; plotted results are not universal 100% values.</p>
+<h2 id="limits-and-project-use">Limits and project use</h2>
+<p><strong>Independent analysis:</strong> suffix alignment cannot predict an unexpected collision before fresh inference completes. Rigid-body state-machine demonstrations constrain motion/contact diversity, and short histories do not provide complete long-term memory. Flexible objects, sustained occlusion, unmodeled forces, and exhausted queues need separate evaluation.</p>
+<p>Unlike RTC, LAAS does not use gradient-guided prefix completion; unlike VLASH, it does not explicitly train future-proprioception conditioning; unlike FLASH, it has no draft verifier. Reproduction must fix assets, version, views, delta-action conventions, prediction/execution indices, continued simulator motion during inference, and source-observation timestamps for every executed action. The source notes report no simulator or robot reruns.</p>
+<h2 id="source-references">Source references</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2601.22153v1">Source 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2601.22153">Source 2</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/html/2601.22153v2">Source 3</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hzxie/DynamicVLA">Source 4</a></li>
+<li><a target="_blank" rel="noopener" href="https://haozhexie.com/project/dynamic-vla">Source 5</a></li>
+</ul>
+<p>The source versions and checks above are retained from the uploaded PaperRead notes. This English edition edits their presentation; it does not report new experiments.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/reading/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

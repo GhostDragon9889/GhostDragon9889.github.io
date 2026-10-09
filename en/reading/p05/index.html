@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A recurrent policy learns to explore and adapt through hidden state across episodes within a task.">
+  <meta name="theme-color" content="#ffffff">
+  <title>RL²: Fast Reinforcement Learning via Slow Reinforcement Learning · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/reading/p05/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p05/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p05/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/reading/p05/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#reading">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Literature Reading</p><h1 class="reading-title" id="post-title">RL²: Fast Reinforcement Learning via Slow Reinforcement Learning</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="Paper information"><h2>RL²: Fast Reinforcement Learning via Slow Reinforcement Learning</h2><p>Paper ID: P05 · Surveys and Foundations</p><p>Source version: 1611.02779v2 · 2016</p><p>Source: Official-source supplement</p><p>This is a literature reading note. Reported experimental results refer to the identified paper version; independent analysis and proposed experiments are labeled separately.</p><a class="text-link" href="https://arxiv.org/abs/1611.02779v2" target="_blank" rel="noopener noreferrer">Original paper <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="identity-and-central-idea">Identity and central idea</h2>
+<p>Yan Duan, John Schulman, Xi Chen, Peter L. Bartlett, Ilya Sutskever, and Pieter Abbeel proposed RL² in 2016. The notes use the 14-page <strong>arXiv:1611.02779v2</strong>, revised November 10, 2016, supplied as an official-source supplement. The manuscript says “Under review as a conference paper at ICLR 2017”; that wording does not establish acceptance.</p>
+<p><strong>Slow outer RL learns the weights; fast inner adaptation changes recurrent hidden state.</strong> The paper learns how to explore, remember feedback, and exploit it in new tasks sampled from a training-related distribution. “Fast” concerns adaptation sample efficiency, not milliseconds of inference or VLA control speed.</p>
+<h2 id="trials-episodes-and-memory-boundaries">Trials, episodes, and memory boundaries</h2>
+<p>A task is an MDP <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><mo stretchy="false">(</mo><mi mathvariant="script">S</mi><mo separator="true">,</mo><mi mathvariant="script">A</mi><mo separator="true">,</mo><mi>P</mi><mo separator="true">,</mo><mi>r</mi><mo separator="true">,</mo><msub><mi>ρ</mi><mn>0</mn></msub><mo separator="true">,</mo><mi>γ</mi><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">M=(\mathcal S,\mathcal A,P,r,\rho_0,\gamma,T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathcal" style="margin-right:0.075em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathcal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span></span> sampled from a task distribution. A <strong>trial</strong> contains several episodes in the same MDP. Episode resets change initial state while retaining the task and recurrent memory. A new trial samples another MDP and clears memory.</p>
+<table>
+<thead>
+<tr>
+<th>Boundary</th>
+<th>Reset</th>
+<th>Retain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Episode</td>
+<td>Environment initial state</td>
+<td>MDP, weights, hidden state</td>
+</tr>
+<tr>
+<td>Trial</td>
+<td>MDP and hidden state</td>
+<td>Meta-trained weights</td>
+</tr>
+<tr>
+<td>Outer update</td>
+<td>Optimize weights from sampled trials</td>
+<td>Task-distribution specification</td>
+</tr>
+</tbody>
+</table>
+<p>Clearing the GRU after every episode removes the intended learning channel; retaining it across unrelated trials changes the problem.</p>
+<p>The feedback-aware policy can be written as:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub><mo>=</mo><mi>ϕ</mi><mo stretchy="false">(</mo><msub><mi>o</mi><mi>t</mi></msub><mo separator="true">,</mo><msub><mi>a</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>r</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>d</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><msub><mi>h</mi><mi>t</mi></msub><mo>=</mo><msub><mo><mi mathvariant="normal">GRU</mi><mo>⁡</mo></mo><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>h</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">x_t=\phi(o_t,a_{t-1},r_{t-1},d_{t-1}),\qquad
+h_t=\operatorname{GRU}_\theta(h_{t-1},x_t),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:2em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop"><span class="mord mathrm">G</span><span class="mord mathrm">R</span><span class="mord mathrm">U</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>t</mi></msub><mo>∣</mo><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">softmax</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>W</mi><msub><mi>h</mi><mi>t</mi></msub><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\pi_\theta(a_t\mid h_t)=\operatorname{softmax}(Wh_t+b).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">s</span><span class="mord mathrm">o</span><span class="mord mathrm" style="margin-right:0.07778em;">f</span><span class="mord mathrm">t</span><span class="mord mathrm">m</span><span class="mord mathrm">a</span><span class="mord mathrm">x</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p>All experiments use 256 GRU units and discrete actions. The previous action records what was tried; reward records its outcome; the termination flag identifies an environment reset. Different histories can yield different actions under the same current observation. This is adaptation in activations, without requiring an explicit Q-table or Bayesian posterior.</p>
+<h2 id="outer-optimization">Outer optimization</h2>
+<p>The outer objective optimizes expected discounted reward across an entire trial:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>M</mi><mo separator="true">,</mo><mi>τ</mi></mrow></msub><mrow><mo fence="true">[</mo><munderover><mo>∑</mo><mrow><mi mathvariant="normal">ℓ</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>L</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mi>γ</mi><mi mathvariant="normal">ℓ</mi></msup><msub><mi>r</mi><mi mathvariant="normal">ℓ</mi></msub><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">J(\theta)=\mathbb E_{M,\tau}
+\left[\sum_{\ell=0}^{L-1}\gamma^\ell r_\ell\right].
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.1304490000000005em;vertical-align:-1.302113em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">[</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000002em;"><span style="top:-1.8478869999999998em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">ℓ</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.300005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">L</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.302113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">ℓ</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">ℓ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">]</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span></span></span></span></span></p>
+<p>Early information gathering can pay off in later episodes. The original optimizer is <strong>TRPO</strong>, with recurrent value baselines and GAE, rather than PPO. At test time, weights stay fixed: reward is a forward input, not a test-time gradient update.</p>
+<p>Long-horizon credit assignment remains difficult. Memory permits information flow but does not ensure that noisy policy gradients discover useful exploration. Interpreting the hidden task identity as a POMDP is helpful; the GRU is not required to encode an exact normalized posterior.</p>
+<h2 id="bandit-and-tabular-mdp-evidence">Bandit and tabular-MDP evidence</h2>
+<p>Bernoulli bandits draw each arm mean from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">U[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>. The evaluation uses 1,000 new tasks for combinations of 5, 10, or 50 arms and 10, 100, or 500 pulls. Results are cumulative rewards, not success rates. Classical baselines receive the true prior and applicable hyperparameter tuning.</p>
+<table>
+<thead>
+<tr>
+<th>Pulls / arms</th>
+<th style="text-align:right">Gittins</th>
+<th style="text-align:right">UCB1</th>
+<th style="text-align:right">RL²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10 / 5</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">6.7</td>
+<td style="text-align:right">6.7</td>
+</tr>
+<tr>
+<td>10 / 10</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">6.7</td>
+<td style="text-align:right">6.7</td>
+</tr>
+<tr>
+<td>10 / 50</td>
+<td style="text-align:right">6.5</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">6.8</td>
+</tr>
+<tr>
+<td>100 / 5</td>
+<td style="text-align:right">78.3</td>
+<td style="text-align:right">78.0</td>
+<td style="text-align:right">78.7</td>
+</tr>
+<tr>
+<td>100 / 10</td>
+<td style="text-align:right">82.8</td>
+<td style="text-align:right">82.4</td>
+<td style="text-align:right">83.5</td>
+</tr>
+<tr>
+<td>100 / 50</td>
+<td style="text-align:right">85.2</td>
+<td style="text-align:right">84.3</td>
+<td style="text-align:right">84.9</td>
+</tr>
+<tr>
+<td>500 / 5</td>
+<td style="text-align:right">405.8</td>
+<td style="text-align:right">405.8</td>
+<td style="text-align:right">401.6</td>
+</tr>
+<tr>
+<td>500 / 10</td>
+<td style="text-align:right">437.8</td>
+<td style="text-align:right">437.1</td>
+<td style="text-align:right">432.5</td>
+</tr>
+<tr>
+<td>500 / 50</td>
+<td style="text-align:right">463.7</td>
+<td style="text-align:right">457.6</td>
+<td style="text-align:right">438.9</td>
+</tr>
+</tbody>
+</table>
+<p>RL² is competitive at short budgets but loses 24.8 reward to Gittins in the hardest listed setting. Small mean differences are not automatically significant; the table uses a one-sided test at <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">p=0.05</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">0</span><span class="mord">5</span></span></span></span>. A supervised imitation experiment trains the same network to match Gittins, supporting an outer-optimization bottleneck in that setting.</p>
+<p>Tabular tasks have ten states, five actions, and ten steps per episode. Reward means come from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal N(1,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> with additional unit-variance noise; transitions use a flat Dirichlet prior. RL² cumulative rewards for 10, 25, 50, 75, and 100 episodes are <strong>156.2, 445.7, 936.1, 1428.8, and 1913.7</strong>. Optimistic PSRL gives <strong>144.1, 425.2, 930.7, 1449.2, and 1973.9</strong>. The advantage reverses at longer budgets. Fixed encodings and task priors limit claims about arbitrary task families.</p>
+<h2 id="visual-maze-evidence">Visual-maze evidence</h2>
+<p>ViZDoom supplies first-person RGB. A trial keeps the map and target fixed. Rewards are +1 at the goal, −0.001 for wall collisions, and −0.04 per step. Training uses 5×5 mazes, two episodes per trial, and at most 250 steps per episode; 1,000 training configurations and 1,000 separately generated test configurations are used. Larger 9×9 mazes permit 1,000 steps, and tests extend to five episodes.</p>
+<table>
+<thead>
+<tr>
+<th>Episode</th>
+<th>Small-maze length / success</th>
+<th>Large-maze length / success</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>52.4±1.3 / 99.3%</td>
+<td>180.1±6.0 / 97.1%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>39.1±0.9 / 99.6%</td>
+<td>151.8±5.9 / 96.7%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>42.6±1.0 / 99.7%</td>
+<td>169.3±6.3 / 95.8%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>43.5±1.1 / 99.4%</td>
+<td>162.3±6.4 / 95.6%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>43.9±1.1 / 99.6%</td>
+<td>169.3±6.5 / 96.1%</td>
+</tr>
+</tbody>
+</table>
+<p>Lengths include successful trajectories only; the notes retain the reported ± notation without inventing its statistical meaning. Episode-two lengths decrease by approximately 25.4% and 15.7% relative to episode one, calculated in the notes. However, the table uses the <strong>best training run</strong>, and later episodes do not improve monotonically. Remembering a goal and taking its optimal path are separate capabilities.</p>
+<h2 id="reproduction-and-research-implications">Reproduction and research implications</h2>
+<p>Shared settings include discount 0.99, average KL limit 0.01, weight normalization, orthogonal recurrent initialization, and Xavier initialization elsewhere. Bandit/tabular runs use GAE λ=0.3 and batch 250,000, with up to 1,000/10,000 updates; visual runs use λ=0.99, batch 50,000, and up to 5,000 updates. Batch sizes must be interpreted through the sampler, not as independent-task counts. The original stack is TensorFlow/rllab, with TabulaRL baselines; the export did not verify a complete official dedicated code repository.</p>
+<p><strong>Independent analysis:</strong> meta-training cost is amortized across test tasks. Adaptation depends on task priors, budgets, and reset boundaries; long-horizon optimization and memory remain fragile. No continuous-action robot or moving-object experiment is established here. A dynamic VLA extension would need explicit history, available rewards, change distributions, and memory reset rules, with adaptation quality and runtime latency evaluated separately.</p>
+<h2 id="source-references">Source references</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.02779v2">Source 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.02779">Source 2</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/rl2/">Source 3</a></li>
+</ul>
+<p>The source versions and checks above are retained from the uploaded PaperRead notes. This English edition edits their presentation; it does not report new experiments.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/reading/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

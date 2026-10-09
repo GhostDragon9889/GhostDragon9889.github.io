@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用八类动作相关中间表示统一分析模型模块、数据来源与执行接口。 分类可重叠且 token 定义宽泛；组合架构是研究判断，没有统一对照实验。">
+  <meta name="theme-color" content="#ffffff">
+  <title>视觉—语言—动作模型综述：动作令牌化视角 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/reading/p02/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p02/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p02/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/reading/p02/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">视觉—语言—动作模型综述：动作令牌化视角</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="论文信息"><h2>A Survey on Vision-Language-Action Models: An Action Tokenization Perspective</h2><p>论文编号: P02 · 综述与理论基础</p><p>所用版本: 2507.01925v1 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/2507.01925v1" target="_blank" rel="noopener noreferrer">论文原文 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="1-论文身份与核心贡献">1. 论文身份与核心贡献</h2>
+<ul>
+<li><strong>中文译名</strong>：视觉—语言—动作模型综述：动作令牌化视角。</li>
+<li><strong>作者</strong>：Yifan Zhong、Fengshuo Bai、Shaofei Cai、Xuchuan Huang、Zhang Chen、Xiaowei Zhang、Yuanfei Wang、Shaoyang Guo、Tianrui Guan、Ka Nam Lui、Zhiquan Qi、Yitao Liang、Yuanpei Chen、Yaodong Yang。</li>
+<li><strong>版本</strong>：项目附件 arXiv:2507.01925v1，2025 年 7 月 2 日，70 页；正文含结论至第 45 页，后续为参考文献。首页另有 2025-7-3 排版日期，正式 arXiv 提交日期以版本记录为准。[1]</li>
+<li><strong>研究类型</strong>：分类与分析型综述，覆盖机器人操作、导航、自动驾驶和部分虚拟环境；没有提出一套经过统一训练的新控制算法，也没有建立八类表示的统一实验排行榜。</li>
+</ul>
+<p><strong>核心贡献</strong>：以模块之间传递的动作相关表示为分析单位，将多种看似不同的系统放进同一框架。论文中的 action token 不限于离散动作编号，而包括语言计划、代码、可供性、轨迹、目标状态、潜表示、原始动作和推理中间表示八类。[1，§3]</p>
+<h2 id="2-最关键的定义：这里的-token-到底是什么">2. 最关键的定义：这里的 token 到底是什么</h2>
+<p>作者将 VLA module 定义为最大可微子网络或不可微功能单元，把模块生成的动作相关信息称为 action token；模块内部具有明确语义的中间输出也可以属于 token。因此，运动规划器可以是模块，一张目标图像、一组接触点或一个连续动作块可以是 token。[1，PDF 第 12—14 页]</p>
+<p>这与语言模型 tokenizer 的通常含义不同：后者经常指把文本变成词表中的整数索引；本文的 token 是一个<strong>宽泛的功能接口概念</strong>。它不要求离散、不要求单个标量，也不要求由自回归模型生成。若将本文理解成“比较八种离散量化方法”，会读错研究对象。</p>
+<p>作者用 Hi Robot、VoxPoser、GO-1 等说明模块与表示可以组合。前者可先产生语言子任务，再生成动作；VoxPoser 可经语言与代码生成空间价值图，再由规划器求动作；GO-1 的中间接口则包含学习得到的潜动作。[1，图 1]</p>
+<p>用以下表达可以辅助理解模块链，这不是论文新证明的概率定理：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mn>1</mn></msub><mo>∼</mo><msub><mi>p</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mo>⋅</mo><mo>∣</mo><mi>o</mi><mo separator="true">,</mo><mi mathvariant="normal">ℓ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><msub><mi>z</mi><mi>k</mi></msub><mo>∼</mo><msub><mi>p</mi><mi>k</mi></msub><mo stretchy="false">(</mo><mo>⋅</mo><mo>∣</mo><mi>o</mi><mo separator="true">,</mo><mi mathvariant="normal">ℓ</mi><mo separator="true">,</mo><msub><mi>z</mi><mrow><mo>&lt;</mo><mi>k</mi></mrow></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mi>A</mi><mo>∼</mo><msub><mi>p</mi><mi>a</mi></msub><mo stretchy="false">(</mo><mo>⋅</mo><mo>∣</mo><mi>o</mi><mo separator="true">,</mo><mi mathvariant="normal">ℓ</mi><mo separator="true">,</mo><msub><mi>z</mi><mrow><mn>1</mn><mo>:</mo><mi>K</mi></mrow></msub><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">z_1\sim p_1(\cdot\mid o,\ell),\quad
+z_k\sim p_k(\cdot\mid o,\ell,z_{&lt;k}),\quad
+A\sim p_a(\cdot\mid o,\ell,z_{1:K}).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">⋅</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">o</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">ℓ</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">⋅</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">o</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">ℓ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999985em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">&lt;</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">⋅</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">o</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">ℓ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mrel mtight">:</span><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi></mrow><annotation encoding="application/x-tex">o</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">o</span></span></span></span> 为观测，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">ℓ</mi></mrow><annotation encoding="application/x-tex">\ell</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">ℓ</span></span></span></span> 为任务，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">z_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 是某种中间表示，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 是可执行动作。某些模块是确定性函数，也可以用对应的退化分布表示。实际系统允许重新读取观测、回退和循环，并不局限于单次线性链；论文在 §13.2 也主张进一步发展带记忆和反馈的图结构。</p>
+<p><strong>分类不互斥</strong>：同一个系统可以同时产生目标视频、轨迹和原始动作；reasoning 常用于改进其他 token；每条完整控制链最终都要到达动作接口。不能把八类直接当成八组互不重叠的模型。</p>
+<h2 id="3-八类动作表示的完整对照">3. 八类动作表示的完整对照</h2>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>表示内容</th>
+<th>典型下游模块</th>
+<th>主要收益</th>
+<th>核心不足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语言描述</td>
+<td>子任务、动作短语、空间命令</td>
+<td>技能库、语言条件策略</td>
+<td>复用语言先验，便于分解和人工修改</td>
+<td>物理细节不充分、歧义、推理延迟</td>
+</tr>
+<tr>
+<td>代码</td>
+<td>API 调用、条件、循环、程序</td>
+<td>感知与控制函数库</td>
+<td>明确逻辑和组合能力</td>
+<td>依赖 API 能力及实际执行前提</td>
+</tr>
+<tr>
+<td>可供性</td>
+<td>可交互点、区域、方向与空间分数</td>
+<td>规划器、抓取器、条件策略</td>
+<td>连接语义目标与物理位置</td>
+<td>动态变化、遮挡、三维和接触信息不足</td>
+</tr>
+<tr>
+<td>轨迹</td>
+<td>点序列、绘制路径、光流</td>
+<td>轨迹跟踪或动作策略</td>
+<td>视频可提供监督，动作模式可跨任务复用</td>
+<td>常缺姿态、受力和执行逻辑</td>
+</tr>
+<tr>
+<td>目标状态</td>
+<td>未来图像、点云或视频</td>
+<td>目标条件策略、逆动力学模型</td>
+<td>利用无动作视频和事后目标标注</td>
+<td>生成误差、过度指定、计算成本</td>
+</tr>
+<tr>
+<td>潜表示</td>
+<td>经专门学习的隐动作或隐目标</td>
+<td>本体专用解码器、动作专家</td>
+<td>压缩行为，连接异构数据</td>
+<td>语义纠缠、粒度与覆盖、难以检查</td>
+</tr>
+<tr>
+<td>原始动作</td>
+<td>关节或末端指令、动作块</td>
+<td>机器人控制接口</td>
+<td>直接动作监督，便于端到端学习</td>
+<td>数据昂贵、本体差异、长任务与延迟</td>
+</tr>
+<tr>
+<td>推理</td>
+<td>任务分解、空间关系与决策中间步骤</td>
+<td>上述任意表示生成器</td>
+<td>增加可检查的中间监督与任务约束</td>
+<td>文本未必忠实、固定模板、额外延迟</td>
+</tr>
+</tbody>
+</table>
+<p>以上是对原文表 1 与 §4—11 的归纳，表示的优劣依赖任务与接口，不是统一评测后的绝对排名。[1]</p>
+<h2 id="4-语言与代码：高层组合能力来自哪里">4. 语言与代码：高层组合能力来自哪里</h2>
+<h3 id="4-1-语言计划与语言运动">4.1 语言计划与语言运动</h3>
+<p>语言计划描述子任务，例如先收拾物体再擦桌面；语言运动描述更局部的操作，例如移动手臂或闭合夹爪。SayCan 用技能可行性修正语言候选，Inner Monologue 引入执行反馈，Hi Robot 连接高层自由语言子任务与通用低层策略，RT-H 研究细粒度动作语言的中间层。[1，§4，表 2]</p>
+<p>它们的共同难点是<strong>下游能否执行上游生成的表达</strong>。能生成一种新子任务描述，不代表系统已经学会对应的控制技能。使用固定技能库时，泛化主要表现为已有技能的新组合；使用开放语言条件策略时，则仍取决于该策略训练覆盖和语言对齐。</p>
+<p>自然语言适合表达逻辑和目标，却不适合在每个控制周期完整指定接触位置、旋转、速度和力。原文认为语言运动难以成为所有低层控制的主流表达，而语言计划仍适合长时域分解。这是作者的研究判断，不是已排除其他结构的理论结论。</p>
+<h3 id="4-2-代码表示">4.2 代码表示</h3>
+<p>Code as Policies、ProgPrompt、Instruct2Act、RoboScript 等把输出变成可运行的程序或函数组合。代码能表示条件、循环和参数计算，并调用已有感知与控制工具，因此不只是把自然语言换一种格式。[1，§5，表 3]</p>
+<p>系统成功需要三层同时成立：程序语法有效，调用逻辑合理，现实环境满足 API 的前提。例如抓取函数存在，并不能保证当前物体的几何、摩擦和可达性满足其适用条件。代码检查能发现一部分错误，但无法单独证明真实执行一定成功。</p>
+<p>作者提出扩充可靠函数库、验证接口和运行时前提、允许人工调试。对本项目而言，这一路线适合解释上层任务编排与底层生成策略的分工；不能把调用已有控制器取得的表现全部归因于语言模型自身学会了底层控制。</p>
+<h2 id="5-可供性：在什么地方以何种方式交互">5. 可供性：在什么地方以何种方式交互</h2>
+<p>论文讨论四种形式。[1，§6，表 4]</p>
+<p><strong>关键点</strong>给出紧凑的交互位置，必要时附方向。例如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">k=(x,d)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>d</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">x,d\in\mathbb R^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> 分别是位置和方向。它适合约束接触关系，但单点不会自动包含夹爪朝向、受力和碰撞条件。ReKep 等方法把关键点关系交给优化器求解。</p>
+<p><strong>包围盒</strong>适合定位目标实例。二维盒子可写作左上与右下角坐标，三维盒子还包含空间范围。DexGraspVLA 等再将目标定位结果转换为掩码和低层策略条件。盒子提供粗位置，不能当作精确抓取姿态。</p>
+<p><strong>分割掩码</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><msup><mo stretchy="false">}</mo><mrow><mi>H</mi><mo>×</mo><mi>W</mi></mrow></msup></mrow><annotation encoding="application/x-tex">M\in\{0,1\}^{H\times W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0913309999999998em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.08125em;">H</span><span class="mbin mtight">×</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">W</span></span></span></span></span></span></span></span></span></span></span></span> 表示像素区域，比包围盒更适合描述轮廓和功能部位。但“属于某物体”与“可以按当前方式接触”仍有差别，后者需要任务和交互条件。</p>
+<p><strong>可供性图</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>H</mi><mo>×</mo><mi>W</mi></mrow></msup></mrow><annotation encoding="application/x-tex">F\in\mathbb R^{H\times W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.08125em;">H</span><span class="mbin mtight">×</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">W</span></span></span></span></span></span></span></span></span></span></span></span> 或其三维扩展给出区域与动作的适合程度。VoxPoser 将语言约束转成空间图，再求轨迹；其他方法加入力、运动或接触分布。这里的分数未必经过概率校准，也未必等于真实执行成功概率。</p>
+<p>三个研究方向分别是原生三维表示、随动作变化的可供性、对遮挡和视觉扰动的稳健处理。动态可供性的关键是可操作属性会随状态变化，例如移开障碍之后才出现可达区域。静态定位正确不能替代这种状态更新。[1，§6.5]</p>
+<h2 id="6-轨迹：显式运动表示的收益与缺口">6. 轨迹：显式运动表示的收益与缺口</h2>
+<p>原文分成三类：[1，§7]</p>
+<ul>
+<li>点轨迹 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>T</mi><mo>×</mo><mi>K</mi><mo>×</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">P\in\mathbb R^{T\times K\times 2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mbin mtight">×</span><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span><span class="mbin mtight">×</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>：跟踪 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> 个二维点在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 个时刻的位置。</li>
+<li>视觉轨迹：把路径直接绘制到图像或视频上。</li>
+<li>光流 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">V\in\mathbb R^{H\times W\times 2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.08125em;">H</span><span class="mbin mtight">×</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">W</span><span class="mbin mtight">×</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>：表示相邻图像之间各像素的运动，可进一步构成时序光流。</li>
+</ul>
+<p>ATM 利用无动作标签视频训练点运动预测，再用少量动作数据训练控制器；RT-Trajectory 让低层策略跟随视觉路径；HAMSTER 把高层二维路径与低层三维观测连接；Im2Flow2Act 从人类视频提取物体运动，并用仿真训练下游策略。[1，表 5]</p>
+<p>轨迹能把语义不同但运动相似的任务联系起来，也允许点跟踪器自动产生监督。然而，<strong>图像运动并不唯一确定机器人动作</strong>：同一路径可能对应不同深度、姿态、速度与接触方式；相机运动也会产生光流。仅凭二维轨迹无法解决完整的六自由度操作。</p>
+<p>应区分带时间戳轨迹与几何路径。后者只规定经过哪里，仍需确定执行速度和何时重规划。论文认为轨迹特别适合擦拭、导航等路径明确的任务；在遮挡严重、接触状态未知或必须根据外部变化改道的任务中，预先完整预测可能不足。</p>
+<h2 id="7-目标状态：用未来观测指导现在的动作">7. 目标状态：用未来观测指导现在的动作</h2>
+<p>单帧目标图像、RGB-D、点云或多帧目标视频均可作为中间条件。SuSIE 用图像生成器提出子目标，再由目标条件策略执行；UniPi 由视频计划连接逆动力学模型；AVDC 从生成视频抽取光流；FLIP 等还评估多个未来候选。[1，§8，表 6]</p>
+<p>高层目标生成器能够使用无动作视频训练，下层动作映射仍需要机器人数据、物理模型或其他控制知识。<strong>不需要动作标签的是某个训练阶段，不一定是完整系统</strong>。</p>
+<p>事后目标重标注把轨迹片段最后的观测作为前面动作的目标。这样可以自动产生目标条件训练样本，但前提是该轨迹本来包含所需动作或可用执行信息；它不会凭空恢复视频中未记录的关节控制量。</p>
+<p>作者强调两种不同失败：[1，§8.4]</p>
+<ol>
+<li><strong>目标错误</strong>：生成不可能的接触、错误物体或不一致的空间关系，引导下层执行错误动作。</li>
+<li><strong>目标过度指定</strong>：目标图像包含并非任务必需的背景、姿态或纹理细节，使策略试图匹配无关变化。</li>
+</ol>
+<p>综述转述 AVDC 生成八帧目标视频约需十秒、Gen2Act 约 3 Hz、VPP 约 7—10 Hz。这些数值说明当时某些实现的计算负担，<strong>不是在统一硬件上对目标状态表示进行的控制实验</strong>。由画面质量提高推导出机器人可靠性提高仍需实机验证。</p>
+<h2 id="8-潜动作：三阶段训练以及最容易混淆的边界">8. 潜动作：三阶段训练以及最容易混淆的边界</h2>
+<p>该文将潜表示限定为经专门预训练、具有动作相关作用的紧凑向量序列，并非把任意网络隐藏层都归入此类。典型过程包括构建潜空间、训练 VLM 预测潜动作、用目标机器人数据适配动作解码器。[1，§9，图 5]</p>
+<h3 id="8-1-基于视觉变化">8.1 基于视觉变化</h3>
+<p>编码器从前后观测提取 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span>，解码器用当前观测和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span> 重建未来观测。用示意目标表达：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">(</mo><msub><mi>o</mi><mi>t</mi></msub><mo separator="true">,</mo><msub><mi>o</mi><mrow><mi>t</mi><mo>+</mo><mi mathvariant="normal">Δ</mi></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><msub><mi mathvariant="script">L</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">c</mi></mrow></msub><mo>=</mo><mi>d</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">(</mo><msub><mi>o</mi><mi>t</mi></msub><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>o</mi><mrow><mi>t</mi><mo>+</mo><mi mathvariant="normal">Δ</mi></mrow></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">z=Q(E(o_t,o_{t+\Delta})),\qquad
+\mathcal L_{\mathrm{rec}}=d(D(o_t,z),o_{t+\Delta}),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">Δ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:2em;"></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">r</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">c</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">Δ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span> 可表示量化，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span></span></span></span> 是重建距离。具体 VQ-VAE、FSQ 或 NSVQ 的约束不同；这不是所有方法共同使用的完整损失。LAPA、GO-1、UniVLA 等沿此路线发展，UniVLA 特别尝试分开任务相关与无关变化。[1，§9.1]</p>
+<p>关键局限是<strong>可重建的视觉变化不等于可执行的因果动作</strong>。如果 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span> 同时编码相机抖动、光照和外部物体运动，下游策略就难以把它映射为稳定控制。这也说明重建误差低不能单独证明动作空间好。</p>
+<h3 id="8-2-基于真实动作">8.2 基于真实动作</h3>
+<p>QueST 等直接编码和重建长度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> 的动作块，学习技能词表。动作监督更直接，但训练必须拥有动作标签，而且关节与末端接口的本体差异不会仅因量化而消失。[1，§9.2]</p>
+<h3 id="8-3-基于整体目标">8.3 基于整体目标</h3>
+<p>GROOT、GROOT-2 等从较长交互序列学习隐目标，OmniJARVIS 把潜目标与语言、记忆和控制连接。这里的 GROOT 系列虚拟环境研究应与 NVIDIA GR00T N1 的命名区分。此类表示可能退化为轨迹细节记忆或出现后验坍缩，因而需要目标约束或语言对齐。[1，§9.3]</p>
+<p>作者用粒度、覆盖性和任务对齐三个维度评价潜空间：过粗会丢失精细控制，过细会减弱压缩与迁移；词表覆盖不足会限制可生成行为；任务无关因素则会干扰下游。</p>
+<p>本文标题中的 action token、本项目 RL Token 论文里提供给小型在线策略的连续状态表征、ACT 的 CVAE 风格潜变量，是不同语境。RL Token 不是本综述八类分类之外的一套新离散词表，ACT 的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span> 也不能直接解释成已学习到可复用的语义技能库。</p>
+<h2 id="9-原始动作：端到端学习仍依赖精确接口">9. 原始动作：端到端学习仍依赖精确接口</h2>
+<p>原始动作指能交给机器人接口的一步或多步命令，不限于力矩。关节角、末端增量、夹爪状态和移动底盘速度，都可能是某系统的“raw action”。[1，§10，表 8]</p>
+<p>综述梳理了视觉语言融合、Transformer 通用策略、自回归动作分箱、视频预训练、扩散动作块、跨形态共享空间等路线。RT-2 继承 VLM 并联合训练，OpenVLA 提供可复用开源基座，π₀ 使用流匹配动作专家，RDT 与 GR00T N1 等处理多本体和多源数据。FAST 通过时序压缩改善高频离散动作的冗余，RTC 处理异步动作块之间的连续性。[1，§10.1—10.7]</p>
+<p>“端到端”不意味着没有工程先验：传感器坐标、动作归一化、关节限制、下层控制器和数据过滤仍会决定策略效果。跨形态动作维度填充或共享码本也只是对齐步骤，不等于零样本适配所有机器人。</p>
+<p>原文表 8 中不同频率包含动作输出、控制循环和分层系统更新等口径。特别是动作块含 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> 步时，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">/</mi><msub><mi>T</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">H/T_{\mathrm{infer}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">/</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 是动作吞吐量，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msub><mi>T</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">1/T_{\mathrm{infer}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 才对应单个串行推理循环的量级；两者都未必等于机器人部署时的新视觉反馈频率。因此该表适合找到原论文，不能直接据此排列动态响应能力。</p>
+<h2 id="10-推理中间表示：可检查输出与真实执行的关系">10. 推理中间表示：可检查输出与真实执行的关系</h2>
+<p>ECoT 等在生成动作之前预测任务分解、物体定位和空间关系；RAD 将相似标注方式扩展到无动作人类视频；DriveVLM 用场景分析支持轨迹规划。[1，§11，表 9]</p>
+<p>这些方法的实际作用是增加中间监督、改变条件分布和分配额外计算。输出文本可以帮助定位某些错误，但它不是网络内部计算过程的完整记录，文本合理也不保证动作忠实遵循。高层常识正确而低层动作失败，是必须单独评估的情况。</p>
+<p>原文表 9 明确标记 Cosmos-Reason1、AlphaDrive 等部分方法没有完成动作落地与执行，只因相关表征研究而纳入。不能把这些模型的视觉问答或决策文本成绩当成实机控制成绩。</p>
+<p>固定推理模板可能限制泛化；更长输出又增加时延。因此作者建议按任务复杂度调整计算，在适当层级采用多模态中间表示。其“reasoning 可增强其他 token”是结构设计方向，尚不能推出每个任务都应增加显式文本。</p>
+<h2 id="11-数据-证据与研究边界">11. 数据、证据与研究边界</h2>
+<p>论文用三层数据结构连接表示选择：底层互联网与人类视频提供语义和视觉变化，中层仿真与合成数据提供可控任务和交互标签，上层真机数据校准实际本体与接触。[1，§12，表 10]</p>
+<p>轨迹和潜动作方便接入视频，代码与语言便于复用基础模型知识，原始动作最接近执行监督。但所有迁移最终都需要证明：中间表示包含下游控制必需信息，训练目标与部署目标一致，接口中的误差没有破坏闭环。</p>
+<p>表 1 的“代表性成就”包括整理、操作工具等演示，不是相同任务下的量化成绩。表 2—9 的模型、训练和硬件条目来自不同论文，不能用于归因“某种 token 本身比另一种高多少”。综述也没有控制参数规模、预训练数据量、机器人配置和评估难度等混杂变量。</p>
+<p>作者展望包含分层组合、记忆与反馈、强化学习、灵巧硬件和多模态数据。需要限定两处表述：模仿学习不必然缺少目标条件，正文自身已介绍目标条件 BC；示范表现也不是所有训练评估分布下严格不可突破的数学上界。强化学习可以利用额外奖励和交互改善策略，但能否提升泛化及精度取决于训练任务覆盖、奖励和预算。[1，§13.3；本总结的概念限定]</p>
+<h2 id="12-对本项目的连接与可执行研究问题">12. 对本项目的连接与可执行研究问题</h2>
+<p>本项目可以按“表示—学习—执行—环境”理解，而不必强行把所有论文塞进 VLA 架构类别：</p>
+<ul>
+<li>ACT、Diffusion Policy 与 π₀ 解释动作分布和动作块如何产生。</li>
+<li>MetaVLA、π_RL、RL Token 与 RL 泛化实证解释如何用新数据或奖励改进策略。</li>
+<li>RTC、FLASH、Running VLAs、VLASH、DynamicVLA、DOMINO 解释动作生成后如何利用新观测和处理延迟。</li>
+<li>NavDP、FLUX 将生成策略用于导航；MotionBricks、Uni-Inter、GRAIL 研究运动与交互表示；SAGE-3D、Lyra 2.0 等提供环境表示和生成能力。</li>
+</ul>
+<p>这些是本总结的跨论文联系，2025 年综述没有覆盖全部后来发表的工作。</p>
+<p>最值得实验验证的是：在相同传感器和动作解码器下，显式轨迹、潜动作、目标图像各自保留了哪些可用信息；新增背景变化时哪个接口最稳定；高层接口多久更新一次仍不损害恢复能力；相同真实数据预算下，借助无动作视频的收益来自更多数据还是表示本身。评估应同时报告成功率、对扰动的恢复、观测到动作延迟、动作连续性和跨本体适配成本。</p>
+<p><strong>最终判断</strong>：这篇综述最有价值的是将动作表示视为连接模型能力、数据来源和执行接口的设计选择。八类表示具有互补关系，但作者提出的组合结构仍需任务级验证；它是一份系统分析工具，不是已经证明最优的通用机器人架构。</p>
+<h2 id="参考来源">参考来源</h2>
+<p>[1] Zhong et al.，项目附件 arXiv:2507.01925v1，重点 §3—13、图 1 和图 5、表 1—10。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2507.01925v1">论文与版本</a>；<a target="_blank" rel="noopener" href="https://arxiv.org/html/2507.01925v1">HTML 全文</a>；<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2507.01925v1">PDF</a>。</p>
+<p>[2] 对照阅读：ACT <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2304.13705v1">原论文</a>、Diffusion Policy <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.04137v5">原论文</a>、π₀ <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2410.24164v1">项目所存首版</a>。此处用于澄清潜变量、动作条件与控制接口；本项目各有独立详细总结。</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/reading/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

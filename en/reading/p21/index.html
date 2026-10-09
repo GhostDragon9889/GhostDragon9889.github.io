@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Modular motion latents and smart primitives synthesize real-time kinematic references.">
+  <meta name="theme-color" content="#ffffff">
+  <title>MotionBricks: Scalable Real-Time Motions with Modular Latent Generative Model and Smart Primitives · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/reading/p21/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p21/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p21/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/reading/p21/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#reading">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Literature Reading</p><h1 class="reading-title" id="post-title">MotionBricks: Scalable Real-Time Motions with Modular Latent Generative Model and Smart Primitives</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="Paper information"><h2>MotionBricks: Scalable Real-Time Motions with Modular Latent Generative Model and Smart Primitives</h2><p>Paper ID: P21 · Human Motion and Interaction</p><p>Source version: 2604.24833v1 · 2026</p><p>Source: Project paper attachment</p><p>This is a literature reading note. Reported experimental results refer to the identified paper version; independent analysis and proposed experiments are labeled separately.</p><a class="text-link" href="https://arxiv.org/abs/2604.24833v1" target="_blank" rel="noopener noreferrer">Original paper <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="identity-and-contribution">Identity and contribution</h2>
+<p>Tingwu Wang, Olivier Dionne, and colleagues propose MotionBricks in <strong>arXiv:2604.24833v1</strong>, April 27, 2026, a 22-page paper associated with SIGGRAPH/ACM TOG 2026, DOI 10.1145/3811334.</p>
+<p>Root paths, body pose, and control interfaces are modeled separately. Multihead discrete latents and sparse keyframes support styles, transitions, and object interactions. The direct output is a <strong>kinematic motion reference</strong>. Navigation intent and physics tracking remain separate; a real G1 demonstration uses an additional physical controller.</p>
+<h2 id="representation-and-modular-generation">Representation and modular generation</h2>
+<p>Training uses 12–64-frame segments at 30 FPS, sampled in four-frame increments. States include global/local root motion, joints, rotations, velocities, and contacts. The last four frames provide context; partial root/pose constraints use masks, with zero to ten sampled keyframes.</p>
+<p>The tokenizer encodes joint positions and rotations, with fourfold temporal downsampling. It splits latent features into quantization heads. With <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">C_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> codes per head, combination capacity is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∏</mo><mi>k</mi></msub><msub><mi>C</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\prod_kC_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0497100000000001em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∏</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1863979999999999em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, while stored codes number <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>C</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_kC_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0497100000000001em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1863979999999999em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>. “Billion-token capacity” therefore does not mean storing a billion complete motion clips. Heads are learned rather than assigned to named limbs.</p>
+<p>A conditional decoder restores continuous pose, velocity, contacts, and root quantities, with VQ-style reconstruction/commitment, velocity, and foot-sliding objectives. Root and pose are not statistically independent; separating their pathways permits coordinated path changes without binding every root location into a pose code.</p>
+<p>The root module first predicts duration, then trajectory. The pose module predicts masked discrete codes conditioned on roots/keyframes, followed by continuous decoding. Often one forward pass is sufficient. This decomposition improves runtime control, without turning arbitrary infeasible keyframes into physically valid motion.</p>
+<h2 id="smart-primitives-and-execution">Smart primitives and execution</h2>
+<p>Smart locomotion extrapolates velocity/heading for about one second, smooths with a critically damped spring, then applies style keyframes, root refinement, and decoder refinement. The final root can differ from the initial navigation command, so strict path following needs measured error.</p>
+<p>Smart objects bind intention keyframes to object coordinates and interaction logic, including triggers, sockets, release positions, and anchors. UE5 traces, raycasts, and StateTree logic are part of the demonstrations. “Neural generation” does not remove all external interaction logic. Hard/soft drop-frame settings define execution/replanning behavior, not formal zero-error constraint guarantees.</p>
+<p>A future buffer is consumed frame by frame and regenerated when commands change or it runs low. G1 replans around 10 Hz or on command changes; appendix guidance suggests every three to nine 30 FPS frames. Replanning at every render frame can damage motion detail and style.</p>
+<h2 id="data-computation-and-results">Data, computation, and results</h2>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th style="text-align:right">Duration</th>
+<th style="text-align:right">Training clips</th>
+<th style="text-align:right">Test clips</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Internal 350K</td>
+<td style="text-align:right">700 h</td>
+<td style="text-align:right">315,162</td>
+<td style="text-align:right">35,018</td>
+</tr>
+<tr>
+<td>Internal 70K subset</td>
+<td style="text-align:right">140 h</td>
+<td style="text-align:right">62,132</td>
+<td style="text-align:right">35,018</td>
+</tr>
+<tr>
+<td>Processed HumanML3D</td>
+<td style="text-align:right">28.6 h</td>
+<td style="text-align:right">23,206</td>
+<td style="text-align:right">2,578</td>
+</tr>
+<tr>
+<td>LaFAN1-G1</td>
+<td style="text-align:right">4.6 h</td>
+<td style="text-align:right">2,362</td>
+<td style="text-align:right">262</td>
+</tr>
+</tbody>
+</table>
+<p>The internal set covers 36 broad categories, approximately 9,300 fine-grained skills, and 163 performers. Clip count is not distinct-skill count. Public BONES-SEED contains approximately 143,792 clips with separate unseen-content and held-out-combination tests.</p>
+<p>Training uses 32 GPUs and two million updates. Reported H100 stage durations are approximately seven days tokenizer, three root, and seven pose. Deployment sizes are approximately 23.5M, 50M, and 150M parameters. Smaller-hardware feasibility does not imply the same training wall time.</p>
+<p>On the 350K test, MotionBricks reports <strong>FID 1.054, target-root error 0.023 m, 99.6% arrival, and 2 ms generation</strong> on the stated RTX 5090 setup. Jetson Orin is approximately 5 ms. Subjective preference is 86.5%, rating 4.06/5, and foot-contact accuracy 92.6%. Arrival requires root error below five centimeters and heading error below fifteen degrees.</p>
+<p>The reported <strong>15,000 generated frames/s</strong> is motion-generation throughput, not Isaac render FPS, physics frequency, or a guaranteed crowd size. HumanML3D arrival is 98.9%, while LaFAN1-G1 is 61.1%. It does not achieve near-perfect arrival on every dataset or dominate every metric.</p>
+<p>Multihead-code and root-interpolation ablations support usable capacity and path adaptation. More data need not monotonically improve FID. Code-capacity comparisons use different conditions and do not define a universal optimum.</p>
+<h2 id="limits-and-isaac-integration">Limits and Isaac integration</h2>
+<p>Rare motions, missing terrain/object dynamics, self-collision, hardware feasibility, and real-world pose availability limit deployment. A G1 locomotion demo does not establish arbitrary physical object interaction. The export identifies the public code as an initial preview, rather than a confirmed complete reproduction of internal 350K training and UE5 integration.</p>
+<p><strong>Project proposal:</strong> let NavMesh, ORCA, or learned behavior choose destinations and avoidance; convert local commands/styles into MotionBricks conditions; retarget roots/joints to USD Skel. Kinematic animation can serve visual occlusion tests. Pushing, falls, or force feedback require physical tracking and contact modeling.</p>
+<p>Assign root-motion ownership once. If navigation and animation both write world poses, movement can duplicate or be overwritten. Measure path deviation, foot slip, command delay, multi-character inference, skeleton updates, rendering, collisions, and sensors together. These are integration recommendations, not an existing Isaac-compatible implementation verified by the notes.</p>
+<h2 id="source-references">Source references</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://nvlabs.github.io/motionbricks/">Source 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2604.24833v1">Source 2</a></li>
+<li><a target="_blank" rel="noopener" href="https://doi.org/10.1145/3811334">Source 3</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/NVlabs/GR00T-WholeBodyControl/tree/main/motionbricks">Source 4</a></li>
+</ul>
+<p>The source versions and checks above are retained from the uploaded PaperRead notes. This English edition edits their presentation; it does not report new experiments.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/reading/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

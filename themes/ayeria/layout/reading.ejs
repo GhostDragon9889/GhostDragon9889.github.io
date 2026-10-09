@@ -1,19 +1,16 @@
-<% const entries = site.posts.filter(post => post.collection === 'reading').sort('date', -1); const topics = []; entries.each(post => { const topic = post.paper && post.paper.topic || '其他'; if (!topics.includes(topic)) topics.push(topic); }); %>
+<% const entries = site_records(['reading']).sort('paper.id', 1); %>
 <section class="reading-page" aria-labelledby="reading-title">
-  <a class="breadcrumb text-link" href="<%- url_for() %>#reading">← 返回主页</a>
-  <header class="reading-header"><p class="section-label">LITERATURE NOTES</p><h1 class="reading-title" id="reading-title">文献阅读</h1><p class="reading-description">研究问题、核心方法、实验结果与局限，以及与其他工作的联系。</p></header>
-<% if (entries.length) { %>
-  <div class="content-filter" data-content-filter>
-    <div class="filter-controls" role="group" aria-label="按论文主题筛选"><button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">全部</button>
-<% topics.forEach(function(topic) { %>
-      <button class="filter-button" type="button" data-filter="reading:<%= topic %>" aria-pressed="false"><%= topic %></button>
+  <a class="breadcrumb text-link" href="<%- site_home() %>#reading">← <%= site_text('backHome') %></a>
+  <header class="reading-header"><p class="section-label">LITERATURE NOTES</p><h1 class="reading-title" id="reading-title"><%= site_text('reading') %></h1><p class="reading-description"><%= site_text('readingPageIntro') %></p></header>
+  <aside class="collection-overview"><h2><%= site_text('coverage') %></h2><p><%= site_text('scope') %></p><a href="<%- site_path('knowledge/paperread-roadmap/') %>"><%= site_text('roadmap') %> →</a><details><summary><%= site_text('sourceNotes') %></summary><p><%= site_text('sourceIntegrity') %></p><ul><li><a href="<%- url_for('downloads/paperread/source-index.md') %>"><%= site_text('readingIndex') %> (.md)</a></li><li><a href="<%- url_for('downloads/paperread/source-summaries.md') %>"><%= site_text('sourceNotes') %> (.md)</a></li><li><a href="<%- url_for('downloads/paperread/source-manifest.json') %>"><%= site_text('sourceManifest') %> (.json)</a></li><li><a href="<%- url_for('downloads/paperread/source-roadmap.md') %>"><%= site_text('roadmap') %> (.md)</a></li></ul></details></aside>
+  <div class="content-filter" data-content-filter data-count-label="<%= site_text('recordCount') %>">
+    <div class="filter-controls" role="group" aria-label="<%= site_text('filterReading') %>"><button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true"><%= site_text('all') %></button>
+<% site.data.paperread.topics.forEach(function(topic) { %>
+      <button class="filter-button" type="button" data-filter="reading:<%= topic.id %>" aria-pressed="false"><%= site_locale() === 'en' ? topic.label_en : topic.label %></button>
 <% }); %>
     </div>
     <p class="filter-status" aria-live="polite" aria-atomic="true"></p>
 <%- partial('_partial/entry-list', {entries: entries, filterable: true}) %>
-    <p class="filter-empty empty-state" hidden>该主题暂无已发布笔记。</p>
+    <p class="filter-empty empty-state" hidden><%= site_text('readingFilterEmpty') %></p>
   </div>
-<% } else { %>
-  <p class="empty-state">阅读笔记整理中。</p>
-<% } %>
 </section>

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="以 nav2py 连接 Python 学习策略和 ROS 2 Nav2，结合语义场景、交互行为和多维指标开展可配置社交导航比较。 其成功率允许少于两次碰撞，不等同零碰撞到达；算法分类与部分指标单位有误，统计复现细节有限。">
+  <meta name="theme-color" content="#ffffff">
+  <title>Arena-Bench 2.0：面向协作环境中社交导航方法的综合基准 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/reading/p27/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p27/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p27/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/reading/p27/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">Arena-Bench 2.0：面向协作环境中社交导航方法的综合基准</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="论文信息"><h2>Arena-Bench 2.0: A Comprehensive Benchmark of Social Navigation Approaches in Collaborative Environments</h2><p>论文编号: P27 · 导航、社交评测与三维环境</p><p>所用版本: 2025 · 2025</p><p>资料来源: 项目论文附件</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://doi.org/10.1109/IROS60139.2025.11246895" target="_blank" rel="noopener noreferrer">论文原文 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="论文信息与版本">论文信息与版本</h2>
+<ul>
+<li><strong>中文题目</strong>：Arena-Bench 2.0：面向协作环境中社交导航方法的综合基准。</li>
+<li><strong>作者</strong>：Volodymyr Shcherbyna、Linh Kästner、Duc Anh Do、Jiaming Wang、Huu Giang Nguyen、Tim Seeger、Ahmed Martban、Zhengcheng Shen、Huajian Zeng、Nhan Trinh、Eva Wiese；前两位共同第一作者。</li>
+<li><strong>发表信息</strong>：IROS 2025，正式论文页码 9202–9209；DOI：10.1109/IROS60139.2025.11246895。</li>
+<li><strong>研究类别</strong>：ROS 2 / Nav2 插件、社交导航评测协议、场景生成与日志分析。</li>
+<li><strong>范围说明</strong>：依据项目中的正式会议 PDF 全文及附录，核查 Arena 官方组织和具体插件入口。本文不是 2023 年的 <strong>Arena-Rosnav 2.0</strong>，也不是 <strong>Arena 4.0</strong> 或 <strong>Arena 5.0</strong>；这些名称属于相关但不同的论文和发布版本。本次没有运行平台或重新测量图中结果。[1][2]</li>
+</ul>
+<h2 id="1-论文主张与真正的研究对象">1. 论文主张与真正的研究对象</h2>
+<p><strong>原文工作</strong>：很多导航方法在各自的 Python、依赖版本、私有场景和感知假设下有效，却难以接入同一机器人导航栈，导致“算法结果”和“工程接口差异”混合。Arena-Bench 2.0 因此同时处理三件事：让 Python 方法成为 Nav2 插件，系统地生成包含社会情境的场景，以及按统一日志计算导航和人类相关指标。[1，§I、III]</p>
+<p>论文没有提出一个取代所有基线的新导航损失或策略网络。它的核心是<strong>可比较的实验基础设施</strong>：同一场景和任务分布、可切换的规划方法、统一的数据记录、分组统计和可追溯的结果。其有效性需要用接口覆盖、实验可复现性和指标解释能力来评价，不能只看是否有一个最高成功率。[1，§III–IV；独立分析]</p>
+<p>论文也没有要求所有方法必须把传感器压缩成二维 costmap；其接口允许方法在模拟器支持时使用原始 RGB-D、二维/三维 LiDAR、IMU 或 GPS。因此感知能力与传感器预算本身可成为比较条件，而不被接口提前抹去。[1，§III-A]</p>
+<h2 id="2-nav2py：python-方法如何进入-nav2">2. nav2py：Python 方法如何进入 Nav2</h2>
+<h3 id="2-1-依赖隔离解决什么问题">2.1 依赖隔离解决什么问题</h3>
+<p><strong>原文设计</strong>：基于 ament 构建工具，为各方法的 <code>pyproject.toml</code> 自动建立隔离虚拟环境，必要时安装不同 Python 版本，再把该方法绑定到指定解释器。这样两个分别依赖不同 PyTorch/Python 的研究代码可以并存，而不要求一起安装进 ROS 2 的系统 Python。[1，§III-A]</p>
+<p>这解决的是包版本冲突和执行环境组织，不会自动解决 CUDA/驱动兼容、GPU 内存竞争、数据传输延迟或模型权重缺失。对项目中的 Isaac Sim + ROS 2 环境，隔离 Python 更像明确进程边界后的部署策略；它不是在任意 Python 进程中直接导入 Isaac Sim 就能运行的保证。[1，§III-A；独立分析]</p>
+<h3 id="2-2-双侧接口与事件驱动">2.2 双侧接口与事件驱动</h3>
+<p>Python 侧通过类包装规划逻辑，注册回调并与数据桥通信；C++ 侧对接 ROS 2 参数、topic 和 Nav2，将方法注册为原生 planner 或 controller 插件。算法主体保留 Python 实现，Nav2 生命周期与消息接口由适配层处理。图 2 的重点是这种职责分工，而非使用 C++ 重写网络推理。[1，§III-A、图 2]</p>
+<p><strong>解释性形式化</strong>：设某方法为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>t</mi></msub><mo>=</mo><msub><mi>π</mi><mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>o</mi><mrow><mn>0</mn><mo>:</mo><mi>t</mi></mrow></msub><mo separator="true">,</mo><mi>g</mi><mo separator="true">,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a_t=\pi_i(o_{0:t},g,m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span><span class="mrel mtight">:</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span>，接口需要规定观测 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi></mrow><annotation encoding="application/x-tex">o</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">o</span></span></span></span>、目标 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span>、地图 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> 和动作 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 的语义及时间戳。不同方法可以在接口内部实现搜索、优化或神经网络，但比较时要记录</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>o</mi><mi>b</mi><mi>s</mi></mrow></msub><mo>→</mo><msub><mi>t</mi><mrow><mi>r</mi><mi>e</mi><mi>c</mi><mi>e</mi><mi>i</mi><mi>v</mi><mi>e</mi></mrow></msub><mo>→</mo><msub><mi>t</mi><mrow><mi>i</mi><mi>n</mi><mi>f</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>→</mo><msub><mi>t</mi><mrow><mi>c</mi><mi>o</mi><mi>m</mi><mi>m</mi><mi>a</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>→</mo><msub><mi>t</mi><mrow><mi>a</mi><mi>p</mi><mi>p</mi><mi>l</mi><mi>y</mi></mrow></msub><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">t_{obs}\rightarrow t_{receive}\rightarrow t_{infer}\rightarrow t_{command}\rightarrow t_{apply}.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">b</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9011879999999999em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9011879999999999em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord">.</span></span></span></span></span></p>
+<p>这里的时间链是复现建议，不是原文新提出的公式。它解释了为什么“网络推理 20 ms”并不足以代表机器人反应延迟：消息排队、坐标变换和控制更新可能发生在网络之外。论文明确将感知输入与延迟作为评估关注点，但正文没有提供每个规划器完整的延迟分解数值表。[1，摘要、§III；独立分析]</p>
+<h2 id="3-场景生成：世界-物体与行人语义">3. 场景生成：世界、物体与行人语义</h2>
+<p>论文在已有 Arena 平台之上支持 Gazebo、Unity 和 Isaac Sim 三个三维模拟器，新的生成流程分为以下三个阶段。[1，§III-B]</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>实施机制</th>
+<th>对实验的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>World Generator</td>
+<td>多边形与传统布局算法生成楼层、房间、走廊及门口，添加房间语义</td>
+<td>控制拓扑、面积和通道结构</td>
+</tr>
+<tr>
+<td>Environment Task Mode</td>
+<td><code>tm_environments</code> 根据物体组、方向、安全间距、房间语义放置三维模型</td>
+<td>从空布局得到办公室、医院、餐厅等环境</td>
+</tr>
+<tr>
+<td>Pedestrian Generator</td>
+<td>根据人数、类型和情境说明，在语义相关位置生成行人并分配路点</td>
+<td>形成与场所角色有关的活动</td>
+</tr>
+</tbody>
+</table>
+<p>例如，行人目的地可以与某类房间和物体关联，而非只在自由空间随机采样；这会改变相遇位置、流量方向及门口拥堵。语义约束对 benchmark 的作用是控制任务分布，不能仅把它理解为视觉装饰。[1，§III-B；机制解释]</p>
+<p><strong>证据边界</strong>：本文提到可使用多种社会力模型等平台组件，但没有提出或验证像 NavIsaacLab 那样的 AMP 关节人体控制。配置一个“医院紧急场景”也不代表行人拥有从真实急诊数据学习的完整决策模型。应记录模拟器、行人行为模型和配置参数，避免将“能生成情境”误写为“情境的行为真实性已验证”。[1，§III-B、IV-A；独立分析]</p>
+<h2 id="4-数据与指标：为什么需要同时看几类结果">4. 数据与指标：为什么需要同时看几类结果</h2>
+<h3 id="4-1-从原始日志到可追溯统计">4.1 从原始日志到可追溯统计</h3>
+<p>平台记录运行时障碍位置及语义、行人位置/速度/骨骼姿态、房间和墙体等场景语义，保存为 ROS 2 bag。后处理将指标按 Performance、Naturalness、Social、Human Discomfort 四类组织，可复用已缓存的中间计算；结果索引包含环境、机器人、场景和算法。IPython notebook 支持分组、筛选和绘图，并输出记录生成过程的注释文件。[1，§III-C]</p>
+<p>这一结构值得直接借鉴：先保存足以重算指标的观测和事件，再生成最终统计；若只保留每轮 success 和平均 reward，之后无法区分“速度快但贴人”与“谨慎等待导致超时”。但保存的数据必须带一致时间基准，否则从位置差计算速度、加速度、jerk 会把异步抖动误认为控制不平滑。[1，§III-C；独立建议]</p>
+<h3 id="4-2-指标体系与定义风险">4.2 指标体系与定义风险</h3>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>原文所列代表指标</th>
+<th>实际评价对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Performance</td>
+<td>成功率、碰撞数、到达时间、路径长度、速度、加速度、jerk、等待时间、路径效率</td>
+<td>完成能力与运动代价</td>
+</tr>
+<tr>
+<td>Naturalness</td>
+<td>ADE、FDE、非对称动态时间规整、路径不规则性、拓扑复杂度</td>
+<td>与参考轨迹的差异及运动结构</td>
+</tr>
+<tr>
+<td>Social</td>
+<td>被行人看见时间、个人空间内时间</td>
+<td>互动可见性与空间侵入</td>
+</tr>
+<tr>
+<td>Human Discomfort</td>
+<td>最小人机距离、亲密空间时间/最高速度、面向行人时间、直冲行人比例</td>
+<td>对人造成的不适的代理量</td>
+</tr>
+</tbody>
+</table>
+<p>上述分类来自附录表 I。它们是可计算代理量，不是经过本文用户实验验证的统一“社会接受度分数”。例如被人看见较久可能意味着运动容易察觉，也可能只是停留更久；面向行人不必然代表礼貌。合理评价需要任务语境与多个指标配合，而不是将每个代理量无条件最大化或最小化。[1，附录表 I；独立分析]</p>
+<p><strong>一个必须保留的特殊定义</strong>：附录把 Success Rate 写成 <strong>“Runs with &lt; 2 collisions”</strong>。按该字面定义，发生一次碰撞的运行仍可能被纳入“成功”；表中也没有在这句话里完整写出“到达目标”的必要条件。因此不能把本文成功率直接等同于其他导航论文“无碰撞到达率”。复现时应检查代码是否另外要求到达，以及一次碰撞怎样去抖、计数和分段。[1，附录表 I；核查]</p>
+<p><strong>解释性公式</strong>：轨迹平滑性通常由离散速度差和加速度差近似：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>t</mi></msub><mo>≈</mo><mo stretchy="false">(</mo><msub><mi>v</mi><mi>t</mi></msub><mo>−</mo><msub><mi>v</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">Δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">a_t\approx(v_t-v_{t-1})/\Delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63312em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">/</span><span class="mord">Δ</span><span class="mord mathdefault">t</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>j</mi><mi>t</mi></msub><mo>≈</mo><mo stretchy="false">(</mo><msub><mi>a</mi><mi>t</mi></msub><mo>−</mo><msub><mi>a</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">Δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">j_t\approx(a_t-a_{t-1})/\Delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.05724em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">/</span><span class="mord">Δ</span><span class="mord mathdefault">t</span></span></span></span>。这说明 jerk 对采样间隔和噪声很敏感。附录将曲率单位写为 m，但常用平面曲率单位为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">m</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\mathrm m^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>；必须核对实际实现是曲率、半径还是归一化指标，不能只依表头理解物理量。[1，附录表 I；独立核查]</p>
+<p>ADE、FDE 也需要配对的参考人类轨迹和一致时间点。若在完全随机生成场景中没有对应的人类示范，不能仅因平台提供该函数就宣称这一轮评估已经测量“与人类一样自然”。[1，附录表 I；独立分析]</p>
+<h2 id="5-实验设计与作者观察">5. 实验设计与作者观察</h2>
+<h3 id="5-1-场景矩阵与重复次数">5.1 场景矩阵与重复次数</h3>
+<p>原文使用三类环境，每类四个难度等级，每个环境–等级组合运行 50 个 episode，随机分配目标。三类情境是：医院紧急情况下的人群奔跑；仓库中多个较激进的机器人同时导航，含有/没有人类的设置；办公室门口持续有人出入的堵门情境。若每个规划器完整覆盖这一描述的全部组合，对应 3×4×50=600 个 episode；这个 600 是按实验设计计算的量，不是另一个独立报告的数据集规模。[1，§IV-A、图 4]</p>
+<p>论文集成十余种方法，附录列出 DWB、TEB、Graceful、MPPI、RLCA、CrowdNav、SICNav、BRNE、iPlanner、ArtPlanner、Regulated Pure Pursuit、Vector Pursuit、DRL-VO 等。量化展示主要是图 5 的选择性分布图；定性评估则固定相同起终点和行人轨迹，对选定方法各运行 10 次，并将路径和碰撞位置叠加在地图上。[1，§IV、附录表 II]</p>
+<h3 id="5-2-报告出来的主要结论">5.2 报告出来的主要结论</h3>
+<p><strong>作者的实验观察</strong>：在路径总长度和平均速度等 episode 汇总指标中，传统方法往往有较小相对误差范围，表现较稳定；在加速度、jerk 等更局部的指标上，学习方法可能更稳定。作者将其解释为传统方法把行人主要视为 costmap 障碍，倾向更直接地推进，却会产生频繁的加减速。[1，§IV-A、图 5]</p>
+<p>学习方法在“个人空间中的运动速度”和“看向行人的时间”等部分社会指标上总体较好，但不同学习方法存在不同取舍。论文并没有得出某一学习模型在所有效率、安全和社会指标上严格支配其他方法的结果。[1，§IV-A]</p>
+<p>定性结果显示，简单或低密度情境下路径较相似；在 20–30 名行人以及门口等复杂情境中，传统方法较常出现绕行、循环或局部卡住。作者观察到学习方法在展示案例中碰撞较少，MPPI 较多，Vector Pursuit 和 Shim 某些路径较低效。这是所用参数、场景与传感器配置下的观察，不能推导成对 MPPI 或其他算法类别的一般不可能性结论。[1，§IV-B、图 6；结果解释]</p>
+<p><strong>数值边界</strong>：原文未提供覆盖所有场景、机器人、规划器的完整精确数值矩阵，图 5 分辨率也不足以可靠反读全部小数。本总结保留作者明确陈述的趋势和实验次数，不从小图估造“某算法成功率 XX.X%”。若要继续做跨论文量化汇总，应获取原始 bag、指标导出或作者结果文件。[1，图 5–6；证据说明]</p>
+<h2 id="6-原表分类错误：不能把-benchmark-的描述当作算法定义">6. 原表分类错误：不能把 benchmark 的描述当作算法定义</h2>
+<p>附录表 II 将 SICNav 描述为社会感知强化学习，但其原始论文实际是将人类 ORCA 行为嵌入双层优化的 MPC 方法。它在单层重写后用非线性优化求解，并不是该表描述的 RL 策略。[1，附录表 II][4]</p>
+<p>同表把 DRL-VO 列为 Classic；Arena 官方 <code>nav2py_drlvo</code> 仓库明确称其为 Deep Reinforcement Learning-based Velocity Obstacle 控制策略。因此方法分类和传感器字段存在编辑问题，不能直接照抄后以“学习 vs 传统”的分组结果做过度推论。[1，附录表 II][3]</p>
+<p>这一点并不否定插件和场景工具的价值，但会影响读者对分组比较的理解。复现时应按实际运行的算法和输入接口建立独立清单，写清是否使用学习感知、是否优化轨迹、是否在线学习、是否将行人视为可互动代理，避免只用一个 Classic/Learning 标签概括整个系统。[1][3][4；独立分析]</p>
+<h2 id="7-相对既有平台的新增价值与局限">7. 相对既有平台的新增价值与局限</h2>
+<p><strong>实质变化</strong>：相比作者早期侧重障碍规避与少数算法的平台，本工作强化了 Python 方法到 ROS 2 Nav2 的接入、带场所语义的场景构造，以及能记录身体姿态并计算人类相关指标的评估流程。它的长处在于连接科研代码和可重复的机器人系统实验，不是重新提出所有社会力模型、世界生成器或 Nav2 控制算法。[1，§I、III、V]</p>
+<p><strong>局限</strong>：多个规划器并不必然拥有相同信息、训练数据、计算资源或调参预算；模拟器支持三个后端也不证明三者会得到一致排名。正文对延迟控制和精确配置的报告有限，部分指标定义不完整，方法分类有错误，而且社会舒适度主要依赖几何代理。作者把简化实机迁移、进一步研究 sim-to-real gap，以及增加真实环境副本列为后续工作，说明本文并未完成全面真实机器人验证。[1，§IV–V、附录；独立分析]</p>
+<h2 id="8-对-isaac-sim-ros-2-社交导航-benchmark-的具体启示">8. 对 Isaac Sim + ROS 2 社交导航 benchmark 的具体启示</h2>
+<p>建议直接采用本文的三层实验组织：<strong>场景实例</strong>存储几何、行人行为和随机种子；<strong>方法适配器</strong>封装传感器输入、动作输出、频率及超时；<strong>评估器</strong>从带时间戳的轨迹与事件统一计算指标。若现有项目采用 Isaac Lab GPU 并行训练，可以在训练阶段用原生批接口，在部署评估阶段接入 ROS 2，并分别记录两条链路的时延。[1，§III；独立建议]</p>
+<p>应优先保留任务成功、真实接触、最小表面间距、个人空间侵入持续时间、到达时间、路径长度、速度与加速度，以及行人受迫偏离或等待。原始指标要独立导出，综合分数只能作为附加项。特别是“等待”应结合情境判断：门口有行人通过时主动停车可能合理，在空旷走廊持续静止才可能是失败。[1，附录表 I；独立建议]</p>
+<p>对于 NavDP / FLUX 这类生成局部路点的方法，适配器需要连接路点跟踪器；对直接输出 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>v</mi><mo separator="true">,</mo><mi>ω</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(v,\omega)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span> 的 PPO，则接速度控制接口。若二者使用不同底盘速度、不同恢复行为或不同规划频率，结果差异可能由系统条件而非论文机制产生。统一这些条件后，再分别分析人群模型、相机高度、遮挡、动态密度和机器人运动学的影响，才能形成可解释的 benchmark。[1，§III–IV；独立分析]</p>
+<h2 id="参考来源">参考来源</h2>
+<p>[1] Shcherbyna et al. <strong>Arena-Bench 2.0: A Comprehensive Benchmark of Social Navigation Approaches in Collaborative Environments</strong>，IROS 2025，9202–9209。项目 PDF 第 2–4 页（插件、生成和日志），第 4–6 页（实验和结论），第 8 页（附录指标与方法表）。<a target="_blank" rel="noopener" href="https://doi.org/10.1109/IROS60139.2025.11246895">DOI</a> · <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/11246895/">IEEE 论文入口</a>。</p>
+<p>[2] 作者官方平台组织，2026-10-09 核查。<a target="_blank" rel="noopener" href="https://github.com/Arena-Rosnav">Arena-Rosnav</a>。</p>
+<p>[3] Arena 官方 DRL-VO 插件说明，用于核对算法类别。<a target="_blank" rel="noopener" href="https://github.com/Arena-Rosnav/nav2py_drlvo">nav2py_drlvo</a>。</p>
+<p>[4] Samavi et al. <strong>SICNav: Safe and Interactive Crowd Navigation using Model Predictive Control and Bilevel Optimization</strong>，原始算法论文，用于核对附录的分类。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.10982">arXiv:2310.10982</a>。</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/reading/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

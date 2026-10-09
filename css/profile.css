@@ -144,7 +144,7 @@ html.js .profile-home .filter-controls { display: flex; }
 .profile-home .site-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--border); padding-block: 24px; color: var(--muted); font-size: 11px; }
 .profile-home .footer-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .profile-home .back-to-top { white-space: nowrap; }
-@media (max-width: 767px) {
+@media (max-width: 959px) {
   .profile-home .site-shell { width: calc(100% - 40px); }
   .profile-home .site-header { min-height: 68px; flex-wrap: wrap; gap: 0 16px; padding-block: 12px; }
   .profile-home .header-actions { margin-left: auto; }
@@ -181,3 +181,16 @@ html.js .profile-home .filter-controls { display: flex; }
 @media (prefers-reduced-motion: reduce) {
   .profile-home *, .profile-home *::before, .profile-home *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+.profile-home .language-switch { display: inline-flex; align-items: center; min-height: 42px; padding: 0 8px; font-size: 12px; white-space: nowrap; }
+.profile-home .external-link-icon { display: inline-block; width: 11px; height: 11px; margin-left: 3px; vertical-align: -.08em; }
+.profile-home .paper-id { font: 500 12px/1.5 ui-monospace, monospace; color: var(--muted); }
+.profile-home .collection-overview { margin-bottom: 28px; padding: 20px; background: var(--surface); border: 1px solid var(--border); }
+.profile-home .collection-overview h2 { font-size: 16px; }
+.profile-home .collection-overview p { margin-block: 8px; color: var(--muted); font-size: 13px; }
+.profile-home .collection-overview a, .profile-home .collection-overview summary { font-size: 13px; }
+.profile-home .collection-overview details { margin-top: 14px; }
+.profile-home .collection-overview summary { cursor: pointer; color: var(--muted); }
+.profile-home .post-content .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: 4px; }
+.profile-home .post-content .katex { font-size: 1.05em; }
+@media (max-width: 360px) { .profile-home .header-actions { gap: 0; } .profile-home .github-link { width: 30px; } .profile-home .language-switch { padding: 0 5px; } }

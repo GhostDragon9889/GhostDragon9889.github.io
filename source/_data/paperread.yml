@@ -1,0 +1,20 @@
+export_date: 2026-10-09
+paper_count: 30
+uploaded_unique_paper_count: 27
+official_supplement_count: 3
+topics:
+  - id: foundations
+    label: 综述与理论基础
+    label_en: Surveys and Foundations
+  - id: action-policy
+    label: 动作生成与策略适配
+    label_en: Action Generation and Policy Adaptation
+  - id: real-time
+    label: 实时执行与动态操作
+    label_en: Real-Time Execution and Dynamic Manipulation
+  - id: human-motion
+    label: 人体运动与交互合成
+    label_en: Human Motion and Interaction
+  - id: navigation-worlds
+    label: 导航、社交评测与三维环境
+    label_en: Navigation, Social Evaluation, and 3D Worlds

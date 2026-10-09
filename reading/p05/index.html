@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用慢速外层强化学习训练GRU，使其在新任务中仅依靠跨回合隐藏状态更新学习探索与利用。 外层训练成本高且长时域优化困难，快速适应依赖任务分布与trial边界，实验不支持任意任务的通用最优学习。">
+  <meta name="theme-color" content="#ffffff">
+  <title>RL²：通过慢速强化学习学会快速强化学习 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/reading/p05/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p05/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p05/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/reading/p05/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#reading">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">文献阅读</p><h1 class="reading-title" id="post-title">RL²：通过慢速强化学习学会快速强化学习</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="论文信息"><h2>RL²: Fast Reinforcement Learning via Slow Reinforcement Learning</h2><p>论文编号: P05 · 综述与理论基础</p><p>所用版本: 1611.02779v2 · 2016</p><p>资料来源: 官方原文补充</p><p>本文是文献阅读笔记；报告的实验结果来自所标注的论文版本，独立分析和实验建议另行注明。</p><a class="text-link" href="https://arxiv.org/abs/1611.02779v2" target="_blank" rel="noopener noreferrer">论文原文 <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="rl²：通过慢速强化学习学会快速强化学习">RL²：通过慢速强化学习学会快速强化学习</h2>
+<p><strong>作者：</strong> Yan Duan、John Schulman、Xi Chen、Peter L. Bartlett、Ilya Sutskever、Pieter Abbeel；UC Berkeley 与 OpenAI。<strong>年份与版本：</strong> 2016，arXiv:1611.02779v2，2016 年 11 月 10 日修订，共 14 页；首稿于 11 月 9 日提交。上传稿与 arXiv 元数据写的是“Under review as a conference paper at ICLR 2017”，本总结不据此声称正式会议接收。主依据为项目补充原文 RL2.pdf，并核查了 arXiv 和 OpenAI 官方发布页。[1][2][3]</p>
+<h2 id="1-一句话贡献与问题定位">1. 一句话贡献与问题定位</h2>
+<p>RL² 把“在新任务中如何探索、记住反馈并改进策略”这套学习过程，编码为一个循环神经网络：<strong>慢速外层强化学习更新网络权重，快速内层适应只更新循环隐藏状态。</strong> 它不是把常规强化学习代码执行得更快，而是让模型经过大量任务训练后，在新的同分布任务上用少量交互形成有效行为。[1，摘要、§2]</p>
+<p>普通从零训练的强化学习策略往往需要大量环境样本。人类设计的贝叶斯强化学习算法可以利用任务先验，但高维后验推断和规划常常昂贵。作者采取另一条路径：只要求能够从任务分布采样，用通用强化学习训练一个能根据历史反馈持续调整行为的 RNN。任务先验以权重的形式被压入网络，新任务的探索记录和知识则由激活状态保存。[1，§1–2]</p>
+<p>这里的“快速”主要是<strong>新任务适应的样本效率</strong>，论文没有提供毫秒延迟、机器人控制频率或实时 VLA 的实验。它属于元强化学习的基础工作，与项目中的 VLA 推理加速、动作异步执行属于不同问题层次；二者可能共同服务于机器人适应，但不能用“fast”一词直接混为一类。</p>
+<h2 id="2-两层学习-两个边界">2. 两层学习、两个边界</h2>
+<h3 id="2-1-一个-trial-包含同一任务的多个-episode">2.1 一个 trial 包含同一任务的多个 episode</h3>
+<p>论文先定义有限时域 MDP：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><mo stretchy="false">(</mo><mi mathvariant="script">S</mi><mo separator="true">,</mo><mi mathvariant="script">A</mi><mo separator="true">,</mo><mi>P</mi><mo separator="true">,</mo><mi>r</mi><mo separator="true">,</mo><msub><mi>ρ</mi><mn>0</mn></msub><mo separator="true">,</mo><mi>γ</mi><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">M=(\mathcal S,\mathcal A,P,r,\rho_0,\gamma,T).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathcal" style="margin-right:0.075em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathcal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p>任务来自分布 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>∼</mo><msub><mi>ρ</mi><mi mathvariant="script">M</mi></msub></mrow><annotation encoding="application/x-tex">M\sim\rho_{\mathcal M}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathcal mtight">M</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，训练只需能采样，不必解析写出该分布。对一个固定任务，机器人或智能体可以交互 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 个 episode；这整组称为 <strong>trial</strong>。每个 episode 重新采样初始状态，但同一 trial 内的转移规律和奖励任务不变。只有开始新 trial 时，才重新抽取 MDP。[1，§2.1–2.2、图1]</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>变化内容</th>
+<th>保留内容</th>
+<th>学习发生在哪里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>episode 边界</td>
+<td>环境回到该 MDP 的新初态</td>
+<td>MDP、网络权重、RNN 隐藏状态</td>
+<td>已收集知识继续影响下一回合</td>
+</tr>
+<tr>
+<td>trial 边界</td>
+<td>换一个 MDP，隐藏状态重置</td>
+<td>训练后的网络权重</td>
+<td>新任务从已学先验开始适应</td>
+</tr>
+<tr>
+<td>外层优化步骤</td>
+<td>用多个 trial 更新网络参数</td>
+<td>任务分布定义</td>
+<td>强化学习训练“如何适应”的规则</td>
+</tr>
+</tbody>
+</table>
+<p>表中最关键的是：<strong>episode 结束不等于清空学习记忆。</strong> 如果每回合都将 GRU 状态归零，第一回合找到目标位置的经验就无法用于第二回合；如果跨不同 trial 也不清零，则会把另一任务的经验带入新的任务，改变论文设定。[1，图1、§2.2]</p>
+<h3 id="2-2-输入包含反馈-而不仅是当前状态">2.2 输入包含反馈，而不仅是当前状态</h3>
+<p>在一致的时间记号下，可将策略前向写为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub><mo>=</mo><mi>ϕ</mi><mo stretchy="false">(</mo><msub><mi>o</mi><mi>t</mi></msub><mo separator="true">,</mo><msub><mi>a</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>r</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>d</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><msub><mi>h</mi><mi>t</mi></msub><mo>=</mo><msub><mo><mi mathvariant="normal">GRU</mi><mo>⁡</mo></mo><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>h</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">x_t=\phi(o_t,a_{t-1},r_{t-1},d_{t-1}),\qquad
+h_t=\operatorname{GRU}_\theta(h_{t-1},x_t),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:2em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop"><span class="mord mathrm">G</span><span class="mord mathrm">R</span><span class="mord mathrm">U</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>t</mi></msub><mo>∣</mo><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">softmax</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>W</mi><msub><mi>h</mi><mi>t</mi></msub><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\pi_\theta(a_t\mid h_t)=\operatorname{softmax}(Wh_t+b).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">s</span><span class="mord mathrm">o</span><span class="mord mathrm" style="margin-right:0.07778em;">f</span><span class="mord mathrm">t</span><span class="mord mathrm">m</span><span class="mord mathrm">a</span><span class="mord mathrm">x</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p>在完全可观测任务中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>o</mi><mi>t</mi></msub><mo>=</mo><msub><mi>s</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">o_t=s_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，在视觉迷宫中是图像。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">a_{t-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">r_{t-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">d_{t-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span> 分别是上一步动作、奖励及结束标记。公式是对论文描述的统一记号转述。输入上一动作让网络知道“试了什么”，奖励让它知道“得到怎样的反馈”，结束标记让它知道“环境已经重置”，隐藏状态则总结此前多个回合的经验。[1，§2.2–2.3]</p>
+<p>trial 的初始输入没有上一动作，附录使用动作 0 的嵌入占位，奖励与结束标记置零。动作均为离散动作；策略输出全连接层加 softmax。所有实验 GRU 隐藏单元为 256。作者也尝试在每个 episode 只重置部分隐藏状态，但未观察到优于简单跨回合保留方案的改进。[1，§2.3、附录 A]</p>
+<h3 id="2-3-隐藏状态更新为何可以称为-学习">2.3 隐藏状态更新为何可以称为“学习”</h3>
+<p><strong>机制解释：</strong> 对两个外观相同的当前观测，如果此前奖励经历不同，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">h_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 就可以不同，策略因而选择不同动作。例如某个拉杆刚连续失败，网络可以降低它的选择概率；在迷宫第一次找到目标以后，网络可以在下一回合优先走向已知位置。改变的不是权重，而是权重所规定的计算过程正在积累证据。它是一种在激活中实现的适应，不要求内部显式存在 Q 表、转移模型或贝叶斯后验。[1，§2、§4；例子为本总结解释]</p>
+<p>同样，拥有记忆并不自动意味着学到了高效探索。网络可以记住过去，却仍然采用无效策略；只有对整个 trial 的累计结果进行训练，才会让早期获取信息、后期利用信息的行为获得反馈。RL² 的贡献是将这种策略与适应规则共同优化，而不是单独提出一种新的 GRU 单元。</p>
+<h2 id="3-外层目标与训练过程">3. 外层目标与训练过程</h2>
+<h3 id="3-1-优化整个-trial-的回报">3.1 优化整个 trial 的回报</h3>
+<p>用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">ℓ</mi></mrow><annotation encoding="application/x-tex">\ell</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">ℓ</span></span></span></span> 表示贯穿 trial 的交互索引、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span></span></span></span> 表示该 trial 总步数，可概括目标为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo><mi>max</mi><mo>⁡</mo></mo><mi>θ</mi></munder><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>M</mi><mo>∼</mo><msub><mi>ρ</mi><mi mathvariant="script">M</mi></msub><mo separator="true">,</mo><mtext> </mtext><mi>τ</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub><mo separator="true">,</mo><mi>M</mi></mrow></msub><mrow><mo fence="true">[</mo><munderover><mo>∑</mo><mrow><mi mathvariant="normal">ℓ</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>L</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mi>γ</mi><mi mathvariant="normal">ℓ</mi></msup><msub><mi>r</mi><mi mathvariant="normal">ℓ</mi></msub><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\max_\theta J(\theta)=
+\mathbb E_{M\sim\rho_{\mathcal M},\,\tau\sim\pi_\theta,M}
+\left[\sum_{\ell=0}^{L-1}\gamma^\ell r_\ell\right].
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.502108em;vertical-align:-0.752108em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.43055999999999994em;"><span style="top:-2.347892em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">max</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.752108em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.1304490000000005em;vertical-align:-1.302113em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathdefault mtight">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3567071428571427em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathcal mtight">M</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.14329285714285717em;"><span></span></span></span></span></span></span><span class="mpunct mtight">,</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">[</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000002em;"><span style="top:-1.8478869999999998em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">ℓ</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.300005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">L</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.302113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">ℓ</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">ℓ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">]</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span></span></span></span></span></p>
+<p>这是对论文“单个 trial 的预期累计折扣奖励”目标的形式化转述。早期探索会减少当下奖励，但若使后续回合获得更多奖励，仍可能提高总体目标。作者把最大化累计回报联系到最小化累计 pseudo-regret；这不表示论文证明了该神经策略具有经典算法的遗憾上界。[1，§2.2]</p>
+<p>训练时，每批抽取多个任务，对每个任务完整运行若干 episode；保留 trial 内隐藏状态，收集动作、奖励及网络状态；再用外层强化学习改进权重。部署到新任务后权重固定，只沿新的交互历史前向更新 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">h</span></span></span></span>。因此，<strong>内层没有为新任务执行梯度下降，没有用测试奖励更新网络权重</strong>；奖励是前向输入，外层训练才通过奖励构造优化信号。[1，§2]</p>
+<h3 id="3-2-trpo-价值基线和长时域信用分配">3.2 TRPO、价值基线和长时域信用分配</h3>
+<p>作者使用 TRPO，并将其实现描述为 first-order implementation；价值基线也用 GRU，并可使用 GAE 减少梯度估计方差。这里不能误称 RL² 在外层使用 PPO，也不能把后续算法采用的优化器倒填到原论文。TRPO/GAE 是借用的训练组件，本文新增的核心是跨任务、跨回合的训练问题与循环策略信息结构。[1，§2.4]</p>
+<p>由于第一回合的一个探索动作可能到第二回合才产生收益，外层必须解决跨回合的长期信用分配。保存隐藏状态只保证前向信息可以流动，并不保证高方差策略梯度能有效学会利用它。试验时域越长、探索收益越晚出现，外层训练越困难；这正是作者后续实验观察到的瓶颈。[1，§3.1–3.3、§5]</p>
+<p>从部分可观测角度看，环境的具体 MDP 对智能体隐藏，历史交互提供关于它的证据。RL² 将“未知是哪一个任务”构造成外层 POMDP，RNN 近似维持对任务的内部表示。该表示可以承担类似 belief state 的作用，但论文没有要求它等于规范化概率分布，也没有监督它恢复真实后验。[1，§4]</p>
+<h2 id="4-多臂老虎机：是否学到探索与利用">4. 多臂老虎机：是否学到探索与利用</h2>
+<p>每个任务有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 个伯努利拉杆，奖励均值 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">p_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 独立采自 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">U[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>。测试组合为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>5</mn><mo separator="true">,</mo><mn>10</mn><mo separator="true">,</mo><mn>50</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">k\in\{5,10,50\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mord">0</span><span class="mclose">}</span></span></span></span>、总交互数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>10</mn><mo separator="true">,</mo><mn>100</mn><mo separator="true">,</mo><mn>500</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">n\in\{10,100,500\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mord">0</span><span class="mord">0</span><span class="mclose">}</span></span></span></span>；原表将这些称为 interaction episodes，在无状态老虎机中对应总拉杆次数。每个设置在 1,000 个新任务上报告平均累计奖励；它不是成功率。[1，§3.1、表1]</p>
+<p>基线含 Gittins 指数近似、Thompson sampling、乐观 TS、UCB1、ε-greedy 和 greedy。贝叶斯方法获得真实任务先验；带超参数方法分别做网格搜索。因此比较并非故意不给经典算法先验。Gittins 的理论最优性质对应折扣无限时域，而这里展示有限交互预算及近似实现，不能据有限表格宣布 RL² 超越贝叶斯最优策略。[1，§3.1]</p>
+<table>
+<thead>
+<tr>
+<th>交互 n / 拉杆 k</th>
+<th style="text-align:right">随机</th>
+<th style="text-align:right">Gittins</th>
+<th style="text-align:right">乐观 TS</th>
+<th style="text-align:right">UCB1</th>
+<th style="text-align:right">RL²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10 / 5</td>
+<td style="text-align:right">5.0</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">6.5</td>
+<td style="text-align:right">6.7</td>
+<td style="text-align:right">6.7</td>
+</tr>
+<tr>
+<td>10 / 10</td>
+<td style="text-align:right">5.0</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">6.2</td>
+<td style="text-align:right">6.7</td>
+<td style="text-align:right">6.7</td>
+</tr>
+<tr>
+<td>10 / 50</td>
+<td style="text-align:right">5.1</td>
+<td style="text-align:right">6.5</td>
+<td style="text-align:right">5.5</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">6.8</td>
+</tr>
+<tr>
+<td>100 / 5</td>
+<td style="text-align:right">49.9</td>
+<td style="text-align:right">78.3</td>
+<td style="text-align:right">77.9</td>
+<td style="text-align:right">78.0</td>
+<td style="text-align:right">78.7</td>
+</tr>
+<tr>
+<td>100 / 10</td>
+<td style="text-align:right">49.9</td>
+<td style="text-align:right">82.8</td>
+<td style="text-align:right">81.4</td>
+<td style="text-align:right">82.4</td>
+<td style="text-align:right">83.5</td>
+</tr>
+<tr>
+<td>100 / 50</td>
+<td style="text-align:right">49.8</td>
+<td style="text-align:right">85.2</td>
+<td style="text-align:right">67.7</td>
+<td style="text-align:right">84.3</td>
+<td style="text-align:right">84.9</td>
+</tr>
+<tr>
+<td>500 / 5</td>
+<td style="text-align:right">249.8</td>
+<td style="text-align:right">405.8</td>
+<td style="text-align:right">406.7</td>
+<td style="text-align:right">405.8</td>
+<td style="text-align:right">401.6</td>
+</tr>
+<tr>
+<td>500 / 10</td>
+<td style="text-align:right">249.0</td>
+<td style="text-align:right">437.8</td>
+<td style="text-align:right">438.9</td>
+<td style="text-align:right">437.1</td>
+<td style="text-align:right">432.5</td>
+</tr>
+<tr>
+<td>500 / 50</td>
+<td style="text-align:right">249.6</td>
+<td style="text-align:right">463.7</td>
+<td style="text-align:right">437.6</td>
+<td style="text-align:right">457.6</td>
+<td style="text-align:right">438.9</td>
+</tr>
+</tbody>
+</table>
+<p>短预算时 RL² 接近或略高于这些基线；最难的 500 次、50 臂设置明显落后 Gittins，累计奖励差 24.8。原表用单侧 t 检验、p=0.05 标记与最佳值无显著差异的算法，不能把所有小数位上的领先都称为显著胜出。训练曲线另将随机策略归一化为 0、Gittins 为 1，该归一化分数也不是原始累计奖励。[1，表1、图2]</p>
+<p>一个关键诊断实验是：用 Gittins 生成轨迹，对<strong>同一网络结构</strong>做监督学习，网络可以达到 Gittins 水平。它支持这一设置下外层强化学习优化是瓶颈，而非仅仅隐藏单元容量不够；但不证明任意长时域都不需要更好的记忆架构。[1，§3.1、§5]</p>
+<h2 id="5-随机表格-mdp：加入真正的序列决策">5. 随机表格 MDP：加入真正的序列决策</h2>
+<p>任务含 10 个状态、5 个动作，每回合最多 10 步，固定从第一个状态开始。各状态—动作奖励均值独立采自 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal N(1,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，实际奖励再加单位方差高斯噪声；转移分布从平坦 Dirichlet 先验采样。状态和动作分别用 one-hot 编码。回合数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 为 10、25、50、75、100，因此最长 trial 涉及约 1,000 次环境交互。[1，§3.2、附录 A.2]</p>
+<p>PSRL 每回合采样一个后验 MDP，并在该回合执行其最优策略；OPSRL 是乐观变体。BEB 为较少访问的状态—动作加探索奖励，UCRL2 则进行乐观模型规划。论文沿用与老虎机相同的评测程序，表2报告累计奖励。[1，§3.2]</p>
+<table>
+<thead>
+<tr>
+<th>每 trial 回合数 n</th>
+<th style="text-align:right">随机</th>
+<th style="text-align:right">PSRL</th>
+<th style="text-align:right">OPSRL</th>
+<th style="text-align:right">BEB</th>
+<th style="text-align:right">RL²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td style="text-align:right">100.1</td>
+<td style="text-align:right">138.1</td>
+<td style="text-align:right">144.1</td>
+<td style="text-align:right">150.2</td>
+<td style="text-align:right"><strong>156.2</strong></td>
+</tr>
+<tr>
+<td>25</td>
+<td style="text-align:right">250.2</td>
+<td style="text-align:right">408.8</td>
+<td style="text-align:right">425.2</td>
+<td style="text-align:right">427.8</td>
+<td style="text-align:right"><strong>445.7</strong></td>
+</tr>
+<tr>
+<td>50</td>
+<td style="text-align:right">499.7</td>
+<td style="text-align:right">904.4</td>
+<td style="text-align:right">930.7</td>
+<td style="text-align:right">917.8</td>
+<td style="text-align:right"><strong>936.1</strong></td>
+</tr>
+<tr>
+<td>75</td>
+<td style="text-align:right">749.9</td>
+<td style="text-align:right">1417.1</td>
+<td style="text-align:right"><strong>1449.2</strong></td>
+<td style="text-align:right">1422.6</td>
+<td style="text-align:right">1428.8</td>
+</tr>
+<tr>
+<td>100</td>
+<td style="text-align:right">999.4</td>
+<td style="text-align:right">1939.5</td>
+<td style="text-align:right"><strong>1973.9</strong></td>
+<td style="text-align:right">1935.1</td>
+<td style="text-align:right">1913.7</td>
+</tr>
+</tbody>
+</table>
+<p>RL² 在前 3 个预算设置中均值较好，n=75、100 时优势反转。作者的解释是短预算不足以准确识别整个环境，直接针对该预算训练的网络可能更早进入利用阶段，而通用算法的探索安排未必最适合这种有限时域。这个解释合理，但论文没有直接解码网络证明它内部实现了某一种明确的探索规则。[1，表2、图3]</p>
+<p>表格任务中的优势也不意味着学会了任意状态数、动作数和奖励分布下的通用算法。状态/动作编码维度固定，训练先验也很具体；改变这些条件是否仍然有效，需要额外实验。论文主要展示同一分布中新 MDP 的适应，而不是跨任意任务家族的泛化。</p>
+<h2 id="6-视觉迷宫：跨回合记忆与外推">6. 视觉迷宫：跨回合记忆与外推</h2>
+<p>ViZDoom 迷宫只给第一人称 RGB，目标位置与地图在同一 trial 内固定。到目标奖励 +1，撞墙 −0.001，每步 −0.04。训练为 5×5 小迷宫、每 trial 两回合、每回合最多 250 步；从 1,000 个训练地图—目标配置采样，测试另生成 1,000 个配置。还在 9×9 大迷宫测试，并把每回合时限增至 1,000 步，以及把交互延长到 5 回合。[1，§3.3]</p>
+<p>策略要从低层动作学会导航，并在第一回合探索后保留目标位置信息。图像缩到 40×30，RGB 归一化到 [−1,1]；两层 16 通道、5×5、stride 2 卷积；上一动作经可学习的 256 维嵌入后与视觉特征结合，再经过 256 维全连接层送入循环策略。奖励与结束标记按公共输入设计保留。本实验策略与价值基线共享网络，其他两组通常用独立网络。[1，附录 A]</p>
+<table>
+<thead>
+<tr>
+<th>回合</th>
+<th style="text-align:right">小迷宫成功轨迹长度</th>
+<th style="text-align:right">小迷宫成功率</th>
+<th style="text-align:right">大迷宫成功轨迹长度</th>
+<th style="text-align:right">大迷宫成功率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:right">52.4±1.3</td>
+<td style="text-align:right">99.3%</td>
+<td style="text-align:right">180.1±6.0</td>
+<td style="text-align:right">97.1%</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:right">39.1±0.9</td>
+<td style="text-align:right">99.6%</td>
+<td style="text-align:right">151.8±5.9</td>
+<td style="text-align:right">96.7%</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:right">42.6±1.0</td>
+<td style="text-align:right">99.7%</td>
+<td style="text-align:right">169.3±6.3</td>
+<td style="text-align:right">95.8%</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:right">43.5±1.1</td>
+<td style="text-align:right">99.4%</td>
+<td style="text-align:right">162.3±6.4</td>
+<td style="text-align:right">95.6%</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:right">43.9±1.1</td>
+<td style="text-align:right">99.6%</td>
+<td style="text-align:right">169.3±6.5</td>
+<td style="text-align:right">96.1%</td>
+</tr>
+</tbody>
+</table>
+<p>以上为原表3，长度只对成功轨迹统计，保留原表 ± 数字而不擅自指定未说明的置信区间含义。第二回合相对第一回合，平均成功路径在小迷宫减少约 25.4%，大迷宫约 15.7%（本总结计算）。第二回合长度不超过第一回合的地图比例为 91.7% 与 71.4%；“不超过”含持平，不能写成所有这些地图都严格改善。[1，表3]</p>
+<p>两点尤其影响证据解读。第一，表3明确选用图5所有随机初始化中<strong>最佳的一次训练运行</strong>，不是跨种子平均水平；图5显示训练性能对初始化很敏感。第二，第三到第五回合并未继续单调缩短路径，而是比第二回合更长。结果说明一定程度的回合外推与记忆利用，不支持持续交互必然持续改善。[1，表3、图5]</p>
+<p>图6还给出失败模式：有时第二回合忘记目标位置，再次探索。即使小迷宫成功率很高，也不能将其等同于最优路径记忆；找到目标与以最短路径利用已知目标是不同标准。[1，§3.3、图6]</p>
+<h2 id="7-相对前作的差异-局限与项目意义">7. 相对前作的差异、局限与项目意义</h2>
+<p>相对经典贝叶斯强化学习，RL² 不手工维护显式后验与规划器，而以循环网络近似任务推断和行动；相对学习优化器的方法，它不另行输出某个策略的参数更新，而由同一 RNN 同时承担适应机制与行为策略；相对仅迁移固定技能，它允许新任务中的奖励反馈改变后续行动，探索与利用也进入训练目标。[1，§4]</p>
+<p><strong>关键局限有四个。</strong> 外层训练仍慢，少样本测试收益来自大量元训练的摊销；任务分布、可用交互预算和记忆边界构成重要先验；长时域的信用分配与记忆可靠性不足；表现接近有理论保证的算法不等于自身获得同样理论保证。论文对最难老虎机的诊断、表格 MDP 的长预算反转和迷宫随机初始化差异都支持这些限制。[1，§3、§5]</p>
+<p><strong>与动态机器人研究的关系（本总结分析）：</strong> RL² 提供一种学习隐含动力学、执行器偏差或任务偏好的思路：让交互历史在隐藏状态中影响后续控制。但本文没有机器人、连续动作或运动物体实验；真实部署若任务在一个 trial 内突然改变，原先“该 trial 的 MDP 固定”先验还可能使旧记忆妨碍快速适应。要用于动态 VLA，应另行设计历史输入、奖励可得性、环境变化分布和记忆重置策略，并分别检验适应质量与实时延迟。</p>
+<h2 id="8-复现时最容易错的地方">8. 复现时最容易错的地方</h2>
+<p>首先固定任务分布与预算，再检查三种边界：环境 episode 结束、trial 结束、外层优化批次结束。结束标记必须送进网络，隐藏状态只能按既定 trial 边界清空；训练采样、回报计算和循环展开也要允许早期探索影响后续回合。测试时固定权重，避免把额外梯度微调误计为原方法的内层能力。[1，§2；实现核查为本总结建议]</p>
+<p>附录的共同参数是 GRU 256、折扣 0.99、平均 KL 限制 0.01；老虎机/表格 MDP 的 GAE λ=0.3、batch 250,000，最多 1,000/10,000 次策略迭代；视觉任务 λ=0.99、batch 50,000，最多 5,000 次迭代。使用权重归一化，隐藏到隐藏矩阵正交初始化，其余 Xavier，偏置置零。batch 数字应按原训练采样器含义核对，不能直接解释为同样数量的独立任务。[1，附录 A]</p>
+<p>原实现基于 TensorFlow 与 rllab，经典算法使用 TabulaRL。官方发布页可确认论文来源，但本次没有从该页面核实到论文专属的完整代码仓库，因此不把检索到的第三方 PyTorch 复现标成作者原代码。本总结完成原文、表格与官方元数据核查，未执行模型训练或复现实验。[1，附录 A；3]</p>
+<h2 id="参考来源与定位">参考来源与定位</h2>
+<p>[1] 项目补充原文：<em>RL2.pdf</em>，arXiv:1611.02779v2，14 页。第2–3页§2：trial、输入、GRU 与 TRPO；第4–5页§3.1/表1：老虎机；第5–6页§3.2/表2：表格 MDP；第7–8页§3.3/表3、图4–6：视觉迷宫与最佳种子口径；第8–9页§4–5：关系与瓶颈；第13–14页附录A：输入编码、优化参数与网络。官方固定版本：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.02779v2">官方链接</a></p>
+<p>[2] arXiv 官方元数据与版本历史：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.02779">官方链接</a> 。核查日期：2026-10-09。</p>
+<p>[3] OpenAI 官方论文发布页，2016-11-09：<a target="_blank" rel="noopener" href="https://openai.com/index/rl2/">官方链接</a> 。核查日期：2026-10-09。</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/reading/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

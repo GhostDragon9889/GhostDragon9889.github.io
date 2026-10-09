@@ -2,12 +2,20 @@ groups:
   - id: research
     label: 学术研究
     description: 研究问题、方法分析与学术讨论。
+    label_en: Research
+    description_en: Research questions, method analysis, and academic discussions.
   - id: engineering
     label: 工程实践
     description: 工具链、系统实现、部署与问题排查。
+    label_en: Engineering
+    description_en: Toolchains, implementation, deployment, and troubleshooting.
   - id: reproduction
     label: 实验复现
     description: 算法实现、实验配置、结果与可复现性。
+    label_en: Reproduction
+    description_en: Algorithm implementation, experiments, results, and reproducibility.
   - id: reading
     label: 文献阅读
     description: 论文的问题、方法、实验与阅读思考。
+    label_en: Literature Reading
+    description_en: Research problems, methods, experiments, and reading reflections.

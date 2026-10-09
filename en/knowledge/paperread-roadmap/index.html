@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Connections and controlled experiments across action generation, policy adaptation, execution, human motion, and navigation worlds.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Cross-Paper Comparison and Research Roadmap · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/knowledge/paperread-roadmap/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/knowledge/paperread-roadmap/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/knowledge/paperread-roadmap/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/knowledge/paperread-roadmap/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#knowledge">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Research</p><h1 class="reading-title" id="post-title">Cross-Paper Comparison and Research Roadmap</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <div class="post-content"><p>This roadmap reorganizes the uploaded PaperRead cross-paper analysis into an English edition. Paper-specific facts refer to the identified source versions. System combinations and proposed experiments below are <strong>independent research analysis</strong>, rather than results established by any single paper. The source export reports no experiment reruns.</p>
+<h2 id="1-a-common-research-question">1. A common research question</h2>
+<p>How can behavior learned from demonstrations or large datasets become useful robot action under <strong>real time, contact, and environmental change</strong>?</p>
+<p>Five connected layers organize the collection: action-distribution modeling, adaptation/RL, execution timing, human motion, and navigation/world evaluation. <a href="/en/reading/p07/">ACT</a>, <a href="/en/reading/p08/">Diffusion Policy</a>, and <a href="/en/reading/p09/">π₀</a> explain generation. <a href="/en/reading/p10/">MetaVLA</a>, <a href="/en/reading/p11/">π_RL</a>, <a href="/en/reading/p12/">RL Token</a>, and <a href="/en/reading/p13/">the generalization study</a> explain adaptation. The realtime papers modify computation, scheduling, observations, or training data.</p>
+<p>Better generation, faster inference, realistic interactions, and more task successes are distinct outcomes. An improvement can be lost at an interface.</p>
+<h2 id="2-five-time-quantities">2. Five time quantities</h2>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Meaning</th>
+<th>Common mistake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control period</td>
+<td>Time between physical commands</td>
+<td>Equating interpolation with fresh visual feedback</td>
+</tr>
+<tr>
+<td>Prediction horizon <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span></td>
+<td>Number of proposed future actions</td>
+<td>Assuming every predicted action executes</td>
+</tr>
+<tr>
+<td>Executed horizon <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span></td>
+<td>Actions used before replacement</td>
+<td>Confusing it with denoising iterations</td>
+</tr>
+<tr>
+<td>Inference latency <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{\mathrm{infer}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td>
+<td>Complete query duration</td>
+<td>Confusing latency, throughput, and task time</td>
+</tr>
+<tr>
+<td>Observation age</td>
+<td>Age of information when an action applies</td>
+<td>Measuring only GPU computation</td>
+</tr>
+</tbody>
+</table>
+<p>For serial chunk generation, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">/</mi><msub><mi>T</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">H/T_{\mathrm{infer}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">/</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is action throughput, not an equal number of independent new-image decisions. Pipeline overlap further separates throughput and latency. Measure camera, queue, network, computation, and actuator timestamps.</p>
+<h2 id="3-what-the-seven-execution-papers-change">3. What the seven execution papers change</h2>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Main intervention</th>
+<th>Training requirement</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/en/reading/p14/">ADP</a></td>
+<td>Action-aware visual pruning</td>
+<td>No additional training</td>
+<td>FLOPs ratios differ from latency; robot motion is an environmental proxy</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p15/">FLASH</a></td>
+<td>Fresh drafts, cached verification, fallback</td>
+<td>Draft training</td>
+<td>Consistency is heuristic; fast-path cost differs from trajectory average</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p16/">RTC</a></td>
+<td>Prefix-guided inpainting and concurrency</td>
+<td>Mainly inference-time</td>
+<td>Gradients add cost; committed actions remain a feedback blind interval</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p17/">Running VLAs</a></td>
+<td>Graph/kernel optimization</td>
+<td>Implementation optimization</td>
+<td>Complete forward timing is measured; full streaming is partly proposed</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p18/">VLASH</a></td>
+<td>Future-body-state conditioning</td>
+<td>Offset fine-tuning</td>
+<td>Future proprioception does not mean future object state</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p19/">DynamicVLA</a></td>
+<td>Multiframe compact policy and stale-prefix removal</td>
+<td>Dynamic training/data</td>
+<td>Valid suffixes must cover ongoing execution</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p20/">DOMINO/PUMA</a></td>
+<td>Flow history and future-object feature supervision</td>
+<td>Policy training</td>
+<td>Stored simulation excludes full real control-delay effects</td>
+</tr>
+</tbody>
+</table>
+<p>RTC increases model latency from 76 to 97 ms while improving task throughput. Running VLAs measures 27.3 ms two-view inference; its 480 Hz full force-feedback controller is not implemented evidence. DynamicVLA’s clarified 0.226 s/chunk and 25 Hz action indexing prevent interpreting action throughput as 88 fresh-image queries/s.</p>
+<h2 id="4-adaptation-updates-different-things">4. Adaptation updates different things</h2>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>What changes</th>
+<th>Feedback</th>
+<th>Limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/en/reading/p05/">RL²</a></td>
+<td>Hidden state within a trial; outer-trained weights</td>
+<td>Across-episode return</td>
+<td>No test-time gradient adaptation or universal Bayesian-optimal claim</td>
+</tr>
+<tr>
+<td><a href="/en/reading/p06/">SimBa</a></td>
+<td>Network structure/normalization</td>
+<td>Existing RL objective</td>
+<td>State/symbolic evidence does not establish visual-VLA scaling</td>
+</tr>
+<tr>
+<td>MetaVLA</td>
+<td>Demonstration-conditioned MAR</td>
+<td>Target action supervision</td>
+<td>Context reading differs from online RL or unseen-skill validation</td>
+</tr>
+<tr>
+<td>π_RL</td>
+<td>Primarily action expert and value/noise modules</td>
+<td>Simulator rewards</td>
+<td>Not full-backbone online real-robot updating</td>
+</tr>
+<tr>
+<td>RL Token</td>
+<td>Small actor/critic after freezing VLA</td>
+<td>Rewards, references, human correction</td>
+<td>Critical-stage improvement differs from full-task mastery</td>
+</tr>
+<tr>
+<td>Generalization study</td>
+<td>LoRA and shared value head</td>
+<td>Task interaction</td>
+<td>Recovery improvements do not imply all semantic OOD improves</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="/en/reading/p02/">action-token survey</a>’s broad module-interface token and RL Token’s compact continuous state vector are different concepts. Account separately for demonstrations, interaction, updated parameters, privileged state, rewards, takeover, resets, and wall time.</p>
+<h2 id="5-human-motion-needs-behavior-and-physics-interfaces">5. Human motion needs behavior and physics interfaces</h2>
+<p><a href="/en/reading/p21/">MotionBricks</a> provides modular kinematic motion and runtime keyframes. <a href="/en/reading/p22/">Uni-Inter</a> conditions joint synthesis on known interaction volumes. <a href="/en/reading/p23/">GRAIL</a> starts with known assets, reconstructs generated interactions, and trains physical trackers.</p>
+<p>GRAIL’s 88.9% frame tracking, 81.4% episode tracking, and 84%/80% real pickup figures have different denominators and thresholds. They must not form one averaged success score.</p>
+<p>For crowds, separately represent destination/avoidance, root path, joints, physical contacts, and sensor occlusion. Animated playback can serve some visual tests; pushes, falls, or force feedback need physical control. <a href="/en/reading/p26/">NavIsaacLab</a> embodies this hierarchy while retaining tracking failures and pipeline costs.</p>
+<h2 id="6-visual-worlds-versus-physical-geometry">6. Visual worlds versus physical geometry</h2>
+<p><a href="/en/reading/p30/">Lyra 2.0</a> supports exploration and revisits through generative memory, but invents unseen space and principally assumes static worlds. <a href="/en/reading/p29/">SAGE-3D</a> aligns Gaussian appearance and collisions using <strong>preexisting meshes</strong>.</p>
+<p>A scene entering Isaac needs appearance, metric scale/coordinates, collision geometry, object identity, and physical parameters. A file-format conversion does not solve all five. The conceptual interfaces are:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Produces</th>
+<th>Receives feedback from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scene</td>
+<td>Appearance, geometry, semantics</td>
+<td>Object transforms and contacts</td>
+</tr>
+<tr>
+<td>Crowd behavior</td>
+<td>Intent and root paths</td>
+<td>Neighbors and robot observations</td>
+</tr>
+<tr>
+<td>Body control</td>
+<td>Joints and physical motion</td>
+<td>Root targets, geometry, contact</td>
+</tr>
+<tr>
+<td>Sensors</td>
+<td>Timestamped local observations</td>
+<td>Scene, bodies, robot state</td>
+</tr>
+<tr>
+<td>Robot policy/execution</td>
+<td>Plans and commands</td>
+<td>Sensors and actual action consumption</td>
+</tr>
+</tbody>
+</table>
+<p>This is a proposed system decomposition, not a complete system demonstrated by one paper.</p>
+<h2 id="7-normalize-social-navigation-definitions">7. Normalize social-navigation definitions</h2>
+<p><a href="/en/reading/p24/">NavDP</a> uses privileged geometry for training rather than deployment maps. <a href="/en/reading/p25/">FLUX</a> adds dynamic learning; <a href="/en/reading/p27/">Arena-Bench</a> supplies integration/measurement; <a href="/en/reading/p28/">the social-navigation review</a> maps architectures and modified benchmark implementations.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Required definition</th>
+<th>Example ambiguity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Success</td>
+<td>Arrival, timeout, contact allowance, denominator</td>
+<td>Arena appendix allows fewer than two collisions</td>
+</tr>
+<tr>
+<td>SPL</td>
+<td>Same episodes, success flag, shortest/actual path</td>
+<td>Some FLUX/SAGE entries exceed SR</td>
+</tr>
+<tr>
+<td>Collision</td>
+<td>Physical contact or proximity; events or steps</td>
+<td>FLUX uses distance-based incursions</td>
+</tr>
+<tr>
+<td>Social distance</td>
+<td>Threshold, duration, crowd normalization</td>
+<td>FLUX SC is lower-is-better</td>
+</tr>
+<tr>
+<td>Smoothness</td>
+<td>Period, differences, coordinates</td>
+<td>Frozen failed policies can appear smooth</td>
+</tr>
+<tr>
+<td>Parallel speed</td>
+<td>Aggregate or individual steps, simulated/wall time</td>
+<td>Crowd aggregate throughput is not per-person Hz</td>
+</tr>
+</tbody>
+</table>
+<p>Geometry-based comfort proxies do not replace real-participant evidence.</p>
+<h2 id="8-four-reading-routes">8. Four reading routes</h2>
+<ol>
+<li><strong>Action generation:</strong> ACT → Diffusion Policy → π₀; use the action-token survey to compare interfaces.</li>
+<li><strong>Dynamic VLA:</strong> RTC → Running VLAs → FLASH → VLASH → DynamicVLA → DOMINO/PUMA; add ADP to study computation allocation.</li>
+<li><strong>Policy improvement:</strong> RL²/SimBa → <a href="/en/reading/p04/">RL-VLA survey</a> → generalization study → π_RL/RL Token/MetaVLA.</li>
+<li><strong>Isaac social navigation:</strong> NavDP → FLUX → NavIsaacLab → Arena-Bench/social review; add human-motion and SAGE/Lyra papers at their respective layers.</li>
+</ol>
+<p>The <a href="/en/reading/p01/">systematic VLA review</a> and <a href="/en/reading/p03/">Chinese-language pipeline survey</a> provide complementary initial maps.</p>
+<h2 id="9-minimal-informative-experiments">9. Minimal informative experiments</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Controlled comparison</th>
+<th>Records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Does pruning miss dynamic events?</td>
+<td>Same policy/budget; target changes while robot rests or moves</td>
+<td>Event time, retained tokens, age, recovery</td>
+</tr>
+<tr>
+<td>Where do asynchronous gains come from?</td>
+<td>Synchronous, naive async, RTC, future-state training</td>
+<td>Success, executed horizon, waiting, retries, discontinuities</td>
+</tr>
+<tr>
+<td>Does RL transfer to new skills?</td>
+<td>Separate visual, position, phrasing, and entirely new skill holdouts</td>
+<td>Demonstrations, interactions, ID/OOD and failures</td>
+</tr>
+<tr>
+<td>Do generated scenes change rankings?</td>
+<td>Fixed collisions/change appearance, then the inverse</td>
+<td>Clearance errors, contacts, real-scene agreement</td>
+</tr>
+<tr>
+<td>Does body realism help navigation?</td>
+<td>Fixed root paths/change joints, then fixed style/change avoidance</td>
+<td>Navigation, foot slip, heading, proximity, cost</td>
+</tr>
+<tr>
+<td>Does precision-stage learning help full tasks?</td>
+<td>Critical stage and home-start task; vary entry state</td>
+<td>Takeover, resets, throughput, failure location</td>
+</tr>
+</tbody>
+</table>
+<p>Start with comparisons that isolate one cause, then combine modules. Simultaneously replacing data, model, execution, and world can improve success while obscuring the responsible mechanism.</p>
+<p>Source versions stay explicit: π₀ v1 is a 2024 paper; MetaVLA title spelling, Uni-Inter revision year, and VLASH/DynamicVLA updates are not silently merged. Survey rankings require primary-paper checks. All experiments above are proposed, rather than rerun results.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/knowledge/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Memory and camera-conditioned video generation build explorable worlds, with static-world and geometry limits.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Lyra 2.0: Explorable Generative 3D Worlds · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/reading/p30/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/reading/p30/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/reading/p30/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/reading/p30/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#reading">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Literature Reading</p><h1 class="reading-title" id="post-title">Lyra 2.0: Explorable Generative 3D Worlds</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <aside class="paper-reference" aria-label="Paper information"><h2>Lyra 2.0: Explorable Generative 3D Worlds</h2><p>Paper ID: P30 · Navigation, Social Evaluation, and 3D Worlds</p><p>Source version: 2604.13036v1 · 2026</p><p>Source: Project paper attachment</p><p>This is a literature reading note. Reported experimental results refer to the identified paper version; independent analysis and proposed experiments are labeled separately.</p><a class="text-link" href="https://arxiv.org/abs/2604.13036" target="_blank" rel="noopener noreferrer">Original paper <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a></aside>
+
+  <div class="post-content"><h2 id="identity-and-task">Identity and task</h2>
+<p>Tianchang Shen, Sherwin Bahmani, and colleagues introduce Lyra 2.0 in <strong>arXiv:2604.13036v1</strong>, April 14, 2026. A single image, camera trajectory, and optional text condition generate video, then explicit Gaussians and a mesh.</p>
+<p>This is <strong>generative reconstruction</strong>: unseen areas are invented plausibly rather than uniquely recovered from measurements. A faithful digital twin still needs real views, scale references, and geometry checks. The work primarily addresses static environments.</p>
+<h2 id="two-kinds-of-memory">Two kinds of memory</h2>
+<p>Spatial forgetting occurs when returning to older regions; temporal drift accumulates when generated history conditions later segments. More recent frames alone do not solve spatial revisits.</p>
+<p>Each historical frame retains RGB, depth, cameras, and low-resolution point clouds <strong>without forcing one fused global cloud</strong>. Target-camera projection ranks visible historical coverage. The reported 0.1 visibility threshold uses normalized depth units, not automatically ten centimeters. Greedy inference selects five frames covering new target pixels.</p>
+<p>Canonical coordinate maps encode source pixel location/frame identity, then warp those coordinates and depth into the target view. Query/key conditioning finds historical features while values preserve original image information. This avoids hard RGB-memory fusion artifacts. The base camera-control path still warps the latest RGB/depth and uses Plücker rays; the system is not entirely RGB-warp-free.</p>
+<p>FramePack compresses temporal history while retaining an initial anchor. Spatial retrieval and temporal packing have complementary roles.</p>
+<h2 id="generation-augmentation-and-reconstruction">Generation, augmentation, and reconstruction</h2>
+<p>The video backbone is <strong>Wan 2.1-14B</strong>, 832×480, with spatial/temporal VAE compression. Internal flow time differs from physical frame time. General descriptions use uniform time while the training appendix specifies logit-normal sampling.</p>
+<p>With probability <strong>0.7</strong>, history latents are noised up to level 0.5 and reconstructed with one model step before conditioning the next segment. Clean targets remain clean. This imitates some self-generated errors but does not guarantee elimination of the long-rollout train/test gap.</p>
+<p>A modified Depth Anything v3 Gaussian head reduces Gaussian count fourfold. It is fine-tuned on <strong>3,000 generated one-minute videos</strong>, rather than merely using an unchanged generic reconstructor. Rendered median depth and normals form an oriented point cloud; sparse SDF extraction and marching cubes produce a mesh.</p>
+<p>Mesh export does not ensure correct scale, watertight collision geometry, thin walls, or stable physical contacts. Isaac demos lack comprehensive collision-error/navigation statistics across every generated world.</p>
+<h2 id="data-resources-and-results">Data, resources, and results</h2>
+<p>Training uses about 10K DL3DV videos with estimated pose/depth and generated descriptions. The appendix reports <strong>64 GB200 GPUs</strong>, seven thousand video-model updates, bf16, and a 35-step FlowUniPC generator. DMD distillation reduces it to four steps with distilled guidance.</p>
+<p>One GB200 generates an eighty-frame segment in approximately <strong>194 seconds</strong> for the full model or <strong>fifteen seconds</strong> distilled; retrieval is under one second. Fast rendering of an already generated world is different from generating new content. These timings should not be extrapolated directly to consumer GPUs.</p>
+<p>On Tanks-and-Temples, full-model values include <strong>SSIM 0.384, LPIPS 0.552, FID 51.33, quality 43.35, style consistency 85.07, camera control 63.87, and reprojection error 0.069</strong>. GEN3C has stronger camera control/reprojection but weaker appearance measures. The evidence supports a tradeoff, not winning every geometry measure.</p>
+<p>Reconstruction fine-tuning improves LPIPS-P/G from <strong>0.409/0.648 to 0.372/0.629</strong>, where P compares reconstructed views with generated video and G with real reference. Agreement with generated views can still be consistently wrong, so external geometry remains necessary.</p>
+<p>Replacing per-frame geometry with an accumulated cloud lowers camera control 63.87→49.86; hard correspondence fusion gives 57.29. Removing self-augmentation reduces style consistency 85.07→77.98 and camera control to 53.92, yet raises single-frame quality to 47.88. The ablations expose local sharpness versus long-term consistency tradeoffs.</p>
+<h2 id="limits-and-project-route">Limits and project route</h2>
+<p>Static-world assumptions, exposure changes, depth/pose errors, extreme views, unknown-area invention, memory growth, and hardware costs limit deployment. Branching from a common start does not prove arbitrary independent videos register automatically in a shared metric frame.</p>
+<p><strong>Project proposal:</strong> distinguish faithful measured layouts from generated scenario variants. Preserve images, cameras, depths, Gaussians, and meshes; independently validate physical floors, walls, doors, furniture, and navigation clearance. Add dynamic crowds as separate body/behavior layers, then test sensor observations and policy outcomes.</p>
+<p>A useful progression is one segment, revisit consistency, branch alignment, collision geometry, and finally robot/crowd experiments. This separates appearance, geometric, behavioral, and policy effects. The original notes checked official entry points but did not run the model, validate user hardware timing, or prove precise robot-contact geometry.</p>
+<h2 id="source-references">Source references</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2604.13036">Source 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2604.13036v1">Source 2</a></li>
+<li><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/sil/lyra2/">Source 3</a></li>
+<li><a target="_blank" rel="noopener" href="https://nv-tlabs.github.io/Project-Lyra/">Source 4</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/nv-tlabs/lyra">Source 5</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/nv-tlabs/lyra/blob/main/Lyra-2/gui/README.md">Source 6</a></li>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/nvidia/Lyra-2.0">Source 7</a></li>
+</ul>
+<p>The source versions and checks above are retained from the uploaded PaperRead notes. This English edition edits their presentation; it does not report new experiments.</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/en/reading/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

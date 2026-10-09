@@ -1,10 +1,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="<%= page.description || config.description %>">
+  <meta name="description" content="<%= page.description || site_text('metaDescription') %>">
   <meta name="theme-color" content="#ffffff">
-  <title><% if (!is_home() && page.title) { %><%= page.title %> · <% } else if (is_archive()) { %>文章归档 · <% } %><%= profile.name %> | 学术与工程</title>
-  <link rel="canonical" href="<%- full_url_for(is_home() ? '' : page.path || '') %>">
+  <title><% if (!site_is_home() && page.title) { %><%= page.title %> · <% } else if (is_archive()) { %><%= site_text('archive') %> · <% } %><%= profile.name %> | <%= site_text('siteTitle') %></title>
+  <link rel="canonical" href="<%- full_url_for((page.path || (site_locale() === 'en' ? 'en/' : '')).replace(/index\.html$/, '')) %>">
+  <link rel="alternate" hreflang="<%= site_locale() %>" href="<%- full_url_for((page.path || '').replace(/index\.html$/, '')) %>">
+  <link rel="alternate" hreflang="<%= site_locale() === 'en' ? 'zh-CN' : 'en' %>" href="<%- full_url_for(site_alternate()) %>">
   <link rel="icon" href="<%- url_for('images/profile-mark.svg') %>" type="image/svg+xml">
   <link rel="stylesheet" href="<%- url_for('css/profile.css') %>">
   <script>

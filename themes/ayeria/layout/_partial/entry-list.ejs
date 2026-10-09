@@ -1,13 +1,10 @@
 <div class="entry-list">
-<% entries.each(function(post) { const group = site.data.collections.groups.find(item => item.id === post.collection); %>
-  <article class="entry-row<%= filterable ? ' content-item' : '' %>"<% if (filterable) { %> data-group="<%= post.collection === 'reading' ? 'reading:' + (post.paper && post.paper.topic || '其他') : post.collection %>"<% } %>>
-    <div class="entry-meta"><span><%= post.collection === 'reading' && post.paper && post.paper.topic ? post.paper.topic : group ? group.label : '个人记录' %></span><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time></div>
-    <h3><a href="<%- url_for(post.path) %>"><%= post.title %></a></h3>
-<% if (post.paper && post.paper.title) { %>
-    <p class="paper-citation"><%= post.paper.title %><% if (post.paper.authors) { %> · <%= post.paper.authors %><% } %><% if (post.paper.year) { %> · <%= post.paper.year %><% } %></p>
-<% } %>
+<% entries.each(function(post) { %>
+  <article class="entry-row<%= filterable ? ' content-item' : '' %>"<% if (filterable) { %> data-group="<%= post.collection === 'reading' ? 'reading:' + post.paper.topic_id : post.collection %>"<% } %>>
+    <div class="entry-meta"><span><%= post.collection === 'reading' ? site_topic(post.paper) : site_group(post.collection) %></span><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time></div>
+    <h3><a href="<%- url_for(post.path) %>"><% if (post.paper) { %><span class="paper-id"><%= post.paper.id %></span> <% } %><%= post.title %></a></h3>
     <p class="entry-description"><%= post.description || truncate(strip_html(post.excerpt || post.content), {length: 120}) %></p>
-    <div class="entry-links"><a href="<%- url_for(post.path) %>">阅读全文 →</a><% if (post.paper && post.paper.url) { %><a href="<%= post.paper.url %>" target="_blank" rel="noopener noreferrer">论文原文 ↗</a><% } %></div>
+    <div class="entry-links"><a href="<%- url_for(post.path) %>"><%= site_text('readMore') %> →</a><% if (post.paper && post.paper.url) { %><a href="<%= post.paper.url %>" target="_blank" rel="noopener noreferrer"><%= site_text('originalPaper') %> <%- partial('external-link-icon') %></a><% } %></div>
   </article>
 <% }); %>
 </div>

@@ -1,17 +1,12 @@
+<% const entries = site_locale() === 'en' ? site_records(['reading','research','engineering','reproduction','profile']) : page.posts; %>
 <section class="reading-page" aria-labelledby="archive-title">
-  <a class="breadcrumb text-link" href="<%- url_for() %>#knowledge">← 返回主页</a>
-  <header class="reading-header">
-    <p class="section-label">ARCHIVE</p>
-    <h1 class="reading-title" id="archive-title"><%= page.category || (page.tag ? '标签：' + page.tag : '文章归档') %></h1>
-    <p class="reading-description">学习经历、文献笔记与工程记录。<% if (page.year) { %> · <%= page.year %><% if (page.month) { %>.<%= page.month %><% } %><% } %></p>
-  </header>
+  <a class="breadcrumb text-link" href="<%- site_home() %>#knowledge">← <%= site_text('backHome') %></a>
+  <header class="reading-header"><p class="section-label">ARCHIVE</p><h1 class="reading-title" id="archive-title"><%= page.category || (page.tag ? site_text('tagPrefix') + page.tag : site_text('archive')) %></h1><p class="reading-description"><%= site_text('archiveIntro') %><% if (page.year) { %> · <%= page.year %><% if (page.month) { %>.<%= page.month %><% } %><% } %></p></header>
   <ul class="archive-list">
-<% page.posts.each(function(post) { %>
-    <li><a class="archive-item" href="<%- url_for(post.path) %>"><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time><span class="archive-title"><%= post.title %></span><span class="archive-arrow" aria-hidden="true">↗</span></a></li>
+<% entries.each(function(post) { %>
+    <li><a class="archive-item" href="<%- url_for(post.path) %>"><time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time><span class="archive-title"><%= post.title %></span><span class="archive-arrow" aria-hidden="true">→</span></a></li>
 <% }); %>
   </ul>
-<% if (!page.posts.length) { %><p class="archive-empty">新的记录正在酝酿中。</p><% } %>
-<% if (page.total > 1) { %>
-  <nav class="archive-pagination" aria-label="文章分页"><%- paginator({prev_text: '上一页', next_text: '下一页'}) %></nav>
-<% } %>
+<% if (!entries.length) { %><p class="archive-empty"><%= site_text('archiveEmpty') %></p><% } %>
+<% if (page.total > 1) { %><nav class="archive-pagination" aria-label="<%= site_text('archive') %>"><%- paginator({prev_text: site_text('previous'), next_text: site_text('next')}) %></nav><% } %>
 </section>

@@ -8,7 +8,7 @@
   function updateTheme() {
     const dark = root.dataset.theme === 'dark';
     toggle.setAttribute('aria-pressed', String(dark));
-    toggle.setAttribute('aria-label', dark ? '切换到浅色模式' : '切换到深色模式');
+    toggle.setAttribute('aria-label', dark ? toggle.dataset.lightLabel : toggle.dataset.darkLabel);
     themeColor.setAttribute('content', dark ? '#131b26' : '#ffffff');
   }
 
@@ -22,7 +22,7 @@
   function setMenu(open) {
     nav.classList.toggle('is-open', open);
     menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+    menuButton.setAttribute('aria-label', open ? menuButton.dataset.closeLabel : menuButton.dataset.openLabel);
   }
 
   menuButton.addEventListener('click', () => {
@@ -40,7 +40,7 @@
   document.addEventListener('click', event => {
     if (!event.target.closest('.site-header')) setMenu(false);
   });
-  window.matchMedia('(min-width: 768px)').addEventListener('change', event => {
+  window.matchMedia('(min-width: 960px)').addEventListener('change', event => {
     if (event.matches) setMenu(false);
   });
   root.classList.add('js');
@@ -63,7 +63,7 @@
         button.setAttribute('aria-pressed', String(active));
       });
       empty.hidden = count !== 0;
-      status.textContent = '共 ' + count + ' 篇记录';
+      status.textContent = container.dataset.countLabel.replace('{count}', String(count));
       if (updateUrl) {
         const url = new URL(location.href);
         if (group === 'all') url.searchParams.delete('category');
@@ -74,6 +74,17 @@
     buttons.forEach(button => button.addEventListener('click', () => filter(button.dataset.filter, true)));
     filter(new URLSearchParams(location.search).get('category') || 'all', false);
   });
+
+  const languageLink = document.querySelector('[data-language-switch]');
+  // Keep a filter and a same-article anchor when switching languages.
+  function updateLanguageLink() {
+    const target = new URL(languageLink.href);
+    target.search = location.search;
+    target.hash = location.hash;
+    languageLink.href = target.href;
+  }
+  languageLink.addEventListener('click', updateLanguageLink);
+  updateLanguageLink();
 
   if ('IntersectionObserver' in window) {
     const links = [...nav.querySelectorAll('a')];
