@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从依赖安装、静态生成到 Git 发布，整理个人主页维护中可复用的工程经验。">
+  <meta name="theme-color" content="#ffffff">
+  <title>Hexo 与 GitHub Pages：保留源码的构建和发布流程 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/2026/10/09/hexo-github-pages-workflow/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
+  <header class="reading-header">
+    <p class="section-label">工程实践</p>
+    <h1 class="reading-title" id="post-title">Hexo 与 GitHub Pages：保留源码的构建和发布流程</h1>
+    <time class="reading-date" datetime="2026-10-09">2026.10.09</time>
+  </header>
+
+  <div class="post-content"><p>这篇记录整理了本主页维护过程中实际采用的构建、验证与发布方法。仓库同时保存 Hexo 源码和根目录的静态站点文件，发布流程需要保留这两部分。</p>
+<h2 id="1-使用锁定依赖-保留完整性校验">1. 使用锁定依赖，保留完整性校验</h2>
+<p>使用 <code>npm ci</code> 按 <code>package-lock.json</code> 安装依赖，不在部署时重新选择版本。锁文件中记录的镜像域名如果不可访问，可以通过 npm 支持的下载源替换选项使用官方仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ci --registry=https://registry.npmjs.org --replace-registry-host=always --no-audit --no-fund</span><br></pre></td></tr></table></figure>
+<p>此方式不修改锁文件中的版本与完整性校验值，也不关闭 TLS 校验。<code>--replace-registry-host=always</code> 适用于本仓库的 npm 镜像依赖；其他项目若含私有仓库或自定义下载地址，需要先核对来源。</p>
+<h2 id="2-区分源文件-构建输出与发布文件">2. 区分源文件、构建输出与发布文件</h2>
+<ul>
+<li><code>source/</code> 保存个人信息、文章与页面资源。</li>
+<li><code>themes/ayeria/layout/</code> 保存页面模板。</li>
+<li><code>public/</code> 是 Hexo 生成的、被 Git 忽略的构建输出。</li>
+<li>仓库根目录的 HTML、CSS 等是 GitHub Pages 的发布文件。</li>
+</ul>
+<p>构建后，通过受限制的同步工具复制已识别的发布路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br><span class="line">node tools/sync-pages.cjs</span><br><span class="line">node tools/sync-pages.cjs --check</span><br><span class="line">git diff --check</span><br></pre></td></tr></table></figure>
+<p>同步工具不删除文件，也不会把 <code>public/</code> 整体替换到源码目录。新增顶层发布路径时，需要明确更新允许列表。</p>
+<p>本仓库原有 <code>hexo deploy</code> 配置指向 <code>main</code>，会以纯静态输出替换该分支的内容；因此采用正常的 Git 提交与推送流程发布，保留源码。</p>
+<h2 id="3-保持文章链接稳定">3. 保持文章链接稳定</h2>
+<p>在 Markdown 的 front matter 中显式保存文章日期。依赖文件修改时间生成日期会使重新检出或迁移后的文章路径改变。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">学习经历</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-05-29 18:26:07</span></span><br></pre></td></tr></table></figure>
+<p>修改个人信息时，需要同时检查首页、文章页与搜索索引，避免只更新源文件而继续发布旧静态内容。</p>
+<h2 id="4-验证实际页面和交互">4. 验证实际页面和交互</h2>
+<p>构建成功后，还需要通过浏览器验证生成的站点。此次主页维护检查了桌面与手机布局、导航、主题切换、原有文章链接以及停用 JavaScript 后的内容可读性。</p>
+<p>页面使用本地 CSS 和原生 JavaScript，减少外部字体与特效 CDN 加载失败对阅读体验的影响。阅读和分类页面同样保留无需 JavaScript 即可查看的内容；筛选功能作为渐进增强。</p>
+<h2 id="5-发布前核对">5. 发布前核对</h2>
+<p>确认发布文件与本次构建一致，再检查暂存区并提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node tools/sync-pages.cjs --check</span><br><span class="line">git diff --check</span><br><span class="line">git status --short</span><br></pre></td></tr></table></figure>
+<p>推送后核对远端分支的提交标识。Git 推送成功与 GitHub Pages 构建完成是不同状态，应分别验证。</p>
+</div>
+  <footer class="reading-footer"><a class="text-link" href="/knowledge/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

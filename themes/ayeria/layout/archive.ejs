@@ -1,9 +1,9 @@
-<section class="reading-page section-block" aria-labelledby="archive-title">
-  <a class="breadcrumb text-link" href="<%- url_for() %>#notes">← 返回主页</a>
+<section class="reading-page" aria-labelledby="archive-title">
+  <a class="breadcrumb text-link" href="<%- url_for() %>#knowledge">← 返回主页</a>
   <header class="reading-header">
-    <p class="section-label">02 / NOTES</p>
-    <h1 class="reading-title" id="archive-title">文字记录<span class="accent">。</span></h1>
-    <p class="reading-description">把走过的路、想过的事，慢慢记录下来。<% if (page.year) { %> · <%= page.year %><% if (page.month) { %>.<%= page.month %><% } %><% } %></p>
+    <p class="section-label">ARCHIVE</p>
+    <h1 class="reading-title" id="archive-title"><%= page.category || (page.tag ? '标签：' + page.tag : '文章归档') %></h1>
+    <p class="reading-description">学习经历、文献笔记与工程记录。<% if (page.year) { %> · <%= page.year %><% if (page.month) { %>.<%= page.month %><% } %><% } %></p>
   </header>
   <ul class="archive-list">
 <% page.posts.each(function(post) { %>

@@ -9,7 +9,7 @@
     const dark = root.dataset.theme === 'dark';
     toggle.setAttribute('aria-pressed', String(dark));
     toggle.setAttribute('aria-label', dark ? '切换到浅色模式' : '切换到深色模式');
-    themeColor.setAttribute('content', dark ? '#101e1b' : '#f7f8f5');
+    themeColor.setAttribute('content', dark ? '#131b26' : '#ffffff');
   }
 
   toggle.addEventListener('click', () => {
@@ -45,6 +45,36 @@
   });
   root.classList.add('js');
 
+  document.querySelectorAll('[data-content-filter]').forEach(container => {
+    const buttons = [...container.querySelectorAll('[data-filter]')];
+    const items = [...container.querySelectorAll('.content-item')];
+    const empty = container.querySelector('.filter-empty');
+    const status = container.querySelector('.filter-status');
+    function filter(group, updateUrl) {
+      if (!buttons.some(button => button.dataset.filter === group)) group = 'all';
+      let count = 0;
+      items.forEach(item => {
+        item.hidden = group !== 'all' && item.dataset.group !== group;
+        if (!item.hidden) count += 1;
+      });
+      buttons.forEach(button => {
+        const active = button.dataset.filter === group;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      empty.hidden = count !== 0;
+      status.textContent = '共 ' + count + ' 篇记录';
+      if (updateUrl) {
+        const url = new URL(location.href);
+        if (group === 'all') url.searchParams.delete('category');
+        else url.searchParams.set('category', group);
+        history.replaceState(null, '', url);
+      }
+    }
+    buttons.forEach(button => button.addEventListener('click', () => filter(button.dataset.filter, true)));
+    filter(new URLSearchParams(location.search).get('category') || 'all', false);
+  });
+
   if ('IntersectionObserver' in window) {
     const links = [...nav.querySelectorAll('a')];
     const observer = new IntersectionObserver(entries => {
@@ -58,6 +88,6 @@
         });
       });
     }, {rootMargin: '-10% 0px -55% 0px'});
-    document.querySelectorAll('#about, #education, #notes').forEach(section => observer.observe(section));
+    document.querySelectorAll('#about, #scholar, #reading, #knowledge').forEach(section => observer.observe(section));
   }
 })();

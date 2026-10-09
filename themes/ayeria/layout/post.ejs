@@ -1,10 +1,14 @@
-<article class="reading-page section-block" aria-labelledby="post-title">
-  <a class="breadcrumb text-link" href="<%- url_for() %>#notes">← 返回主页</a>
+<% const group = site.data.collections.groups.find(item => item.id === page.collection); const returnSection = page.collection === 'reading' ? 'reading' : page.collection === 'profile' ? 'education' : 'knowledge'; %>
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="<%- url_for() %>#<%= returnSection %>">← 返回主页</a>
   <header class="reading-header">
-    <p class="section-label">NOTES / 文字记录</p>
+    <p class="section-label"><%= group ? group.label : '个人记录' %></p>
     <h1 class="reading-title" id="post-title"><%= page.title %></h1>
     <time class="reading-date" datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
   </header>
+<% if (page.paper && page.paper.title) { %>
+  <aside class="paper-reference" aria-label="论文信息"><h2><%= page.paper.title %></h2><p><%= page.paper.authors || '' %><% if (page.paper.year) { %> · <%= page.paper.year %><% } %><% if (page.paper.venue) { %> · <%= page.paper.venue %><% } %></p><% if (page.paper.url) { %><a class="text-link" href="<%= page.paper.url %>" target="_blank" rel="noopener noreferrer">论文原文 ↗</a><% } %></aside>
+<% } %>
   <div class="post-content"><%- page.content %></div>
-  <footer class="reading-footer"><a class="text-link" href="<%- url_for('archives/') %>">查看全部记录 <span aria-hidden="true">↗</span></a></footer>
+  <footer class="reading-footer"><a class="text-link" href="<%- url_for(page.collection === 'reading' ? 'reading/' : 'knowledge/') %>">返回栏目目录 →</a><a class="text-link" href="<%- url_for('archives/') %>">全部文章 →</a></footer>
 </article>

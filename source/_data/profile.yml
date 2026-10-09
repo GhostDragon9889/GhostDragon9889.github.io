@@ -1,7 +1,9 @@
 name: LFM
 alias: 哈基米南北绿豆
 github: https://github.com/GhostDragon9889
-description: 这里是我的个人空间，记录学习的足迹，也给新的想法留一点生长的空间。
+scholar: https://scholar.google.com/citations?user=-lS94kMAAAAJ
+description: 记录学习经历，整理文献阅读、学术思考与工程实践。
+publications: []
 education:
   - period: 2017.09 — 2021.06
     degree: 本科 · B.S.
