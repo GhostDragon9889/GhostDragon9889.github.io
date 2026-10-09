@@ -9,6 +9,7 @@
   <title>Hexo 与 GitHub Pages：保留源码的构建和发布流程 · LFM | 学术与工程</title>
   <meta name="generator" content="hexo-theme-ayeria">
   <link rel="canonical" href="https://ghostdragon9889.github.io/2026/10/09/hexo-github-pages-workflow/">
+
   <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/2026/10/09/hexo-github-pages-workflow/">
   <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/2026/10/09/hexo-github-pages-workflow/">
   <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
@@ -35,11 +36,11 @@
     </a>
     <nav class="site-nav" id="site-nav" aria-label="主导航">
       <ul>
-        <li><a href="/#about" >简介</a></li>
-        <li><a href="/#scholar">学术信息</a></li>
-        <li><a href="/#reading" >文献阅读</a></li>
+        <li><a href="/" >首页</a></li>
+        <li><a href="/about/" >关于我</a></li>
+        <li><a href="/reading/" >文献阅读</a></li>
         <li><a href="/tutorials/" >技术教程</a></li>
-        <li><a href="/#knowledge" aria-current="location">学术与工程</a></li>
+        <li><a href="/knowledge/" aria-current="location">学术与工程</a></li>
         <li><a href="/archives/" >归档</a></li>
       </ul>
     </nav>
@@ -86,7 +87,7 @@
 <p>本仓库原有 <code>hexo deploy</code> 配置指向 <code>main</code>，会以纯静态输出替换该分支的内容；因此采用正常的 Git 提交与推送流程发布，保留源码。</p>
 <h2 id="3-保持文章链接稳定">3. 保持文章链接稳定</h2>
 <p>在 Markdown 的 front matter 中显式保存文章日期。依赖文件修改时间生成日期会使重新检出或迁移后的文章路径改变。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">学习经历</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-05-29 18:26:07</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">实验记录</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-10-09 16:00:00</span></span><br></pre></td></tr></table></figure>
 <p>修改个人信息时，需要同时检查首页、文章页与搜索索引，避免只更新源文件而继续发布旧静态内容。</p>
 <h2 id="4-验证实际页面和交互">4. 验证实际页面和交互</h2>
 <p>构建成功后，还需要通过浏览器验证生成的站点。此次主页维护检查了桌面与手机布局、导航、主题切换、原有文章链接以及停用 JavaScript 后的内容可读性。</p>

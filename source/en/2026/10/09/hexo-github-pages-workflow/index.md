@@ -48,8 +48,8 @@ The original `hexo deploy` configuration targets `main` and would replace that b
 Store dates explicitly in Markdown front matter. File-modification timestamps can change after checkout and alter date-based article routes.
 
 ```yaml
-title: Education
-date: 2026-05-29 18:26:07
+title: Experiment notes
+date: 2026-10-09 16:00:00
 ```
 
 Chinese records are posts; English counterparts are pages with `lang: en`, the same collection, and an explicit `translation_path` back to their Chinese article. This prevents translated copies from duplicating Chinese built-in archives. Paper notes use stable `reading/p01/` and `en/reading/p01/` routes. Topic IDs are shared so a language switch can preserve a selected category.

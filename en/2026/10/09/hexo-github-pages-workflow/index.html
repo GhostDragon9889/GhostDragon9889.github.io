@@ -9,6 +9,7 @@
   <title>Hexo and GitHub Pages: Building and Publishing While Preserving Sources · LFM | Research &amp; Engineering</title>
   <meta name="generator" content="hexo-theme-ayeria">
   <link rel="canonical" href="https://ghostdragon9889.github.io/en/2026/10/09/hexo-github-pages-workflow/">
+
   <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/2026/10/09/hexo-github-pages-workflow/">
   <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/2026/10/09/hexo-github-pages-workflow/">
   <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
@@ -35,11 +36,11 @@
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <ul>
-        <li><a href="/en/#about" >About</a></li>
-        <li><a href="/en/#scholar">Scholar</a></li>
-        <li><a href="/en/#reading" >Reading</a></li>
+        <li><a href="/en/" >Home</a></li>
+        <li><a href="/en/about/" >About me</a></li>
+        <li><a href="/en/reading/" >Reading</a></li>
         <li><a href="/en/tutorials/" >Tutorials</a></li>
-        <li><a href="/en/#knowledge" aria-current="location">Research &amp; Engineering</a></li>
+        <li><a href="/en/knowledge/" aria-current="location">Research &amp; Engineering</a></li>
         <li><a href="/en/archives/" >Archive</a></li>
       </ul>
     </nav>
@@ -86,7 +87,7 @@
 <p>The original <code>hexo deploy</code> configuration targets <code>main</code> and would replace that branch with generated-only files. This repository instead publishes normal Git commits that retain its source tree.</p>
 <h2 id="3-keep-article-urls-stable-and-pair-translations">3. Keep article URLs stable and pair translations</h2>
 <p>Store dates explicitly in Markdown front matter. File-modification timestamps can change after checkout and alter date-based article routes.</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">Education</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-05-29 18:26:07</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">Experiment</span> <span class="string">notes</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-10-09 16:00:00</span></span><br></pre></td></tr></table></figure>
 <p>Chinese records are posts; English counterparts are pages with <code>lang: en</code>, the same collection, and an explicit <code>translation_path</code> back to their Chinese article. This prevents translated copies from duplicating Chinese built-in archives. Paper notes use stable <code>reading/p01/</code> and <code>en/reading/p01/</code> routes. Topic IDs are shared so a language switch can preserve a selected category.</p>
 <p>Changes need regenerated homepage, article, archive, and indexing output. Editing one source file alone does not update already published HTML.</p>
 <h2 id="4-verify-actual-pages-and-interactions">4. Verify actual pages and interactions</h2>

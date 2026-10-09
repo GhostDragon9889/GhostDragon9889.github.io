@@ -4,7 +4,11 @@
   <meta name="description" content="<%= page.description || site_text('metaDescription') %>">
   <meta name="theme-color" content="#ffffff">
   <title><% if (!site_is_home() && page.title) { %><%= page.title %> · <% } else if (is_archive()) { %><%= site_text('archive') %> · <% } %><%= profile.name %> | <%= site_text('siteTitle') %></title>
-  <link rel="canonical" href="<%- full_url_for((page.path || (site_locale() === 'en' ? 'en/' : '')).replace(/index\.html$/, '')) %>">
+  <link rel="canonical" href="<%- full_url_for(page.redirect_path || (page.path || (site_locale() === 'en' ? 'en/' : '')).replace(/index\.html$/, '')) %>">
+<% if (page.redirect_path) { %>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url=<%- url_for(page.redirect_path) %>">
+<% } %>
   <link rel="alternate" hreflang="<%= site_locale() %>" href="<%- full_url_for((page.path || '').replace(/index\.html$/, '')) %>">
   <link rel="alternate" hreflang="<%= site_locale() === 'en' ? 'zh-CN' : 'en' %>" href="<%- full_url_for(site_alternate()) %>">
   <link rel="icon" href="<%- url_for('images/profile-mark.svg') %>" type="image/svg+xml">

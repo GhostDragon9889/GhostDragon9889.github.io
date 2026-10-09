@@ -1,4 +1,4 @@
-<% const returnSection = page.tutorial ? 'tutorials' : page.collection === 'reading' ? 'reading' : page.collection === 'profile' ? 'education' : 'knowledge'; %>
+<% const returnSection = page.tutorial ? 'tutorials' : page.collection === 'reading' ? 'reading' : 'knowledge'; %>
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="<%- site_home() %>#<%= returnSection %>">← <%= site_text('backHome') %></a>
   <header class="reading-header"><p class="section-label"><%= site_group(page.collection) %></p><h1 class="reading-title" id="post-title"><%= page.title %></h1><div class="post-meta"><time class="reading-date" datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, 'YYYY.MM.DD') %></time><span><%= site_reading_time(page) %></span></div></header>

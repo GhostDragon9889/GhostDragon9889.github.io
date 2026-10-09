@@ -89,20 +89,4 @@
   languageLink.addEventListener('click', updateLanguageLink);
   updateLanguageLink();
 
-  if ('IntersectionObserver' in window) {
-    const links = [...nav.querySelectorAll('a')];
-    const sections = [...document.querySelectorAll('#about, #scholar, #reading, #tutorials, #knowledge')];
-    const observer = new IntersectionObserver(() => {
-      const crossed = sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .3);
-      const section = crossed[crossed.length - 1] || sections[0];
-      if (!section) return;
-      links.forEach(link => {
-        const active = link.hash === '#' + section.id;
-        link.classList.toggle('is-active', active);
-        if (active) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    }, {rootMargin: '0px 0px -70% 0px'});
-    sections.forEach(section => observer.observe(section));
-  }
 })();

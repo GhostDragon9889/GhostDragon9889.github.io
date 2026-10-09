@@ -1,4 +1,4 @@
-<% const navSection = site_is_home() || page.collection === 'profile' ? 'about' : page.tutorial || page.layout === 'tutorials' ? 'tutorials' : page.collection === 'reading' || page.layout === 'reading' ? 'reading' : page.layout === 'archive' || is_archive() ? 'archive' : page.collection || page.layout === 'knowledge' || page.layout === 'notebook' ? 'knowledge' : ''; %>
+<% const navSection = site_is_home() ? 'home' : page.layout === 'profile-about' || page.layout === 'profile-redirect' ? 'about' : page.tutorial || page.layout === 'tutorials' ? 'tutorials' : page.collection === 'reading' || page.layout === 'reading' ? 'reading' : page.layout === 'archive' || is_archive() ? 'archive' : page.collection || page.layout === 'knowledge' || page.layout === 'notebook' ? 'knowledge' : ''; %>
   <a class="skip-link" href="#main"><%= site_text('skip') %></a>
   <header class="site-header site-shell">
     <a class="brand" href="<%- site_home() %>" aria-label="<%= profile.name %> <%= site_text('homeAria') %>">
@@ -9,11 +9,11 @@
     </a>
     <nav class="site-nav" id="site-nav" aria-label="<%= site_text('navigation') %>">
       <ul>
-        <li><a href="<%- site_home() %>#about" <% if (navSection === 'about') { %>class="is-active" aria-current="location"<% } %>><%= site_text('about') %></a></li>
-        <li><a href="<%- site_home() %>#scholar"><%= site_text('scholar') %></a></li>
-        <li><a href="<%- site_home() %>#reading" <% if (navSection === 'reading') { %>aria-current="location"<% } %>><%= site_text('reading') %></a></li>
+        <li><a href="<%- site_home() %>" <% if (navSection === 'home') { %>aria-current="page"<% } %>><%= site_text('home') %></a></li>
+        <li><a href="<%- site_path('about/') %>" <% if (navSection === 'about') { %>aria-current="page"<% } %>><%= site_text('about') %></a></li>
+        <li><a href="<%- site_path('reading/') %>" <% if (navSection === 'reading') { %>aria-current="location"<% } %>><%= site_text('reading') %></a></li>
         <li><a href="<%- site_path('tutorials/') %>" <% if (navSection === 'tutorials') { %>aria-current="location"<% } %>><%= site_text('tutorialNav') %></a></li>
-        <li><a href="<%- site_home() %>#knowledge" <% if (navSection === 'knowledge') { %>aria-current="location"<% } %>><%= site_text('knowledge') %></a></li>
+        <li><a href="<%- site_path('knowledge/') %>" <% if (navSection === 'knowledge') { %>aria-current="location"<% } %>><%= site_text('knowledge') %></a></li>
         <li><a href="<%- site_path('archives/') %>" <% if (navSection === 'archive') { %>aria-current="location"<% } %>><%= site_text('archiveNav') %></a></li>
       </ul>
     </nav>
