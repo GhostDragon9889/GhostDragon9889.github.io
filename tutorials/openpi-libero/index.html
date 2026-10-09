@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="根据固定上游代码补充字段、图像方向、动作队列与单请求验证。">
+  <meta name="theme-color" content="#ffffff">
+  <title>OpenPI × LIBERO：服务、观测和动作契约 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/openpi-libero/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/openpi-libero/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/openpi-libero/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/openpi-libero/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">OpenPI × LIBERO：服务、观测和动作契约</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
+
+  <div class="post-content"><h2 id="服务端和仿真端分环境">服务端和仿真端分环境</h2>
+<p>OpenPI 官方推荐远程推理将策略依赖与机器人/仿真依赖分开；LIBERO 示例包含 Docker 与独立环境流程。使用本页引用的固定提交核对入口和依赖，而不是混装所有项目的最新版本。</p>
+<p>官方服务入口示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run scripts/serve_policy.py --<span class="built_in">env</span> LIBERO</span><br></pre></td></tr></table></figure>
+<p>需先按同提交文档安装环境并获得相应模型资源。这里不复制私人主机地址、凭据或开放显示服务器的配置；命令未在本次目标 GPU 环境运行。</p>
+<h2 id="官方代码补充：libero-预处理不能只看-shape">官方代码补充：LIBERO 预处理不能只看 shape</h2>
+<p>已读取的 <code>examples/libero/main.py</code> 使用 <code>agentview_image</code> 与腕部图像，通过 <code>[::-1, ::-1]</code> 调整图像方向，转为连续数组，再 resize/pad 和转 uint8。这个行为属于该示例，其他仿真来源不能机械套用。状态由末端位置、quaternion 转换后的 axis-angle 和夹爪关节构成。</p>
+<table>
+<thead>
+<tr>
+<th>策略字段</th>
+<th>本示例语义</th>
+<th>验收</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>observation/image</td>
+<td>主视角图像</td>
+<td>朝向、RGB、尺寸、uint8</td>
+</tr>
+<tr>
+<td>observation/wrist_image</td>
+<td>腕部图像</td>
+<td>相机身份与时间对齐</td>
+</tr>
+<tr>
+<td>observation/state</td>
+<td>指定构造的本体状态</td>
+<td>顺序、单位、旋转表示</td>
+</tr>
+<tr>
+<td>prompt</td>
+<td>当前任务语言</td>
+<td>任务身份与更新边界</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>动作块</td>
+<td>horizon、维度、归一化及夹爪</td>
+</tr>
+</tbody>
+</table>
+<h2 id="动作队列与请求">动作队列与请求</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openpi_client <span class="keyword">import</span> websocket_client_policy</span><br><span class="line"></span><br><span class="line">client = websocket_client_policy.WebsocketClientPolicy(</span><br><span class="line">    host=<span class="string">&quot;localhost&quot;</span>, port=<span class="number">8000</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># observation must follow the selected policy&#x27;s preprocessing contract.</span></span><br><span class="line">actions = client.infer(observation)[<span class="string">&quot;actions&quot;</span>]</span><br><span class="line"><span class="keyword">if</span> actions.ndim != <span class="number">2</span>:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&quot;expected [horizon, action_dim]&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>observation</code> 由上表和所选配置构造，此片段不是独立可运行完整实验。检查返回的实际 horizon 和 dim；不要固定为某次历史诊断的形状。当前 LIBERO 示例将动作放入队列，按 <code>replan_steps</code> 消费前缀，再推理；reset 清空队列和历史。</p>
+<h2 id="分层验证">分层验证</h2>
+<p>先验证模型加载，再验证单请求字段和有限输出，然后用固定 initial state 检查动作单位与停止语义，最后运行完整套件。记录预热、推理、传输、动作执行和 episode 墙钟时间。一次连通、单任务成功或服务端测速不能变成全套 LIBERO 分数。比较外层 Agent 与直接策略时转到 <a href="../paired-evaluation/">配对评测</a>。</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-libero" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/README.md" target="_blank" rel="noopener noreferrer">OpenPI LIBERO example <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-client" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/main.py" target="_blank" rel="noopener noreferrer">OpenPI LIBERO client source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="libero" href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/README.md" target="_blank" rel="noopener noreferrer">LIBERO benchmark <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Lifelong-Robot-Learning/LIBERO · 引用提交 <code>8f1084e3132a</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/tutorials/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

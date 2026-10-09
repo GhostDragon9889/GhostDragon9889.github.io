@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Audit versioned interfaces for NavDP, FLUX, NavIsaacLab, and ProtoMotions.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Navigation Baselines and Migration: Auditing Papers, Code, and Assets · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/tutorials/navigation-baselines/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/navigation-baselines/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/navigation-baselines/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/tutorials/">Tutorials</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/tutorials/navigation-baselines/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Reproduction</p><h1 class="reading-title" id="post-title">Navigation Baselines and Migration: Auditing Papers, Code, and Assets</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
+
+  <div class="post-content"><h2 id="keep-four-evidence-layers">Keep four evidence layers</h2>
+<p>Separate the paper method, execution at a pinned commit, asset availability, and target-environment results. A README capability list does not establish reproduction by the default configuration. Utility tests do not establish sensor, GPU, or training integration. Disambiguate project names, including navigation FLUX versus image-generation FLUX.</p>
+<h2 id="trace-each-interface">Trace each interface</h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Evidence to inspect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NavDP-style trajectory policies</td>
+<td>Inputs, predicted paths, scorer, controller, privileged supervision</td>
+</tr>
+<tr>
+<td>FLUX-style navigation baselines</td>
+<td>Model version, dynamic assets, episodes, pedestrian configuration</td>
+</tr>
+<tr>
+<td>NavIsaacLab-style integration</td>
+<td>Default crowd backend, action application, reset, actual sensor use</td>
+</tr>
+<tr>
+<td>ProtoMotions</td>
+<td>Body, joint order, motion library, checkpoint, configuration classes</td>
+</tr>
+</tbody>
+</table>
+<p>A local RGB-D policy does not receive a deployment map merely because training supervision used one. A chassis driven through direct pose integration cannot have its executed motion explained by wheel friction. Report entity slots, complete environments, and crowd instances separately.</p>
+<h2 id="official-repository-supplement-migrate-interfaces-explicitly">Official-repository supplement: migrate interfaces explicitly</h2>
+<p>The reviewed ProtoMotions commit documents configuration, retargeting, and multiple backends. Migration needs separate checks of imported symbols, serialized class paths, body/joint naming, reset and rollout lifecycles, evaluation return values, and dependency baselines. Removed directories do not prove removed algorithm capabilities; matching names do not establish checkpoint compatibility.</p>
+<p>Git documentation explains that submodules use paths and gitlinks registered by the parent. Inspect <code>.gitmodules</code>, the parent tree, and submodule status first. An upstream project with a matching name does not register a local submodule automatically.</p>
+<h2 id="acceptance-sequence">Acceptance sequence</h2>
+<p>Pin parent and dependency commits, record asset hashes and patches, load a minimal configuration, and validate one character, one reset, and a short rollout. Add sensors and policies before parallel scaling and training. Compare observation, action, contact, and metric semantics rather than directory-difference counts.</p>
+<p>The upload supplies summaries and catalogs of some historical audits, not their complete referenced artifacts. Private audit filenames and repository relationships are omitted, and unreviewed code conclusions are not reconstructed. See <a href="../../reading/?category=reading%3Anavigation-worlds">navigation readings</a> and the <a href="../reproducible-debugging/">debugging workflow</a>.</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="lab-install" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/setup/installation/pip_installation.rst" target="_blank" rel="noopener noreferrer">Isaac Lab installation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="git-submodule" href="https://github.com/git/git/blob/6de20f6092dcf9bdb1c8efe03db4b70c82b423dd/Documentation/git-submodule.adoc" target="_blank" rel="noopener noreferrer">Git submodule manual <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">git/git · Referenced commit <code>6de20f6092dc</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">NVlabs/ProtoMotions · Referenced commit <code>7a8417a9f55b</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/en/tutorials/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,659 @@
+{
+  "updated": "2026-10-09",
+  "article_count": 18,
+  "reference_count": 28,
+  "groups": [
+    {
+      "id": "learning",
+      "label": "学习与算法实现",
+      "label_en": "Learning & Implementation",
+      "description": "张量、梯度与强化学习实现。",
+      "description_en": "Tensors, gradients, and RL implementation."
+    },
+    {
+      "id": "simulation",
+      "label": "仿真与机器人建模",
+      "label_en": "Simulation & Robot Modeling",
+      "description": "资产、接触、时序和人形控制。",
+      "description_en": "Assets, contact, timing, and humanoid control."
+    },
+    {
+      "id": "navigation",
+      "label": "导航、人群与场景",
+      "label_en": "Navigation, Crowds & Scenes",
+      "description": "评测、接口、人体与视频重建。",
+      "description_en": "Evaluation, interfaces, body motion, and reconstruction."
+    },
+    {
+      "id": "vla",
+      "label": "VLA 与模仿学习",
+      "label_en": "VLA & Imitation Learning",
+      "description": "动作分块、模型服务与配对实验。",
+      "description_en": "Action chunks, model serving, and paired experiments."
+    },
+    {
+      "id": "toolchain",
+      "label": "Python 与 GPU 工具链",
+      "label_en": "Python & GPU Toolchains",
+      "description": "构建、计时、版本与可复现排错。",
+      "description_en": "Builds, timing, versions, and reproducible debugging."
+    }
+  ],
+  "entries": [
+    {
+      "id": "T01",
+      "slug": "tensor-layout",
+      "group": "learning",
+      "title": "PyTorch：轴语义、广播与存储布局",
+      "title_en": "PyTorch: Axes, Broadcasting, and Storage Layout",
+      "description": "用形状契约区分换轴、重塑、视图与复制，避免损失广播错误。",
+      "description_en": "Define shape contracts and distinguish axis changes, reshaping, views, and copies.",
+      "references": [
+        "torch-tensor"
+      ],
+      "path": "tutorials/tensor-layout/",
+      "collection": "engineering",
+      "featured": true
+    },
+    {
+      "id": "T02",
+      "slug": "autograd-training",
+      "group": "learning",
+      "title": "Autograd、梯度累积与训练状态恢复",
+      "title_en": "Autograd, Gradient Accumulation, and Training Recovery",
+      "description": "解释图生命周期、eval 与推理模式，并给出梯度累积和检查点契约。",
+      "description_en": "Understand graph lifetime, inference modes, gradient accumulation, and checkpoint contracts.",
+      "references": [
+        "torch-autograd",
+        "torch-amp"
+      ],
+      "path": "tutorials/autograd-training/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T03",
+      "slug": "rl-implementation",
+      "group": "learning",
+      "title": "强化学习实现：目标、掩码与梯度路径",
+      "title_en": "RL Implementation: Objectives, Masks, and Gradient Paths",
+      "description": "把 PPO/GAE、TD、集中训练及表征学习连接到可检查的接口。",
+      "description_en": "Turn PPO/GAE, TD, centralized training, and representations into inspectable interfaces.",
+      "references": [
+        "torch-autograd",
+        "lab-scene"
+      ],
+      "path": "tutorials/rl-implementation/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T04",
+      "slug": "robot-assets",
+      "group": "simulation",
+      "title": "机器人资产：CAD、USD、URDF 与惯量验收",
+      "title_en": "Robot Assets: CAD, USD, URDF, and Inertial Validation",
+      "description": "建立单位、组合层、关节帧和动力学属性的逐层验收流程。",
+      "description_en": "Validate units, composition layers, joint frames, and physical properties in stages.",
+      "references": [
+        "usd-glossary",
+        "lab-articulation",
+        "mujoco-model"
+      ],
+      "path": "tutorials/robot-assets/",
+      "collection": "engineering",
+      "featured": true
+    },
+    {
+      "id": "T05",
+      "slug": "contact-mecanum",
+      "group": "simulation",
+      "title": "碰撞、接触与麦克纳姆轮的最小实验",
+      "title_en": "Minimal Experiments for Contact and Mecanum Wheels",
+      "description": "从碰撞代理、滚子轴和接触包络定位振动，按坐标推导轮速。",
+      "description_en": "Inspect collision proxies, roller axes, support envelopes, and wheel-speed conventions.",
+      "references": [
+        "mujoco-model",
+        "mujoco-computation",
+        "lab-actuators"
+      ],
+      "path": "tutorials/contact-mecanum/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T06",
+      "slug": "sim-timing",
+      "group": "simulation",
+      "title": "仿真时序、NavMesh 更新与性能剖析",
+      "title_en": "Simulation Timing, NavMesh Updates, and Profiling",
+      "description": "区分物理、控制、传感器和渲染周期，定位启动与稳态开销。",
+      "description_en": "Separate physics, control, sensing, and rendering clocks and isolate startup costs.",
+      "references": [
+        "lab-articulation",
+        "lab-articulation-code",
+        "lab-scene",
+        "usd-glossary"
+      ],
+      "path": "tutorials/sim-timing/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T07",
+      "slug": "humanoid-training",
+      "group": "simulation",
+      "title": "人形机器人：控制维度、对称性与课程恢复",
+      "title_en": "Humanoid Robots: Control Dimensions, Symmetry, and Curriculum Recovery",
+      "description": "分离模型坐标和策略动作，按阶段验证接触、重置与完整续训。",
+      "description_en": "Separate model coordinates from policy actions and validate contacts, resets, and recovery.",
+      "references": [
+        "mujoco-computation",
+        "lab-actuators",
+        "proto"
+      ],
+      "path": "tutorials/humanoid-training/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T08",
+      "slug": "navigation-benchmark",
+      "group": "navigation",
+      "title": "社交导航 Benchmark：模块契约与指标",
+      "title_en": "Social Navigation Benchmarks: Contracts and Metrics",
+      "description": "整理十二模块架构，明确特权观测、安全、效率和社交指标的边界。",
+      "description_en": "Define a twelve-module architecture and separate privileged observations, safety, and social metrics.",
+      "references": [
+        "lab-scene",
+        "ros-qos",
+        "proto"
+      ],
+      "path": "tutorials/navigation-benchmark/",
+      "collection": "evaluation",
+      "featured": false
+    },
+    {
+      "id": "T09",
+      "slug": "ros2-simulation",
+      "group": "navigation",
+      "title": "ROS 2 与仿真：时钟、TF、QoS 和过期动作",
+      "title_en": "ROS 2 and Simulation: Clocks, TF, QoS, and Stale Actions",
+      "description": "以 Jazzy 官方文档补充消息兼容、时间戳与 reset 后的控制安全边界。",
+      "description_en": "Use Jazzy documentation to check message compatibility, timestamps, and reset boundaries.",
+      "references": [
+        "ros-qos",
+        "ros-tf",
+        "lab-articulation"
+      ],
+      "path": "tutorials/ros2-simulation/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T10",
+      "slug": "crowd-motion",
+      "group": "navigation",
+      "title": "人群行为、人体运动与物理控制的接口",
+      "title_en": "Interfaces for Crowd Behavior, Body Motion, and Physical Control",
+      "description": "分离意图、路径、全身参考和执行，明确 MotionLib 与策略资产的配套关系。",
+      "description_en": "Separate intent, paths, body references, and execution, with explicit motion/policy dependencies.",
+      "references": [
+        "proto",
+        "lab-actuators",
+        "mujoco-computation"
+      ],
+      "path": "tutorials/crowd-motion/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T11",
+      "slug": "video-scene",
+      "group": "navigation",
+      "title": "视频到仿真场景：几何、尺度、碰撞与导航",
+      "title_en": "From Video to Simulation: Geometry, Scale, Contact, and Navigation",
+      "description": "补充 COLMAP 与 OpenUSD 流程，区分视觉重建和可物理仿真的交付物。",
+      "description_en": "Connect COLMAP and OpenUSD while distinguishing visual reconstruction from physical assets.",
+      "references": [
+        "colmap",
+        "usd-glossary"
+      ],
+      "path": "tutorials/video-scene/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T12",
+      "slug": "navigation-baselines",
+      "group": "navigation",
+      "title": "导航基线与框架迁移：论文、代码和资源审计",
+      "title_en": "Navigation Baselines and Migration: Auditing Papers, Code, and Assets",
+      "description": "为 NavDP、FLUX、NavIsaacLab 和 ProtoMotions 建立固定版本的接口审计表。",
+      "description_en": "Audit versioned interfaces for NavDP, FLUX, NavIsaacLab, and ProtoMotions.",
+      "references": [
+        "proto",
+        "git-submodule",
+        "lab-install"
+      ],
+      "path": "tutorials/navigation-baselines/",
+      "collection": "reproduction",
+      "featured": false
+    },
+    {
+      "id": "T13",
+      "slug": "vla-execution",
+      "group": "vla",
+      "title": "VLA 执行：动作分块、时延与闭环反馈",
+      "title_en": "VLA Execution: Action Chunks, Latency, and Feedback",
+      "description": "分离动作表示、生成、消费和调度，量化观测年龄与异步切换。",
+      "description_en": "Separate action representation, generation, consumption, and scheduling; measure observation age.",
+      "references": [
+        "openvla",
+        "openpi-remote",
+        "openpi-readme"
+      ],
+      "path": "tutorials/vla-execution/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T14",
+      "slug": "openpi-libero",
+      "group": "vla",
+      "title": "OpenPI × LIBERO：服务、观测和动作契约",
+      "title_en": "OpenPI × LIBERO: Serving, Observations, and Action Contracts",
+      "description": "根据固定上游代码补充字段、图像方向、动作队列与单请求验证。",
+      "description_en": "Use pinned upstream code to check fields, image orientation, action queues, and a single request.",
+      "references": [
+        "openpi-remote",
+        "openpi-libero",
+        "openpi-client",
+        "libero"
+      ],
+      "path": "tutorials/openpi-libero/",
+      "collection": "engineering",
+      "featured": true
+    },
+    {
+      "id": "T15",
+      "slug": "paired-evaluation",
+      "group": "vla",
+      "title": "Direct / Agent 配对评测与进展核验",
+      "title_en": "Paired Direct/Agent Evaluation and Progress Verification",
+      "description": "固定 episode 身份与预算，区分任务成功、工具完成和机制消融。",
+      "description_en": "Fix episode identity and budgets, separating task success, tool completion, and ablations.",
+      "references": [
+        "libero",
+        "openpi-client",
+        "openpi-libero"
+      ],
+      "path": "tutorials/paired-evaluation/",
+      "collection": "evaluation",
+      "featured": false
+    },
+    {
+      "id": "T16",
+      "slug": "python-builds",
+      "group": "toolchain",
+      "title": "Python 工程：pyproject、uv 锁定与构建隔离",
+      "title_en": "Python Engineering: pyproject, uv Locking, and Build Isolation",
+      "description": "区分运行依赖与构建依赖，从 wheel 和最内层异常排查安装失败。",
+      "description_en": "Separate runtime and build dependencies; diagnose installation through wheel compatibility and backend errors.",
+      "references": [
+        "uv-config",
+        "uv-build",
+        "uv-lock",
+        "lab-install"
+      ],
+      "path": "tutorials/python-builds/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T17",
+      "slug": "gpu-profiling",
+      "group": "toolchain",
+      "title": "GPU 软件栈与 PyTorch / JAX 正确计时",
+      "title_en": "GPU Software Stacks and Correct PyTorch/JAX Timing",
+      "description": "分离驱动、Toolkit、框架运行时，并在异步执行后同步计时。",
+      "description_en": "Separate drivers, toolkits, and framework runtimes; synchronize asynchronous benchmarks.",
+      "references": [
+        "jax-async",
+        "jax-install",
+        "torch-amp"
+      ],
+      "path": "tutorials/gpu-profiling/",
+      "collection": "engineering",
+      "featured": false
+    },
+    {
+      "id": "T18",
+      "slug": "reproducible-debugging",
+      "group": "toolchain",
+      "title": "可复现排错：Git、下载、系统 ABI 与证据状态",
+      "title_en": "Reproducible Debugging: Git, Downloads, ABI, and Evidence States",
+      "description": "把安装、网络、扩展和运行错误按层定位，保留最小证据并清理日志隐私。",
+      "description_en": "Locate installation, network, extension, and runtime failures by layer and sanitize evidence.",
+      "references": [
+        "git-submodule",
+        "hf-download",
+        "uv-build",
+        "usd-glossary"
+      ],
+      "path": "tutorials/reproducible-debugging/",
+      "collection": "engineering",
+      "featured": false
+    }
+  ],
+  "references": [
+    {
+      "id": "torch-autograd",
+      "title": "Autograd mechanics",
+      "repo": "pytorch/pytorch",
+      "ref": "refs/tags/v2.10.0",
+      "commit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+      "path": "docs/source/notes/autograd.rst",
+      "url": "https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/autograd.rst",
+      "accessed": "2026-10-09",
+      "sha256": "79b6775c349d0ba2815873e3eff510c3693da43c3bb1400331ab96f3b00261bd"
+    },
+    {
+      "id": "torch-tensor",
+      "title": "Tensor views",
+      "repo": "pytorch/pytorch",
+      "ref": "refs/tags/v2.10.0",
+      "commit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+      "path": "docs/source/tensor_view.rst",
+      "url": "https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/tensor_view.rst",
+      "accessed": "2026-10-09",
+      "sha256": "234446783868f417f01f6600ba49bc050af93c90bd1fc4357105bb686f0c4e9f"
+    },
+    {
+      "id": "torch-amp",
+      "title": "Automatic mixed precision examples",
+      "repo": "pytorch/pytorch",
+      "ref": "refs/tags/v2.10.0",
+      "commit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+      "path": "docs/source/notes/amp_examples.rst",
+      "url": "https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/amp_examples.rst",
+      "accessed": "2026-10-09",
+      "sha256": "ca4e1c814873b1191b2ea7aae208d2be27e355d2e221f59c10e9f6afa8b874e4"
+    },
+    {
+      "id": "uv-config",
+      "title": "Project configuration",
+      "repo": "astral-sh/uv",
+      "ref": "refs/heads/main",
+      "commit": "f3e56e16e0302e26ea456cb51b676b35958572a0",
+      "path": "docs/concepts/projects/config.md",
+      "url": "https://github.com/astral-sh/uv/blob/f3e56e16e0302e26ea456cb51b676b35958572a0/docs/concepts/projects/config.md",
+      "accessed": "2026-10-09",
+      "sha256": "89b2391be8d6cb94098faef83f79551e490c639cb9c76042ad2604f144e3a6a5"
+    },
+    {
+      "id": "uv-build",
+      "title": "Build failures",
+      "repo": "astral-sh/uv",
+      "ref": "refs/heads/main",
+      "commit": "f3e56e16e0302e26ea456cb51b676b35958572a0",
+      "path": "docs/reference/troubleshooting/build-failures.md",
+      "url": "https://github.com/astral-sh/uv/blob/f3e56e16e0302e26ea456cb51b676b35958572a0/docs/reference/troubleshooting/build-failures.md",
+      "accessed": "2026-10-09",
+      "sha256": "a06076fdb3c8c4ebeb1e015ee929f2dceda4f4822e3259805c15da9035c5a34c"
+    },
+    {
+      "id": "uv-lock",
+      "title": "Locking and syncing",
+      "repo": "astral-sh/uv",
+      "ref": "refs/heads/main",
+      "commit": "f3e56e16e0302e26ea456cb51b676b35958572a0",
+      "path": "docs/concepts/projects/sync.md",
+      "url": "https://github.com/astral-sh/uv/blob/f3e56e16e0302e26ea456cb51b676b35958572a0/docs/concepts/projects/sync.md",
+      "accessed": "2026-10-09",
+      "sha256": "5c6a534a81111800ff37455f8c547bbb67f304b9d0cb02543c7185266dbef218"
+    },
+    {
+      "id": "ros-qos",
+      "title": "ROS 2 QoS",
+      "repo": "ros2/ros2_documentation",
+      "ref": "refs/heads/jazzy",
+      "commit": "ddfbbf25bea58be10421d08ba418ecb937f7287d",
+      "path": "source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst",
+      "url": "https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst",
+      "accessed": "2026-10-09",
+      "sha256": "dacf14cb84e15c0ca3710468202d09e52606b959c28fe618f652d8debcf962fe"
+    },
+    {
+      "id": "ros-tf",
+      "title": "Introduction to tf2",
+      "repo": "ros2/ros2_documentation",
+      "ref": "refs/heads/jazzy",
+      "commit": "ddfbbf25bea58be10421d08ba418ecb937f7287d",
+      "path": "source/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.rst",
+      "url": "https://github.com/ros2/ros2_documentation/blob/ddfbbf25bea58be10421d08ba418ecb937f7287d/source/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.rst",
+      "accessed": "2026-10-09",
+      "sha256": "4e1e83fae0f83b016cfd39dc8a58c76343d6b71f83cb6cd7a6f2563c6600cff7"
+    },
+    {
+      "id": "usd-glossary",
+      "title": "OpenUSD glossary",
+      "repo": "PixarAnimationStudios/OpenUSD",
+      "ref": "refs/heads/release",
+      "commit": "ee47c679abde5b467a7b6a41f3b2285564a4222e",
+      "path": "docs/glossary.rst",
+      "url": "https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst",
+      "accessed": "2026-10-09",
+      "sha256": "b381f7dc71271255e33463fc7c21e1112eff6595850a88b3051bbcbb301f6692"
+    },
+    {
+      "id": "lab-install",
+      "title": "Isaac Lab installation",
+      "repo": "isaac-sim/IsaacLab",
+      "ref": "refs/heads/main",
+      "commit": "b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8",
+      "path": "docs/source/setup/installation/pip_installation.rst",
+      "url": "https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/setup/installation/pip_installation.rst",
+      "accessed": "2026-10-09",
+      "sha256": "16b97f540028510a5fb574249c30ba7403a5dfaef9494fc7111b3da0ca330932"
+    },
+    {
+      "id": "lab-articulation",
+      "title": "Interacting with an articulation",
+      "repo": "isaac-sim/IsaacLab",
+      "ref": "refs/heads/main",
+      "commit": "b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8",
+      "path": "docs/source/tutorials/01_assets/run_articulation.rst",
+      "url": "https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/01_assets/run_articulation.rst",
+      "accessed": "2026-10-09",
+      "sha256": "ccb709d4ed28f9984825c431dda487d5ccbbfb1766a95ceca03e03c4c03cc594"
+    },
+    {
+      "id": "lab-scene",
+      "title": "Creating an interactive scene",
+      "repo": "isaac-sim/IsaacLab",
+      "ref": "refs/heads/main",
+      "commit": "b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8",
+      "path": "docs/source/tutorials/02_scene/create_scene.rst",
+      "url": "https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/02_scene/create_scene.rst",
+      "accessed": "2026-10-09",
+      "sha256": "e021d415405c34afea633cd62177ed1a457710f4c4ab005f893514e5e24aa158"
+    },
+    {
+      "id": "lab-actuators",
+      "title": "Actuator models",
+      "repo": "isaac-sim/IsaacLab",
+      "ref": "refs/heads/main",
+      "commit": "b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8",
+      "path": "docs/source/overview/core-concepts/actuators.rst",
+      "url": "https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst",
+      "accessed": "2026-10-09",
+      "sha256": "ac6f9ac8ac0d86776d415750197b66d343526f4fc9ae4845f42ad61efa247a3e"
+    },
+    {
+      "id": "lab-articulation-code",
+      "title": "Articulation example source",
+      "repo": "isaac-sim/IsaacLab",
+      "ref": "refs/heads/main",
+      "commit": "b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8",
+      "path": "scripts/tutorials/01_assets/run_articulation.py",
+      "url": "https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/scripts/tutorials/01_assets/run_articulation.py",
+      "accessed": "2026-10-09",
+      "sha256": "958a4c443375951a1b521488c16d6c7ef9cea98f7a9a34b272acc486159ea667"
+    },
+    {
+      "id": "openpi-remote",
+      "title": "OpenPI remote inference",
+      "repo": "Physical-Intelligence/openpi",
+      "ref": "refs/heads/main",
+      "commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+      "path": "docs/remote_inference.md",
+      "url": "https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md",
+      "accessed": "2026-10-09",
+      "sha256": "5b62754525100f958a1bb5bcd0f5ea406c8d120e582c4785742072ccef79e24c"
+    },
+    {
+      "id": "openpi-libero",
+      "title": "OpenPI LIBERO example",
+      "repo": "Physical-Intelligence/openpi",
+      "ref": "refs/heads/main",
+      "commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+      "path": "examples/libero/README.md",
+      "url": "https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/README.md",
+      "accessed": "2026-10-09",
+      "sha256": "a2caaf5459c4b01837b73aa93a6f69e8cdf10385b39c34eba36afa85f83fafe9"
+    },
+    {
+      "id": "openpi-client",
+      "title": "OpenPI LIBERO client source",
+      "repo": "Physical-Intelligence/openpi",
+      "ref": "refs/heads/main",
+      "commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+      "path": "examples/libero/main.py",
+      "url": "https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/main.py",
+      "accessed": "2026-10-09",
+      "sha256": "d53748c95804ada559e3ca867305b8f755d8651c4c7f4e2723ef80aea55a3943"
+    },
+    {
+      "id": "openpi-readme",
+      "title": "OpenPI project overview",
+      "repo": "Physical-Intelligence/openpi",
+      "ref": "refs/heads/main",
+      "commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+      "path": "README.md",
+      "url": "https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/README.md",
+      "accessed": "2026-10-09",
+      "sha256": "567fc57766bd736664f50126cab8145af4071ca16cc5e238f2b11e369169c3b5"
+    },
+    {
+      "id": "git-submodule",
+      "title": "Git submodule manual",
+      "repo": "git/git",
+      "ref": "refs/heads/master",
+      "commit": "6de20f6092dcf9bdb1c8efe03db4b70c82b423dd",
+      "path": "Documentation/git-submodule.adoc",
+      "url": "https://github.com/git/git/blob/6de20f6092dcf9bdb1c8efe03db4b70c82b423dd/Documentation/git-submodule.adoc",
+      "accessed": "2026-10-09",
+      "sha256": "86c3eacdc59d4ac21f4673df8af2dfefb33528ab9483eea81a193edcb6f379b4"
+    },
+    {
+      "id": "jax-async",
+      "title": "JAX asynchronous dispatch",
+      "repo": "jax-ml/jax",
+      "ref": "refs/heads/main",
+      "commit": "2dc7e6df4fd0eb14e75d70aac954bd0e784d8b44",
+      "path": "docs/async_dispatch.rst",
+      "url": "https://github.com/jax-ml/jax/blob/2dc7e6df4fd0eb14e75d70aac954bd0e784d8b44/docs/async_dispatch.rst",
+      "accessed": "2026-10-09",
+      "sha256": "c15b6237a159c34c9fb2ea8674133dafc49dd7707950ed45f50508a6102c5611"
+    },
+    {
+      "id": "jax-install",
+      "title": "JAX installation",
+      "repo": "jax-ml/jax",
+      "ref": "refs/heads/main",
+      "commit": "2dc7e6df4fd0eb14e75d70aac954bd0e784d8b44",
+      "path": "docs/installation.md",
+      "url": "https://github.com/jax-ml/jax/blob/2dc7e6df4fd0eb14e75d70aac954bd0e784d8b44/docs/installation.md",
+      "accessed": "2026-10-09",
+      "sha256": "f100006495106af365282ceb5ef8a77b8b1a1ea38578c901480baa5d8b5978f8"
+    },
+    {
+      "id": "proto",
+      "title": "ProtoMotions overview",
+      "repo": "NVlabs/ProtoMotions",
+      "ref": "refs/heads/main",
+      "commit": "7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1",
+      "path": "README.md",
+      "url": "https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md",
+      "accessed": "2026-10-09",
+      "sha256": "ed168d25b6b2764aec2816effc82e315f3f3515f7c3e459287278fabe027a7c8"
+    },
+    {
+      "id": "libero",
+      "title": "LIBERO benchmark",
+      "repo": "Lifelong-Robot-Learning/LIBERO",
+      "ref": "refs/heads/master",
+      "commit": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+      "path": "README.md",
+      "url": "https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/README.md",
+      "accessed": "2026-10-09",
+      "sha256": "e87d5b284da3d7c127e1bc8282ea80b5da02aad3e9272c13adc96c4eca0eaa41"
+    },
+    {
+      "id": "colmap",
+      "title": "COLMAP reconstruction tutorial",
+      "repo": "colmap/colmap",
+      "ref": "refs/heads/main",
+      "commit": "b7d115e126827f9c0470baca2ad83daf82f1530e",
+      "path": "doc/tutorial.rst",
+      "url": "https://github.com/colmap/colmap/blob/b7d115e126827f9c0470baca2ad83daf82f1530e/doc/tutorial.rst",
+      "accessed": "2026-10-09",
+      "sha256": "351008a25b046fcd5d4a1fd28f1163aa59c979edd54d1bd9ab3d51ff735a6d0a"
+    },
+    {
+      "id": "mujoco-model",
+      "title": "MuJoCo modeling",
+      "repo": "google-deepmind/mujoco",
+      "ref": "refs/heads/main",
+      "commit": "9660a5c7ff7416d610dd3513a52a2c80ec293ab2",
+      "path": "doc/modeling.rst",
+      "url": "https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/modeling.rst",
+      "accessed": "2026-10-09",
+      "sha256": "cee78ec055294b9a34befe7d1db4f157b8ff1338968c9200a304f18dc0358dd4"
+    },
+    {
+      "id": "mujoco-computation",
+      "title": "MuJoCo computation",
+      "repo": "google-deepmind/mujoco",
+      "ref": "refs/heads/main",
+      "commit": "9660a5c7ff7416d610dd3513a52a2c80ec293ab2",
+      "path": "doc/computation/index.rst",
+      "url": "https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/computation/index.rst",
+      "accessed": "2026-10-09",
+      "sha256": "f6a00ef24c8e973b21899ff9f3f0828a1643ff71e1769b133688dea0babe360a"
+    },
+    {
+      "id": "openvla",
+      "title": "OpenVLA overview",
+      "repo": "openvla/openvla",
+      "ref": "refs/heads/main",
+      "commit": "c8f03f48af692657d3060c19588038c7220e9af9",
+      "path": "README.md",
+      "url": "https://github.com/openvla/openvla/blob/c8f03f48af692657d3060c19588038c7220e9af9/README.md",
+      "accessed": "2026-10-09",
+      "sha256": "ba8e9a2884e38a8000dafc98af4116512e37b0e143dad2f940100482bfd6b75c"
+    },
+    {
+      "id": "hf-download",
+      "title": "Hugging Face download guide",
+      "repo": "huggingface/huggingface_hub",
+      "ref": "refs/heads/main",
+      "commit": "fb34ba424073a2cd4a1108e09d2493698f11c66e",
+      "path": "docs/source/en/guides/download.md",
+      "url": "https://github.com/huggingface/huggingface_hub/blob/fb34ba424073a2cd4a1108e09d2493698f11c66e/docs/source/en/guides/download.md",
+      "accessed": "2026-10-09",
+      "sha256": "faee488495395bd2451041d508cfa1bca6b11eee2ac41da2fd54c91f13043a06"
+    }
+  ]
+}

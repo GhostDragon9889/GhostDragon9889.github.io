@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LFM 的学术主页，整理学习经历、文献阅读与工程实践。">
+  <meta name="theme-color" content="#ffffff">
+  <title>技术与教程 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<section class="reading-page tutorials-page" aria-labelledby="tutorials-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">TECHNICAL TUTORIALS</p><h1 class="reading-title" id="tutorials-title">技术与教程</h1><p class="reading-description">18 篇中英文技术教程，涵盖学习实现、机器人仿真、导航场景、VLA 与工程工具链。</p></header>
+  <div class="collection-overview"><p>整理版合并重复主题，改写为通用说明和合成示例，剔除个人信息、私人环境快照与聊天索引。原始压缩包和历史附件目录不公开。</p><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p><p>本专题参考 28 份官方文档与示例代码。 <a href="/data/tutorial-sources.json">官方来源与校验清单 (.json) →</a></p></div>
+  <nav class="notebook-jumps" aria-label="按学习方向浏览"><a href="#learning">学习与算法实现</a><a href="#simulation">仿真与机器人建模</a><a href="#navigation">导航、人群与场景</a><a href="#vla">VLA 与模仿学习</a><a href="#toolchain">Python 与 GPU 工具链</a></nav>
+  <div class="notebook-grid">
+
+    <section class="notebook-card" id="learning" aria-labelledby="group-learning"><h2 id="group-learning">学习与算法实现<span class="notebook-count">3</span></h2><p class="tutorial-group-description">张量、梯度与强化学习实现。</p><ul>
+
+      <li><a data-tutorial-id="T01" href="/tutorials/tensor-layout/">PyTorch：轴语义、广播与存储布局</a><p>用形状契约区分换轴、重塑、视图与复制，避免损失广播错误。</p></li>
+
+      <li><a data-tutorial-id="T02" href="/tutorials/autograd-training/">Autograd、梯度累积与训练状态恢复</a><p>解释图生命周期、eval 与推理模式，并给出梯度累积和检查点契约。</p></li>
+
+      <li><a data-tutorial-id="T03" href="/tutorials/rl-implementation/">强化学习实现：目标、掩码与梯度路径</a><p>把 PPO/GAE、TD、集中训练及表征学习连接到可检查的接口。</p></li>
+
+    </ul></section>
+
+    <section class="notebook-card" id="simulation" aria-labelledby="group-simulation"><h2 id="group-simulation">仿真与机器人建模<span class="notebook-count">4</span></h2><p class="tutorial-group-description">资产、接触、时序和人形控制。</p><ul>
+
+      <li><a data-tutorial-id="T04" href="/tutorials/robot-assets/">机器人资产：CAD、USD、URDF 与惯量验收</a><p>建立单位、组合层、关节帧和动力学属性的逐层验收流程。</p></li>
+
+      <li><a data-tutorial-id="T05" href="/tutorials/contact-mecanum/">碰撞、接触与麦克纳姆轮的最小实验</a><p>从碰撞代理、滚子轴和接触包络定位振动，按坐标推导轮速。</p></li>
+
+      <li><a data-tutorial-id="T06" href="/tutorials/sim-timing/">仿真时序、NavMesh 更新与性能剖析</a><p>区分物理、控制、传感器和渲染周期，定位启动与稳态开销。</p></li>
+
+      <li><a data-tutorial-id="T07" href="/tutorials/humanoid-training/">人形机器人：控制维度、对称性与课程恢复</a><p>分离模型坐标和策略动作，按阶段验证接触、重置与完整续训。</p></li>
+
+    </ul></section>
+
+    <section class="notebook-card" id="navigation" aria-labelledby="group-navigation"><h2 id="group-navigation">导航、人群与场景<span class="notebook-count">5</span></h2><p class="tutorial-group-description">评测、接口、人体与视频重建。</p><ul>
+
+      <li><a data-tutorial-id="T08" href="/tutorials/navigation-benchmark/">社交导航 Benchmark：模块契约与指标</a><p>整理十二模块架构，明确特权观测、安全、效率和社交指标的边界。</p></li>
+
+      <li><a data-tutorial-id="T09" href="/tutorials/ros2-simulation/">ROS 2 与仿真：时钟、TF、QoS 和过期动作</a><p>以 Jazzy 官方文档补充消息兼容、时间戳与 reset 后的控制安全边界。</p></li>
+
+      <li><a data-tutorial-id="T10" href="/tutorials/crowd-motion/">人群行为、人体运动与物理控制的接口</a><p>分离意图、路径、全身参考和执行，明确 MotionLib 与策略资产的配套关系。</p></li>
+
+      <li><a data-tutorial-id="T11" href="/tutorials/video-scene/">视频到仿真场景：几何、尺度、碰撞与导航</a><p>补充 COLMAP 与 OpenUSD 流程，区分视觉重建和可物理仿真的交付物。</p></li>
+
+      <li><a data-tutorial-id="T12" href="/tutorials/navigation-baselines/">导航基线与框架迁移：论文、代码和资源审计</a><p>为 NavDP、FLUX、NavIsaacLab 和 ProtoMotions 建立固定版本的接口审计表。</p></li>
+
+    </ul></section>
+
+    <section class="notebook-card" id="vla" aria-labelledby="group-vla"><h2 id="group-vla">VLA 与模仿学习<span class="notebook-count">3</span></h2><p class="tutorial-group-description">动作分块、模型服务与配对实验。</p><ul>
+
+      <li><a data-tutorial-id="T13" href="/tutorials/vla-execution/">VLA 执行：动作分块、时延与闭环反馈</a><p>分离动作表示、生成、消费和调度，量化观测年龄与异步切换。</p></li>
+
+      <li><a data-tutorial-id="T14" href="/tutorials/openpi-libero/">OpenPI × LIBERO：服务、观测和动作契约</a><p>根据固定上游代码补充字段、图像方向、动作队列与单请求验证。</p></li>
+
+      <li><a data-tutorial-id="T15" href="/tutorials/paired-evaluation/">Direct / Agent 配对评测与进展核验</a><p>固定 episode 身份与预算，区分任务成功、工具完成和机制消融。</p></li>
+
+    </ul></section>
+
+    <section class="notebook-card" id="toolchain" aria-labelledby="group-toolchain"><h2 id="group-toolchain">Python 与 GPU 工具链<span class="notebook-count">3</span></h2><p class="tutorial-group-description">构建、计时、版本与可复现排错。</p><ul>
+
+      <li><a data-tutorial-id="T16" href="/tutorials/python-builds/">Python 工程：pyproject、uv 锁定与构建隔离</a><p>区分运行依赖与构建依赖，从 wheel 和最内层异常排查安装失败。</p></li>
+
+      <li><a data-tutorial-id="T17" href="/tutorials/gpu-profiling/">GPU 软件栈与 PyTorch / JAX 正确计时</a><p>分离驱动、Toolkit、框架运行时，并在异步执行后同步计时。</p></li>
+
+      <li><a data-tutorial-id="T18" href="/tutorials/reproducible-debugging/">可复现排错：Git、下载、系统 ABI 与证据状态</a><p>把安装、网络、扩展和运行错误按层定位，保留最小证据并清理日志隐私。</p></li>
+
+    </ul></section>
+
+  </div>
+  <section class="notebook-reading-routes" aria-labelledby="tutorial-routes"><h2 id="tutorial-routes">建议实践路线</h2><ol><li>学习：张量布局 → Autograd → RL 掩码与梯度 → 实验协议。</li><li>机器人：资产 → 接触 → 仿真时序 → ROS 2 → 人群与导航评测。</li><li>VLA：动作分块 → OpenPI / LIBERO → 配对评测 → GPU 计时与排错。</li></ol><p><a href="/notes/">强化学习学习笔记专题 →</a> · <a href="/reading/">阅读目录 →</a></p></section>
+</section>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

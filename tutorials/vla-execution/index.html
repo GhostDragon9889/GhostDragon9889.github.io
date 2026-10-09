@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="分离动作表示、生成、消费和调度，量化观测年龄与异步切换。">
+  <meta name="theme-color" content="#ffffff">
+  <title>VLA 执行：动作分块、时延与闭环反馈 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/vla-execution/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/vla-execution/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/vla-execution/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/vla-execution/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">VLA 执行：动作分块、时延与闭环反馈</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
+
+  <div class="post-content"><h2 id="模型层和系统层">模型层和系统层</h2>
+<p>Vision-Language-Action 策略从图像、指令及该模型支持的状态产生动作；离散 action token、连续向量、扩散或 flow 动作轨迹有不同训练与解码方式。OpenVLA 官方 README 提供动作解码与归一化接口；OpenPI 文档提供策略服务和客户端。输出维度、token 数与机器人关节数分别记录。</p>
+<p>这里的 VLA 是视觉语言动作模型；C/C++ 的 Variable Length Array 属于编程语言概念，两者不可混用。</p>
+<h2 id="三个时间尺度">三个时间尺度</h2>
+<p>预测 <code>H</code> 个动作，每次实际执行 <code>K≤H</code> 个，底层周期 <code>dt</code>。观测到推理结果可用的延迟为 <code>tau</code>，第 <code>j</code> 个动作开始时观测年龄近似 <code>tau+j·dt</code>，另加队列等待。大 <code>K</code> 减少调用但延长开环，小 <code>K</code> 增加反馈却提高通信与算力需求。</p>
+<table>
+<thead>
+<tr>
+<th>改进方向</th>
+<th>必须测量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>减少扩散/flow 步数</td>
+<td>同硬件下时延与动作质量</td>
+</tr>
+<tr>
+<td>token/网络剪枝</td>
+<td>判据成本、失败与分布变化</td>
+</tr>
+<tr>
+<td>动态动作消费</td>
+<td>H、K、停止条件与干预时延</td>
+</tr>
+<tr>
+<td>异步推理</td>
+<td>观测身份、结果到达、切换时刻</td>
+</tr>
+<tr>
+<td>前缀约束/inpainting</td>
+<td>已执行动作不可修改与接续连续性</td>
+</tr>
+</tbody>
+</table>
+<h2 id="官方服务文档补充：动作块不是控制周期">官方服务文档补充：动作块不是控制周期</h2>
+<p>OpenPI 远程推理返回 <code>(action_horizon, action_dim)</code> 的动作块，客户端决定何时调用与怎样执行。服务推理时间不包含全部感知、网络、控制和仿真；预测长度也不规定必须一次消费整块。动作字段和归一化语义由指定策略配置决定。</p>
+<p>异步结果携带请求编号、episode 与观测时间。reset、任务切换及过期结果需要取消或丢弃；切换新动作块时核对位置/速度连续性与控制器状态。通用调度伪代码不等于具体论文算法实现。</p>
+<h2 id="实验路线">实验路线</h2>
+<p>先验证固定 <code>H/K</code> 的同步执行，再只改变一个时序因素；统计端到端延迟分位数、观测年龄、队列长度、成功与失败。剪枝的动作差应先统一单位和尺度，不能把角度、平移、夹爪直接取未加权欧氏距离。RL 适配需写明更新完整模型、动作头、adapter、隐变量或独立策略中的哪一项。</p>
+<p>已有 <a href="../../reading/?category=reading%3Areal-time">实时执行论文</a> 可供横向比较；OpenPI 接入见 <a href="../openpi-libero/">接口教程</a>。本文没有新的 VLA 性能或机器人实验结果。</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-readme" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/README.md" target="_blank" rel="noopener noreferrer">OpenPI project overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openvla" href="https://github.com/openvla/openvla/blob/c8f03f48af692657d3060c19588038c7220e9af9/README.md" target="_blank" rel="noopener noreferrer">OpenVLA overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">openvla/openvla · 引用提交 <code>c8f03f48af69</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/tutorials/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

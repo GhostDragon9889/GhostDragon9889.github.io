@@ -37,6 +37,7 @@
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
         <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
         <li><a href="/#knowledge">学术与工程</a></li>
       </ul>
     </nav>
@@ -62,6 +63,7 @@
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
   <header class="reading-header"><p class="section-label">理论与方法</p><h1 class="reading-title" id="post-title">马尔可夫性、部分观测与 RNN 记忆</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
 
+
   <div class="post-content"><h2 id="状态与观测要分开">状态与观测要分开</h2>
 <p>马尔可夫性指未来在给定当前充分状态和动作后，不再依赖更早历史。物理系统可能是 Markov 的，但 agent 只看到不完整观测 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>o</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">o_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，例如单张图像未包含速度。这会形成 POMDP，而不是因为使用 RNN 才改变了环境动力学。</p>
 <h2 id="历史-belief-与隐状态">历史、belief 与隐状态</h2>
@@ -73,6 +75,7 @@
 <p>比较无记忆、堆叠观测和 recurrent policy，控制参数量、训练预算与输入信息。用遮挡、速度不可见、延迟和任务切换设计测试；报告恢复速度和 reset 规则。测试 episode 中的记忆适应不应混同于梯度微调。</p>
 <p>关联阅读：<a href="/knowledge/meta-rl/">Meta-RL</a>、<a href="/reading/p05/">RL²</a>、<a href="/knowledge/probability-measures/">概率与占据分布</a>。</p>
 </div>
+
 
   <aside class="notebook-sources" aria-labelledby="notebook-sources-title"><h2 id="notebook-sources-title">原始笔记与整理说明</h2><p>本页为合并和校订后的整理版。下载文件完整保留原措辞与排版；原文中未获支持的数值及错误推导未作为正文结论。</p><ul><li><a class="notebook-source-link" data-source-id="N052" href="/downloads/obsidian/n052.md" download>马尔科夫性.md (.md)</a></li></ul><a class="text-link" href="/notes/">强化学习学习笔记专题 →</a></aside>
 

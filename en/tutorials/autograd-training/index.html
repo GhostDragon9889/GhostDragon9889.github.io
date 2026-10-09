@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Understand graph lifetime, inference modes, gradient accumulation, and checkpoint contracts.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Autograd, Gradient Accumulation, and Training Recovery · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/tutorials/autograd-training/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/autograd-training/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/autograd-training/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/tutorials/">Tutorials</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/tutorials/autograd-training/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Autograd, Gradient Accumulation, and Training Recovery</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
+
+  <div class="post-content"><h2 id="forward-execution-records-dependencies">Forward execution records dependencies</h2>
+<p>Reverse-mode autograd builds the graph during forward execution and saves values needed by backward rules. Backward computes vector–Jacobian products rather than storing a full Jacobian for every operation. Leaf parameters with <code>requires_grad=True</code> normally accumulate gradients in <code>.grad</code>. Repeated backward calls accumulate gradients; they do not perform optimizer updates.</p>
+<p><code>zero_grad(set_to_none=True)</code> starts an update window, <code>backward()</code> computes gradients, and <code>step()</code> updates parameters. Freezing parameters, detaching tensors, and disabling gradient recording affect different paths and must match the intended objective. Retain a graph only when another backward pass through it is required. Storing losses or recurrent states with attached graphs can cause sustained memory growth.</p>
+<h2 id="official-source-supplement-eval-does-not-disable-autograd">Official-source supplement: eval does not disable autograd</h2>
+<p><code>model.eval()</code> changes module behavior such as Dropout and BatchNorm while still allowing gradients. <code>no_grad()</code> suppresses ordinary backward graph recording. <code>inference_mode()</code> removes additional overhead, but tensors created there generally cannot be reused in computations that need to save them for backward. Choose a mode according to subsequent computation, not just its name.</p>
+<h2 id="weight-accumulated-gradients-by-sample-count">Weight accumulated gradients by sample count</h2>
+<p>This example assumes a sample-mean loss for each microbatch. Weighting by the actual window size handles unequal microbatches and a shorter final window.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">update_window</span>(<span class="params">model, optimizer, batches, loss_fn</span>):</span><br><span class="line">    total = <span class="built_in">sum</span>(<span class="built_in">len</span>(target) <span class="keyword">for</span> _, target <span class="keyword">in</span> batches)</span><br><span class="line">    <span class="keyword">if</span> total == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;empty accumulation window&quot;</span>)</span><br><span class="line">    optimizer.zero_grad(set_to_none=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> inputs, target <span class="keyword">in</span> batches:</span><br><span class="line">        loss = loss_fn(model(inputs), target)</span><br><span class="line">        (loss * <span class="built_in">len</span>(target) / total).backward()</span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
+<p>Masked token losses require weighting by valid token counts. Nonlinear regularizers need their own treatment. The official AMP examples require consistent scaling within an effective batch: accumulate first, then unscale, clip, step, and update the scaler. BatchNorm statistics and Dropout randomness can prevent equivalence to a single large forward batch.</p>
+<h2 id="restore-the-training-process">Restore the training process</h2>
+<p>Save the model, optimizer, learning-rate scheduler, AMP scaler, global step, and normalization statistics. Exact continuation can also require random-generator states, sampler position, and environment state. Recovery at an epoch boundary differs from recovery at an arbitrary instant. Loading weights alone initializes a model; it does not restore the complete process. Compare a short continuation under identical conditions, checking losses, updates, and data order. Cross-device bitwise identity is not claimed.</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="torch-autograd" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/autograd.rst" target="_blank" rel="noopener noreferrer">Autograd mechanics <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">pytorch/pytorch · Referenced commit <code>449b17684101</code></span></li><li><a data-reference-id="torch-amp" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/amp_examples.rst" target="_blank" rel="noopener noreferrer">Automatic mixed precision examples <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">pytorch/pytorch · Referenced commit <code>449b17684101</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/en/tutorials/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

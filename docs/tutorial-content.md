@@ -1,0 +1,13 @@
+# Technical tutorial collection
+
+The uploaded technical archive contains 15 files: topic chapters, duplicate combined editions, historical indexes, and artifact catalogs. Only those supplied texts were read; the hundreds of artifacts mentioned by the catalog were not supplied and are not claimed as inspected.
+
+The public edition adds 18 paired Chinese/English tutorials in five groups. Existing RL theory and literature notes are linked instead of duplicated. Fifteen tutorials enter Engineering, two enter Evaluation, and one enters Reproduction. Both `/tutorials/` and `/en/tutorials/` provide the complete directory; the homepage shows three selected entries.
+
+Personal conversations, account identifiers, local paths, host/network addresses, hardware snapshots, private repository relationships, filenames of historical artifacts, personal diagnostic scores, and individual timelines are omitted. Examples are synthetic or taken in abbreviated form from identified public upstream APIs. The archive, combined original editions, chat indexes, and private catalogs are kept outside the repository. There are no new raw downloads.
+
+Network research used GitHub repository search and official repository documentation because the search engine and several hosted documentation domains were inaccessible from this environment. The edition reads 28 official documents/code examples at fixed commits, including PyTorch v2.10.0 and ROS 2 Jazzy documentation. Other pinned development branches are source snapshots, not a claimed compatible release matrix. `source/_data/tutorials.json` maps references to articles. `source/data/tutorial-sources.json` contains public source URLs, commits, dates, and SHA-256 hashes of the retrieved upstream texts; it contains no uploaded archive contents.
+
+The content distinguishes documentation checks, static checks, minimal execution, integration validation, and proposed work. GPU, robot, full simulator, and benchmark experiments were not executed. The NumPy GAE snippet passed analytical terminal, truncation, and rollout-boundary checks. Python snippets passed syntax checks; TOML/JSON examples parsed and shell snippets passed `bash -n`. PyTorch and JAX are not installed here, so their runtime examples were not executed. These checks do not establish integration performance.
+
+Keep bilingual counterparts and their `translation_path` reciprocal. Chinese records are Hexo posts with explicit permalinks; English counterparts are pages with `layout: post`, avoiding duplicate Chinese archive entries. Run `node tools/audit-tutorials.cjs`, build, and use `node tools/sync-pages.cjs` followed by `--check`. Never publish the private import directory or use a deployment command that replaces this mixed source/output branch.

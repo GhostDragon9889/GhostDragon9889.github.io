@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Separate physics, control, sensing, and rendering clocks and isolate startup costs.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Simulation Timing, NavMesh Updates, and Profiling · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/tutorials/sim-timing/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/sim-timing/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/sim-timing/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/tutorials/">Tutorials</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/tutorials/sim-timing/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Simulation Timing, NavMesh Updates, and Profiling</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
+
+  <div class="post-content"><h2 id="record-four-independent-schedules">Record four independent schedules</h2>
+<p>Physics advances by <code>dt_p</code>. Updating control every <code>k</code> steps gives a control interval of <code>k·dt_p</code>; sensors and rendering can have separate schedules. Frame rate is not physics frequency. The real-time factor is elapsed simulation time divided by elapsed wall time. Record completed steps rather than only the requested frequency.</p>
+<h2 id="official-code-supplement-command-and-cache-order">Official-code supplement: command and cache order</h2>
+<p>The pinned Isaac Lab articulation example sets targets, calls <code>write_data_to_sim()</code>, advances with <code>sim.step()</code>, and refreshes state with <code>robot.update(dt)</code>. Reset restores root pose, root velocity, and joint state and clears internal caches. This pseudocode describes ordering rather than a universal cross-version launcher.</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if reset_required:</span><br><span class="line">    restore root pose, root velocity, joint state</span><br><span class="line">    reset controller history and asset caches</span><br><span class="line">set control targets</span><br><span class="line">write commands to simulator</span><br><span class="line">step physics</span><br><span class="line">refresh asset state buffers</span><br><span class="line">sample observations on their scheduled ticks</span><br></pre></td></tr></table></figure>
+<p>Give each physics instance a single state owner. Kinematic pose writes and dynamic control should not compete over the robot. Specify when commands take effect and observations are sampled.</p>
+<h2 id="separate-navigation-and-contact-representations">Separate navigation and contact representations</h2>
+<p>NavMesh describes traversable surfaces, colliders participate in contact, and visual meshes provide appearance. Fine wheel geometry rarely needs a separate high-level navigation obstacle for every visual part. Measure state notifications, dynamic-obstacle maintenance, and baking separately; a slowdown does not prove complete rebaking every frame.</p>
+<p>Reparented visual geometry must preserve world transforms and fixed assembly relationships. Read current backend buffers rather than stale static properties. After simplifying representations, check reset, collision bindings, and navigation interaction.</p>
+<h2 id="use-a-profiling-matrix">Use a profiling matrix</h2>
+<p>Separate downloads, shader processing, collision preparation, and steady execution. In the same scene, add input reading, control conversion, joint commands, sensors, pedestrians, and synchronization incrementally. Measure CPU/GPU, physics, and rendering cost and change one factor at a time.</p>
+<p>A suddenly enormous bounding box calls for finding the first non-finite state, penetration, or constraint failure. A busy thread requires call-stack evidence. Callback signature errors, missing shaders, and synchronous resource calls belong to the <a href="../reproducible-debugging/">versioned debugging workflow</a>. They cannot all be attributed to the physics solver. Without running the target simulator, these remain diagnostic procedures.</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">PixarAnimationStudios/OpenUSD · Referenced commit <code>ee47c679abde</code></span></li><li><a data-reference-id="lab-articulation" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/01_assets/run_articulation.rst" target="_blank" rel="noopener noreferrer">Interacting with an articulation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="lab-scene" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/02_scene/create_scene.rst" target="_blank" rel="noopener noreferrer">Creating an interactive scene <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="lab-articulation-code" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/scripts/tutorials/01_assets/run_articulation.py" target="_blank" rel="noopener noreferrer">Articulation example source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/en/tutorials/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

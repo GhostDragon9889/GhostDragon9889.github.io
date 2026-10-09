@@ -37,6 +37,7 @@
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
         <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
         <li><a href="/#knowledge">学术与工程</a></li>
       </ul>
     </nav>
@@ -67,6 +68,11 @@
   <p>理论与概率、策略与动作、层次适配、多智能体、实验基准及具身研究。</p>
 </aside>
 
+<aside class="collection-overview tutorial-overview">
+  <h2><a href="/tutorials/">技术与教程 →</a></h2>
+  <p>18 篇中英文技术教程，涵盖学习实现、机器人仿真、导航场景、VLA 与工程工具链。</p>
+</aside>
+
   <div class="content-filter" data-content-filter data-count-label="共 {count} 篇记录">
     <div class="filter-controls" role="group" aria-label="按内容分类筛选">
       <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">全部</button>
@@ -84,6 +90,132 @@
     </div>
     <p class="filter-status" aria-live="polite" aria-atomic="true"></p>
 <div class="entry-list">
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/reproducible-debugging/">可复现排错：Git、下载、系统 ABI 与证据状态</a></h3>
+    <p class="entry-description">把安装、网络、扩展和运行错误按层定位，保留最小证据并清理日志隐私。</p>
+    <div class="entry-links"><a href="/tutorials/reproducible-debugging/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/gpu-profiling/">GPU 软件栈与 PyTorch / JAX 正确计时</a></h3>
+    <p class="entry-description">分离驱动、Toolkit、框架运行时，并在异步执行后同步计时。</p>
+    <div class="entry-links"><a href="/tutorials/gpu-profiling/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/python-builds/">Python 工程：pyproject、uv 锁定与构建隔离</a></h3>
+    <p class="entry-description">区分运行依赖与构建依赖，从 wheel 和最内层异常排查安装失败。</p>
+    <div class="entry-links"><a href="/tutorials/python-builds/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/paired-evaluation/">Direct / Agent 配对评测与进展核验</a></h3>
+    <p class="entry-description">固定 episode 身份与预算，区分任务成功、工具完成和机制消融。</p>
+    <div class="entry-links"><a href="/tutorials/paired-evaluation/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/openpi-libero/">OpenPI × LIBERO：服务、观测和动作契约</a></h3>
+    <p class="entry-description">根据固定上游代码补充字段、图像方向、动作队列与单请求验证。</p>
+    <div class="entry-links"><a href="/tutorials/openpi-libero/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/vla-execution/">VLA 执行：动作分块、时延与闭环反馈</a></h3>
+    <p class="entry-description">分离动作表示、生成、消费和调度，量化观测年龄与异步切换。</p>
+    <div class="entry-links"><a href="/tutorials/vla-execution/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="reproduction">
+    <div class="entry-meta"><span>实验复现</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/navigation-baselines/">导航基线与框架迁移：论文、代码和资源审计</a></h3>
+    <p class="entry-description">为 NavDP、FLUX、NavIsaacLab 和 ProtoMotions 建立固定版本的接口审计表。</p>
+    <div class="entry-links"><a href="/tutorials/navigation-baselines/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/video-scene/">视频到仿真场景：几何、尺度、碰撞与导航</a></h3>
+    <p class="entry-description">补充 COLMAP 与 OpenUSD 流程，区分视觉重建和可物理仿真的交付物。</p>
+    <div class="entry-links"><a href="/tutorials/video-scene/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/crowd-motion/">人群行为、人体运动与物理控制的接口</a></h3>
+    <p class="entry-description">分离意图、路径、全身参考和执行，明确 MotionLib 与策略资产的配套关系。</p>
+    <div class="entry-links"><a href="/tutorials/crowd-motion/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/ros2-simulation/">ROS 2 与仿真：时钟、TF、QoS 和过期动作</a></h3>
+    <p class="entry-description">以 Jazzy 官方文档补充消息兼容、时间戳与 reset 后的控制安全边界。</p>
+    <div class="entry-links"><a href="/tutorials/ros2-simulation/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/navigation-benchmark/">社交导航 Benchmark：模块契约与指标</a></h3>
+    <p class="entry-description">整理十二模块架构，明确特权观测、安全、效率和社交指标的边界。</p>
+    <div class="entry-links"><a href="/tutorials/navigation-benchmark/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/humanoid-training/">人形机器人：控制维度、对称性与课程恢复</a></h3>
+    <p class="entry-description">分离模型坐标和策略动作，按阶段验证接触、重置与完整续训。</p>
+    <div class="entry-links"><a href="/tutorials/humanoid-training/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/sim-timing/">仿真时序、NavMesh 更新与性能剖析</a></h3>
+    <p class="entry-description">区分物理、控制、传感器和渲染周期，定位启动与稳态开销。</p>
+    <div class="entry-links"><a href="/tutorials/sim-timing/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/contact-mecanum/">碰撞、接触与麦克纳姆轮的最小实验</a></h3>
+    <p class="entry-description">从碰撞代理、滚子轴和接触包络定位振动，按坐标推导轮速。</p>
+    <div class="entry-links"><a href="/tutorials/contact-mecanum/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/robot-assets/">机器人资产：CAD、USD、URDF 与惯量验收</a></h3>
+    <p class="entry-description">建立单位、组合层、关节帧和动力学属性的逐层验收流程。</p>
+    <div class="entry-links"><a href="/tutorials/robot-assets/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/rl-implementation/">强化学习实现：目标、掩码与梯度路径</a></h3>
+    <p class="entry-description">把 PPO/GAE、TD、集中训练及表征学习连接到可检查的接口。</p>
+    <div class="entry-links"><a href="/tutorials/rl-implementation/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/autograd-training/">Autograd、梯度累积与训练状态恢复</a></h3>
+    <p class="entry-description">解释图生命周期、eval 与推理模式，并给出梯度累积和检查点契约。</p>
+    <div class="entry-links"><a href="/tutorials/autograd-training/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/tutorials/tensor-layout/">PyTorch：轴语义、广播与存储布局</a></h3>
+    <p class="entry-description">用形状契约区分换轴、重塑、视图与复制，避免损失广播错误。</p>
+    <div class="entry-links"><a href="/tutorials/tensor-layout/">阅读全文 →</a></div>
+  </article>
 
   <article class="entry-row content-item" data-group="evaluation">
     <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Separate action representation, generation, consumption, and scheduling; measure observation age.">
+  <meta name="theme-color" content="#ffffff">
+  <title>VLA Execution: Action Chunks, Latency, and Feedback · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/tutorials/vla-execution/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/vla-execution/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/vla-execution/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/tutorials/">Tutorials</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/tutorials/vla-execution/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">VLA Execution: Action Chunks, Latency, and Feedback</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
+
+  <div class="post-content"><h2 id="separate-model-and-execution-layers">Separate model and execution layers</h2>
+<p>A vision-language-action policy maps images, instructions, and supported state inputs to actions. Discrete action tokens, continuous vectors, diffusion, and flow trajectories have different training and decoding procedures. OpenVLA documents decoding and normalization interfaces; OpenPI documents policy serving and clients. Action dimensions, token counts, and robot joint counts remain separate.</p>
+<p>Here VLA means vision-language-action. Variable-length arrays in C/C++ are a different concept.</p>
+<h2 id="track-three-time-scales">Track three time scales</h2>
+<p>Predict <code>H</code> actions, execute <code>K≤H</code> per call, and use a low-level interval <code>dt</code>. If observation-to-result delay is <code>tau</code>, the observation age at action <code>j</code> is approximately <code>tau+j·dt</code>, plus queueing. Larger <code>K</code> reduces calls while extending open-loop execution; smaller <code>K</code> offers more feedback at higher communication and compute cost.</p>
+<table>
+<thead>
+<tr>
+<th>Intervention</th>
+<th>Required measurements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fewer diffusion/flow steps</td>
+<td>Latency and quality on identical hardware</td>
+</tr>
+<tr>
+<td>Token/network pruning</td>
+<td>Decision cost, failures, distribution change</td>
+</tr>
+<tr>
+<td>Dynamic chunk consumption</td>
+<td>H, K, stop rule, intervention delay</td>
+</tr>
+<tr>
+<td>Asynchronous inference</td>
+<td>Observation identity, arrival, switch time</td>
+</tr>
+<tr>
+<td>Prefix constraints/inpainting</td>
+<td>Immutable executed prefix and continuity</td>
+</tr>
+</tbody>
+</table>
+<h2 id="official-source-supplement-chunks-do-not-define-the-control-loop">Official-source supplement: chunks do not define the control loop</h2>
+<p>OpenPI remote inference returns an <code>(action_horizon, action_dim)</code> chunk. The client determines when to request and execute it. Service latency excludes some sensing, networking, control, and simulation costs. A prediction horizon does not require consuming the whole chunk. Fields and normalization depend on the selected policy configuration.</p>
+<p>Carry request, episode, and observation identities through asynchronous calls. Cancel or discard results after resets, task changes, or expiry. At a chunk switch, check position/velocity continuity and controller state. Generic scheduling pseudocode is not an implementation of a particular paper.</p>
+<h2 id="experimental-route">Experimental route</h2>
+<p>Start with synchronous fixed <code>H/K</code> execution and change one timing factor at a time. Report end-to-end latency quantiles, observation age, queue size, success, and failures. Normalize action units before pruning decisions; raw Euclidean distance across translation, angles, and gripper commands implies arbitrary weights. RL adaptation must name the updated component: full model, head, adapter, latent variable, or separate policy.</p>
+<p>Compare the existing <a href="../../reading/?category=reading%3Areal-time">real-time execution readings</a> and continue with <a href="../openpi-libero/">OpenPI integration</a>. No new VLA performance or robot experiment is claimed.</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="openpi-remote" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/remote_inference.md" target="_blank" rel="noopener noreferrer">OpenPI remote inference <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · Referenced commit <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-readme" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/README.md" target="_blank" rel="noopener noreferrer">OpenPI project overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · Referenced commit <code>215abfb217db</code></span></li><li><a data-reference-id="openvla" href="https://github.com/openvla/openvla/blob/c8f03f48af692657d3060c19588038c7220e9af9/README.md" target="_blank" rel="noopener noreferrer">OpenVLA overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">openvla/openvla · Referenced commit <code>c8f03f48af69</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/en/tutorials/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<% const tutorials = site.data.tutorials; const en = site_locale() === 'en'; %>
+<section class="reading-page tutorials-page" aria-labelledby="tutorials-title">
+  <a class="breadcrumb text-link" href="<%- site_home() %>#tutorials">← <%= site_text('backHome') %></a>
+  <header class="reading-header"><p class="section-label">TECHNICAL TUTORIALS</p><h1 class="reading-title" id="tutorials-title"><%= site_text('tutorialTitle') %></h1><p class="reading-description"><%= site_text('tutorialIntro').replace('{count}', tutorials.article_count) %></p></header>
+  <div class="collection-overview"><p><%= site_text('tutorialScope') %></p><p><%= site_text('tutorialEvidence').replace('{date}', tutorials.updated) %></p><p><%= site_text('tutorialSourcesCount').replace('{count}', tutorials.reference_count) %> <a href="<%- url_for('data/tutorial-sources.json') %>"><%= site_text('tutorialManifest') %> (.json) →</a></p></div>
+  <nav class="notebook-jumps" aria-label="<%= site_text('notebookNavigation') %>"><% tutorials.groups.forEach(function(group) { %><a href="#<%= group.id %>"><%= en ? group.label_en : group.label %></a><% }); %></nav>
+  <div class="notebook-grid">
+<% tutorials.groups.forEach(function(group) { const records = tutorials.entries.filter(item => item.group === group.id); %>
+    <section class="notebook-card" id="<%= group.id %>" aria-labelledby="group-<%= group.id %>"><h2 id="group-<%= group.id %>"><%= en ? group.label_en : group.label %><span class="notebook-count"><%= records.length %></span></h2><p class="tutorial-group-description"><%= en ? group.description_en : group.description %></p><ul>
+<% records.forEach(function(record) { %>
+      <li><a data-tutorial-id="<%= record.id %>" href="<%- site_path(record.path) %>"><%= en ? record.title_en : record.title %></a><p><%= en ? record.description_en : record.description %></p></li>
+<% }); %>
+    </ul></section>
+<% }); %>
+  </div>
+  <section class="notebook-reading-routes" aria-labelledby="tutorial-routes"><h2 id="tutorial-routes"><%= site_text('tutorialRoutes') %></h2><ol><li><%= site_text('tutorialRouteLearning') %></li><li><%= site_text('tutorialRouteRobot') %></li><li><%= site_text('tutorialRouteVla') %></li></ol><p><a href="<%- site_path('notes/') %>"><%= site_text('notebookTitle') %> →</a> · <a href="<%- site_path('reading/') %>"><%= site_text('readingDirectory') %> →</a></p></section>
+</section>

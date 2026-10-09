@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="把安装、网络、扩展和运行错误按层定位，保留最小证据并清理日志隐私。">
+  <meta name="theme-color" content="#ffffff">
+  <title>可复现排错：Git、下载、系统 ABI 与证据状态 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/reproducible-debugging/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/reproducible-debugging/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/reproducible-debugging/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/reproducible-debugging/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">可复现排错：Git、下载、系统 ABI 与证据状态</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
+
+  <div class="post-content"><h2 id="用失败层次决定下一步">用失败层次决定下一步</h2>
+<table>
+<thead>
+<tr>
+<th>表现</th>
+<th>首先检查</th>
+<th>不足以证明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统包缺库</td>
+<td>发行版、仓库来源、ABI</td>
+<td>相似包名即可兼容</td>
+</tr>
+<tr>
+<td>AppImage 缺 FUSE</td>
+<td>挂载与图形运行分开</td>
+<td>提取成功就是应用可用</td>
+</tr>
+<tr>
+<td>Python 构建失败</td>
+<td>单包 backend stderr</td>
+<td>升级全部依赖即可修复</td>
+</tr>
+<tr>
+<td>HTTP 401 / 403</td>
+<td>资源权限、身份、许可</td>
+<td>一定是链接失效</td>
+</tr>
+<tr>
+<td>TLS / registry 失败</td>
+<td>域名、证书、代理与阶段</td>
+<td>一定是 GPU 或物理问题</td>
+</tr>
+<tr>
+<td>扩展回调缺参数</td>
+<td>注册接口和函数签名</td>
+<td>仅修改任意一侧即可兼容</td>
+</tr>
+<tr>
+<td>USD shader/codegen 缺项</td>
+<td>定义、资源和生成阶段</td>
+<td>设置变量即生成成功</td>
+</tr>
+</tbody>
+</table>
+<p>OBS 的发行版 ABI、MoviePy/Pillow 的 API 与视频编码 FPS 分别绑定版本。网卡驱动日志中的 <code>XID</code> 不能仅凭字母等同于 NVIDIA 的 <code>NVRM: Xid</code>，应先确认日志子系统。</p>
+<h2 id="官方-git-补充：子模块需要父仓库登记">官方 Git 补充：子模块需要父仓库登记</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rev-parse HEAD</span><br><span class="line">git submodule status --recursive</span><br><span class="line">git config --file .gitmodules --get-regexp path</span><br></pre></td></tr></table></figure>
+<p>没有 <code>.gitmodules</code> 时最后一条会失败，作为登记缺失的线索。只对确认登记的路径执行初始化；父仓库 commit 与依赖 commit 都保存。普通 vendor 目录、子模块和 LFS pointer 是不同机制，指针存在不意味着二进制资源已取得。</p>
+<h2 id="官方下载文档补充">官方下载文档补充</h2>
+<p>Hugging Face 的下载指南提供 <code>revision</code> 固定版本和缓存机制。复现记录包含公开资源 ID、指定 revision、文件 hash 与许可；签名 URL、访问令牌、带凭据代理地址留在本地配置中。缓存返回路径不能直接作为网页材料复制，修改缓存文件也可能破坏版本对应关系。</p>
+<h2 id="一份可复用排错记录">一份可复用排错记录</h2>
+<p>使用：症状 → 最小步骤 → 版本 → 关键错误 → 定位证据 → 单项修改 → 同条件复查 → 尚未覆盖的条件。公开日志将账户路径替换为相对路径，主机替换为 <code>localhost</code> 或文档保留域名；去除邮箱、电话、认证 header、设备标识和个人时间线。不要上传未脱敏压缩包或聊天导出。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>可以声称什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档核对</td>
+<td>固定来源描述该机制</td>
+</tr>
+<tr>
+<td>静态检查</td>
+<td>配置/代码结构符合所检查条件</td>
+</tr>
+<tr>
+<td>最小运行</td>
+<td>指定输入与环境通过</td>
+</tr>
+<tr>
+<td>集成验收</td>
+<td>资产、传感、控制等共同运行</td>
+</tr>
+<tr>
+<td>方案待执行</td>
+<td>尚无运行闭环</td>
+</tr>
+</tbody>
+</table>
+<p>本文将历史个人排错案例概括成通用方法，没有重新运行私人设备，也不发布其环境快照。完整版本与复现记录可以继续使用 <a href="../../knowledge/evaluation-protocol/">实验协议</a>；示例仅在相应工具已安装且版本匹配时适用。</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="uv-build" href="https://github.com/astral-sh/uv/blob/f3e56e16e0302e26ea456cb51b676b35958572a0/docs/reference/troubleshooting/build-failures.md" target="_blank" rel="noopener noreferrer">Build failures <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">astral-sh/uv · 引用提交 <code>f3e56e16e030</code></span></li><li><a data-reference-id="usd-glossary" href="https://github.com/PixarAnimationStudios/OpenUSD/blob/ee47c679abde5b467a7b6a41f3b2285564a4222e/docs/glossary.rst" target="_blank" rel="noopener noreferrer">OpenUSD glossary <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">PixarAnimationStudios/OpenUSD · 引用提交 <code>ee47c679abde</code></span></li><li><a data-reference-id="git-submodule" href="https://github.com/git/git/blob/6de20f6092dcf9bdb1c8efe03db4b70c82b423dd/Documentation/git-submodule.adoc" target="_blank" rel="noopener noreferrer">Git submodule manual <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">git/git · 引用提交 <code>6de20f6092dc</code></span></li><li><a data-reference-id="hf-download" href="https://github.com/huggingface/huggingface_hub/blob/fb34ba424073a2cd4a1108e09d2493698f11c66e/docs/source/en/guides/download.md" target="_blank" rel="noopener noreferrer">Hugging Face download guide <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">huggingface/huggingface_hub · 引用提交 <code>fb34ba424073</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/tutorials/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

@@ -207,6 +207,9 @@ html.js .profile-home .filter-controls { display: flex; }
 .profile-home .collection-overview a, .profile-home .collection-overview summary { font-size: 13px; }
 .profile-home .collection-overview details { margin-top: 14px; }
 .profile-home .collection-overview summary { cursor: pointer; color: var(--muted); }
+.profile-home .tutorial-group-description { margin-top: 8px; color: var(--muted); font-size: 12px; }
+.profile-home .tutorial-reference-version { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+.profile-home .tutorial-sources li + li { margin-top: 12px; }
 .profile-home .post-content .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: 4px; }
 .profile-home .post-content .katex { font-size: 1.05em; }
 @media (max-width: 360px) { .profile-home .header-actions { gap: 0; } .profile-home .github-link { width: 30px; } .profile-home .language-switch { padding: 0 5px; } }

@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Separate model coordinates from policy actions and validate contacts, resets, and recovery.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Humanoid Robots: Control Dimensions, Symmetry, and Curriculum Recovery · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/tutorials/humanoid-training/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/humanoid-training/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/humanoid-training/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/tutorials/">Tutorials</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/tutorials/humanoid-training/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">Humanoid Robots: Control Dimensions, Symmetry, and Curriculum Recovery</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
+
+  <div class="post-content"><h2 id="maintain-three-name-mappings">Maintain three name mappings</h2>
+<p>Separate simulator joint coordinates, actively controllable hardware joints, and the policy’s action subset. A free base represented with a quaternion gives different position and velocity dimensions. Actuator counts need not equal joint counts. Hand variants, passive couplings, and action subsets require matching assets and mappings. This public guide does not inherit dimensions from a private model snapshot.</p>
+<p>Record joint names, axes, zero positions, limits, control modes, action scales, effort bounds, and active/passive status. Bind the checkpoint to this table and the observation order. Matching tensor sizes alone does not ensure matching semantics.</p>
+<h2 id="symmetry-is-a-modeling-assumption">Symmetry is a modeling assumption</h2>
+<p>For sagittal reflection <code>S = diag(1,−1,1)</code>, center of mass transforms as <code>c' = Sc</code> and inertia as <code>I' = S I Sᵀ</code> in the same coordinates. Joint directions and action signs also need mappings. Equal masses alone do not establish symmetry. A mirrored model can support symmetry experiments while real hardware retains transmission, wiring, and manufacturing differences.</p>
+<p>Static configuration checks, randomized mirror checks, short passive simulation, and stable locomotion establish different evidence. Placeholder visual meshes, finite values, or a stable free fall do not establish physical fidelity or gait quality.</p>
+<h2 id="curriculum-and-termination-boundaries">Curriculum and termination boundaries</h2>
+<p>Progress from standing to slow walking, turning, and terrain disturbances. Gate stages using fixed evaluations and explicit criteria, preserving failures. Reset root velocity, action history, filters, recurrent state, and counters. Fall detection needs terrain-relative height and orientation, together with a documented set of allowed body contacts.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Restore for continuation</th>
+<th>Document changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy and value networks</td>
+<td>Usually</td>
+<td>Observation/action semantics</td>
+</tr>
+<tr>
+<td>Optimizer and scheduler</td>
+<td>For full continuation</td>
+<td>Stage learning rate</td>
+</tr>
+<tr>
+<td>Normalization statistics</td>
+<td>According to protocol</td>
+<td>Distribution changes</td>
+</tr>
+<tr>
+<td>Policy distribution scale</td>
+<td>Preserve or intentionally reset</td>
+<td>std / log_std parameterization</td>
+</tr>
+<tr>
+<td>Curriculum and environment</td>
+<td>Depends on recovery granularity</td>
+<td>Stage, random streams, reset</td>
+</tr>
+</tbody>
+</table>
+<h2 id="official-source-supplement-and-acceptance">Official-source supplement and acceptance</h2>
+<p>MuJoCo distinguishes generalized position and velocity. Isaac Lab explains migration differences between implicit and explicit actuators. The pinned ProtoMotions overview requires compatible bodies, motion data, and policies. Validate a single joint and static contact before short standing, action-sign checks, and one stage transition. Resetting policy standard deviation is an experimental intervention and should be reported separately rather than assumed to be a generic repair.</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">NVlabs/ProtoMotions · Referenced commit <code>7a8417a9f55b</code></span></li><li><a data-reference-id="mujoco-computation" href="https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/computation/index.rst" target="_blank" rel="noopener noreferrer">MuJoCo computation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">google-deepmind/mujoco · Referenced commit <code>9660a5c7ff74</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/en/tutorials/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

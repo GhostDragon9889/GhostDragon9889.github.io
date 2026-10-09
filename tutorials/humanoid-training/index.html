@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="分离模型坐标和策略动作，按阶段验证接触、重置与完整续训。">
+  <meta name="theme-color" content="#ffffff">
+  <title>人形机器人：控制维度、对称性与课程恢复 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/humanoid-training/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/humanoid-training/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/humanoid-training/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/humanoid-training/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">人形机器人：控制维度、对称性与课程恢复</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
+
+  <div class="post-content"><h2 id="三份名称映射">三份名称映射</h2>
+<p>分别记录仿真关节坐标、硬件可主动控制关节及策略控制子集。自由基座的 quaternion 使位置维度和速度维度不同；actuator 数量也不必等于关节数量。手部版本、被动耦合和任务动作子集变化时，必须使用对应资产与映射。公开教程不继承某个私有模型快照的维度数字。</p>
+<p>最小配置表包含关节名、轴、零位、限位、控制模式、动作缩放、执行器限幅与被动/主动标记。checkpoint 必须同时绑定这张表和观测顺序，尺寸匹配不足以保证语义匹配。</p>
+<h2 id="对称性是一项模型假设">对称性是一项模型假设</h2>
+<p>以矢状面反射 <code>S = diag(1,−1,1)</code> 为例，同一坐标系中的质心按 <code>c' = Sc</code> 变换，惯量按 <code>I' = S I Sᵀ</code> 变换。关节方向与动作符号也需映射，不能只比较左右质量。严格镜像模型可用于对称学习实验；实际机械结构可能有布线、传动和制造差异。</p>
+<p>静态 XML/配置检查、随机状态镜像检查、短时自由运动和稳定行走分别提供不同证据。占位视觉网格、无 NaN 或自由倒地不证明实物保真度和步态质量。</p>
+<h2 id="课程阶段与终止边界">课程阶段与终止边界</h2>
+<p>从静态站立、低速平地、转向到地形扰动逐级增加难度。门控使用固定评估集与明确阈值，并保留失败样例。reset 必须清理根速度、动作历史、滤波器、RNN 和计数器；跌倒检测使用相对地面高度与倾角，并核对身体接触的允许集合。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>续训是否恢复</th>
+<th>变更需记录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>策略与价值网络</td>
+<td>通常恢复</td>
+<td>观测/动作语义</td>
+</tr>
+<tr>
+<td>优化器与调度器</td>
+<td>完整续训恢复</td>
+<td>新阶段学习率</td>
+</tr>
+<tr>
+<td>归一化统计</td>
+<td>按协议恢复</td>
+<td>数据分布变化</td>
+</tr>
+<tr>
+<td>策略分布尺度</td>
+<td>保留或主动重置</td>
+<td>std / log_std 参数化</td>
+</tr>
+<tr>
+<td>课程与环境状态</td>
+<td>依恢复粒度</td>
+<td>阶段、随机流、reset</td>
+</tr>
+</tbody>
+</table>
+<h2 id="官方资料补充与验收">官方资料补充与验收</h2>
+<p>MuJoCo 计算文档区分广义位置与速度；Isaac Lab actuator 文档说明隐式与显式驱动可能造成迁移差异；ProtoMotions 固定提交说明身体、运动数据与控制策略必须配套。先验收单关节和静态接触，再验证短时站立、动作符号及一个阶段切换。策略标准差重置是新实验干预，应独立报告，不能默认为“安全修复”。</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">NVlabs/ProtoMotions · 引用提交 <code>7a8417a9f55b</code></span></li><li><a data-reference-id="mujoco-computation" href="https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/computation/index.rst" target="_blank" rel="noopener noreferrer">MuJoCo computation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">google-deepmind/mujoco · 引用提交 <code>9660a5c7ff74</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/tutorials/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

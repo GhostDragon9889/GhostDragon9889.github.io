@@ -1,13 +1,19 @@
-<% const returnSection = page.collection === 'reading' ? 'reading' : page.collection === 'profile' ? 'education' : 'knowledge'; %>
+<% const returnSection = page.tutorial ? 'tutorials' : page.collection === 'reading' ? 'reading' : page.collection === 'profile' ? 'education' : 'knowledge'; %>
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="<%- site_home() %>#<%= returnSection %>">← <%= site_text('backHome') %></a>
   <header class="reading-header"><p class="section-label"><%= site_group(page.collection) %></p><h1 class="reading-title" id="post-title"><%= page.title %></h1><time class="reading-date" datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, 'YYYY.MM.DD') %></time></header>
 <% if (page.paper && page.paper.title) { %>
   <aside class="paper-reference" aria-label="<%= site_text('paperInfo') %>"><h2><%= page.paper.title %></h2><p><%= site_text('paperId') %>: <%= page.paper.id %> · <%= site_topic(page.paper) %></p><p><%= site_text('paperVersion') %>: <%= page.paper.version %> · <%= page.paper.year %></p><p><%= site_text('sourceLabel') %>: <%= site_text(page.paper.source_kind === 'notebook' ? 'notebookSource' : page.paper.supplement ? 'supplementLabel' : 'attachmentLabel') %></p><p><%= site_text(page.paper.source_kind === 'notebook' ? 'notebookPaperEvidence' : 'paperEvidence') %></p><% if (page.paper.url) { %><a class="text-link" href="<%= page.paper.url %>" target="_blank" rel="noopener noreferrer"><%= site_text('originalPaper') %> <%- partial('_partial/external-link-icon') %></a><% } %></aside>
 <% } %>
+<% if (page.tutorial) { %>
+  <aside class="collection-overview tutorial-edition"><p><%= site_text('tutorialEvidence').replace('{date}', site.data.tutorials.updated) %></p></aside>
+<% } %>
   <div class="post-content"><%- page.content %></div>
+<% if (page.tutorial) { const references = site.data.tutorials.references.filter(item => page.tutorial.references.includes(item.id)); %>
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title"><%= site_text('tutorialSources') %></h2><ul><% references.forEach(function(reference) { %><li><a data-reference-id="<%= reference.id %>" href="<%= reference.url %>" target="_blank" rel="noopener noreferrer"><%= reference.title %> <%- partial('_partial/external-link-icon') %></a><span class="tutorial-reference-version"><%= reference.repo %> · <%= site_text('tutorialReferenceVersion') %> <code><%= reference.commit.slice(0, 12) %></code></span></li><% }); %></ul></aside>
+<% } %>
 <% if (page.notebook) { const sources = site.data.notebook.sources.filter(item => page.notebook.sources.includes(item.id)); %>
   <aside class="notebook-sources" aria-labelledby="notebook-sources-title"><h2 id="notebook-sources-title"><%= site_text('notebookSources') %></h2><p><%= site_text('notebookEditionNotice') %></p><ul><% sources.forEach(function(source) { %><li><a class="notebook-source-link" data-source-id="<%= source.id %>" href="<%- url_for(source.url) %>" download><%= site_locale() === 'en' ? site_text('notebookSourceNote') + ' ' + source.id : source.path %> (.md)</a></li><% }); %></ul><a class="text-link" href="<%- site_path('notes/') %>"><%= site_text('notebookTitle') %> →</a></aside>
 <% } %>
-  <footer class="reading-footer"><a class="text-link" href="<%- site_path(page.collection === 'reading' ? 'reading/' : 'knowledge/') %>"><%= site_text('backDirectory') %> →</a><a class="text-link" href="<%- site_path('archives/') %>"><%= site_text('allArticles') %> →</a></footer>
+  <footer class="reading-footer"><a class="text-link" href="<%- site_path(page.tutorial ? 'tutorials/' : page.collection === 'reading' ? 'reading/' : 'knowledge/') %>"><%= site_text('backDirectory') %> →</a><a class="text-link" href="<%- site_path('archives/') %>"><%= site_text('allArticles') %> →</a></footer>
 </article>

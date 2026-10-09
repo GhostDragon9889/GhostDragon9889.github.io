@@ -37,6 +37,7 @@
         <li><a href="/#about" >简介</a></li>
         <li><a href="/#scholar">学术信息</a></li>
         <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
         <li><a href="/#knowledge">学术与工程</a></li>
       </ul>
     </nav>
@@ -61,6 +62,7 @@
 <article class="reading-page" aria-labelledby="post-title">
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
   <header class="reading-header"><p class="section-label">理论与方法</p><h1 class="reading-title" id="post-title">IPPO、COMA 与多智能体梯度方差</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
 
   <div class="post-content"><h2 id="ippo-coma-与集中式-critic">IPPO、COMA 与集中式 critic</h2>
 <p>IPPO 对各智能体使用独立 PPO 更新，可能共享 actor 参数，但“独立”不意味着环境中的其他学习者固定。严格的局部 critic 版本应与采用全局信息的 MAPPO 等 CTDE 配置区分。COMA 的反事实 baseline 固定其他智能体动作，对当前智能体的可能动作求期望：</p>
@@ -100,6 +102,7 @@ h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span
 <p>集中式信息可减少某些未观测随机性，但 critic 的逼近误差、维度和覆盖仍可能成为瓶颈。该 toy example 不证明任何集中式算法在所有任务上都优于 IPPO。比较应控制参数共享、critic 信息、奖励、预算和伙伴拆分。</p>
 <p>继续阅读：<a href="/knowledge/multi-agent-benchmarks/">MARL 基准</a>、<a href="/knowledge/policy-gradients/">策略梯度</a>。</p>
 </div>
+
 
   <aside class="notebook-sources" aria-labelledby="notebook-sources-title"><h2 id="notebook-sources-title">原始笔记与整理说明</h2><p>本页为合并和校订后的整理版。下载文件完整保留原措辞与排版；原文中未获支持的数值及错误推导未作为正文结论。</p><ul><li><a class="notebook-source-link" data-source-id="N027" href="/downloads/obsidian/n027.md" download>IPPO和CMOA.md (.md)</a></li><li><a class="notebook-source-link" data-source-id="N028" href="/downloads/obsidian/n028.md" download>MADDPG的一个证明.md (.md)</a></li></ul><a class="text-link" href="/notes/">强化学习学习笔记专题 →</a></aside>
 

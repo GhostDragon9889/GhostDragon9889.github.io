@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="固定 episode 身份与预算，区分任务成功、工具完成和机制消融。">
+  <meta name="theme-color" content="#ffffff">
+  <title>Direct / Agent 配对评测与进展核验 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/paired-evaluation/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/paired-evaluation/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/paired-evaluation/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/paired-evaluation/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">基准与实验方法</p><h1 class="reading-title" id="post-title">Direct / Agent 配对评测与进展核验</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
+
+  <div class="post-content"><h2 id="比较的对象是调度器还是策略">比较的对象是调度器还是策略</h2>
+<p>外层 Agent 可以改变子目标、重试、调用时机和终止。比较 Direct 与 Agent 时固定 VLA checkpoint、观测权限、预处理、动作空间和任务清单。若 Agent 获得更多交互预算，应单独报告同预算性能和追加成本下的性能。</p>
+<h2 id="建立配对-manifest">建立配对 manifest</h2>
+<p>跨方法共享键由 suite、task、initial-state、simulator seed 和 manifest 序号构成，方法特有 run ID 另存。只用 task 作键可能覆盖同任务不同初态，不能形成可靠配对。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;pair_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;episode-0001&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;suite&quot;</span><span class="punctuation">:</span> <span class="string">&quot;example-suite&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;task_index&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;initial_state_index&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;simulator_seed&quot;</span><span class="punctuation">:</span> <span class="number">7</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;budget&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;environment_steps&quot;</span><span class="punctuation">:</span> <span class="number">300</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;methods&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;direct&quot;</span><span class="punctuation">,</span> <span class="string">&quot;agent&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这是公开的合成 schema 示例，不是个人实验数据。保留全部失败与无效 episode，说明排除规则和真正的总分母。成功率、环境步数、VLA 调用、Agent turn、token 与墙钟时间分别统计。</p>
+<h2 id="官方代码补充与成功判定">官方代码补充与成功判定</h2>
+<p>LIBERO 上游和 OpenPI 示例提供 task suite 与 initial states 的访问结构，可用它们构建稳定任务身份。具体终止判据仍需核对固定环境版本；外层工具返回 <code>finish</code> 不自动代表仿真任务成功。</p>
+<p>进展核验器应有可检查输入与证据来源。用人工或环境标注样例分别估计误报、漏报、触发时机和额外成本；禁止评估真值未经授权进入策略。缓存历史图像时保存对应任务和时间，避免 reset 后引用旧场景。</p>
+<h2 id="从诊断到机制结论">从诊断到机制结论</h2>
+<p>先做服务连通和单任务诊断，再执行完整配对清单。一次小样本成功差异不足以证明全套基准改进。分别消融核验器、历史上下文、重试和预算；区分“有设计”“已实现”“已运行”和“统计支持”。给出配对差异与不确定性，训练多个种子时按训练 seed 做相应统计，而非把全部 episode 当成独立模型。</p>
+<p>本页没有公开个人诊断成绩、时间线或私人工具配置，提供的是可复用协议。实验方法延伸见 <a href="../../knowledge/statistics-tuning/">统计与调参</a> 和 <a href="../../knowledge/evaluation-protocol/">复现协议</a>。</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="openpi-libero" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/README.md" target="_blank" rel="noopener noreferrer">OpenPI LIBERO example <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="openpi-client" href="https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/examples/libero/main.py" target="_blank" rel="noopener noreferrer">OpenPI LIBERO client source <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Physical-Intelligence/openpi · 引用提交 <code>215abfb217db</code></span></li><li><a data-reference-id="libero" href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/README.md" target="_blank" rel="noopener noreferrer">LIBERO benchmark <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">Lifelong-Robot-Learning/LIBERO · 引用提交 <code>8f1084e3132a</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/tutorials/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

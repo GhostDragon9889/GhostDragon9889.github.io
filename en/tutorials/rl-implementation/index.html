@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn PPO/GAE, TD, centralized training, and representations into inspectable interfaces.">
+  <meta name="theme-color" content="#ffffff">
+  <title>RL Implementation: Objectives, Masks, and Gradient Paths · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/tutorials/rl-implementation/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/rl-implementation/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/rl-implementation/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/tutorials/">Tutorials</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/tutorials/rl-implementation/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#tutorials">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Engineering</p><h1 class="reading-title" id="post-title">RL Implementation: Objectives, Masks, and Gradient Paths</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>Official repository sources checked on 2026-10-09. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.</p></aside>
+
+  <div class="post-content"><h2 id="align-the-objective-and-sampling-distribution">Align the objective and sampling distribution</h2>
+<p>Discounted, average-reward, and finite-horizon objectives use different occupancy conventions. A policy-gradient baseline must be independent of the current action. Estimated advantages are normally treated as fixed actor weights. Critic error does not automatically imply biased actor gradients: its expected correlation with the policy score matters. Follow the existing notes on <a href="../../knowledge/policy-gradients/">policy gradients</a>, <a href="../../knowledge/mdp-bellman/">TD and projection</a>, and <a href="../../reading/p34/">GTD2/TDC</a>.</p>
+<p>PPO ratios use log-probabilities recorded by the behavior policy. Reduce multidimensional log-probabilities along the correct action axis. Old log-probabilities and advantage estimates must remain fixed across policy updates. Clipping the surrogate does not enforce a bound on every ratio or guarantee monotonic return improvement.</p>
+<h2 id="gae-needs-two-boundary-masks">GAE needs two boundary masks</h2>
+<p>True termination normally prevents bootstrapping. A time-limit reset in a continuing task can bootstrap from the final observation, while the recursive advantage must stop before the next episode. A horizon that defines the task itself can instead be a true terminal boundary.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gae</span>(<span class="params">reward, value, next_value, terminated, reset, gamma, lam</span>):</span><br><span class="line">    <span class="comment"># All arrays: [time, environment]. next_value uses final observations.</span></span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    advantage = np.zeros_like(reward, dtype=<span class="built_in">float</span>)</span><br><span class="line">    carry = np.zeros(reward.shape[<span class="number">1</span>], dtype=<span class="built_in">float</span>)</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(reward) - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        delta = reward[t] + gamma * (~terminated[t]) * next_value[t] - value[t]</span><br><span class="line">        carry = delta + gamma * lam * (~reset[t]) * carry</span><br><span class="line">        advantage[t] = carry</span><br><span class="line">    <span class="keyword">return</span> advantage</span><br></pre></td></tr></table></figure>
+<p>Both masks must be boolean arrays. <code>reset</code> includes termination and truncation that resets the environment. The final rollout step can still bootstrap through <code>next_value</code>; an automatically reset observation cannot replace the previous episode’s final observation.</p>
+<h2 id="specify-information-and-update-boundaries">Specify information and update boundaries</h2>
+<p>CTDE can give the training critic extra information, while deployed actor inputs must remain available. Record neighbor masks, death masks, recurrent resets, and task changes. TD3, TD7, SimBa, Dual Goal, Meta-RL, and streaming methods require separate value targets, representation losses, frozen copies, parameter-update scopes, and sampling sources. Network names do not make them interchangeable. The <a href="../../notes/">study notebook</a> provides the detailed theory and literature.</p>
+<h2 id="official-source-supplement-and-acceptance">Official-source supplement and acceptance</h2>
+<p>Autograd documentation supports checks of detachment and leaf gradients. Isaac Lab’s InteractiveScene tutorial explains replicated scenes and shared assets. Entity slots, sensor batches, and independent complete environments require separate counts. The GAE function is educational; other algorithms are not presented as newly tested implementations.</p>
+<p>Use two environments with a terminal transition and a truncated transition to inspect returns and final observations. Then check action reductions, finite gradients, and actor/critic update scopes. Distinguish TD residuals, Bellman error, value error, and task return. Continue with <a href="../../reading/p36/">GAE</a> and the <a href="../../knowledge/evaluation-protocol/">evaluation protocol</a>.</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">Official Documentation and Versions</h2><ul><li><a data-reference-id="torch-autograd" href="https://github.com/pytorch/pytorch/blob/449b1768410104d3ed79d3bcfe4ba1d65c7f22c0/docs/source/notes/autograd.rst" target="_blank" rel="noopener noreferrer">Autograd mechanics <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">pytorch/pytorch · Referenced commit <code>449b17684101</code></span></li><li><a data-reference-id="lab-scene" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/tutorials/02_scene/create_scene.rst" target="_blank" rel="noopener noreferrer">Creating an interactive scene <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · Referenced commit <code>b0542fe2d45b</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/en/tutorials/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

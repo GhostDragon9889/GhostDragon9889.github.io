@@ -84,7 +84,21 @@
     "notebookPaperEvidence": "据上传笔记整理，具体版本按所给题录标注；本次未重新核验原论文 PDF 或复现其实验。",
     "notebookSources": "原始笔记与整理说明",
     "notebookSourceNote": "原始笔记",
-    "notebookEditionNotice": "本页为合并和校订后的整理版。下载文件完整保留原措辞与排版；原文中未获支持的数值及错误推导未作为正文结论。"
+    "notebookEditionNotice": "本页为合并和校订后的整理版。下载文件完整保留原措辞与排版；原文中未获支持的数值及错误推导未作为正文结论。",
+    "tutorialTitle": "技术与教程",
+    "tutorialDirectory": "教程目录",
+    "tutorialNav": "技术教程",
+    "tutorialIntro": "{count} 篇中英文技术教程，涵盖学习实现、机器人仿真、导航场景、VLA 与工程工具链。",
+    "tutorialScope": "整理版合并重复主题，改写为通用说明和合成示例，剔除个人信息、私人环境快照与聊天索引。原始压缩包和历史附件目录不公开。",
+    "tutorialEvidence": "官方仓库资料核对日期：{date}。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。",
+    "tutorialSources": "官方文档与版本依据",
+    "tutorialSourcesCount": "本专题参考 {count} 份官方文档与示例代码。",
+    "tutorialManifest": "官方来源与校验清单",
+    "tutorialReferenceVersion": "引用提交",
+    "tutorialRoutes": "建议实践路线",
+    "tutorialRouteLearning": "学习：张量布局 → Autograd → RL 掩码与梯度 → 实验协议。",
+    "tutorialRouteRobot": "机器人：资产 → 接触 → 仿真时序 → ROS 2 → 人群与导航评测。",
+    "tutorialRouteVla": "VLA：动作分块 → OpenPI / LIBERO → 配对评测 → GPU 计时与排错。"
   },
   "en": {
     "siteTitle": "Research & Engineering",
@@ -171,6 +185,20 @@
     "notebookPaperEvidence": "Edited from uploaded notes with the available bibliographic/version information. Original paper PDFs were not rechecked and experiments were not rerun.",
     "notebookSources": "Original notes and editorial scope",
     "notebookSourceNote": "Original note",
-    "notebookEditionNotice": "This is an edited, consolidated edition. Downloads retain complete source wording and formatting. Unsupported numerical claims and incorrect derivations are not adopted as conclusions."
+    "notebookEditionNotice": "This is an edited, consolidated edition. Downloads retain complete source wording and formatting. Unsupported numerical claims and incorrect derivations are not adopted as conclusions.",
+    "tutorialTitle": "Technical Tutorials",
+    "tutorialDirectory": "Tutorial directory",
+    "tutorialNav": "Tutorials",
+    "tutorialIntro": "{count} bilingual tutorials on learning implementation, robot simulation, navigation scenes, VLA, and engineering toolchains.",
+    "tutorialScope": "Repeated topics are consolidated into general explanations and synthetic examples. Personal information, private environment snapshots, and chat indexes are omitted. The original archive and historical artifact catalog are not published.",
+    "tutorialEvidence": "Official repository sources checked on {date}. References pin commits; documentation review and example code do not establish target GPU, robot, or complete simulator validation.",
+    "tutorialSources": "Official Documentation and Versions",
+    "tutorialSourcesCount": "This collection references {count} official documents and code examples.",
+    "tutorialManifest": "Official source and checksum manifest",
+    "tutorialReferenceVersion": "Referenced commit",
+    "tutorialRoutes": "Suggested practice routes",
+    "tutorialRouteLearning": "Learning: tensor layout → autograd → RL masks and gradients → evaluation protocol.",
+    "tutorialRouteRobot": "Robotics: assets → contact → simulation timing → ROS 2 → crowds and navigation evaluation.",
+    "tutorialRouteVla": "VLA: action chunks → OpenPI/LIBERO → paired evaluation → GPU timing and debugging."
   }
 }

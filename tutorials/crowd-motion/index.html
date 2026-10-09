@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="分离意图、路径、全身参考和执行，明确 MotionLib 与策略资产的配套关系。">
+  <meta name="theme-color" content="#ffffff">
+  <title>人群行为、人体运动与物理控制的接口 · LFM | 学术与工程</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/tutorials/crowd-motion/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/tutorials/crowd-motion/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/tutorials/crowd-motion/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+</head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/" aria-label="LFM 的主页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="/#about" >简介</a></li>
+        <li><a href="/#scholar">学术信息</a></li>
+        <li><a href="/#reading">文献阅读</a></li>
+        <li><a href="/tutorials/">技术教程</a></li>
+        <li><a href="/#knowledge">学术与工程</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/en/tutorials/crowd-motion/" lang="en" hreflang="en" aria-label="Switch to English">English</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="访问我的 GitHub（新窗口）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="切换到深色模式" data-light-label="切换到浅色模式" type="button" aria-label="切换到深色模式" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="打开导航菜单" data-close-label="关闭导航菜单" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/#tutorials">← 返回主页</a>
+  <header class="reading-header"><p class="section-label">工程实践</p><h1 class="reading-title" id="post-title">人群行为、人体运动与物理控制的接口</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+
+  <aside class="collection-overview tutorial-edition"><p>官方仓库资料核对日期：2026-10-09。引用固定提交；文档核对与代码示例不代表目标 GPU、机器人或完整仿真实验已通过。</p></aside>
+
+  <div class="post-content"><h2 id="四层接口">四层接口</h2>
+<p>行为层决定目标、停留和交互；规划层给出路线、速度和局部避让；运动层生成身体参考；执行层播放动画或通过物理控制器跟踪。LLM 可以生成可校验事件，但文本本身不提供无碰撞连续轨迹或接触稳定性。</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>最小输出</th>
+<th>失败事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行为</td>
+<td>目标、事件类型、有效期</td>
+<td>无法到达、目标冲突</td>
+</tr>
+<tr>
+<td>规划</td>
+<td>时间化根轨迹、速度</td>
+<td>无路、拥堵、轨迹过期</td>
+</tr>
+<tr>
+<td>运动</td>
+<td>根与关节参考、骨架标识</td>
+<td>重定向失败、路径偏离</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>实际姿态、速度、接触</td>
+<td>跟踪失败、跌倒、穿透</td>
+</tr>
+</tbody>
+</table>
+<h2 id="动画和物理跟踪分别验收">动画和物理跟踪分别验收</h2>
+<p>直接写根与骨骼适合可控回放，但不证明身体由合理力和接触支持。物理控制器将参考变成驱动目标或力矩，再由动力学计算状态。对研究推挤、失衡或接触的任务，应选择与问题相符的物理模型。</p>
+<p>检查脚滑、根速度与步频、转向迟滞、身体包络碰撞和 reset。只约束根点的规划可能漏掉摆臂和侧步。动作生成器偏离规划轨迹时应协调重规划或修正，避免强写一个根轨迹同时跟踪矛盾的关节动作。</p>
+<h2 id="官方仓库补充：数据和权重不会自动配套">官方仓库补充：数据和权重不会自动配套</h2>
+<p>固定提交的 ProtoMotions README 将身体模型、重定向数据、训练与推理流程分开。SMPL 模型、AMASS 原始动作、转换后的 MotionLib、物理 MJCF/USD 和策略 checkpoint 是不同资源；许可证与访问条件分别核对，下载一个权重不代表全部资源存在。</p>
+<p>MotionBricks 等轨迹条件动作模型与 Uni-Inter 等交互动作模型可作为扩展阅读；本次未读取其固定代码与运行接口，不能把建议输入字段当成已发布 API。已有 <a href="../../reading/?category=reading%3Ahuman-motion">人体运动文献栏目</a> 提供论文入口。</p>
+<h2 id="可复用采集流程">可复用采集流程</h2>
+<p>每条示范保存场景、episode、专家类型、动作单位、观测时间及终止原因。并行采样保持环境独立随机流，导出时不能把一个环境 reset 后的首帧接到前一个 episode。区分全局地图专家与局部视觉学习者的权限；按场景或任务划分数据，避免相邻帧随机拆分产生泄漏。</p>
+</div>
+
+  <aside class="notebook-sources tutorial-sources" aria-labelledby="tutorial-sources-title"><h2 id="tutorial-sources-title">官方文档与版本依据</h2><ul><li><a data-reference-id="lab-actuators" href="https://github.com/isaac-sim/IsaacLab/blob/b0542fe2d45bf91c4e1d9ef6952b9c709c80b4e8/docs/source/overview/core-concepts/actuators.rst" target="_blank" rel="noopener noreferrer">Actuator models <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">isaac-sim/IsaacLab · 引用提交 <code>b0542fe2d45b</code></span></li><li><a data-reference-id="proto" href="https://github.com/NVlabs/ProtoMotions/blob/7a8417a9f55b1586b0d6e8f46578c5bc9d7ce1f1/README.md" target="_blank" rel="noopener noreferrer">ProtoMotions overview <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">NVlabs/ProtoMotions · 引用提交 <code>7a8417a9f55b</code></span></li><li><a data-reference-id="mujoco-computation" href="https://github.com/google-deepmind/mujoco/blob/9660a5c7ff7416d610dd3513a52a2c80ec293ab2/doc/computation/index.rst" target="_blank" rel="noopener noreferrer">MuJoCo computation <svg class="external-link-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><span class="tutorial-reference-version">google-deepmind/mujoco · 引用提交 <code>9660a5c7ff74</code></span></li></ul></aside>
+
+
+  <footer class="reading-footer"><a class="text-link" href="/tutorials/">返回栏目目录 →</a><a class="text-link" href="/archives/">全部文章 →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>学术 · 文献 · 工程</span></div>
+    <a class="back-to-top" href="/#about">回到顶部 <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>
