@@ -6,7 +6,8 @@
   "lang": "en",
   "collection": "engineering",
   "translation_path": "2026/10/09/hexo-github-pages-workflow/",
-  "description": "Dependency installation, static generation, browser verification, and source-preserving Git publication."
+  "description": "Dependency installation, static generation, browser verification, and source-preserving Git publication.",
+  "featured": true
 }
 ---
 

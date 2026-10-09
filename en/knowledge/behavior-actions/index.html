@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supervised objectives, closed-loop distribution shift, and regression, classification, and residual actions.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Behavior Cloning, Action Bins, and Multimodal Actions · LFM | Research &amp; Engineering</title>
+  <meta name="generator" content="hexo-theme-ayeria">
+  <link rel="canonical" href="https://ghostdragon9889.github.io/en/knowledge/behavior-actions/">
+  <link rel="alternate" hreflang="en" href="https://ghostdragon9889.github.io/en/knowledge/behavior-actions/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ghostdragon9889.github.io/knowledge/behavior-actions/">
+  <link rel="icon" href="/images/profile-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/profile.css">
+  <script>
+    try {
+      if (localStorage.getItem('profile-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {}
+  </script>
+  <script src="/js/profile.js" defer></script>
+<link href="/css/katex/katex.min.css" rel="stylesheet" /></head>
+
+<body class="profile-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header site-shell">
+    <a class="brand" href="/en/" aria-label="LFM academic homepage">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m11 10-6 6 6 6m10-12 6 6-6 6m-3-15-4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">LFM<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/en/#about" >About</a></li>
+        <li><a href="/en/#scholar">Scholar</a></li>
+        <li><a href="/en/#reading">Reading</a></li>
+        <li><a href="/en/#knowledge">Research &amp; Engineering</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="language-switch" data-language-switch href="/knowledge/behavior-actions/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <a class="github-link" href="https://github.com/GhostDragon9889" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.81c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
+      <button class="theme-toggle" data-dark-label="Switch to dark mode" data-light-label="Switch to light mode" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-toggle" data-open-label="Open navigation menu" data-close-label="Close navigation menu" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+<main id="main" class="site-shell">
+
+<article class="reading-page" aria-labelledby="post-title">
+  <a class="breadcrumb text-link" href="/en/#knowledge">← Back to homepage</a>
+  <header class="reading-header"><p class="section-label">Theory &amp; Methods</p><h1 class="reading-title" id="post-title">Behavior Cloning, Action Bins, and Multimodal Actions</h1><time class="reading-date" datetime="2026-10-09">2026.10.09</time></header>
+
+  <div class="post-content"><h2 id="the-statistical-objective-of-cloning">The statistical objective of cloning</h2>
+<p>Behavior cloning fits <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo>∣</mo><mi>o</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi_\theta(a\mid o)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">o</span><span class="mclose">)</span></span></span></span> from demonstration pairs <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>o</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>∼</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">(o,a)\sim D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">o</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span></span></span>, often through negative log likelihood. Deterministic regression learns a location statistic such as the conditional mean. Averaging multiple valid modes can produce an action supported by none of them: left and right paths around an obstacle can average into a collision.</p>
+<p>The issue is conditional multimodality. Representation, loss, and inference rules must agree.</p>
+<h2 id="choosing-an-action-representation">Choosing an action representation</h2>
+<table>
+<thead>
+<tr>
+<th>Representation</th>
+<th>Capability</th>
+<th>Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Continuous regression</td>
+<td>One predicted action</td>
+<td>Squared loss may average modes</td>
+</tr>
+<tr>
+<td>Gaussian/mixture</td>
+<td>Explicit probabilistic components</td>
+<td>Restricted family and mixture complexity</td>
+</tr>
+<tr>
+<td>Action bins</td>
+<td>Probabilities over modes or intervals</td>
+<td>Quantization and combinatorial size</td>
+</tr>
+<tr>
+<td>Discrete mode plus residual</td>
+<td>Coarse mode with local precision</td>
+<td>Mode assignment and residual fitting</td>
+</tr>
+<tr>
+<td>Diffusion/flow</td>
+<td>Complex joint continuous distributions</td>
+<td>Sampling cost and timing</td>
+</tr>
+</tbody>
+</table>
+<p>A bin can be a uniform numeric interval or a cluster center; clustered modes need not be ordered intervals. BeT-style classification-plus-residual modeling separates mode selection from local action refinement.</p>
+<h2 id="closed-loop-distribution-shift">Closed-loop distribution shift</h2>
+<p>Cloning trains on expert visitation. Deployment errors can move the system into poorly covered states. Classical compounding-error bounds require a specified error event, horizon, and worst-case assumptions; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>T</mi><mn>2</mn></msup><mi>ϵ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(T^2\epsilon)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathdefault">ϵ</span><span class="mclose">)</span></span></span></span> is not a numerical prediction for every robot. Interactive corrections, DAgger, perturbation recovery, and broader state coverage can mitigate the shift.</p>
+<h2 id="chunks-and-evaluation">Chunks and evaluation</h2>
+<p>Prediction horizon <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> and executed horizon <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> differ. Chunk consistency, refreshed observations, and inference latency jointly determine behavior. Evaluate success, recovery, continuity, and complete latency in addition to offline prediction loss.</p>
+<p>Related reading: <a href="/en/knowledge/diffusion-deep-dive/">the diffusion supplement</a>, <a href="/en/reading/p07/">ACT</a>, and <a href="/en/reading/p02/">action interfaces</a>.</p>
+<h2 id="selected-references-from-the-source-notes">Selected references from the source notes</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper_files/paper/1988/file/812b4ba287f5ee0bc9d43bbf5bbe87fb-Paper.pdf">Reference 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2206.11251">Reference 2</a></li>
+</ul>
+</div>
+
+  <aside class="notebook-sources" aria-labelledby="notebook-sources-title"><h2 id="notebook-sources-title">Original notes and editorial scope</h2><p>This is an edited, consolidated edition. Downloads retain complete source wording and formatting. Unsupported numerical claims and incorrect derivations are not adopted as conclusions.</p><ul><li><a class="notebook-source-link" data-source-id="N017" href="/downloads/obsidian/n017.md" download>Original note N017 (.md)</a></li><li><a class="notebook-source-link" data-source-id="N019" href="/downloads/obsidian/n019.md" download>Original note N019 (.md)</a></li></ul><a class="text-link" href="/en/notes/">RL Study Notebook →</a></aside>
+
+  <footer class="reading-footer"><a class="text-link" href="/en/knowledge/">Back to the directory →</a><a class="text-link" href="/en/archives/">All articles →</a></footer>
+</article>
+
+</main>
+  <footer class="site-footer site-shell">
+    <div class="footer-meta"><span>© 2026 LFM</span><span>Research · Literature · Engineering</span></div>
+    <a class="back-to-top" href="/en/#about">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
+
+</body>
+</html>

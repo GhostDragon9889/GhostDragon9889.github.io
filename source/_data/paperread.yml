@@ -3,6 +3,9 @@ paper_count: 30
 uploaded_unique_paper_count: 27
 official_supplement_count: 3
 topics:
+  - id: rl-classics
+    label: 强化学习经典与教材
+    label_en: RL Classics and Textbooks
   - id: foundations
     label: 综述与理论基础
     label_en: Surveys and Foundations

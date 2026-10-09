@@ -184,6 +184,22 @@ html.js .profile-home .filter-controls { display: flex; }
 
 .profile-home .language-switch { display: inline-flex; align-items: center; min-height: 42px; padding: 0 8px; font-size: 12px; white-space: nowrap; }
 .profile-home .external-link-icon { display: inline-block; width: 11px; height: 11px; margin-left: 3px; vertical-align: -.08em; }
+.profile-home .notebook-jumps { display: flex; flex-wrap: wrap; gap: 8px 18px; padding-block: 0 22px; font-size: 12px; }
+.profile-home .notebook-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 20px; }
+.profile-home .notebook-card { border: 1px solid var(--border); padding: 20px; scroll-margin-top: 24px; overflow-wrap: anywhere; }
+.profile-home .notebook-card h2 { font-size: 17px; line-height: 1.5; }
+.profile-home .notebook-count { margin-left: 10px; font-size: 12px; font-weight: 400; color: var(--muted); }
+.profile-home .notebook-card ul { margin: 18px 0 0; padding: 0; list-style: none; }
+.profile-home .notebook-card li { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; font-size: 13px; }
+.profile-home .notebook-card li p { margin-top: 4px; font-size: 12px; color: var(--muted); }
+.profile-home .notebook-sources { margin-top: 32px; padding: 20px; border: 1px solid var(--border); background: var(--surface); overflow-wrap: anywhere; }
+.profile-home .notebook-sources h2, .profile-home .notebook-reading-routes h2 { font-size: 18px; }
+.profile-home .notebook-sources p, .profile-home .notebook-sources li { font-size: 13px; color: var(--muted); }
+.profile-home .notebook-sources p { margin-top: 8px; }
+.profile-home .notebook-sources ul { padding-left: 20px; }
+.profile-home .notebook-reading-routes { margin-top: 32px; border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; }
+.profile-home .notebook-reading-routes ol { padding-left: 20px; }
+@media (max-width: 640px) { .profile-home .notebook-grid { grid-template-columns: 1fr; } }
 .profile-home .paper-id { font: 500 12px/1.5 ui-monospace, monospace; color: var(--muted); }
 .profile-home .collection-overview { margin-bottom: 28px; padding: 20px; background: var(--surface); border: 1px solid var(--border); }
 .profile-home .collection-overview h2 { font-size: 16px; }

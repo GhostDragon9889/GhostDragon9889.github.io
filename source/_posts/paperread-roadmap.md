@@ -6,10 +6,10 @@
   "lang": "zh-CN",
   "permalink": "knowledge/paperread-roadmap/",
   "translation_path": "en/knowledge/paperread-roadmap/",
-  "description": "从动作生成、策略适配与实时执行，到人体运动、导航环境和可验证实验。"
+  "description": "从动作生成、策略适配与实时执行，到人体运动、导航环境和可验证实验。",
+  "featured": true
 }
 ---
-
 
 核对日期：2026-10-09。本文是基于逐篇原文阅读的综合分析；事实对应原论文，系统组合与实验建议均为本次总结的独立分析。完整题目、版本、来源和各篇详细方法见《论文总索引》。
 

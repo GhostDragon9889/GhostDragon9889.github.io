@@ -6,7 +6,8 @@
   "lang": "en",
   "collection": "research",
   "translation_path": "knowledge/paperread-roadmap/",
-  "description": "Connections and controlled experiments across action generation, policy adaptation, execution, human motion, and navigation worlds."
+  "description": "Connections and controlled experiments across action generation, policy adaptation, execution, human motion, and navigation worlds.",
+  "featured": true
 }
 ---
 

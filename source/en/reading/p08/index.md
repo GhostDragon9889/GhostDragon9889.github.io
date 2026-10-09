@@ -18,7 +18,8 @@
     "supplement": false,
     "summary_sha256": "c152ef2d38493de411b95ccb542088b5c0c4245434fff26743c8b4ef414b628a"
   },
-  "layout": "post"
+  "layout": "post",
+  "featured": true
 }
 ---
 

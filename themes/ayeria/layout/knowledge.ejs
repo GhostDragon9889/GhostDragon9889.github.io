@@ -1,7 +1,8 @@
-<% const entries = site_records(['research', 'engineering', 'reproduction']); %>
+<% const entries = site_records(['theory', 'evaluation', 'research', 'engineering', 'reproduction']); %>
 <section class="reading-page" aria-labelledby="knowledge-title">
   <a class="breadcrumb text-link" href="<%- site_home() %>#knowledge">← <%= site_text('backHome') %></a>
   <header class="reading-header"><p class="section-label">RESEARCH & ENGINEERING</p><h1 class="reading-title" id="knowledge-title"><%= site_text('knowledge') %></h1><p class="reading-description"><%= site_text('knowledgePageIntro') %></p></header>
+<%- partial('_partial/notebook-overview') %>
   <div class="content-filter" data-content-filter data-count-label="<%= site_text('recordCount') %>">
     <div class="filter-controls" role="group" aria-label="<%= site_text('filterKnowledge') %>">
       <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true"><%= site_text('all') %></button>

@@ -1,0 +1,17 @@
+<% const notebook = site.data.notebook; const en = site_locale() === 'en'; %>
+<section class="reading-page notebook-page" aria-labelledby="notebook-title">
+  <a class="breadcrumb text-link" href="<%- site_home() %>#knowledge">← <%= site_text('backHome') %></a>
+  <header class="reading-header"><p class="section-label">STUDY NOTEBOOK</p><h1 class="reading-title" id="notebook-title"><%= site_text('notebookTitle') %></h1><p class="reading-description"><%= site_text('notebookStats').replace('{sources}', notebook.meaningful_count).replace('{articles}', notebook.article_count) %></p></header>
+  <div class="collection-overview"><p><%= site_text('notebookDescription') %></p><p><%= site_text('notebookCoverage').replace('{guides}', notebook.guide_count).replace('{reading}', notebook.reading_count).replace('{unique}', notebook.unique_count) %></p><a href="<%- url_for('downloads/obsidian/manifest.json') %>"><%= site_text('notebookManifest') %> (.json) →</a></div>
+  <nav class="notebook-jumps" aria-label="<%= site_text('notebookNavigation') %>"><% notebook.groups.forEach(function(group) { %><a href="#<%= group.id %>"><%= en ? group.label_en : group.label %></a><% }); %></nav>
+  <div class="notebook-grid">
+<% notebook.groups.forEach(function(group) { const records = notebook.entries.filter(item => item.group === group.id); %>
+    <section class="notebook-card" id="<%= group.id %>" aria-labelledby="group-<%= group.id %>"><h2 id="group-<%= group.id %>"><%= en ? group.label_en : group.label %><span class="notebook-count"><%= records.length %></span></h2><ul>
+<% records.forEach(function(record) { %>
+      <li><a href="<%- site_path(record.path) %>"><%= en ? record.title_en : record.title %></a><p><%= en ? record.description_en : record.description %></p></li>
+<% }); %>
+    </ul></section>
+<% }); %>
+  </div>
+  <section class="notebook-reading-routes" aria-labelledby="notebook-routes"><h2 id="notebook-routes"><%= site_text('notebookRoutesTitle') %></h2><ol><li><%= site_text('notebookRouteTheory') %></li><li><%= site_text('notebookRouteControl') %></li><li><%= site_text('notebookRouteExperiment') %></li></ol><p><a href="<%- site_path('reading/') %>"><%= site_text('readingDirectory') %> →</a> · <a href="<%- site_path('knowledge/') %>"><%= site_text('knowledgeDirectory') %> →</a></p></section>
+</section>

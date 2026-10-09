@@ -1,4 +1,4 @@
-<% const entries = site_locale() === 'en' ? site_records(['reading','research','engineering','reproduction','profile']) : page.posts; %>
+<% const entries = site_locale() === 'en' ? site_records(['reading','theory','evaluation','research','engineering','reproduction','profile']) : page.posts; %>
 <section class="reading-page" aria-labelledby="archive-title">
   <a class="breadcrumb text-link" href="<%- site_home() %>#knowledge">← <%= site_text('backHome') %></a>
   <header class="reading-header"><p class="section-label">ARCHIVE</p><h1 class="reading-title" id="archive-title"><%= page.category || (page.tag ? site_text('tagPrefix') + page.tag : site_text('archive')) %></h1><p class="reading-description"><%= site_text('archiveIntro') %><% if (page.year) { %> · <%= page.year %><% if (page.month) { %>.<%= page.month %><% } %><% } %></p></header>

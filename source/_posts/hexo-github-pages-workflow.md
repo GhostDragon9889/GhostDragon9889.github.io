@@ -1,4 +1,5 @@
 ---
+featured: true
 translation_path: en/2026/10/09/hexo-github-pages-workflow/
 title: Hexo 与 GitHub Pages：保留源码的构建和发布流程
 date: 2026-10-09 16:00:00

@@ -1,4 +1,4 @@
-<% const profile = site.data.profile; const reading = site_records(['reading']).sort('paper.id', 1); const knowledge = site_records(['research', 'engineering', 'reproduction']); %>
+<% const profile = site.data.profile; const reading = site_records(['reading']).sort('paper.id', 1); const knowledge = site_records(['theory', 'evaluation', 'research', 'engineering', 'reproduction']); const featuredReading = reading.filter(record => record.featured); const featuredKnowledge = knowledge.filter(record => record.featured); %>
 <section id="about" class="academic-intro" aria-labelledby="profile-title">
   <div class="profile-bio">
     <p class="profile-kicker">PERSONAL ACADEMIC PROFILE</p>
@@ -47,17 +47,18 @@
   <div class="section-heading-row"><h2 id="reading-title"><%= site_text('reading') %></h2><a class="text-link" href="<%- site_path('reading/') %>"><%= site_text('readingDirectory') %> →</a></div>
   <p class="section-intro"><%= site_text('readingIntro') %></p>
 <% if (reading.length) { %>
-<%- partial('entry-list', {entries: reading.limit(3), filterable: false}) %>
+<%- partial('entry-list', {entries: (featuredReading.length ? featuredReading : reading).limit(3), filterable: false}) %>
 <% } else { %>
   <p class="empty-state"><%= site_text('readingEmpty') %></p>
 <% } %>
 </section>
 <section id="knowledge" class="section-block" aria-labelledby="knowledge-title">
   <div class="section-heading-row"><h2 id="knowledge-title"><%= site_text('knowledge') %></h2><a class="text-link" href="<%- site_path('knowledge/') %>"><%= site_text('knowledgeDirectory') %> →</a></div>
+<%- partial('notebook-overview') %>
   <div class="topic-summary">
 <% site.data.collections.groups.filter(group => group.id !== 'reading').forEach(function(group) { %>
     <div><h3><%= (site_locale() === 'en' ? group.label_en : group.label) %></h3><p><%= (site_locale() === 'en' ? group.description_en : group.description) %></p></div>
 <% }); %>
   </div>
-<%- partial('entry-list', {entries: knowledge.limit(4), filterable: false}) %>
+<%- partial('entry-list', {entries: (featuredKnowledge.length ? featuredKnowledge : knowledge).limit(4), filterable: false}) %>
 </section>

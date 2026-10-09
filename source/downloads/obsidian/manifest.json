@@ -1,0 +1,549 @@
+{
+  "import_date": "2026-10-09",
+  "archive_markdown_count": 55,
+  "meaningful_count": 52,
+  "unique_count": 51,
+  "article_count": 34,
+  "sources": [
+    {
+      "path": "BenchMark/强化学习BenchMark&Metric.md",
+      "bytes": 40565,
+      "sha256": "753d60d63484ca58601320feb561175d8bb3ced34f34a17f00cc76d6d005f9a4",
+      "id": "N001",
+      "url": "downloads/obsidian/n001.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习Benchmark.md",
+      "bytes": 41000,
+      "sha256": "b432c4edace112bb644f48470bd01a842f8fea7b2ee6bdd83dcf2f50186d982b",
+      "id": "N002",
+      "url": "downloads/obsidian/n002.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习与多智能体强化学习Benchmark&Metric.md",
+      "bytes": 39793,
+      "sha256": "c98fc9ac3a3772b40bdba9436d6157202b2096e72717f6e9ec7232f98e4e305b",
+      "id": "N003",
+      "url": "downloads/obsidian/n003.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习实验中的 Benchmark 与 Metric 调研.md",
+      "bytes": 45385,
+      "sha256": "c5c18d79b2ad1464d4b20bbed453c16187c175b763e7d4968c68cfde89dad12f",
+      "id": "N004",
+      "url": "downloads/obsidian/n004.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习科研基准详细调研报告.md",
+      "bytes": 37202,
+      "sha256": "70ac7fe0a4997e55fb2d8e66ea1714cc3b5b153368f6955f954eb94b6989efe1",
+      "id": "N005",
+      "url": "downloads/obsidian/n005.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/多智能体强化学习Benchmark.md",
+      "bytes": 60609,
+      "sha256": "97b3cadf21ae2e213459681557871dd09d140629fd7f6f9959f129b483ea9ba4",
+      "id": "N006",
+      "url": "downloads/obsidian/n006.md",
+      "articles": [
+        "multi-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/多智能体强化学习实验所用 benchmark&metric 深度调研.md",
+      "bytes": 45630,
+      "sha256": "9f8c14c7f935f5495cb0b2fa914d586a115d4910eb4889d0c1176517fdff3517",
+      "id": "N007",
+      "url": "downloads/obsidian/n007.md",
+      "articles": [
+        "multi-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "Paper/A Closer Look at Deep Policy Gradients.md",
+      "bytes": 152899,
+      "sha256": "9e21d0d35ab79b00a1e0f7e84eedd5329b4456240eadcb7377aadb555484dd11",
+      "id": "N008",
+      "url": "downloads/obsidian/n008.md",
+      "articles": [
+        "p31"
+      ]
+    },
+    {
+      "path": "Paper/Deep Reinforcement Learing that matters.md",
+      "bytes": 12379,
+      "sha256": "3b68f68151c6ac8a66d1cbb8e84ab25005792385644796ef40d45d6f9c6cb60b",
+      "id": "N009",
+      "url": "downloads/obsidian/n009.md",
+      "articles": [
+        "evaluation-protocol",
+        "p32"
+      ]
+    },
+    {
+      "path": "Paper/Era of Experience.md",
+      "bytes": 9085,
+      "sha256": "0edffd469917e456cfd1cb8b10abbf3b2b75aac979f74b44ccbf93897ed7019b",
+      "id": "N010",
+      "url": "downloads/obsidian/n010.md",
+      "articles": [
+        "p33"
+      ]
+    },
+    {
+      "path": "Paper/Fast Gradient-Descent Methods for Temporal-Difference Learning  with Linear Function Approximation.md",
+      "bytes": 169422,
+      "sha256": "767b027e21ca770758d7de3f0787b2bd7b1031fe4580d459a832bce63996f815",
+      "id": "N011",
+      "url": "downloads/obsidian/n011.md",
+      "articles": [
+        "p34"
+      ]
+    },
+    {
+      "path": "Paper/For SALE State-Action Representation Learning  for Deep Reinforcement Learning.md",
+      "bytes": 298239,
+      "sha256": "b4b7ab8f295db12cb0918c3fddf0f1bcbaa04ccb063e3241611bf8dff73dcd17",
+      "id": "N012",
+      "url": "downloads/obsidian/n012.md",
+      "articles": [
+        "p35"
+      ]
+    },
+    {
+      "path": "Paper/HIGH-DIMENSIONAL CONTINUOUS CONTROL USING GENERALIZED ADVANTAGE ESTIMATION.md",
+      "bytes": 119363,
+      "sha256": "16678d65a53f2730b695024a4bab946e35f546c8b78ad560c6f590af3e5d3261",
+      "id": "N013",
+      "url": "downloads/obsidian/n013.md",
+      "articles": [
+        "p36"
+      ]
+    },
+    {
+      "path": "Paper/Policy Gradient Methods for Reinforcement Learning with Function  Approximation.md",
+      "bytes": 104298,
+      "sha256": "137d924f60ca5a900c6a8f2baf9d0adc12a4b9f9a2c3fb352fb1fb5633c22f19",
+      "id": "N014",
+      "url": "downloads/obsidian/n014.md",
+      "articles": [
+        "p37"
+      ]
+    },
+    {
+      "path": "Paper/Potential-Based Shaping and Q-Value Initialization are Equivalent.md",
+      "bytes": 23928,
+      "sha256": "5ae074b1e2fb07790f265adc6ed84aeef3c37d9284a3929c6c8bc2ed55015c95",
+      "id": "N015",
+      "url": "downloads/obsidian/n015.md",
+      "articles": [
+        "p38"
+      ]
+    },
+    {
+      "path": "VLA&LLM&RL/LLM&VLA.md",
+      "bytes": 14072,
+      "sha256": "4e528af2728629a907fde5376d9e9d7fc205a13c5147304110d96ef1ea064b82",
+      "id": "N016",
+      "url": "downloads/obsidian/n016.md",
+      "articles": [
+        "embodied-research"
+      ]
+    },
+    {
+      "path": "Action Bin.md",
+      "bytes": 11704,
+      "sha256": "7ff9b5fb18dfd1efeb2f13770528b2447998bec936ed89c1e58f7d21dac73c83",
+      "id": "N017",
+      "url": "downloads/obsidian/n017.md",
+      "articles": [
+        "behavior-actions"
+      ]
+    },
+    {
+      "path": "Basic Concept.md",
+      "bytes": 7692,
+      "sha256": "075eac9250bda1bf7f61791e8f7da081992ac7ff6dfaa34c2dd68fc5b9ab1b46",
+      "id": "N018",
+      "url": "downloads/obsidian/n018.md",
+      "articles": [
+        "mdp-bellman"
+      ]
+    },
+    {
+      "path": "Behavior clone.md",
+      "bytes": 29547,
+      "sha256": "0725185478d5b9938116f24d2c56500855594dba663cc6b7e2c6344d63bc455e",
+      "id": "N019",
+      "url": "downloads/obsidian/n019.md",
+      "articles": [
+        "behavior-actions"
+      ]
+    },
+    {
+      "path": "Bellman Error.md",
+      "bytes": 102355,
+      "sha256": "4a164781ea2a4fa84793eacc3726563f07d08eed3d8ed7afcecd6d33e4ceddeb",
+      "id": "N020",
+      "url": "downloads/obsidian/n020.md",
+      "articles": [
+        "mdp-bellman"
+      ]
+    },
+    {
+      "path": "checkpoint (TD7专属).md",
+      "bytes": 23071,
+      "sha256": "4c23040cea6ace7105e2b9cfe9d0f8ceb22a5f43a491a49db52fb0d904700162",
+      "id": "N021",
+      "url": "downloads/obsidian/n021.md",
+      "articles": [
+        "td7-checkpoints"
+      ]
+    },
+    {
+      "path": "Diffusion Policy.md",
+      "bytes": 100005,
+      "sha256": "423fac4fde308132a57800816540202402ec6c1912fe7769d8d9df4fc3c90a87",
+      "id": "N022",
+      "url": "downloads/obsidian/n022.md",
+      "articles": [
+        "diffusion-deep-dive"
+      ]
+    },
+    {
+      "path": "Dvoretzky 、Banach fixed-point、Robbins–Monro、contraction mapping.md",
+      "bytes": 47024,
+      "sha256": "7fce332c10e00686bdef1968f30e8cb2b45d87ca976201b1dbb5d1141164aabd",
+      "id": "N023",
+      "url": "downloads/obsidian/n023.md",
+      "articles": [
+        "convergence"
+      ]
+    },
+    {
+      "path": "Eligibility Trace 和TD(𝜆).md",
+      "bytes": 89057,
+      "sha256": "bb3b9f76654143ab9e12cc69d99d8c14c8a969e067eebd8158b2686612269658",
+      "id": "N024",
+      "url": "downloads/obsidian/n024.md",
+      "articles": [
+        "eligibility-traces"
+      ]
+    },
+    {
+      "path": "GCRL.md",
+      "bytes": 14487,
+      "sha256": "6494958ff8882b5fb407d0a704816dfb2f799a86c328801eea377abf1385dcda",
+      "id": "N025",
+      "url": "downloads/obsidian/n025.md",
+      "articles": [
+        "goal-conditioned"
+      ]
+    },
+    {
+      "path": "Intra option learning.md",
+      "bytes": 62826,
+      "sha256": "2e3fd5fc526f1a3ed43ea825f290ef27aa518d4cc6a4ad775ff4de7f60305fb0",
+      "id": "N026",
+      "url": "downloads/obsidian/n026.md",
+      "articles": [
+        "options"
+      ]
+    },
+    {
+      "path": "IPPO和CMOA.md",
+      "bytes": 18965,
+      "sha256": "afcfdce9de8d8d606db05db97452e4ab35ba93d28913c6244bd4976323447606",
+      "id": "N027",
+      "url": "downloads/obsidian/n027.md",
+      "articles": [
+        "multiagent-gradients"
+      ]
+    },
+    {
+      "path": "MADDPG的一个证明.md",
+      "bytes": 13694,
+      "sha256": "e8b1090d2fd1ae7bbf55c62615b91b8f46baa22c39964c0dbf1bee15086f8972",
+      "id": "N028",
+      "url": "downloads/obsidian/n028.md",
+      "articles": [
+        "multiagent-gradients"
+      ]
+    },
+    {
+      "path": "MDP homomorphism.md",
+      "bytes": 28269,
+      "sha256": "3a06f1bbb6b29b3b00ba2637177417f9a6fc235acfc9c322130fc51ab082188a",
+      "id": "N029",
+      "url": "downloads/obsidian/n029.md",
+      "articles": [
+        "mdp-abstraction"
+      ]
+    },
+    {
+      "path": "Meta Reinforcement Learning.md",
+      "bytes": 1808,
+      "sha256": "d3ddb962075a526edb5b1c987a8db19bf0bc91f16acd5e8e9fe9e6475fa04033",
+      "id": "N030",
+      "url": "downloads/obsidian/n030.md",
+      "articles": [
+        "meta-rl"
+      ]
+    },
+    {
+      "path": "on-policy 与 off-policy 数据采样.md",
+      "bytes": 36589,
+      "sha256": "7788a10de82eeacf7336b3d216daba70d9e44740e221f975bc720c1cabeff0d1",
+      "id": "N031",
+      "url": "downloads/obsidian/n031.md",
+      "articles": [
+        "sampling-replay"
+      ]
+    },
+    {
+      "path": "on-policy以及off-policy.md",
+      "bytes": 12865,
+      "sha256": "f6a2ac2c7acc9efef3c5dc42d35ac79f7af21789f2dcf4d3691c0c43f43838e1",
+      "id": "N032",
+      "url": "downloads/obsidian/n032.md",
+      "articles": [
+        "sampling-replay"
+      ]
+    },
+    {
+      "path": "reinforce gradient.md",
+      "bytes": 7736,
+      "sha256": "b1c6f03ef44e80ddc81f555d6eba8c3490be19a6c8c35f297abb796aff946c3b",
+      "id": "N033",
+      "url": "downloads/obsidian/n033.md",
+      "articles": [
+        "policy-gradients"
+      ]
+    },
+    {
+      "path": "Reinforcement Learning： An introduction.md",
+      "bytes": 19359,
+      "sha256": "2a5c7bcba40c88787791cf37b977783c23c1e6808bfca62357891e2b0253f83d",
+      "id": "N034",
+      "url": "downloads/obsidian/n034.md",
+      "articles": [
+        "p39"
+      ]
+    },
+    {
+      "path": "REINFORCE 为什么高方差.md",
+      "bytes": 9721,
+      "sha256": "0aac309de685df8cede049647368ec5a174cbce8905071c0ad3993a66b75c34c",
+      "id": "N035",
+      "url": "downloads/obsidian/n035.md",
+      "articles": [
+        "policy-gradients"
+      ]
+    },
+    {
+      "path": "Reparameterization trick.md",
+      "bytes": 26149,
+      "sha256": "78d248e94576b9cd91b2b207aba4d9466f55128861d895f5075ae5033c749bce",
+      "id": "N036",
+      "url": "downloads/obsidian/n036.md",
+      "articles": [
+        "reparameterization"
+      ]
+    },
+    {
+      "path": "Replay Buffer.md",
+      "bytes": 12865,
+      "sha256": "f6a2ac2c7acc9efef3c5dc42d35ac79f7af21789f2dcf4d3691c0c43f43838e1",
+      "id": "N037",
+      "url": "downloads/obsidian/n037.md",
+      "articles": [
+        "sampling-replay"
+      ],
+      "duplicate_of": "N032"
+    },
+    {
+      "path": "Reward Shaping.md",
+      "bytes": 51369,
+      "sha256": "7e767dd6d1a482fed263058586cee65fa63c2dfe03b90351b11f9548849d2e05",
+      "id": "N038",
+      "url": "downloads/obsidian/n038.md",
+      "articles": [
+        "reward-shaping"
+      ]
+    },
+    {
+      "path": "SAC的可变温度推倒.md",
+      "bytes": 6169,
+      "sha256": "dc03d00bb1c7981d530d1f2d39a6b4e0a0d8c1ffb07ba947a2b55738c70941bb",
+      "id": "N039",
+      "url": "downloads/obsidian/n039.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "simulation和worldmodel.md",
+      "bytes": 6498,
+      "sha256": "fbca78bef967c48fab3108ff3b86e26debc8bc38a159caf805d5c5b6342fc05a",
+      "id": "N040",
+      "url": "downloads/obsidian/n040.md",
+      "articles": [
+        "simulation-world-models"
+      ]
+    },
+    {
+      "path": "一些统计方法.md",
+      "bytes": 35679,
+      "sha256": "29fa108006295b0163950aa8466f76b916e262970273dae46f4919a5b32cf3ef",
+      "id": "N041",
+      "url": "downloads/obsidian/n041.md",
+      "articles": [
+        "statistics-tuning",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "外推误差.md",
+      "bytes": 23120,
+      "sha256": "17cc4d46498e5bec77a1ce9c27e8add8f3d6d0901309997eee72ea578bcd6ec0",
+      "id": "N042",
+      "url": "downloads/obsidian/n042.md",
+      "articles": [
+        "extrapolation"
+      ]
+    },
+    {
+      "path": "对偶梯度下降.md",
+      "bytes": 7693,
+      "sha256": "168fe49ed9b663eee60b2b8ca28ec62fc048038b06c77637ad488ee099242aed",
+      "id": "N043",
+      "url": "downloads/obsidian/n043.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "对偶梯度下降的详细解释.md",
+      "bytes": 7157,
+      "sha256": "43dfd7cadbffcbfb210398e7b72936c815716bd8f6b514b93b17796433428d89",
+      "id": "N044",
+      "url": "downloads/obsidian/n044.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "强化学习、MP及MDP中的各种分布.md",
+      "bytes": 41407,
+      "sha256": "b5e7710f7062b1b433c62c89c69e6fb4b34fa8ea6796ecd8cbd923dcd049e8ea",
+      "id": "N045",
+      "url": "downloads/obsidian/n045.md",
+      "articles": [
+        "probability-measures"
+      ]
+    },
+    {
+      "path": "最大熵强化学习.md",
+      "bytes": 10152,
+      "sha256": "895c119ecc88366f75488da1c11e65f114a8471e6a7bf411ca95311bb95ae404",
+      "id": "N046",
+      "url": "downloads/obsidian/n046.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "概率测度与经验测度.md",
+      "bytes": 29814,
+      "sha256": "2e45b1d37e88a38fc8ac6e31efc55be948615ddbeb0dc44422adbf2710313671",
+      "id": "N047",
+      "url": "downloads/obsidian/n047.md",
+      "articles": [
+        "probability-measures"
+      ]
+    },
+    {
+      "path": "研究框架.md",
+      "bytes": 8023,
+      "sha256": "73097321ef0210a1db98455a6bf81a2341d425ab9ebd7ec3c51890940eec6cfb",
+      "id": "N048",
+      "url": "downloads/obsidian/n048.md",
+      "articles": [
+        "embodied-research"
+      ]
+    },
+    {
+      "path": "策略梯度以及替代目标.md",
+      "bytes": 61830,
+      "sha256": "cffd0d3c06b75c1e1273862be49816f3cfcac36bca9cb21afcd79056be0aca39",
+      "id": "N049",
+      "url": "downloads/obsidian/n049.md",
+      "articles": [
+        "policy-gradients"
+      ]
+    },
+    {
+      "path": "网格搜索.md",
+      "bytes": 1442,
+      "sha256": "3a2e37119f76786557e172019a3c8f0ccda5c19e1c8df3f6bdcb3291ade3fa81",
+      "id": "N050",
+      "url": "downloads/obsidian/n050.md",
+      "articles": [
+        "statistics-tuning"
+      ]
+    },
+    {
+      "path": "详细解释：软演员-评论员（SAC）算法的关键技术.md",
+      "bytes": 6068,
+      "sha256": "2677fdb86460b2d91825691959fa06c19bf90992f13831871644e6e85299dcee",
+      "id": "N051",
+      "url": "downloads/obsidian/n051.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "马尔科夫性.md",
+      "bytes": 9711,
+      "sha256": "7b68d1631c9bfab81bb0d94e806d72ec4173ec49451ac84461c9c0869e5d75fe",
+      "id": "N052",
+      "url": "downloads/obsidian/n052.md",
+      "articles": [
+        "markov-memory"
+      ]
+    }
+  ],
+  "skipped": {
+    "Problem/something unknown.md": "heading-only placeholder",
+    "README.md": "vault overview, no substantive note",
+    "优先级经验重放.md": "empty placeholder"
+  },
+  "exclusion_policy": [
+    "就业市场",
+    "Idea"
+  ],
+  "editions": "Chinese and English edited guides; full original Markdown preserved; no paper PDF verification or experiment reruns."
+}

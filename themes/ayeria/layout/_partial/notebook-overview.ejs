@@ -1,0 +1,5 @@
+<aside class="collection-overview notebook-overview">
+  <h2><a href="<%- site_path('notes/') %>"><%= site_text('notebookTitle') %> →</a></h2>
+  <p><%= site_text('notebookStats').replace('{sources}', site.data.notebook.meaningful_count).replace('{articles}', site.data.notebook.article_count) %></p>
+  <p><%= site_text('notebookShortDescription') %></p>
+</aside>

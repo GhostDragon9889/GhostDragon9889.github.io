@@ -1,4 +1,14 @@
 groups:
+  - id: theory
+    label: 理论与方法
+    description: 强化学习基础、概率、策略优化与动作建模。
+    label_en: Theory & Methods
+    description_en: RL foundations, probability, policy optimization, and action modeling.
+  - id: evaluation
+    label: 基准与实验方法
+    description: Benchmark 选型、统计评价与可复现实验协议。
+    label_en: Benchmarks & Evaluation
+    description_en: Benchmark selection, statistical evaluation, and reproducible protocols.
   - id: research
     label: 学术研究
     description: 研究问题、方法分析与学术讨论。

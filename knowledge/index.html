@@ -61,9 +61,19 @@
 <section class="reading-page" aria-labelledby="knowledge-title">
   <a class="breadcrumb text-link" href="/#knowledge">← 返回主页</a>
   <header class="reading-header"><p class="section-label">RESEARCH & ENGINEERING</p><h1 class="reading-title" id="knowledge-title">学术与工程</h1><p class="reading-description">分类整理研究讨论、工程经验与实验复现记录。</p></header>
+<aside class="collection-overview notebook-overview">
+  <h2><a href="/notes/">强化学习学习笔记专题 →</a></h2>
+  <p>由 52 份有效原始笔记整理为 34 篇中英文文章。</p>
+  <p>理论与概率、策略与动作、层次适配、多智能体、实验基准及具身研究。</p>
+</aside>
+
   <div class="content-filter" data-content-filter data-count-label="共 {count} 篇记录">
     <div class="filter-controls" role="group" aria-label="按内容分类筛选">
       <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">全部</button>
+
+      <button class="filter-button" type="button" data-filter="theory" aria-pressed="false">理论与方法</button>
+
+      <button class="filter-button" type="button" data-filter="evaluation" aria-pressed="false">基准与实验方法</button>
 
       <button class="filter-button" type="button" data-filter="research" aria-pressed="false">学术研究</button>
 
@@ -74,6 +84,181 @@
     </div>
     <p class="filter-status" aria-live="polite" aria-atomic="true"></p>
 <div class="entry-list">
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/evaluation-protocol/">可复现的 RL 实验与报告协议</a></h3>
+    <p class="entry-description">统一环境版本、训练预算、checkpoint 选择、独立测试和统计汇总。</p>
+    <div class="entry-links"><a href="/knowledge/evaluation-protocol/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/multi-agent-benchmarks/">多智能体 RL Benchmark 与协作评价</a></h3>
+    <p class="entry-description">按合作、竞争、混合动机、局部观测及跨伙伴泛化整理 MARL 基准。</p>
+    <div class="entry-links"><a href="/knowledge/multi-agent-benchmarks/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/single-agent-benchmarks/">单智能体 RL Benchmark 选型与指标</a></h3>
+    <p class="entry-description">合并五份调研，按控制、视觉泛化、离线数据及具身任务选择基准。</p>
+    <div class="entry-links"><a href="/knowledge/single-agent-benchmarks/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>基准与实验方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/statistics-tuning/">RL 实验统计、置信区间与调参预算</a></h3>
+    <p class="entry-description">分清随机种子与 episode，整理功效分析、bootstrap、IQM 和调参泄漏。</p>
+    <div class="entry-links"><a href="/knowledge/statistics-tuning/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>工程实践</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/td7-checkpoints/">TD7 Policy Checkpoints：训练与评估分离</a></h3>
+    <p class="entry-description">区分候选策略、已部署策略、assessment 与独立 evaluation。</p>
+    <div class="entry-links"><a href="/knowledge/td7-checkpoints/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="research">
+    <div class="entry-meta"><span>学术研究</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/embodied-research/">具身 RL、LLM/VLA 与研究问题设计</a></h3>
+    <p class="entry-description">把样本效率、任务适配、奖励和时序问题转为可比较的研究实验。</p>
+    <div class="entry-links"><a href="/knowledge/embodied-research/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="research">
+    <div class="entry-meta"><span>学术研究</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/simulation-world-models/">仿真器、World Model 与规划</a></h3>
+    <p class="entry-description">说明实验环境、学习动力学模型及内部 rollout 的不同职责。</p>
+    <div class="entry-links"><a href="/knowledge/simulation-world-models/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="research">
+    <div class="entry-meta"><span>学术研究</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/meta-rl/">Meta-RL：任务分布与快速适应</a></h3>
+    <p class="entry-description">梳理基于优化、上下文推断与循环记忆的适应路径。</p>
+    <div class="entry-links"><a href="/knowledge/meta-rl/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/markov-memory/">马尔可夫性、部分观测与 RNN 记忆</a></h3>
+    <p class="entry-description">区分物理状态、观测、历史和 belief，避免将 RNN 隐状态当作充分统计量。</p>
+    <div class="entry-links"><a href="/knowledge/markov-memory/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/multiagent-gradients/">IPPO、COMA 与多智能体梯度方差</a></h3>
+    <p class="entry-description">修正 COMA 拼写，比较独立学习、集中式 critic 与反事实信用分配。</p>
+    <div class="entry-links"><a href="/knowledge/multiagent-gradients/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/goal-conditioned/">Goal-Conditioned RL、UVFA 与 HER</a></h3>
+    <p class="entry-description">对齐目标条件价值、事后目标重标记和层次控制接口。</p>
+    <div class="entry-links"><a href="/knowledge/goal-conditioned/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/mdp-abstraction/">MDP Homomorphism 与状态动作抽象</a></h3>
+    <p class="entry-description">区分奖励/转移保持、策略提升、互模拟与近似表示。</p>
+    <div class="entry-links"><a href="/knowledge/mdp-abstraction/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/options/">Options、SMDP 与 Intra-option Learning</a></h3>
+    <p class="entry-description">统一时间抽象、持续时间折扣和跨 option 的样本复用。</p>
+    <div class="entry-links"><a href="/knowledge/options/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/reward-shaping/">Potential-Based Reward Shaping</a></h3>
+    <p class="entry-description">用望远镜求和解释策略不变性，明确终止状态与奖励尺度的条件。</p>
+    <div class="entry-links"><a href="/knowledge/reward-shaping/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/sac-duality/">最大熵 RL、SAC 与对偶温度调节</a></h3>
+    <p class="entry-description">合并五份笔记，修正温度梯度符号及 off-policy 与 offline 的混淆。</p>
+    <div class="entry-links"><a href="/knowledge/sac-duality/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/reparameterization/">重参数化与路径导数</a></h3>
+    <p class="entry-description">推导高斯重参数化、tanh 密度修正和适用边界。</p>
+    <div class="entry-links"><a href="/knowledge/reparameterization/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/extrapolation/">离线 RL 与价值外推误差</a></h3>
+    <p class="entry-description">解释数据支持域之外的价值估计、max backup 与误差传播。</p>
+    <div class="entry-links"><a href="/knowledge/extrapolation/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/diffusion-deep-dive/">Diffusion Policy：分布建模与控制时序</a></h3>
+    <p class="entry-description">作为已有 P08 的深化笔记，梳理去噪时间、动作块与执行闭环。</p>
+    <div class="entry-links"><a href="/knowledge/diffusion-deep-dive/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/behavior-actions/">行为克隆、动作分桶与多模态动作</a></h3>
+    <p class="entry-description">从监督损失到闭环分布偏移，比较回归、分类及离散加残差建模。</p>
+    <div class="entry-links"><a href="/knowledge/behavior-actions/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/eligibility-traces/">Eligibility Traces 与 TD(λ)</a></h3>
+    <p class="entry-description">整理前向 λ-return、后向资格迹、在线等价条件和终止边界。</p>
+    <div class="entry-links"><a href="/knowledge/eligibility-traces/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/policy-gradients/">策略梯度、REINFORCE 与替代目标</a></h3>
+    <p class="entry-description">从轨迹似然推导梯度，并解释 baseline、PPO clipping 与 KL 诊断。</p>
+    <div class="entry-links"><a href="/knowledge/policy-gradients/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/sampling-replay/">On-policy、Off-policy 与经验回放</a></h3>
+    <p class="entry-description">合并完全重复笔记，梳理行为策略、目标策略及数据分布偏移。</p>
+    <div class="entry-links"><a href="/knowledge/sampling-replay/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/convergence/">收缩映射、不动点与随机逼近</a></h3>
+    <p class="entry-description">区分确定性 Bellman 收缩与带噪递推的收敛条件。</p>
+    <div class="entry-links"><a href="/knowledge/convergence/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/probability-measures/">概率测度、经验测度与 RL 占据分布</a></h3>
+    <p class="entry-description">统一概率核、轨迹分布、平稳分布及折扣占据测度的记号。</p>
+    <div class="entry-links"><a href="/knowledge/probability-measures/">阅读全文 →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>理论与方法</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/knowledge/mdp-bellman/">MDP、价值函数与 Bellman 误差</a></h3>
+    <p class="entry-description">从 Bellman 方程到 MSBE、MSPBE、TD error 与双采样问题。</p>
+    <div class="entry-links"><a href="/knowledge/mdp-bellman/">阅读全文 →</a></div>
+  </article>
 
   <article class="entry-row content-item" data-group="research">
     <div class="entry-meta"><span>学术研究</span><time datetime="2026-10-09">2026.10.09</time></div>

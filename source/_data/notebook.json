@@ -1,0 +1,1044 @@
+{
+  "import_date": "2026-10-09",
+  "markdown_count": 55,
+  "meaningful_count": 52,
+  "unique_count": 51,
+  "article_count": 34,
+  "guide_count": 25,
+  "reading_count": 9,
+  "groups": [
+    {
+      "id": "foundations",
+      "label": "RL 理论与概率基础",
+      "label_en": "RL Foundations and Probability"
+    },
+    {
+      "id": "policy",
+      "label": "策略优化与动作建模",
+      "label_en": "Policy Optimization and Action Modeling"
+    },
+    {
+      "id": "adaptation",
+      "label": "抽象、层级与任务适配",
+      "label_en": "Abstraction, Hierarchy, and Adaptation"
+    },
+    {
+      "id": "evaluation",
+      "label": "多智能体与实验评价",
+      "label_en": "Multi-Agent Learning and Evaluation"
+    },
+    {
+      "id": "systems",
+      "label": "工程机制与具身研究",
+      "label_en": "Engineering and Embodied Research"
+    },
+    {
+      "id": "classics",
+      "label": "经典论文、观点与教材",
+      "label_en": "Classic Papers, Perspectives, and Textbooks"
+    }
+  ],
+  "entries": [
+    {
+      "slug": "mdp-bellman",
+      "title": "MDP、价值函数与 Bellman 误差",
+      "title_en": "MDPs, Value Functions, and Bellman Errors",
+      "description": "从 Bellman 方程到 MSBE、MSPBE、TD error 与双采样问题。",
+      "description_en": "Bellman equations, MSBE, MSPBE, sampled TD errors, and double sampling.",
+      "collection": "theory",
+      "group": "foundations",
+      "path": "knowledge/mdp-bellman/",
+      "sources": [
+        "N018",
+        "N020"
+      ]
+    },
+    {
+      "slug": "probability-measures",
+      "title": "概率测度、经验测度与 RL 占据分布",
+      "title_en": "Probability Measures, Empirical Measures, and RL Occupancy",
+      "description": "统一概率核、轨迹分布、平稳分布及折扣占据测度的记号。",
+      "description_en": "Probability kernels, trajectory laws, stationary distributions, and discounted occupancy measures.",
+      "collection": "theory",
+      "group": "foundations",
+      "path": "knowledge/probability-measures/",
+      "sources": [
+        "N047",
+        "N045"
+      ]
+    },
+    {
+      "slug": "convergence",
+      "title": "收缩映射、不动点与随机逼近",
+      "title_en": "Contractions, Fixed Points, and Stochastic Approximation",
+      "description": "区分确定性 Bellman 收缩与带噪递推的收敛条件。",
+      "description_en": "Separate deterministic Bellman contraction from convergence conditions for noisy recursions.",
+      "collection": "theory",
+      "group": "foundations",
+      "path": "knowledge/convergence/",
+      "sources": [
+        "N023"
+      ]
+    },
+    {
+      "slug": "sampling-replay",
+      "title": "On-policy、Off-policy 与经验回放",
+      "title_en": "On-Policy Sampling, Off-Policy Learning, and Replay",
+      "description": "合并完全重复笔记，梳理行为策略、目标策略及数据分布偏移。",
+      "description_en": "Merge duplicate notes and distinguish behavior policies, target policies, and distribution shift.",
+      "collection": "theory",
+      "group": "foundations",
+      "path": "knowledge/sampling-replay/",
+      "sources": [
+        "N031",
+        "N032",
+        "N037"
+      ]
+    },
+    {
+      "slug": "policy-gradients",
+      "title": "策略梯度、REINFORCE 与替代目标",
+      "title_en": "Policy Gradients, REINFORCE, and Surrogate Objectives",
+      "description": "从轨迹似然推导梯度，并解释 baseline、PPO clipping 与 KL 诊断。",
+      "description_en": "Derive the trajectory gradient and connect baselines, PPO clipping, and KL diagnostics.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/policy-gradients/",
+      "sources": [
+        "N033",
+        "N035",
+        "N049"
+      ]
+    },
+    {
+      "slug": "eligibility-traces",
+      "title": "Eligibility Traces 与 TD(λ)",
+      "title_en": "Eligibility Traces and TD(λ)",
+      "description": "整理前向 λ-return、后向资格迹、在线等价条件和终止边界。",
+      "description_en": "Forward lambda returns, backward traces, online equivalence conditions, and episode boundaries.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/eligibility-traces/",
+      "sources": [
+        "N024"
+      ]
+    },
+    {
+      "slug": "behavior-actions",
+      "title": "行为克隆、动作分桶与多模态动作",
+      "title_en": "Behavior Cloning, Action Bins, and Multimodal Actions",
+      "description": "从监督损失到闭环分布偏移，比较回归、分类及离散加残差建模。",
+      "description_en": "Supervised objectives, closed-loop distribution shift, and regression, classification, and residual actions.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/behavior-actions/",
+      "sources": [
+        "N019",
+        "N017"
+      ]
+    },
+    {
+      "slug": "diffusion-deep-dive",
+      "title": "Diffusion Policy：分布建模与控制时序",
+      "title_en": "Diffusion Policy: Distribution Modeling and Control Timing",
+      "description": "作为已有 P08 的深化笔记，梳理去噪时间、动作块与执行闭环。",
+      "description_en": "A supplement to P08 on denoising time, action chunks, and the execution loop.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/diffusion-deep-dive/",
+      "sources": [
+        "N022"
+      ]
+    },
+    {
+      "slug": "extrapolation",
+      "title": "离线 RL 与价值外推误差",
+      "title_en": "Offline RL and Value Extrapolation Error",
+      "description": "解释数据支持域之外的价值估计、max backup 与误差传播。",
+      "description_en": "Value estimates outside data support, maximization backups, and error propagation.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/extrapolation/",
+      "sources": [
+        "N042"
+      ]
+    },
+    {
+      "slug": "reparameterization",
+      "title": "重参数化与路径导数",
+      "title_en": "Reparameterization and Pathwise Gradients",
+      "description": "推导高斯重参数化、tanh 密度修正和适用边界。",
+      "description_en": "Gaussian reparameterization, tanh density corrections, and the limits of pathwise differentiation.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/reparameterization/",
+      "sources": [
+        "N036"
+      ]
+    },
+    {
+      "slug": "sac-duality",
+      "title": "最大熵 RL、SAC 与对偶温度调节",
+      "title_en": "Maximum-Entropy RL, SAC, and Dual Temperature Updates",
+      "description": "合并五份笔记，修正温度梯度符号及 off-policy 与 offline 的混淆。",
+      "description_en": "Merge five notes and correct temperature-gradient signs and the off-policy/offline distinction.",
+      "collection": "theory",
+      "group": "policy",
+      "path": "knowledge/sac-duality/",
+      "sources": [
+        "N046",
+        "N039",
+        "N051",
+        "N043",
+        "N044"
+      ]
+    },
+    {
+      "slug": "reward-shaping",
+      "title": "Potential-Based Reward Shaping",
+      "title_en": "Potential-Based Reward Shaping",
+      "description": "用望远镜求和解释策略不变性，明确终止状态与奖励尺度的条件。",
+      "description_en": "Telescoping returns, policy invariance, terminal potentials, and reward-scale caveats.",
+      "collection": "theory",
+      "group": "foundations",
+      "path": "knowledge/reward-shaping/",
+      "sources": [
+        "N038"
+      ]
+    },
+    {
+      "slug": "options",
+      "title": "Options、SMDP 与 Intra-option Learning",
+      "title_en": "Options, SMDPs, and Intra-Option Learning",
+      "description": "统一时间抽象、持续时间折扣和跨 option 的样本复用。",
+      "description_en": "Temporal abstraction, duration-dependent discounting, and experience shared across options.",
+      "collection": "theory",
+      "group": "adaptation",
+      "path": "knowledge/options/",
+      "sources": [
+        "N026"
+      ]
+    },
+    {
+      "slug": "mdp-abstraction",
+      "title": "MDP Homomorphism 与状态动作抽象",
+      "title_en": "MDP Homomorphisms and State–Action Abstraction",
+      "description": "区分奖励/转移保持、策略提升、互模拟与近似表示。",
+      "description_en": "Reward and transition preservation, policy lifting, bisimulation, and approximate representations.",
+      "collection": "theory",
+      "group": "adaptation",
+      "path": "knowledge/mdp-abstraction/",
+      "sources": [
+        "N029"
+      ]
+    },
+    {
+      "slug": "goal-conditioned",
+      "title": "Goal-Conditioned RL、UVFA 与 HER",
+      "title_en": "Goal-Conditioned RL, UVFA, and HER",
+      "description": "对齐目标条件价值、事后目标重标记和层次控制接口。",
+      "description_en": "Goal-conditioned values, hindsight relabeling, and hierarchical-control interfaces.",
+      "collection": "theory",
+      "group": "adaptation",
+      "path": "knowledge/goal-conditioned/",
+      "sources": [
+        "N025"
+      ]
+    },
+    {
+      "slug": "multiagent-gradients",
+      "title": "IPPO、COMA 与多智能体梯度方差",
+      "title_en": "IPPO, COMA, and Multi-Agent Gradient Variance",
+      "description": "修正 COMA 拼写，比较独立学习、集中式 critic 与反事实信用分配。",
+      "description_en": "Independent learning, centralized critics, counterfactual credit, and a bounded variance example.",
+      "collection": "theory",
+      "group": "evaluation",
+      "path": "knowledge/multiagent-gradients/",
+      "sources": [
+        "N027",
+        "N028"
+      ]
+    },
+    {
+      "slug": "markov-memory",
+      "title": "马尔可夫性、部分观测与 RNN 记忆",
+      "title_en": "Markov States, Partial Observations, and Recurrent Memory",
+      "description": "区分物理状态、观测、历史和 belief，避免将 RNN 隐状态当作充分统计量。",
+      "description_en": "Separate physical state, observation, history, and belief without assuming RNN sufficiency.",
+      "collection": "theory",
+      "group": "foundations",
+      "path": "knowledge/markov-memory/",
+      "sources": [
+        "N052"
+      ]
+    },
+    {
+      "slug": "meta-rl",
+      "title": "Meta-RL：任务分布与快速适应",
+      "title_en": "Meta-RL: Task Distributions and Rapid Adaptation",
+      "description": "梳理基于优化、上下文推断与循环记忆的适应路径。",
+      "description_en": "Optimization, contextual inference, and recurrent adaptation across tasks.",
+      "collection": "research",
+      "group": "adaptation",
+      "path": "knowledge/meta-rl/",
+      "sources": [
+        "N030"
+      ]
+    },
+    {
+      "slug": "simulation-world-models",
+      "title": "仿真器、World Model 与规划",
+      "title_en": "Simulators, World Models, and Planning",
+      "description": "说明实验环境、学习动力学模型及内部 rollout 的不同职责。",
+      "description_en": "Experimental environments, learned dynamics, and internal rollout serve different roles.",
+      "collection": "research",
+      "group": "systems",
+      "path": "knowledge/simulation-world-models/",
+      "sources": [
+        "N040"
+      ]
+    },
+    {
+      "slug": "embodied-research",
+      "title": "具身 RL、LLM/VLA 与研究问题设计",
+      "title_en": "Embodied RL, LLMs/VLAs, and Research Design",
+      "description": "把样本效率、任务适配、奖励和时序问题转为可比较的研究实验。",
+      "description_en": "Turn sample efficiency, adaptation, rewards, and timing into controlled research questions.",
+      "collection": "research",
+      "group": "systems",
+      "path": "knowledge/embodied-research/",
+      "sources": [
+        "N048",
+        "N016"
+      ]
+    },
+    {
+      "slug": "td7-checkpoints",
+      "title": "TD7 Policy Checkpoints：训练与评估分离",
+      "title_en": "TD7 Policy Checkpoints: Separating Training and Evaluation",
+      "description": "区分候选策略、已部署策略、assessment 与独立 evaluation。",
+      "description_en": "Candidate and deployed policies, assessment, and independent evaluation.",
+      "collection": "engineering",
+      "group": "systems",
+      "path": "knowledge/td7-checkpoints/",
+      "sources": [
+        "N021"
+      ]
+    },
+    {
+      "slug": "statistics-tuning",
+      "title": "RL 实验统计、置信区间与调参预算",
+      "title_en": "RL Statistics, Confidence Intervals, and Tuning Budgets",
+      "description": "分清随机种子与 episode，整理功效分析、bootstrap、IQM 和调参泄漏。",
+      "description_en": "Seeds versus episodes, power, bootstrap, IQM, and tuning leakage.",
+      "collection": "evaluation",
+      "group": "evaluation",
+      "path": "knowledge/statistics-tuning/",
+      "sources": [
+        "N041",
+        "N050"
+      ]
+    },
+    {
+      "slug": "single-agent-benchmarks",
+      "title": "单智能体 RL Benchmark 选型与指标",
+      "title_en": "Single-Agent RL Benchmarks and Metrics",
+      "description": "合并五份调研，按控制、视觉泛化、离线数据及具身任务选择基准。",
+      "description_en": "Consolidate five reports across control, visual generalization, offline datasets, and embodied tasks.",
+      "collection": "evaluation",
+      "group": "evaluation",
+      "path": "knowledge/single-agent-benchmarks/",
+      "sources": [
+        "N001",
+        "N002",
+        "N003",
+        "N004",
+        "N005"
+      ]
+    },
+    {
+      "slug": "multi-agent-benchmarks",
+      "title": "多智能体 RL Benchmark 与协作评价",
+      "title_en": "Multi-Agent RL Benchmarks and Cooperative Evaluation",
+      "description": "按合作、竞争、混合动机、局部观测及跨伙伴泛化整理 MARL 基准。",
+      "description_en": "Cooperative, competitive, mixed-motive, partially observed, and cross-partner MARL evaluation.",
+      "collection": "evaluation",
+      "group": "evaluation",
+      "path": "knowledge/multi-agent-benchmarks/",
+      "sources": [
+        "N006",
+        "N007"
+      ]
+    },
+    {
+      "slug": "evaluation-protocol",
+      "title": "可复现的 RL 实验与报告协议",
+      "title_en": "A Reproducible RL Evaluation and Reporting Protocol",
+      "description": "统一环境版本、训练预算、checkpoint 选择、独立测试和统计汇总。",
+      "description_en": "Align environment versions, training budgets, checkpoint selection, held-out testing, and aggregation.",
+      "collection": "evaluation",
+      "group": "evaluation",
+      "path": "knowledge/evaluation-protocol/",
+      "sources": [
+        "N001",
+        "N002",
+        "N003",
+        "N004",
+        "N005",
+        "N006",
+        "N007",
+        "N041",
+        "N009"
+      ]
+    },
+    {
+      "slug": "p31",
+      "title": "深度策略梯度的理论与实证差距",
+      "title_en": "A Closer Look at Deep Policy Gradients",
+      "description": "梯度估计、价值预测与替代目标景观的实证审查。",
+      "description_en": "Gradient estimates, value prediction, and surrogate reward landscapes.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p31/",
+      "sources": [
+        "N008"
+      ]
+    },
+    {
+      "slug": "p32",
+      "title": "Deep RL That Matters：补充材料与复现方法",
+      "title_en": "Deep Reinforcement Learning that Matters: Supplementary Evidence",
+      "description": "随机种子、网络结构、奖励尺度和代码实现如何改变算法比较。",
+      "description_en": "How seeds, architectures, reward scales, and implementations change algorithm comparisons.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p32/",
+      "sources": [
+        "N009"
+      ]
+    },
+    {
+      "slug": "p33",
+      "title": "Era of Experience：经验驱动学习观点",
+      "title_en": "Era of Experience: Notes on Experience-Driven Learning",
+      "description": "区分经验驱动学习范式与 world model 这一模型机制。",
+      "description_en": "Separate experience-driven learning as a paradigm from world models as a mechanism.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p33/",
+      "sources": [
+        "N010"
+      ]
+    },
+    {
+      "slug": "p34",
+      "title": "GTD2 与 TDC：线性函数逼近下的梯度 TD",
+      "title_en": "Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation",
+      "description": "以 MSPBE 和辅助变量连接 off-policy 稳定性与线性复杂度。",
+      "description_en": "MSPBE and auxiliary variables connect off-policy stability to linear-time updates.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p34/",
+      "sources": [
+        "N011"
+      ]
+    },
+    {
+      "slug": "p35",
+      "title": "For SALE / TD7：状态动作表征学习",
+      "title_en": "For SALE: State-Action Representation Learning for Deep Reinforcement Learning",
+      "description": "区分 SALE 表征目标、TD7 工程组件及实证结论的适用范围。",
+      "description_en": "SALE objectives, TD7 engineering components, and the scope of empirical evidence.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p35/",
+      "sources": [
+        "N012"
+      ]
+    },
+    {
+      "slug": "p36",
+      "title": "GAE：优势估计的偏差与方差",
+      "title_en": "High-Dimensional Continuous Control Using Generalized Advantage Estimation",
+      "description": "由 TD 残差构造优势，连接 reward-to-go、λ-return 和 critic 误差。",
+      "description_en": "TD-residual advantages, reward-to-go, lambda returns, and critic error.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p36/",
+      "sources": [
+        "N013"
+      ]
+    },
+    {
+      "slug": "p37",
+      "title": "策略梯度定理与兼容函数逼近",
+      "title_en": "Policy Gradient Methods for Reinforcement Learning with Function Approximation",
+      "description": "明确占据分布、兼容特征和函数逼近的理论条件。",
+      "description_en": "Occupancy distributions, compatible features, and theoretical assumptions for approximation.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p37/",
+      "sources": [
+        "N014"
+      ]
+    },
+    {
+      "slug": "p38",
+      "title": "Potential-Based Shaping 与 Q 值初始化等价",
+      "title_en": "Potential-Based Shaping and Q-Value Initialization are Equivalent",
+      "description": "通过 Q 值平移解释奖励塑形与初始化的路径等价条件。",
+      "description_en": "A Q-value shift explains conditional path equivalence between shaping and initialization.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p38/",
+      "sources": [
+        "N015"
+      ]
+    },
+    {
+      "slug": "p39",
+      "title": "Sutton & Barto：强化学习教材阅读路线",
+      "title_en": "Reinforcement Learning: An Introduction — A Reading Route",
+      "description": "从表格方法、函数逼近到探索与近似策略梯度的章节路线。",
+      "description_en": "A chapter route from tabular methods through approximation, exploration, and policy gradients.",
+      "collection": "reading",
+      "group": "classics",
+      "path": "reading/p39/",
+      "sources": [
+        "N034"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "BenchMark/强化学习BenchMark&Metric.md",
+      "bytes": 40565,
+      "sha256": "753d60d63484ca58601320feb561175d8bb3ced34f34a17f00cc76d6d005f9a4",
+      "id": "N001",
+      "url": "downloads/obsidian/n001.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习Benchmark.md",
+      "bytes": 41000,
+      "sha256": "b432c4edace112bb644f48470bd01a842f8fea7b2ee6bdd83dcf2f50186d982b",
+      "id": "N002",
+      "url": "downloads/obsidian/n002.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习与多智能体强化学习Benchmark&Metric.md",
+      "bytes": 39793,
+      "sha256": "c98fc9ac3a3772b40bdba9436d6157202b2096e72717f6e9ec7232f98e4e305b",
+      "id": "N003",
+      "url": "downloads/obsidian/n003.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习实验中的 Benchmark 与 Metric 调研.md",
+      "bytes": 45385,
+      "sha256": "c5c18d79b2ad1464d4b20bbed453c16187c175b763e7d4968c68cfde89dad12f",
+      "id": "N004",
+      "url": "downloads/obsidian/n004.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/强化学习科研基准详细调研报告.md",
+      "bytes": 37202,
+      "sha256": "70ac7fe0a4997e55fb2d8e66ea1714cc3b5b153368f6955f954eb94b6989efe1",
+      "id": "N005",
+      "url": "downloads/obsidian/n005.md",
+      "articles": [
+        "single-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/多智能体强化学习Benchmark.md",
+      "bytes": 60609,
+      "sha256": "97b3cadf21ae2e213459681557871dd09d140629fd7f6f9959f129b483ea9ba4",
+      "id": "N006",
+      "url": "downloads/obsidian/n006.md",
+      "articles": [
+        "multi-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "BenchMark/多智能体强化学习实验所用 benchmark&metric 深度调研.md",
+      "bytes": 45630,
+      "sha256": "9f8c14c7f935f5495cb0b2fa914d586a115d4910eb4889d0c1176517fdff3517",
+      "id": "N007",
+      "url": "downloads/obsidian/n007.md",
+      "articles": [
+        "multi-agent-benchmarks",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "Paper/A Closer Look at Deep Policy Gradients.md",
+      "bytes": 152899,
+      "sha256": "9e21d0d35ab79b00a1e0f7e84eedd5329b4456240eadcb7377aadb555484dd11",
+      "id": "N008",
+      "url": "downloads/obsidian/n008.md",
+      "articles": [
+        "p31"
+      ]
+    },
+    {
+      "path": "Paper/Deep Reinforcement Learing that matters.md",
+      "bytes": 12379,
+      "sha256": "3b68f68151c6ac8a66d1cbb8e84ab25005792385644796ef40d45d6f9c6cb60b",
+      "id": "N009",
+      "url": "downloads/obsidian/n009.md",
+      "articles": [
+        "evaluation-protocol",
+        "p32"
+      ]
+    },
+    {
+      "path": "Paper/Era of Experience.md",
+      "bytes": 9085,
+      "sha256": "0edffd469917e456cfd1cb8b10abbf3b2b75aac979f74b44ccbf93897ed7019b",
+      "id": "N010",
+      "url": "downloads/obsidian/n010.md",
+      "articles": [
+        "p33"
+      ]
+    },
+    {
+      "path": "Paper/Fast Gradient-Descent Methods for Temporal-Difference Learning  with Linear Function Approximation.md",
+      "bytes": 169422,
+      "sha256": "767b027e21ca770758d7de3f0787b2bd7b1031fe4580d459a832bce63996f815",
+      "id": "N011",
+      "url": "downloads/obsidian/n011.md",
+      "articles": [
+        "p34"
+      ]
+    },
+    {
+      "path": "Paper/For SALE State-Action Representation Learning  for Deep Reinforcement Learning.md",
+      "bytes": 298239,
+      "sha256": "b4b7ab8f295db12cb0918c3fddf0f1bcbaa04ccb063e3241611bf8dff73dcd17",
+      "id": "N012",
+      "url": "downloads/obsidian/n012.md",
+      "articles": [
+        "p35"
+      ]
+    },
+    {
+      "path": "Paper/HIGH-DIMENSIONAL CONTINUOUS CONTROL USING GENERALIZED ADVANTAGE ESTIMATION.md",
+      "bytes": 119363,
+      "sha256": "16678d65a53f2730b695024a4bab946e35f546c8b78ad560c6f590af3e5d3261",
+      "id": "N013",
+      "url": "downloads/obsidian/n013.md",
+      "articles": [
+        "p36"
+      ]
+    },
+    {
+      "path": "Paper/Policy Gradient Methods for Reinforcement Learning with Function  Approximation.md",
+      "bytes": 104298,
+      "sha256": "137d924f60ca5a900c6a8f2baf9d0adc12a4b9f9a2c3fb352fb1fb5633c22f19",
+      "id": "N014",
+      "url": "downloads/obsidian/n014.md",
+      "articles": [
+        "p37"
+      ]
+    },
+    {
+      "path": "Paper/Potential-Based Shaping and Q-Value Initialization are Equivalent.md",
+      "bytes": 23928,
+      "sha256": "5ae074b1e2fb07790f265adc6ed84aeef3c37d9284a3929c6c8bc2ed55015c95",
+      "id": "N015",
+      "url": "downloads/obsidian/n015.md",
+      "articles": [
+        "p38"
+      ]
+    },
+    {
+      "path": "VLA&LLM&RL/LLM&VLA.md",
+      "bytes": 14072,
+      "sha256": "4e528af2728629a907fde5376d9e9d7fc205a13c5147304110d96ef1ea064b82",
+      "id": "N016",
+      "url": "downloads/obsidian/n016.md",
+      "articles": [
+        "embodied-research"
+      ]
+    },
+    {
+      "path": "Action Bin.md",
+      "bytes": 11704,
+      "sha256": "7ff9b5fb18dfd1efeb2f13770528b2447998bec936ed89c1e58f7d21dac73c83",
+      "id": "N017",
+      "url": "downloads/obsidian/n017.md",
+      "articles": [
+        "behavior-actions"
+      ]
+    },
+    {
+      "path": "Basic Concept.md",
+      "bytes": 7692,
+      "sha256": "075eac9250bda1bf7f61791e8f7da081992ac7ff6dfaa34c2dd68fc5b9ab1b46",
+      "id": "N018",
+      "url": "downloads/obsidian/n018.md",
+      "articles": [
+        "mdp-bellman"
+      ]
+    },
+    {
+      "path": "Behavior clone.md",
+      "bytes": 29547,
+      "sha256": "0725185478d5b9938116f24d2c56500855594dba663cc6b7e2c6344d63bc455e",
+      "id": "N019",
+      "url": "downloads/obsidian/n019.md",
+      "articles": [
+        "behavior-actions"
+      ]
+    },
+    {
+      "path": "Bellman Error.md",
+      "bytes": 102355,
+      "sha256": "4a164781ea2a4fa84793eacc3726563f07d08eed3d8ed7afcecd6d33e4ceddeb",
+      "id": "N020",
+      "url": "downloads/obsidian/n020.md",
+      "articles": [
+        "mdp-bellman"
+      ]
+    },
+    {
+      "path": "checkpoint (TD7专属).md",
+      "bytes": 23071,
+      "sha256": "4c23040cea6ace7105e2b9cfe9d0f8ceb22a5f43a491a49db52fb0d904700162",
+      "id": "N021",
+      "url": "downloads/obsidian/n021.md",
+      "articles": [
+        "td7-checkpoints"
+      ]
+    },
+    {
+      "path": "Diffusion Policy.md",
+      "bytes": 100005,
+      "sha256": "423fac4fde308132a57800816540202402ec6c1912fe7769d8d9df4fc3c90a87",
+      "id": "N022",
+      "url": "downloads/obsidian/n022.md",
+      "articles": [
+        "diffusion-deep-dive"
+      ]
+    },
+    {
+      "path": "Dvoretzky 、Banach fixed-point、Robbins–Monro、contraction mapping.md",
+      "bytes": 47024,
+      "sha256": "7fce332c10e00686bdef1968f30e8cb2b45d87ca976201b1dbb5d1141164aabd",
+      "id": "N023",
+      "url": "downloads/obsidian/n023.md",
+      "articles": [
+        "convergence"
+      ]
+    },
+    {
+      "path": "Eligibility Trace 和TD(𝜆).md",
+      "bytes": 89057,
+      "sha256": "bb3b9f76654143ab9e12cc69d99d8c14c8a969e067eebd8158b2686612269658",
+      "id": "N024",
+      "url": "downloads/obsidian/n024.md",
+      "articles": [
+        "eligibility-traces"
+      ]
+    },
+    {
+      "path": "GCRL.md",
+      "bytes": 14487,
+      "sha256": "6494958ff8882b5fb407d0a704816dfb2f799a86c328801eea377abf1385dcda",
+      "id": "N025",
+      "url": "downloads/obsidian/n025.md",
+      "articles": [
+        "goal-conditioned"
+      ]
+    },
+    {
+      "path": "Intra option learning.md",
+      "bytes": 62826,
+      "sha256": "2e3fd5fc526f1a3ed43ea825f290ef27aa518d4cc6a4ad775ff4de7f60305fb0",
+      "id": "N026",
+      "url": "downloads/obsidian/n026.md",
+      "articles": [
+        "options"
+      ]
+    },
+    {
+      "path": "IPPO和CMOA.md",
+      "bytes": 18965,
+      "sha256": "afcfdce9de8d8d606db05db97452e4ab35ba93d28913c6244bd4976323447606",
+      "id": "N027",
+      "url": "downloads/obsidian/n027.md",
+      "articles": [
+        "multiagent-gradients"
+      ]
+    },
+    {
+      "path": "MADDPG的一个证明.md",
+      "bytes": 13694,
+      "sha256": "e8b1090d2fd1ae7bbf55c62615b91b8f46baa22c39964c0dbf1bee15086f8972",
+      "id": "N028",
+      "url": "downloads/obsidian/n028.md",
+      "articles": [
+        "multiagent-gradients"
+      ]
+    },
+    {
+      "path": "MDP homomorphism.md",
+      "bytes": 28269,
+      "sha256": "3a06f1bbb6b29b3b00ba2637177417f9a6fc235acfc9c322130fc51ab082188a",
+      "id": "N029",
+      "url": "downloads/obsidian/n029.md",
+      "articles": [
+        "mdp-abstraction"
+      ]
+    },
+    {
+      "path": "Meta Reinforcement Learning.md",
+      "bytes": 1808,
+      "sha256": "d3ddb962075a526edb5b1c987a8db19bf0bc91f16acd5e8e9fe9e6475fa04033",
+      "id": "N030",
+      "url": "downloads/obsidian/n030.md",
+      "articles": [
+        "meta-rl"
+      ]
+    },
+    {
+      "path": "on-policy 与 off-policy 数据采样.md",
+      "bytes": 36589,
+      "sha256": "7788a10de82eeacf7336b3d216daba70d9e44740e221f975bc720c1cabeff0d1",
+      "id": "N031",
+      "url": "downloads/obsidian/n031.md",
+      "articles": [
+        "sampling-replay"
+      ]
+    },
+    {
+      "path": "on-policy以及off-policy.md",
+      "bytes": 12865,
+      "sha256": "f6a2ac2c7acc9efef3c5dc42d35ac79f7af21789f2dcf4d3691c0c43f43838e1",
+      "id": "N032",
+      "url": "downloads/obsidian/n032.md",
+      "articles": [
+        "sampling-replay"
+      ]
+    },
+    {
+      "path": "reinforce gradient.md",
+      "bytes": 7736,
+      "sha256": "b1c6f03ef44e80ddc81f555d6eba8c3490be19a6c8c35f297abb796aff946c3b",
+      "id": "N033",
+      "url": "downloads/obsidian/n033.md",
+      "articles": [
+        "policy-gradients"
+      ]
+    },
+    {
+      "path": "Reinforcement Learning： An introduction.md",
+      "bytes": 19359,
+      "sha256": "2a5c7bcba40c88787791cf37b977783c23c1e6808bfca62357891e2b0253f83d",
+      "id": "N034",
+      "url": "downloads/obsidian/n034.md",
+      "articles": [
+        "p39"
+      ]
+    },
+    {
+      "path": "REINFORCE 为什么高方差.md",
+      "bytes": 9721,
+      "sha256": "0aac309de685df8cede049647368ec5a174cbce8905071c0ad3993a66b75c34c",
+      "id": "N035",
+      "url": "downloads/obsidian/n035.md",
+      "articles": [
+        "policy-gradients"
+      ]
+    },
+    {
+      "path": "Reparameterization trick.md",
+      "bytes": 26149,
+      "sha256": "78d248e94576b9cd91b2b207aba4d9466f55128861d895f5075ae5033c749bce",
+      "id": "N036",
+      "url": "downloads/obsidian/n036.md",
+      "articles": [
+        "reparameterization"
+      ]
+    },
+    {
+      "path": "Replay Buffer.md",
+      "bytes": 12865,
+      "sha256": "f6a2ac2c7acc9efef3c5dc42d35ac79f7af21789f2dcf4d3691c0c43f43838e1",
+      "id": "N037",
+      "url": "downloads/obsidian/n037.md",
+      "articles": [
+        "sampling-replay"
+      ],
+      "duplicate_of": "N032"
+    },
+    {
+      "path": "Reward Shaping.md",
+      "bytes": 51369,
+      "sha256": "7e767dd6d1a482fed263058586cee65fa63c2dfe03b90351b11f9548849d2e05",
+      "id": "N038",
+      "url": "downloads/obsidian/n038.md",
+      "articles": [
+        "reward-shaping"
+      ]
+    },
+    {
+      "path": "SAC的可变温度推倒.md",
+      "bytes": 6169,
+      "sha256": "dc03d00bb1c7981d530d1f2d39a6b4e0a0d8c1ffb07ba947a2b55738c70941bb",
+      "id": "N039",
+      "url": "downloads/obsidian/n039.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "simulation和worldmodel.md",
+      "bytes": 6498,
+      "sha256": "fbca78bef967c48fab3108ff3b86e26debc8bc38a159caf805d5c5b6342fc05a",
+      "id": "N040",
+      "url": "downloads/obsidian/n040.md",
+      "articles": [
+        "simulation-world-models"
+      ]
+    },
+    {
+      "path": "一些统计方法.md",
+      "bytes": 35679,
+      "sha256": "29fa108006295b0163950aa8466f76b916e262970273dae46f4919a5b32cf3ef",
+      "id": "N041",
+      "url": "downloads/obsidian/n041.md",
+      "articles": [
+        "statistics-tuning",
+        "evaluation-protocol"
+      ]
+    },
+    {
+      "path": "外推误差.md",
+      "bytes": 23120,
+      "sha256": "17cc4d46498e5bec77a1ce9c27e8add8f3d6d0901309997eee72ea578bcd6ec0",
+      "id": "N042",
+      "url": "downloads/obsidian/n042.md",
+      "articles": [
+        "extrapolation"
+      ]
+    },
+    {
+      "path": "对偶梯度下降.md",
+      "bytes": 7693,
+      "sha256": "168fe49ed9b663eee60b2b8ca28ec62fc048038b06c77637ad488ee099242aed",
+      "id": "N043",
+      "url": "downloads/obsidian/n043.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "对偶梯度下降的详细解释.md",
+      "bytes": 7157,
+      "sha256": "43dfd7cadbffcbfb210398e7b72936c815716bd8f6b514b93b17796433428d89",
+      "id": "N044",
+      "url": "downloads/obsidian/n044.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "强化学习、MP及MDP中的各种分布.md",
+      "bytes": 41407,
+      "sha256": "b5e7710f7062b1b433c62c89c69e6fb4b34fa8ea6796ecd8cbd923dcd049e8ea",
+      "id": "N045",
+      "url": "downloads/obsidian/n045.md",
+      "articles": [
+        "probability-measures"
+      ]
+    },
+    {
+      "path": "最大熵强化学习.md",
+      "bytes": 10152,
+      "sha256": "895c119ecc88366f75488da1c11e65f114a8471e6a7bf411ca95311bb95ae404",
+      "id": "N046",
+      "url": "downloads/obsidian/n046.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "概率测度与经验测度.md",
+      "bytes": 29814,
+      "sha256": "2e45b1d37e88a38fc8ac6e31efc55be948615ddbeb0dc44422adbf2710313671",
+      "id": "N047",
+      "url": "downloads/obsidian/n047.md",
+      "articles": [
+        "probability-measures"
+      ]
+    },
+    {
+      "path": "研究框架.md",
+      "bytes": 8023,
+      "sha256": "73097321ef0210a1db98455a6bf81a2341d425ab9ebd7ec3c51890940eec6cfb",
+      "id": "N048",
+      "url": "downloads/obsidian/n048.md",
+      "articles": [
+        "embodied-research"
+      ]
+    },
+    {
+      "path": "策略梯度以及替代目标.md",
+      "bytes": 61830,
+      "sha256": "cffd0d3c06b75c1e1273862be49816f3cfcac36bca9cb21afcd79056be0aca39",
+      "id": "N049",
+      "url": "downloads/obsidian/n049.md",
+      "articles": [
+        "policy-gradients"
+      ]
+    },
+    {
+      "path": "网格搜索.md",
+      "bytes": 1442,
+      "sha256": "3a2e37119f76786557e172019a3c8f0ccda5c19e1c8df3f6bdcb3291ade3fa81",
+      "id": "N050",
+      "url": "downloads/obsidian/n050.md",
+      "articles": [
+        "statistics-tuning"
+      ]
+    },
+    {
+      "path": "详细解释：软演员-评论员（SAC）算法的关键技术.md",
+      "bytes": 6068,
+      "sha256": "2677fdb86460b2d91825691959fa06c19bf90992f13831871644e6e85299dcee",
+      "id": "N051",
+      "url": "downloads/obsidian/n051.md",
+      "articles": [
+        "sac-duality"
+      ]
+    },
+    {
+      "path": "马尔科夫性.md",
+      "bytes": 9711,
+      "sha256": "7b68d1631c9bfab81bb0d94e806d72ec4173ec49451ac84461c9c0869e5d75fe",
+      "id": "N052",
+      "url": "downloads/obsidian/n052.md",
+      "articles": [
+        "markov-memory"
+      ]
+    }
+  ]
+}

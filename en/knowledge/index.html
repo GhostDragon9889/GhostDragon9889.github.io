@@ -61,9 +61,19 @@
 <section class="reading-page" aria-labelledby="knowledge-title">
   <a class="breadcrumb text-link" href="/en/#knowledge">← Back to homepage</a>
   <header class="reading-header"><p class="section-label">RESEARCH & ENGINEERING</p><h1 class="reading-title" id="knowledge-title">Research &amp; Engineering</h1><p class="reading-description">Research discussions, engineering practice, and experimental reproduction, organized by category.</p></header>
+<aside class="collection-overview notebook-overview">
+  <h2><a href="/en/notes/">RL Study Notebook →</a></h2>
+  <p>52 substantive source notes organized into 34 bilingual articles.</p>
+  <p>Theory, probability, policies, actions, hierarchy, multi-agent evaluation, and embodied research.</p>
+</aside>
+
   <div class="content-filter" data-content-filter data-count-label="{count} records">
     <div class="filter-controls" role="group" aria-label="Filter records by category">
       <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+
+      <button class="filter-button" type="button" data-filter="theory" aria-pressed="false">Theory &amp; Methods</button>
+
+      <button class="filter-button" type="button" data-filter="evaluation" aria-pressed="false">Benchmarks &amp; Evaluation</button>
 
       <button class="filter-button" type="button" data-filter="research" aria-pressed="false">Research</button>
 
@@ -74,6 +84,181 @@
     </div>
     <p class="filter-status" aria-live="polite" aria-atomic="true"></p>
 <div class="entry-list">
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>Benchmarks &amp; Evaluation</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/evaluation-protocol/index.html">A Reproducible RL Evaluation and Reporting Protocol</a></h3>
+    <p class="entry-description">Align environment versions, training budgets, checkpoint selection, held-out testing, and aggregation.</p>
+    <div class="entry-links"><a href="/en/knowledge/evaluation-protocol/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>Benchmarks &amp; Evaluation</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/multi-agent-benchmarks/index.html">Multi-Agent RL Benchmarks and Cooperative Evaluation</a></h3>
+    <p class="entry-description">Cooperative, competitive, mixed-motive, partially observed, and cross-partner MARL evaluation.</p>
+    <div class="entry-links"><a href="/en/knowledge/multi-agent-benchmarks/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>Benchmarks &amp; Evaluation</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/single-agent-benchmarks/index.html">Single-Agent RL Benchmarks and Metrics</a></h3>
+    <p class="entry-description">Consolidate five reports across control, visual generalization, offline datasets, and embodied tasks.</p>
+    <div class="entry-links"><a href="/en/knowledge/single-agent-benchmarks/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="evaluation">
+    <div class="entry-meta"><span>Benchmarks &amp; Evaluation</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/statistics-tuning/index.html">RL Statistics, Confidence Intervals, and Tuning Budgets</a></h3>
+    <p class="entry-description">Seeds versus episodes, power, bootstrap, IQM, and tuning leakage.</p>
+    <div class="entry-links"><a href="/en/knowledge/statistics-tuning/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="engineering">
+    <div class="entry-meta"><span>Engineering</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/td7-checkpoints/index.html">TD7 Policy Checkpoints: Separating Training and Evaluation</a></h3>
+    <p class="entry-description">Candidate and deployed policies, assessment, and independent evaluation.</p>
+    <div class="entry-links"><a href="/en/knowledge/td7-checkpoints/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="research">
+    <div class="entry-meta"><span>Research</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/embodied-research/index.html">Embodied RL, LLMs/VLAs, and Research Design</a></h3>
+    <p class="entry-description">Turn sample efficiency, adaptation, rewards, and timing into controlled research questions.</p>
+    <div class="entry-links"><a href="/en/knowledge/embodied-research/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="research">
+    <div class="entry-meta"><span>Research</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/simulation-world-models/index.html">Simulators, World Models, and Planning</a></h3>
+    <p class="entry-description">Experimental environments, learned dynamics, and internal rollout serve different roles.</p>
+    <div class="entry-links"><a href="/en/knowledge/simulation-world-models/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="research">
+    <div class="entry-meta"><span>Research</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/meta-rl/index.html">Meta-RL: Task Distributions and Rapid Adaptation</a></h3>
+    <p class="entry-description">Optimization, contextual inference, and recurrent adaptation across tasks.</p>
+    <div class="entry-links"><a href="/en/knowledge/meta-rl/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/markov-memory/index.html">Markov States, Partial Observations, and Recurrent Memory</a></h3>
+    <p class="entry-description">Separate physical state, observation, history, and belief without assuming RNN sufficiency.</p>
+    <div class="entry-links"><a href="/en/knowledge/markov-memory/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/multiagent-gradients/index.html">IPPO, COMA, and Multi-Agent Gradient Variance</a></h3>
+    <p class="entry-description">Independent learning, centralized critics, counterfactual credit, and a bounded variance example.</p>
+    <div class="entry-links"><a href="/en/knowledge/multiagent-gradients/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/goal-conditioned/index.html">Goal-Conditioned RL, UVFA, and HER</a></h3>
+    <p class="entry-description">Goal-conditioned values, hindsight relabeling, and hierarchical-control interfaces.</p>
+    <div class="entry-links"><a href="/en/knowledge/goal-conditioned/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/mdp-abstraction/index.html">MDP Homomorphisms and State–Action Abstraction</a></h3>
+    <p class="entry-description">Reward and transition preservation, policy lifting, bisimulation, and approximate representations.</p>
+    <div class="entry-links"><a href="/en/knowledge/mdp-abstraction/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/options/index.html">Options, SMDPs, and Intra-Option Learning</a></h3>
+    <p class="entry-description">Temporal abstraction, duration-dependent discounting, and experience shared across options.</p>
+    <div class="entry-links"><a href="/en/knowledge/options/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/reward-shaping/index.html">Potential-Based Reward Shaping</a></h3>
+    <p class="entry-description">Telescoping returns, policy invariance, terminal potentials, and reward-scale caveats.</p>
+    <div class="entry-links"><a href="/en/knowledge/reward-shaping/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/sac-duality/index.html">Maximum-Entropy RL, SAC, and Dual Temperature Updates</a></h3>
+    <p class="entry-description">Merge five notes and correct temperature-gradient signs and the off-policy/offline distinction.</p>
+    <div class="entry-links"><a href="/en/knowledge/sac-duality/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/reparameterization/index.html">Reparameterization and Pathwise Gradients</a></h3>
+    <p class="entry-description">Gaussian reparameterization, tanh density corrections, and the limits of pathwise differentiation.</p>
+    <div class="entry-links"><a href="/en/knowledge/reparameterization/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/extrapolation/index.html">Offline RL and Value Extrapolation Error</a></h3>
+    <p class="entry-description">Value estimates outside data support, maximization backups, and error propagation.</p>
+    <div class="entry-links"><a href="/en/knowledge/extrapolation/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/diffusion-deep-dive/index.html">Diffusion Policy: Distribution Modeling and Control Timing</a></h3>
+    <p class="entry-description">A supplement to P08 on denoising time, action chunks, and the execution loop.</p>
+    <div class="entry-links"><a href="/en/knowledge/diffusion-deep-dive/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/behavior-actions/index.html">Behavior Cloning, Action Bins, and Multimodal Actions</a></h3>
+    <p class="entry-description">Supervised objectives, closed-loop distribution shift, and regression, classification, and residual actions.</p>
+    <div class="entry-links"><a href="/en/knowledge/behavior-actions/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/eligibility-traces/index.html">Eligibility Traces and TD(λ)</a></h3>
+    <p class="entry-description">Forward lambda returns, backward traces, online equivalence conditions, and episode boundaries.</p>
+    <div class="entry-links"><a href="/en/knowledge/eligibility-traces/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/policy-gradients/index.html">Policy Gradients, REINFORCE, and Surrogate Objectives</a></h3>
+    <p class="entry-description">Derive the trajectory gradient and connect baselines, PPO clipping, and KL diagnostics.</p>
+    <div class="entry-links"><a href="/en/knowledge/policy-gradients/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/sampling-replay/index.html">On-Policy Sampling, Off-Policy Learning, and Replay</a></h3>
+    <p class="entry-description">Merge duplicate notes and distinguish behavior policies, target policies, and distribution shift.</p>
+    <div class="entry-links"><a href="/en/knowledge/sampling-replay/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/convergence/index.html">Contractions, Fixed Points, and Stochastic Approximation</a></h3>
+    <p class="entry-description">Separate deterministic Bellman contraction from convergence conditions for noisy recursions.</p>
+    <div class="entry-links"><a href="/en/knowledge/convergence/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/probability-measures/index.html">Probability Measures, Empirical Measures, and RL Occupancy</a></h3>
+    <p class="entry-description">Probability kernels, trajectory laws, stationary distributions, and discounted occupancy measures.</p>
+    <div class="entry-links"><a href="/en/knowledge/probability-measures/index.html">Read the note →</a></div>
+  </article>
+
+  <article class="entry-row content-item" data-group="theory">
+    <div class="entry-meta"><span>Theory &amp; Methods</span><time datetime="2026-10-09">2026.10.09</time></div>
+    <h3><a href="/en/knowledge/mdp-bellman/index.html">MDPs, Value Functions, and Bellman Errors</a></h3>
+    <p class="entry-description">Bellman equations, MSBE, MSPBE, sampled TD errors, and double sampling.</p>
+    <div class="entry-links"><a href="/en/knowledge/mdp-bellman/index.html">Read the note →</a></div>
+  </article>
 
   <article class="entry-row content-item" data-group="research">
     <div class="entry-meta"><span>Research</span><time datetime="2026-10-09">2026.10.09</time></div>
